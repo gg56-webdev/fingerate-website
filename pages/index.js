@@ -6,7 +6,7 @@ import {
     Feed,
     Contact,
     Footer,
-    Social,
+    // Social,
     Promo,
 } from '../components';
 import { useRouter } from 'next/router';
