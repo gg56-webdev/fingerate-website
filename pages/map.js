@@ -1,7 +1,7 @@
-import * as React from 'react';
 import { useState } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-import terminals from '../data/terminals';
+import data from '../data/newData.json';
+import Image from 'next/image';
 
 // export async function getStaticProps() {}
 
@@ -14,7 +14,7 @@ export default function Map() {
         zoom: 11,
     });
 
-    const [showPopup, togglePopup] = React.useState(false);
+    const [selectedMark, setSelectedMark] = useState(null);
 
     return (
         <ReactMapGL
@@ -23,15 +23,42 @@ export default function Map() {
             mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
             onViewportChange={(nextViewport) => setViewport(nextViewport)}
         >
-            {terminals.map((terminal) => (
+            {data.map((terminal) => (
                 <Marker
-                    key={terminal.id}
+                    key={terminal.name}
                     longitude={terminal.long}
                     latitude={terminal.lati}
+                    offsetLeft={-30}
+                    offsetTop={-30}
+                    onClick={() => {
+                        setSelectedMark(terminal);
+                    }}
                 >
-                    <img width='60px' height='60px' src='/2.png' />
+                    <Image
+                        width='60px'
+                        height='60px'
+                        src='/sot_icon.svg'
+                        alt='SoT terminal icon'
+                    />
                 </Marker>
             ))}
+            {selectedMark && (
+                <Popup
+                    latitude={selectedMark.lati}
+                    longitude={selectedMark.long}
+                    closeButton={true}
+                    closeOnClick={true}
+                    onClose={() => setSelectedMark(null)}
+                    anchor='top'
+                    offsetTop={40}
+                >
+                    <div>
+                        This SoT terminal is located:
+                        <br />
+                        {selectedMark.name}
+                    </div>
+                </Popup>
+            )}
         </ReactMapGL>
     );
 }

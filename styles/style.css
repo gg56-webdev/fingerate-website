@@ -1,0 +1,17 @@
+html,
+body {
+    scroll-behavior: smooth;
+    scroll-padding: 60px;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: auto;
+}
