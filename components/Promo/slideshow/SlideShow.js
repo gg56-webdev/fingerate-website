@@ -18,7 +18,7 @@ const MotionBox = motion(Box);
 
 const color1 = '#710193';
 
-export default function SlideShow() {
+export default function SlideShow({ content }) {
     return (
         <Swiper
             slidesPerView={1}
@@ -49,10 +49,7 @@ export default function SlideShow() {
                         lineHeight='normal'
                         px={['8', '8', '0']}
                     >
-                        <ListItem>
-                            Explore the FingeRate Metaverse mapped from real
-                            world
-                        </ListItem>
+                        <ListItem>{content[0][0]}</ListItem>
                     </List>
 
                     <Box p='8'>
@@ -79,11 +76,9 @@ export default function SlideShow() {
                         lineHeight='normal'
                         px={['8', '8', '0']}
                     >
-                        <ListItem>Pick the SoT you want</ListItem>
+                        <ListItem>{content[1][0]}</ListItem>
                         <UnorderedList fontSize='xl' listStyleType='circle'>
-                            <ListItem>
-                                Thousands of real-world locations to choose from
-                            </ListItem>
+                            <ListItem>{content[1][1][0]}</ListItem>
                         </UnorderedList>
                     </List>
 
@@ -188,9 +183,7 @@ export default function SlideShow() {
                         lineHeight='normal'
                         px={['8', '8', '0']}
                     >
-                        <ListItem>
-                            Claim ownership of the SoT &amp; be an SoT Owner
-                        </ListItem>
+                        <ListItem>{content[2][0]}</ListItem>
                     </List>
                 </Flex>
             </SwiperSlide>
@@ -208,15 +201,11 @@ export default function SlideShow() {
                         lineHeight='normal'
                         px={['8', '8', '0']}
                     >
-                        <ListItem fontSize='3xl'>
-                            Be an SoT Owner &amp; enjoy the benefits
-                        </ListItem>
+                        <ListItem fontSize='3xl'>{content[3][0]}</ListItem>
                         <UnorderedList fontSize='xl' listStyleType='circle'>
-                            <ListItem>Earn revenue from surveys</ListItem>
-                            <ListItem>Higher resale value</ListItem>
-                            <ListItem>
-                                Additional revenues from more participation
-                            </ListItem>
+                            {content[3][1].map((i, index) => (
+                                <ListItem key={index}>{i}</ListItem>
+                            ))}
                         </UnorderedList>
                     </List>
                     <Box p='8' position='relative'>

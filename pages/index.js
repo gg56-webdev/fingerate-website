@@ -24,6 +24,9 @@ export default function Home() {
             <Head>
                 <title>{t.title}</title>
                 <meta name='description' content={t.description} />
+                <meta name='keywords' content={t.keywords} />
+                <meta name='robots' content='index, follow' />
+                <meta charset='utf-8' />
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 

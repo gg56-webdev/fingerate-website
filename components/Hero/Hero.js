@@ -73,7 +73,7 @@ export default function Hero({ text: { name, content } }) {
                     >
                         <MotionHeading
                             variants={item}
-                            as='h2'
+                            as='h1'
                             color='text.second'
                             fontSize={['xxx-large', '6xl']}
                             mb='6'

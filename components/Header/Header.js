@@ -65,13 +65,13 @@ export default function Header() {
                             width='50'
                             height='50'
                         />
-                        <Heading
-                            as='h1'
+                        <Box
                             color={navbar ? 'common.second' : 'white'}
                             fontSize='2xl'
+                            fontWeight='bold'
                         >
                             FingeRate
-                        </Heading>
+                        </Box>
                     </Flex>
 
                     <Box
