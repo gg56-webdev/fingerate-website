@@ -3,7 +3,7 @@ import {
     Hero,
     Header,
     About,
-    Feed,
+    // Feed,
     Contact,
     Footer,
     // Social,
@@ -26,7 +26,7 @@ export default function Home() {
                 <meta name='description' content={t.description} />
                 <meta name='keywords' content={t.keywords} />
                 <meta name='robots' content='index, follow' />
-                <meta charset='utf-8' />
+                <meta charSet='utf-8' />
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
@@ -35,7 +35,7 @@ export default function Home() {
                 <Hero text={t.sections.hero} />
                 <Promo text={t.sections.promo} />
                 <About text={t.sections.about} />
-                <Feed text={t.sections.feed} />
+                {/* <Feed text={t.sections.feed} /> */}
                 {/* <Social text={t.sections.social} /> */}
                 <Contact text={t.sections.contact} />
             </main>

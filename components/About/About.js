@@ -32,6 +32,7 @@ export default function About({ text: { title, content, sot } }) {
                     overflow='hidden'
                     pb='16'
                     pt='8'
+                    whiteSpace={['normal', 'pre-line']}
                 >
                     {content.map((i, index) => (
                         <SlideAnim

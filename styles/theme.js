@@ -7,17 +7,14 @@ export const theme = extendTheme({
             body: {
                 bg: '#f4f5f7',
                 color: '#09244d',
+                fontSize: '18px',
             },
-        },
-    },
-    textStyles: {
-        imgs: {
-            fontSize: 'min(2vw, 25px)',
         },
     },
     colors: {
         common: {
             main: '#710193',
+            mainLight: '#c301fe',
             second: '#BFFFB3',
         },
         text: {
@@ -29,3 +26,20 @@ export const theme = extendTheme({
         Card,
     },
 });
+
+export const koreanTheme = extendTheme(
+    {
+        fonts: {
+            heading: 'Do Hyeon',
+            body: 'Gowun Dodum',
+        },
+        components: {
+            Heading: {
+                baseStyle: {
+                    fontWeight: 'normal',
+                },
+            },
+        },
+    },
+    theme
+);

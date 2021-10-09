@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-export default function SlideAnim({ from = 'left', children }) {
+export default function SlideAnim({ from = 'left', children, stagger = 0 }) {
     const controls = useAnimation();
-    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 });
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.4 });
 
     useEffect(() => {
         if (inView) {
@@ -23,6 +23,7 @@ export default function SlideAnim({ from = 'left', children }) {
                     opacity: 1,
                     transition: {
                         when: 'beforeChildren',
+                        staggerChildren: stagger,
                     },
                 },
                 hidden: { x: from === 'left' ? -100 : 100, opacity: 0 },

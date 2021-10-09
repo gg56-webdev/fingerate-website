@@ -5,7 +5,6 @@ import {
     Stack,
     useDisclosure,
     Link,
-    Heading,
     Select,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ExternalLinkIcon } from '@chakra-ui/icons';

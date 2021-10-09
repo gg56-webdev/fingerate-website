@@ -1,15 +1,7 @@
-import {
-    Text,
-    Box,
-    Container,
-    Heading,
-    Flex,
-    Button,
-    Spacer,
-} from '@chakra-ui/react';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { Text, Box, Container, Heading, Flex, Button } from '@chakra-ui/react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import HeroImg from '../../public/avatar/wave.webp';
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -50,11 +42,28 @@ export default function Hero({ text: { name, content } }) {
             w='100%'
             h='100vh'
             // bgColor='common.main'
-            bgGradient='linear(to-br, #00C9FF, #F9AFD1)'
+            bgGradient='linear(to-br, common.mainLight, common.second)'
+            position='relative'
+            _after={{
+                content: `""`,
+                position: 'absolute',
+                background:
+                    'url(https://grainy-gradients.vercel.app/noise.svg)',
+                opacity: '0.35',
+                inset: '0',
+                width: '100%',
+                height: '100%',
+                zIndex: '1',
+            }}
             pt='10'
             overflowX='hidden'
         >
-            <Container maxW='container.xl' h='100%'>
+            <Container
+                maxW='container.xl'
+                h='100%'
+                position='relative'
+                zIndex='2'
+            >
                 <Flex
                     align='center'
                     justify='center'
@@ -83,7 +92,7 @@ export default function Hero({ text: { name, content } }) {
                         <MotionText
                             variants={item}
                             color='text.second'
-                            fontSize={['medium', '2xl']}
+                            fontSize='2xl'
                             mb='8'
                             whiteSpace='pre-wrap'
                         >
@@ -112,18 +121,17 @@ export default function Hero({ text: { name, content } }) {
 
                     <MotionBox
                         w={['100%', '50%']}
-                        display={['none', 'block']}
+                        display={['none', 'none', 'block']}
                         variants={container}
                         initial='hidden'
                         animate='enter'
                         pos='relative'
                     >
                         <Image
-                            src='/avatar/wave.webp'
+                            src={HeroImg}
                             alt='avatar wave'
-                            width='907'
-                            height='888'
                             priority={true}
+                            placeholder='blur'
                         />
                         <MotionBox
                             pos='absolute'

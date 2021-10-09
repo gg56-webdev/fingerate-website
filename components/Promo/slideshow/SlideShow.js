@@ -1,18 +1,15 @@
-import {
-    Grid,
-    List,
-    ListItem,
-    Box,
-    Flex,
-    Spacer,
-    UnorderedList,
-} from '@chakra-ui/layout';
-import { ArrowForwardIcon, CheckCircleIcon } from '@chakra-ui/icons';
+import { List, ListItem, Box, Flex, UnorderedList } from '@chakra-ui/layout';
+import { CheckCircleIcon } from '@chakra-ui/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Counter from './Counter';
+
+import Slide1 from '../../../public/slides/s1.png';
+import Slide2 from '../../../public/slides/s2.png';
+import Slide3 from '../../../public/slides/s3.png';
+import Slide4 from '../../../public/slides/s4.png';
 
 const MotionBox = motion(Box);
 
@@ -44,7 +41,7 @@ export default function SlideShow({ content }) {
                 >
                     <List
                         maxW={['100%', '100%', '30%']}
-                        fontSize='3xl'
+                        fontSize={['2xl', '3xl']}
                         fontWeight='bold'
                         lineHeight='normal'
                         px={['8', '8', '0']}
@@ -54,10 +51,9 @@ export default function SlideShow({ content }) {
 
                     <Box p='8'>
                         <Image
-                            src='/slides/s1.png'
+                            src={Slide1}
                             alt='FingeRate Metaverse integrates in real world'
-                            width='500'
-                            height='500'
+                            placeholder='blur'
                         />
                     </Box>
                 </Flex>
@@ -71,23 +67,25 @@ export default function SlideShow({ content }) {
                 >
                     <List
                         maxW={['100%', '100%', '30%']}
-                        fontSize='3xl'
+                        fontSize={['2xl', '3xl']}
                         fontWeight='bold'
                         lineHeight='normal'
                         px={['8', '8', '0']}
                     >
                         <ListItem>{content[1][0]}</ListItem>
-                        <UnorderedList fontSize='xl' listStyleType='circle'>
+                        <UnorderedList
+                            fontSize={['md', 'xl']}
+                            listStyleType='circle'
+                        >
                             <ListItem>{content[1][1][0]}</ListItem>
                         </UnorderedList>
                     </List>
 
                     <Box p='8'>
                         <Image
-                            src='/slides/s2.png'
+                            src={Slide2}
                             alt='Explore SoT around your location'
-                            width='500'
-                            height='500'
+                            placeholder='blur'
                         />
                     </Box>
                 </Flex>
@@ -99,12 +97,11 @@ export default function SlideShow({ content }) {
                     justifyContent='center'
                     alignItems='center'
                 >
-                    <MotionBox gridArea='img1' p='8' position='relative'>
+                    <MotionBox p='8' position='relative'>
                         <Image
-                            src='/slides/s3-1.png'
+                            src={Slide3}
                             alt='Avatar interacting with SoT'
-                            width='500'
-                            height='500'
+                            placeholder='blur'
                         />
                         <MotionBox
                             pos='absolute'
@@ -123,6 +120,25 @@ export default function SlideShow({ content }) {
                             }}
                         >
                             $150
+                        </MotionBox>
+                        <MotionBox
+                            pos='absolute'
+                            left={['14%', '16%']}
+                            top='14%'
+                            fontWeight='bold'
+                            color='black'
+                            fontSize='xl'
+                            animate={{
+                                opacity: [0, 1, 0],
+                                x: [0, 0, 180],
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                repeatDelay: 3,
+                            }}
+                        >
+                            -$100
                         </MotionBox>
                         <MotionBox
                             pos='absolute'
@@ -151,6 +167,7 @@ export default function SlideShow({ content }) {
                             fontSize='xx-large'
                             animate={{
                                 opacity: [1, 1, 0],
+                                y: [0, 0, 50],
                             }}
                             transition={{
                                 duration: 2,
@@ -178,7 +195,7 @@ export default function SlideShow({ content }) {
                     </MotionBox>
                     <List
                         maxW={['100%', '100%', '30%']}
-                        fontSize='3xl'
+                        fontSize={['2xl', '3xl']}
                         fontWeight='bold'
                         lineHeight='normal'
                         px={['8', '8', '0']}
@@ -196,13 +213,18 @@ export default function SlideShow({ content }) {
                 >
                     <List
                         maxW={['100%', '100%', '30%']}
-                        fontSize='3xl'
+                        fontSize={['2xl', '3xl']}
                         fontWeight='bold'
                         lineHeight='normal'
                         px={['8', '8', '0']}
                     >
-                        <ListItem fontSize='3xl'>{content[3][0]}</ListItem>
-                        <UnorderedList fontSize='xl' listStyleType='circle'>
+                        <ListItem fontSize={['2xl', '3xl']}>
+                            {content[3][0]}
+                        </ListItem>
+                        <UnorderedList
+                            fontSize={['md', 'xl']}
+                            listStyleType='circle'
+                        >
                             {content[3][1].map((i, index) => (
                                 <ListItem key={index}>{i}</ListItem>
                             ))}
@@ -210,10 +232,9 @@ export default function SlideShow({ content }) {
                     </List>
                     <Box p='8' position='relative'>
                         <Image
-                            src='/slides/s4-2.png'
+                            src={Slide4}
                             alt='Explore SoT around your location'
-                            width='500'
-                            height='500'
+                            placeholder='blur'
                         />
                         <Box
                             position='absolute'

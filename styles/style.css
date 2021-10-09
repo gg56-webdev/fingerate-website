@@ -2,6 +2,7 @@ html,
 body {
     scroll-behavior: smooth;
     scroll-padding: 60px;
+    word-break: keep-all;
 }
 
 .swiper-button-prev {
