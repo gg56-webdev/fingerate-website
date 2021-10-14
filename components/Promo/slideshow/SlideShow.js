@@ -71,6 +71,7 @@ export default function SlideShow({ content }) {
                         fontWeight='bold'
                         lineHeight='normal'
                         px={['8', '8', '0']}
+                        spacing='4'
                     >
                         <ListItem>{content[1][0]}</ListItem>
                         <UnorderedList
@@ -217,6 +218,7 @@ export default function SlideShow({ content }) {
                         fontWeight='bold'
                         lineHeight='normal'
                         px={['8', '8', '0']}
+                        spacing='4'
                     >
                         <ListItem fontSize={['2xl', '3xl']}>
                             {content[3][0]}

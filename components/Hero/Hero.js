@@ -24,15 +24,6 @@ const item = {
     enter: { opacity: 1, x: 0, transition: { staggerChildren: 0.3 } },
 };
 
-const blocks = {
-    hidden: {
-        opacity: 0,
-    },
-    enter: {
-        opacity: 1,
-    },
-};
-
 const link = 'https://opensea.io/collection/sotcollection';
 
 export default function Hero({ text: { name, content } }) {
@@ -141,8 +132,12 @@ export default function Hero({ text: { name, content } }) {
                             w='20%'
                             h='20%'
                             borderRadius='md'
-                            transform='rotate(30deg)'
-                            variants={blocks}
+                            whileHover={{ scale: 1.2 }}
+                            animate={{
+                                y: [null, -20, 0],
+                                rotate: 90,
+                                transition: { repeat: Infinity, duration: 10 },
+                            }}
                         />
                         <MotionBox
                             pos='absolute'
@@ -152,8 +147,13 @@ export default function Hero({ text: { name, content } }) {
                             w='14%'
                             h='14%'
                             borderRadius='md'
-                            transform='rotate(85deg)'
-                            variants={blocks}
+                            // transform='rotate(85deg)'
+                            whileHover={{ scale: 1.2 }}
+                            animate={{
+                                y: [0, 50, 0, 50, 0],
+                                rotate: 360,
+                                transition: { repeat: Infinity, duration: 15 },
+                            }}
                         />
                         <MotionBox
                             pos='absolute'
@@ -163,8 +163,13 @@ export default function Hero({ text: { name, content } }) {
                             w='10%'
                             h='10%'
                             borderRadius='md'
-                            transform='rotate(15deg)'
-                            variants={blocks}
+                            // transform='rotate(15deg)'
+                            whileHover={{ scale: 1.2 }}
+                            animate={{
+                                y: [0, -10, 0, -10, 0],
+                                rotate: -360 / 2,
+                                transition: { repeat: Infinity, duration: 7 },
+                            }}
                         />
                     </MotionBox>
                     {/* <motion.div

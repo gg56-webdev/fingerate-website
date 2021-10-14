@@ -22,57 +22,62 @@ const imgs = [About1(), About2(), About3()];
 
 export default function About({ text: { title, content, sot } }) {
     return (
-        <Box as='section' id='about'>
-            <Container maxWidth='container.xl'>
-                {/* <Heading as='h2'>{title}</Heading> */}
-                <Sot content={sot} />
-                <Divider bgColor='common.second' />
-                <Stack
-                    spacing={['32', '32', '40']}
-                    overflow='hidden'
-                    pb='16'
-                    pt='8'
-                    whiteSpace={['normal', 'pre-line']}
-                >
-                    {content.map((i, index) => (
-                        <SlideAnim
-                            key={index}
-                            from={(index + 1) % 2 !== 0 ? 'left' : 'right'}
-                        >
-                            <Heading as='h3' textAlign='center' mb='6'>
-                                {i.title}
-                            </Heading>
-                            <Flex
-                                direction={[
-                                    'column',
-                                    'column',
-                                    (index + 1) % 2 !== 0
-                                        ? 'row'
-                                        : 'row-reverse',
-                                ]}
-                                alignItems='center'
+        <>
+            <Box>
+                <Container maxWidth='container.xl'>
+                    {/* <Heading as='h2'>{title}</Heading> */}
+                    <Sot content={sot} />
+                </Container>
+            </Box>
+            <Box bgColor='purple.100' as='section' id='about'>
+                <Container maxWidth='container.xl'>
+                    <Stack
+                        spacing={['32', '32', '40']}
+                        overflow='hidden'
+                        pb='16'
+                        pt='8'
+                        whiteSpace={['normal', 'pre-line']}
+                    >
+                        {content.map((i, index) => (
+                            <SlideAnim
+                                key={index}
+                                from={(index + 1) % 2 !== 0 ? 'left' : 'right'}
                             >
-                                <Card
-                                    maxW={['100%', '100%', '50%']}
-                                    mb={['8', '8', 0]}
+                                <Heading as='h3' textAlign='center' mb='6'>
+                                    {i.title}
+                                </Heading>
+                                <Flex
+                                    direction={[
+                                        'column',
+                                        'column',
+                                        (index + 1) % 2 !== 0
+                                            ? 'row'
+                                            : 'row-reverse',
+                                    ]}
+                                    alignItems='center'
                                 >
-                                    <Heading
-                                        as='h4'
-                                        mb='6'
-                                        fontWeight='medium'
-                                        fontSize='xx-large'
+                                    <Card
+                                        maxW={['100%', '100%', '50%']}
+                                        mb={['8', '8', 0]}
                                     >
-                                        {i.h3}
-                                    </Heading>
-                                    <Text>{i.p}</Text>
-                                </Card>
+                                        <Heading
+                                            as='h4'
+                                            mb='6'
+                                            fontWeight='medium'
+                                            fontSize='xx-large'
+                                        >
+                                            {i.h3}
+                                        </Heading>
+                                        <Text>{i.p}</Text>
+                                    </Card>
 
-                                {imgs[index]}
-                            </Flex>
-                        </SlideAnim>
-                    ))}
-                </Stack>
-            </Container>
-        </Box>
+                                    {imgs[index]}
+                                </Flex>
+                            </SlideAnim>
+                        ))}
+                    </Stack>
+                </Container>
+            </Box>
+        </>
     );
 }
