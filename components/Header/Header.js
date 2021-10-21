@@ -108,7 +108,7 @@ export default function Header() {
                                 <NLink
                                     key={item.n}
                                     href={item.l}
-                                    passHref={/http/.test(item.l)}
+                                    passHref={/\//.test(item.l)}
                                 >
                                     <Link
                                         onClick={onToggle}
@@ -125,7 +125,7 @@ export default function Header() {
                                             color: 'text.main',
                                             boxShadow: 'md',
                                         }}
-                                        isExternal={/http/.test(item.l)}
+                                        isExternal={/\//.test(item.l)}
                                     >
                                         {item.n}
                                         {/http/.test(item.l) && (

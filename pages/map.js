@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
 import data from '../data/newData.json';
 import Image from 'next/image';
 
-// export async function getStaticProps() {}
+const geolocateControlStyle = {
+    right: 10,
+    top: 10,
+};
 
 export default function Map() {
     const [viewport, setViewport] = useState({
         width: '100%',
         height: '100vh',
-        latitude: 37.5665,
-        longitude: 126.978,
-        zoom: 11,
+        latitude: 0,
+        longitude: 0,
+        zoom: 1,
     });
 
     const [selectedMark, setSelectedMark] = useState(null);
@@ -59,6 +62,12 @@ export default function Map() {
                     </div>
                 </Popup>
             )}
+            <GeolocateControl
+                style={geolocateControlStyle}
+                fitBoundsOptions={{ maxZoom: 11 }}
+                trackUserLocation={false}
+                auto
+            />
         </ReactMapGL>
     );
 }

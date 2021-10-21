@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 export default function NotFound() {
     const router = useRouter();
     useEffect(() => {
-        setTimeout(() => {
+        let timer = setTimeout(() => {
             router.push('/');
         }, 5000);
+        return () => clearTimeout(timer);
     }, [router]);
-    return <h1>Page is not found</h1>;
+    return <span onClick={() => router.push('/')}>Page is not found</span>;
 }
