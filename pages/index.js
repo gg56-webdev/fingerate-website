@@ -6,7 +6,7 @@ import {
     // Feed,
     Contact,
     Footer,
-    // Social,
+    Social,
     Promo,
 } from '../components';
 import { useRouter } from 'next/router';
@@ -36,7 +36,7 @@ export default function Home() {
                 <Promo text={t.sections.promo} />
                 <About text={t.sections.about} />
                 {/* <Feed text={t.sections.feed} /> */}
-                {/* <Social text={t.sections.social} /> */}
+                <Social text={t.sections.social} />
                 <Contact text={t.sections.contact} />
             </main>
             <Footer />
