@@ -5,7 +5,7 @@ export default function Social() {
     return (
         <Box id='social' background='white'>
             <Container maxW='container.xl' py='8'>
-                <Heading as='h2' textAlign='center'>
+                <Heading as='h2' textAlign='center' mb='8'>
                     #FingeRate
                 </Heading>
                 <div

@@ -24,7 +24,7 @@ const item = {
     enter: { opacity: 1, x: 0, transition: { staggerChildren: 0.3 } },
 };
 
-const link = 'https://opensea.io/collection/sotcollection';
+const link = 'https://opensea.io/collection/fingeratesot';
 
 export default function Hero({ text: { name, content } }) {
     return (
