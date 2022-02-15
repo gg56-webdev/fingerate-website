@@ -23,7 +23,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { SmallCloseIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import MapCard from '../components/utils/mapCard';
+import MapCard from '../components/utils/MapCard';
 
 const geolocateControlStyle = {
   right: 10,
