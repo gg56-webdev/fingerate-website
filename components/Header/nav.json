@@ -1,11 +1,16 @@
 [
-  { "n": "How it works?", "l": "#about" },
-
-  { "n": "Social", "l": "#social" },
-  { "n": "Contact", "l": "#contact" },
+  { "n": "Buy SoT", "l": "/map", "important": true, "external": false },
+  {
+    "n": "Marketplace",
+    "l": "/marketplace",
+    "important": true,
+    "external": false
+  },
+  { "n": "How it works?", "l": "/docs", "important": false, "external": false },
   {
     "n": "SoT Collection",
-    "l": "https://opensea.io/collection/fingeratesot"
-  },
-  { "n": "Map", "l": "/map" }
+    "l": "https://opensea.io/collection/fingeratesot",
+    "important": false,
+    "external": true
+  }
 ]
