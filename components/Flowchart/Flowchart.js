@@ -41,7 +41,12 @@ export default function Flowchart({
           <GridItem textAlign={'center'} gridArea='img1'>
             <Box>{slides[0].title}</Box>
             <Box>
-              <Image src={'/flowchart/1.png'} width={380} height={316} />
+              <Image
+                alt='Avatar with SoT device'
+                src={'/flowchart/1.png'}
+                width={380}
+                height={316}
+              />
             </Box>
           </GridItem>
           <GridItem textAlign={'center'} gridArea='arr1'>
@@ -56,7 +61,12 @@ export default function Flowchart({
                 <Box>{slides[2].title}</Box>
               </GridItem>
               <GridItem textAlign={'center'} colSpan={2}>
-                <Image src={'/flowchart/2.png'} width={421} height={273} />
+                <Image
+                  alt='Avatars representing Business Person and GG56'
+                  src={'/flowchart/2.png'}
+                  width={421}
+                  height={273}
+                />
               </GridItem>
             </Grid>
           </GridItem>
@@ -74,7 +84,12 @@ export default function Flowchart({
             <Box>{slides[0].title}</Box>
 
             <Box mt={14}>
-              <Image src={'/flowchart/3.png'} width={233} height={233} />
+              <Image
+                alt='Avatar interacting with SoT App and recieving SoM'
+                src={'/flowchart/3.png'}
+                width={233}
+                height={233}
+              />
             </Box>
           </GridItem>
           <GridItem textAlign={'center'} gridArea='arr3'>
@@ -89,7 +104,12 @@ export default function Flowchart({
             <Box>{slides[0].title}</Box>
 
             <Box>
-              <Image src={'/flowchart/4.png'} width={190} height={290} />
+              <Image
+                alt='GG56 Avatar collects and analyzes data'
+                src={'/flowchart/4.png'}
+                width={190}
+                height={290}
+              />
             </Box>
           </GridItem>
           <GridItem textAlign={'center'} gridArea='arr4'>
@@ -109,7 +129,12 @@ export default function Flowchart({
                 <Box>{slides[0].title}</Box>
               </GridItem>
               <GridItem textAlign={'center'} colSpan={2}>
-                <Image src={'/flowchart/5.png'} width={463} height={232} />
+                <Image
+                  alt='Survey requster recieves data, GG56 prepares data for sale'
+                  src={'/flowchart/5.png'}
+                  width={463}
+                  height={232}
+                />
               </GridItem>
             </Grid>
           </GridItem>
@@ -125,7 +150,12 @@ export default function Flowchart({
             <Box>{slides[0].title}</Box>
 
             <Box>
-              <Image src={'/flowchart/6.png'} width={642} height={373} />
+              <Image
+                alt='All parties recieve benefits from using FingeRate 2.0'
+                src={'/flowchart/6.png'}
+                width={642}
+                height={373}
+              />
             </Box>
           </GridItem>
         </Grid>

@@ -5,6 +5,7 @@ import {
   MenuItem,
   useDisclosure,
   Link,
+  ExternalLinkIcon,
 } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { default as NLink } from 'next/link';

@@ -32,7 +32,7 @@ export default function LearnMore({ text: { content } }) {
                 {content.box1.p}
               </GridItem>
               <GridItem as={Box} alignSelf={'center'}>
-                <Image width={150} height={150} src='/about/sot.png' />
+                <Image alt='' width={150} height={150} src='/about/sot.png' />
               </GridItem>
             </Grid>
           </Stack>
@@ -51,7 +51,7 @@ export default function LearnMore({ text: { content } }) {
                 >
                   장소 1
                 </Box>
-                <Image width={150} height={150} src='/about/sot.png' />
+                <Image alt='' width={150} height={150} src='/about/sot.png' />
               </Flex>
               <Flex
                 p={2}
@@ -68,7 +68,7 @@ export default function LearnMore({ text: { content } }) {
                 >
                   장소 2
                 </Box>
-                <Image width={150} height={150} src='/about/sot.png' />
+                <Image alt='' width={150} height={150} src='/about/sot.png' />
               </Flex>
               <Flex p={2} borderRadius={'md'} bg='gray.100'>
                 <Box
@@ -80,7 +80,7 @@ export default function LearnMore({ text: { content } }) {
                 >
                   장소 1
                 </Box>
-                <Image width={150} height={150} src='/about/sot.png' />
+                <Image alt='' width={150} height={150} src='/about/sot.png' />
               </Flex>
             </Stack>
           </Stack>

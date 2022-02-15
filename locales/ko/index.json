@@ -129,6 +129,30 @@
         ]
       }
     },
+    "roadmap": {
+      "title": "Roadmap",
+      "content": {
+        "h2": "Roadmap",
+        "steps": [
+          {
+            "title": "title1",
+            "p": "text with explanation fdfsdfd fdsdfdf sdfsd fdfdfdfd"
+          },
+          {
+            "title": "title2",
+            "p": "text with explanation fdsjlkfjoidsj jfiosdj iofsjdjfiosdj fiosjdoi joi joisdjf o"
+          },
+          {
+            "title": "title3",
+            "p": "text with explanation pfjsdipjfiosdjiofjsdiofj j soidjfiosdj ijsdi jisdj fisjdoi fjso"
+          },
+          {
+            "title": "title4",
+            "p": "text with explanation fijiodsjfiosdjf jfiodsjfiosdj jfoio jdiofj oisd"
+          }
+        ]
+      }
+    },
     "promo": {
       "title": "Promo",
       "content": [

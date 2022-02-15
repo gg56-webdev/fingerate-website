@@ -27,7 +27,12 @@ export default function AboutSot({ text: { content } }) {
           </GridItem>
           <GridItem>
             <Box>
-              <Image src='/about/sot.png' width={500} height={500} />
+              <Image
+                alt='SoT device'
+                src='/about/sot.png'
+                width={500}
+                height={500}
+              />
             </Box>
           </GridItem>
           <GridItem>
