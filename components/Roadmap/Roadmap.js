@@ -19,6 +19,7 @@ export default function Roadmap({ text: { content, title } }) {
           <Grid
             gridTemplateColumns={`repeat(${content.steps.length}, 1fr)`}
             justifyItems='center'
+            gap={2}
           >
             {content.steps.map((step, i) => (
               <Box
@@ -49,7 +50,7 @@ export default function Roadmap({ text: { content, title } }) {
           <Grid
             gridTemplateColumns={`repeat(${content.steps.length}, 1fr)`}
             justifyItems='center'
-            px={2}
+            // px={2}
             gap={2}
           >
             {content.steps.map((step) => (
