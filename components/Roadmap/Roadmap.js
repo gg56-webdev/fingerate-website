@@ -15,70 +15,58 @@ export default function Roadmap({ text: { content, title } }) {
     <Box>
       <Container maxW={'container.lg'} textAlign='center'>
         <Heading as={'h2'}>{content.h2}</Heading>
-        <Stack direction={'column'}>
-          <Grid
-            gridTemplateColumns={`repeat(${content.steps.length}, 1fr)`}
-            justifyItems='center'
-            gap={2}
-          >
-            {content.steps.map((step, i) => (
+
+        <Stack
+          direction={'row'}
+          position='relative'
+          _before={{
+            content: `""`,
+            position: 'absolute',
+            top: '51px',
+            width: '104%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            height: '4px',
+            bg: 'common.main',
+            borderRadius: '100px',
+          }}
+        >
+          {content.steps.map((step, i) => (
+            <Stack
+              key={step.title}
+              position='relative'
+              spacing={'8'}
+              flex='1'
+              direction={'column'}
+            >
               <Box
-                key={i}
+                position={'relative'}
                 fontSize='xx-large'
                 fontWeight={'bold'}
                 color='common.main'
+                lineHeight={'normal'}
+                _after={{
+                  content: `""`,
+                  position: 'absolute',
+                  transform: 'translate(-50%, 100%)',
+                  left: '50%',
+                  bottom: '0',
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: '50%',
+                  bg: 'common.main',
+                }}
               >
                 {i + 1}
               </Box>
-            ))}
-          </Grid>
-          <Box
-            w='100%'
-            height={'3px'}
-            bg='common.main'
-            position={'relative'}
-            borderRadius='50px'
-          >
-            <ArrowRightIcon
-              position={'absolute'}
-              top='50%'
-              right={0}
-              transform='translateY(-50%)'
-              color={'common.main'}
-            />
-          </Box>
-          <Grid
-            gridTemplateColumns={`repeat(${content.steps.length}, 1fr)`}
-            justifyItems='center'
-            // px={2}
-            gap={2}
-          >
-            {content.steps.map((step) => (
-              <GridItem
-                borderRadius={'md'}
-                key={step.title}
-                bg='common.second'
-                p={2}
-                position='relative'
-                _before={{
-                  content: `''`,
-                  w: '20px',
-                  h: '20px',
-                  borderRadius: '50%',
-                  bg: 'common.main',
-                  position: 'absolute',
-                  top: '-20px',
-                  right: '50%',
-                  transform: 'translateX(50%)',
-                }}
-              >
+              <Box borderRadius={'md'} bg='common.second' p={2} flexGrow='1'>
                 <Heading as={'h3'} fontSize='lg'>
                   {step.title}
                 </Heading>
                 <Text>{step.p}</Text>
-              </GridItem>
-            ))}
-          </Grid>
+              </Box>
+            </Stack>
+          ))}
         </Stack>
       </Container>
     </Box>

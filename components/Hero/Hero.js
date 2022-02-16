@@ -1,7 +1,13 @@
-import { Text, Box, Container, Heading, Flex, Button } from '@chakra-ui/react';
-import Image from 'next/image';
+import {
+  Text,
+  Box,
+  Container,
+  Heading,
+  Flex,
+  Button,
+  Grid,
+} from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import HeroImg from '../../public/avatar/wave.webp';
 import styles from '../../styles/animation.module.css';
 
 const MotionBox = motion(Box);
@@ -27,9 +33,9 @@ const item = {
 
 const link = 'https://opensea.io/collection/fingeratesot';
 
-export default function Hero({ text: { name, content } }) {
+export default function Hero({ text: { content } }) {
   return (
-    <Box
+    <Flex
       as='section'
       w='100%'
       h='100vh'
@@ -49,19 +55,26 @@ export default function Hero({ text: { name, content } }) {
         zIndex: '1',
       }}
       overflowX='hidden'
+      flexDir={'column'}
     >
-      <Container maxW='container.xl' h='95%' position='relative' zIndex='2'>
+      <Container
+        maxW='container.xl'
+        flexGrow='1'
+        position='relative'
+        zIndex='2'
+      >
         <Flex
-          pt={'70px'}
+          pt={'65px'}
           align='center'
           justify='center'
-          wrap='wrap'
+          flexDirection={{ base: 'column-reverse', md: 'row' }}
           h='100%'
           alignContent='center'
         >
           <MotionBox
-            w={['100%', '100%', '50%']}
-            textAlign={['center', 'center', 'left']}
+            w={{ base: '100%', md: '50%' }}
+            textAlign={{ base: 'center', md: 'left' }}
+            pr={{ md: 2 }}
             variants={container}
             initial='hidden'
             animate='enter'
@@ -72,39 +85,41 @@ export default function Hero({ text: { name, content } }) {
               as='h1'
               color='text.second'
               fontSize={['xx-large', 'xx-large', '5xl']}
-              mb='6'
-              whiteSpace='pre-wrap'
+              mb='2'
+              whiteSpace={{ md: 'pre-wrap' }}
+              pl={{ md: 6 }}
             >
               {content.h2}
             </MotionHeading>
-            <Flex flexDir={'column'} alignItems='center'>
+            <Grid
+              gridTemplateColumns={{ base: '1fr 1fr', md: '0.25fr 1fr 0.25fr' }}
+              gap={2}
+              mb='2'
+              px={2}
+            >
               {content.features.map((feature, _id) => (
                 <MotionText
                   key={feature}
                   variants={item}
-                  alignSelf={{
-                    base: _id % 2 === 0 ? 'flex-start' : 'flex-end',
-                    md: _id % 2 === 0 ? 'flex-start' : 'center',
-                  }}
-                  w={{ base: '100%', sm: '70%' }}
                   bg='common.second'
                   color='common.main'
-                  border='1px solide'
-                  borderColor='common.main'
                   textAlign={'center'}
-                  fontSize={['md', 'md', 'xl']}
-                  mb='4'
+                  fontSize={{ base: 'sm', md: 'xl' }}
                   p={2}
                   borderRadius='md'
-                  whiteSpace='pre-wrap'
+                  whiteSpace={{ md: 'pre-wrap' }}
                   fontWeight='bold'
+                  display='grid'
+                  placeItems='center'
+                  gridColumn={{ md: _id % 2 === 0 ? '1 / 3' : '2 / -1' }}
                 >
                   {feature}
                 </MotionText>
               ))}
-            </Flex>
-            <Flex justifyContent={'center'}>
+            </Grid>
+            <Flex justifyContent={'center'} mb='2'>
               <MotionButton
+                flex='1'
                 rel='noopener noreferrer'
                 as='a'
                 href={link}
@@ -113,7 +128,7 @@ export default function Hero({ text: { name, content } }) {
                 border='1px solid'
                 borderColor='text.second'
                 color='text.second'
-                fontSize='large'
+                fontSize='x-large'
                 mr={4}
                 _hover={{
                   bg: 'common.main',
@@ -125,6 +140,7 @@ export default function Hero({ text: { name, content } }) {
                 {content.btn1}
               </MotionButton>
               <MotionButton
+                flex='1'
                 rel='noopener noreferrer'
                 as='a'
                 href={link}
@@ -133,7 +149,7 @@ export default function Hero({ text: { name, content } }) {
                 border='1px solid'
                 borderColor='text.second'
                 color='text.second'
-                fontSize='large'
+                fontSize='x-large'
                 _hover={{
                   bg: 'common.main',
                   color: 'text.second',
@@ -147,90 +163,39 @@ export default function Hero({ text: { name, content } }) {
           </MotionBox>
 
           <MotionBox
-            w={['100%', '50%']}
-            h={'100%'}
-            display={['none', 'none', 'block']}
+            w={{ base: '100%', md: '50%' }}
+            // display={['none', 'none', 'block']}
             variants={container}
             initial='hidden'
             animate='enter'
             pos='relative'
+            flexGrow='1'
+            h='100%'
           >
-            {/* <iframe
-              src='https://my.spline.design/iphone13copy-a0383159b7cc650c9d123c75f7a7d180/'
+            <iframe
+              src='https://my.spline.design/sotdevice-fb79e2d7b8093da7f604cef8e68b8715/'
               frameBorder='0'
               width='100%'
               height='100%'
-            ></iframe> */}
-            {/* <Image
-              src={HeroImg}
-              alt='avatar wave'
-              priority={true}
-              placeholder='blur'
-            />
-            <MotionBox
-              pos='absolute'
-              bottom='0'
-              right='-5%'
-              bg='white'
-              w='20%'
-              h='20%'
-              borderRadius='md'
-              whileHover={{ scale: 1.2 }}
-              animate={{
-                y: [null, -20, 0],
-                rotate: 90,
-                transition: { repeat: Infinity, duration: 10 },
-              }}
-            />
-            <MotionBox
-              pos='absolute'
-              top='10%'
-              right='10%'
-              bg='cyan.200'
-              w='14%'
-              h='14%'
-              borderRadius='md'
-              // transform='rotate(85deg)'
-              whileHover={{ scale: 1.2 }}
-              animate={{
-                y: [0, 50, 0, 50, 0],
-                rotate: 360,
-                transition: { repeat: Infinity, duration: 15 },
-              }}
-            />
-            <MotionBox
-              pos='absolute'
-              bottom='35%'
-              left='5'
-              bg='blue.200'
-              w='10%'
-              h='10%'
-              borderRadius='md'
-              // transform='rotate(15deg)'
-              whileHover={{ scale: 1.2 }}
-              animate={{
-                y: [0, -10, 0, -10, 0],
-                rotate: -360 / 2,
-                transition: { repeat: Infinity, duration: 7 },
-              }}
-            /> */}
+              loading='lazy'
+            ></iframe>
           </MotionBox>
-          {/* <motion.div
-                        animate={{ y: -5 }}
-                        transition={{ yoyo: Infinity, duration: 1 }}
-                    >
-                        <ChevronDownIcon boxSize='14' color='text.second' />
-                    </motion.div> */}
         </Flex>
       </Container>
-      <Box h={'5%'} bg='white' border={'1px solid'}>
+      <Box
+        h={'fit-content'}
+        bg='white'
+        borderTop={'1px solid'}
+        borderBottom={'1px solid'}
+        borderColor='common.mainLight'
+      >
         <Container
           maxW='container.xl'
           h={'100%'}
           textAlign='center'
           overflow={'hidden'}
         >
-          <Box className={styles.animation}>
+          <Box className={styles.animation} h='100%'>
             <Box display={'inline-block'}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
               volutpat, ante eu bibendum tincidunt, sem lacus vehicula augue, ut
@@ -244,6 +209,6 @@ export default function Hero({ text: { name, content } }) {
           </Box>
         </Container>
       </Box>
-    </Box>
+    </Flex>
   );
 }

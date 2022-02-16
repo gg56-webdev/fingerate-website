@@ -19,8 +19,10 @@ export default function Price({
 }) {
   return (
     <Box>
-      <Container maxW={'container.lg'} textAlign='center'>
-        <Heading as={'h2'}>{h2}</Heading>
+      <Container maxW={'container.xl'} textAlign='center' py={8}>
+        <Heading as={'h2'} mb='10'>
+          {h2}
+        </Heading>
         <Grid
           gridTemplateColumns={'1fr 1fr'}
           gap='4'
@@ -32,25 +34,31 @@ export default function Price({
               <GridItem
                 p='2'
                 borderRadius={'md'}
-                border='2px solid'
+                border='4px solid'
+                bg='white'
                 borderColor={getRGBcolor(gradeColors[row[2]])}
               >
                 <Box
                   as={'strong'}
                   display='block'
                   color={getRGBcolor(gradeColors[row[2]])}
+                  fontSize='xxl'
                 >
                   {row[0][0]}
                 </Box>
-                <Box as={'small'}>{row[0][1]}</Box>
+                <Box as={'small'} fontSize='sm'>
+                  {row[0][1]}
+                </Box>
               </GridItem>
               <GridItem
                 display={'grid'}
                 placeItems='center'
                 p='2'
                 borderRadius={'md'}
-                border='2px solid'
+                bg='white'
+                border='4px solid'
                 borderColor={getRGBcolor(gradeColors[row[2]])}
+                fontSize='xl'
               >
                 {row[1]}
               </GridItem>

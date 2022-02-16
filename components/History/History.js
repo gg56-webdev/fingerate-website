@@ -3,8 +3,10 @@ import { Box, Container, Heading, Grid, GridItem } from '@chakra-ui/react';
 export default function History({ text: { content } }) {
   return (
     <Box>
-      <Container maxW={'container.lg'} textAlign='center'>
-        <Heading as='h2'>{content.h2}</Heading>
+      <Container maxW={'container.lg'} textAlign='center' py={8} px='1'>
+        <Heading as='h2' mb='10'>
+          {content.h2}
+        </Heading>
         <Grid
           gridTemplateColumns={{
             md: 'repeat(6,1fr)',
@@ -45,8 +47,8 @@ export default function History({ text: { content } }) {
               content: `''`,
               position: 'absolute',
               justifySelf: 'center',
-              width: { md: '104%', base: '3px' },
-              height: { md: '3px', base: '102%' },
+              width: { md: '104%', base: '4px' },
+              height: { md: '4px', base: '102%' },
               bg: 'common.main',
               zIndex: -1,
               borderRadius: '100px',
