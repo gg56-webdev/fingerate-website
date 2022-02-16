@@ -5,13 +5,15 @@ export default function Footer() {
   return (
     <Box as={'footer'} bg='blue.100'>
       <Container
-        maxW='container.xl'
+        maxW='container.lg'
         display={'flex'}
-        justifyContent='space-between'
+        justifyContent={{ base: 'center', sm: 'space-between' }}
         alignItems={'center'}
+        sx={{ gap: '0.5rem' }}
         p='2'
+        flexWrap={'wrap-reverse'}
       >
-        <Text textAlign='center' fontSize='smaller'>
+        <Text fontSize='smaller'>
           @ {new Date().getFullYear()} GG56 Ltd. ALL RIGHTS RESERVED.
         </Text>
         <Contact />

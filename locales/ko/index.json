@@ -54,9 +54,13 @@
           { "title": "GG56 또는 SoT 소유주가 직접 조사 진행", "info": "" },
           { "title": "다양한 설문조사/리서치 참여 후 보상 받기", "info": "" },
           { "title": "조사 종료 후  통계데이터 생성", "info": "" },
-          { "title": "자체 조사로 수집/가공한 데이터 판매하기 ", "info": "" },
           { "title": "의뢰한 조사의 통계데이터 확보 및 활용", "info": "" },
-          { "title": "모두가 윈윈하는 Satisfaction of Things!", "info": "" }
+          { "title": "자체 조사로 수집/가공한 데이터 판매하기 ", "info": "" },
+          {
+            "title": "모두가 윈윈하는 Satisfaction of Things!",
+            "info": "",
+            "avatars": ["GG56", "SoT 소유주", "일반 사용자", "조사 의뢰자"]
+          }
         ]
       }
     },

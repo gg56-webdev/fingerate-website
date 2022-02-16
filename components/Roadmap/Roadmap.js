@@ -7,67 +7,66 @@ import {
   Heading,
   Stack,
   Text,
+  Flex,
   transform,
 } from '@chakra-ui/react';
 
 export default function Roadmap({ text: { content, title } }) {
   return (
     <Box>
-      <Container maxW={'container.lg'} textAlign='center'>
-        <Heading as={'h2'}>{content.h2}</Heading>
+      <Container maxW={'container.xl'} textAlign='center' py={8} px='1'>
+        <Heading as={'h2'} mb='10'>
+          {content.h2}
+        </Heading>
 
-        <Stack
-          direction={'row'}
-          position='relative'
+        <Grid
+          gridTemplateColumns={{
+            md: `repeat(${content.steps.length}, 1fr)`,
+          }}
+          gap='2'
+          position={'relative'}
           _before={{
             content: `""`,
             position: 'absolute',
-            top: '51px',
-            width: '104%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            height: '4px',
+            top: { base: '50%', md: '10px' },
+            left: { base: '10px', md: '50%' },
+            width: { base: '4px', md: '104%' },
+            height: { base: '104%', md: '4px' },
+            transform: {
+              base: 'translate(-50%, -50%)',
+              md: 'translate(-50%, -50%)',
+            },
             bg: 'common.main',
             borderRadius: '100px',
           }}
         >
           {content.steps.map((step, i) => (
-            <Stack
+            <GridItem
+              as={Flex}
               key={step.title}
-              position='relative'
-              spacing={'8'}
-              flex='1'
-              direction={'column'}
+              flexDir={{ base: 'row', md: 'column' }}
+              alignItems='center'
+              sx={{ gap: '0.5rem' }}
             >
               <Box
-                position={'relative'}
-                fontSize='xx-large'
-                fontWeight={'bold'}
-                color='common.main'
-                lineHeight={'normal'}
-                _after={{
-                  content: `""`,
-                  position: 'absolute',
-                  transform: 'translate(-50%, 100%)',
-                  left: '50%',
-                  bottom: '0',
-                  width: '20px',
-                  height: '20px',
-                  borderRadius: '50%',
-                  bg: 'common.main',
-                }}
-              >
+                w='20px'
+                height='20px'
+                flexShrink='0'
+                bg={'common.main'}
+                borderRadius='50%'
+              />
+              <Box fontSize='xx-large' fontWeight={'bold'} color='common.main'>
                 {i + 1}
               </Box>
               <Box borderRadius={'md'} bg='common.second' p={2} flexGrow='1'>
-                <Heading as={'h3'} fontSize='lg'>
+                <Heading as={'h3'} fontSize='xl' color={'common.main'}>
                   {step.title}
                 </Heading>
                 <Text>{step.p}</Text>
               </Box>
-            </Stack>
+            </GridItem>
           ))}
-        </Stack>
+        </Grid>
       </Container>
     </Box>
   );

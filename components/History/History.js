@@ -2,8 +2,8 @@ import { Box, Container, Heading, Grid, GridItem } from '@chakra-ui/react';
 
 export default function History({ text: { content } }) {
   return (
-    <Box>
-      <Container maxW={'container.lg'} textAlign='center' py={8} px='1'>
+    <Box bg='white'>
+      <Container maxW={'container.xl'} textAlign='center' py={8} px='1'>
         <Heading as='h2' mb='10'>
           {content.h2}
         </Heading>
@@ -50,11 +50,12 @@ export default function History({ text: { content } }) {
               width: { md: '104%', base: '4px' },
               height: { md: '4px', base: '102%' },
               bg: 'common.main',
-              zIndex: -1,
+              zIndex: 1,
               borderRadius: '100px',
             }}
           >
             <GridItem
+              zIndex='2'
               bg={'common.main'}
               borderRadius='lg'
               px='2'
@@ -65,6 +66,7 @@ export default function History({ text: { content } }) {
               2020.12
             </GridItem>
             <GridItem
+              zIndex='2'
               bg={'common.main'}
               borderRadius='lg'
               px='2'
@@ -75,6 +77,7 @@ export default function History({ text: { content } }) {
               2021.06
             </GridItem>
             <GridItem
+              zIndex='2'
               bg={'common.main'}
               borderRadius='lg'
               px='2'
@@ -85,6 +88,7 @@ export default function History({ text: { content } }) {
               2021.10
             </GridItem>
             <GridItem
+              zIndex='2'
               bg={'common.main'}
               borderRadius='lg'
               px='2'

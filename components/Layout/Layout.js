@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Header, Footer } from '../index';
 
-const layoutCancel = ['/marketplace', '/map'];
+const footerCancel = ['/marketplace', '/map'];
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -10,7 +10,7 @@ export default function Layout({ children }) {
     <>
       <Header />
       <main>{children}</main>
-      {!layoutCancel.includes(pathname) && <Footer />}
+      {!footerCancel.includes(pathname) && <Footer />}
     </>
   );
 }

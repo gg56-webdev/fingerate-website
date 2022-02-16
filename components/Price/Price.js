@@ -1,4 +1,11 @@
-import { Box, Container, Grid, GridItem, Heading } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Grid,
+  GridItem,
+  Heading,
+  Flex,
+} from '@chakra-ui/react';
 import { Fragment } from 'react';
 
 const gradeColors = {
@@ -19,25 +26,27 @@ export default function Price({
 }) {
   return (
     <Box>
-      <Container maxW={'container.xl'} textAlign='center' py={8}>
+      <Container maxW={'container.lg'} textAlign='center' py={8}>
         <Heading as={'h2'} mb='10'>
           {h2}
         </Heading>
         <Grid
-          gridTemplateColumns={'1fr 1fr'}
+          gridTemplateColumns={{ base: '1fr' }}
           gap='4'
           fontSize={'x-large'}
           color='common.main'
         >
           {list.map((row) => (
-            <Fragment key={row}>
-              <GridItem
-                p='2'
-                borderRadius={'md'}
-                border='4px solid'
-                bg='white'
-                borderColor={getRGBcolor(gradeColors[row[2]])}
-              >
+            <GridItem
+              key={row}
+              as={Flex}
+              flexDirection={{ base: 'column', md: 'row' }}
+              p='2'
+              borderRadius={'md'}
+              bg={getRGBcolor(gradeColors[row[2]])}
+              sx={{ gap: '0.5rem' }}
+            >
+              <Box flex={1} p='2' bg='white' borderRadius={'md'}>
                 <Box
                   as={'strong'}
                   display='block'
@@ -49,20 +58,20 @@ export default function Price({
                 <Box as={'small'} fontSize='sm'>
                   {row[0][1]}
                 </Box>
-              </GridItem>
-              <GridItem
+              </Box>
+              <Box
+                flex={1}
                 display={'grid'}
                 placeItems='center'
                 p='2'
                 borderRadius={'md'}
                 bg='white'
-                border='4px solid'
-                borderColor={getRGBcolor(gradeColors[row[2]])}
                 fontSize='xl'
+                bg='white'
               >
                 {row[1]}
-              </GridItem>
-            </Fragment>
+              </Box>
+            </GridItem>
           ))}
         </Grid>
       </Container>

@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 export default function AboutSot({ text: { content } }) {
   return (
-    <Box>
+    <Box bg='purple.100'>
       <Container maxW={'container.lg'} py='8'>
         <Heading as='h2' textAlign={'center'} mb='10'>
           {content.h2}
@@ -23,6 +23,10 @@ export default function AboutSot({ text: { content } }) {
             md: `'list1 img list2'`,
           }}
           gap='4'
+          bg={'white'}
+          p='2'
+          borderRadius={'md'}
+          alignItems='center'
         >
           <GridItem gridArea={'list1'}>
             <Heading
@@ -35,9 +39,7 @@ export default function AboutSot({ text: { content } }) {
             </Heading>
             <UnorderedList>
               {content.list1.listItems.map((item) => (
-                <ListItem listStylePos={'inside'} key={item}>
-                  {item}
-                </ListItem>
+                <ListItem listStylePos={'inside'}>{item}</ListItem>
               ))}
             </UnorderedList>
           </GridItem>

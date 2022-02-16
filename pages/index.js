@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import en from '../locales/en/index.json';
 import ko from '../locales/ko/index.json';
 
-export default function Home({ sots }) {
+export default function Home() {
   const router = useRouter();
   const { locale } = router;
   const t = locale === 'en' ? en : ko;
@@ -35,7 +35,7 @@ export default function Home({ sots }) {
       <Price text={t.sections.price} />
       <LearnMore text={t.sections.learnMore} />
       <History text={t.sections.history} />
-      {/* <Roadmap text={t.sections.roadmap} /> */}
+      <Roadmap text={t.sections.roadmap} />
     </>
   );
 }

@@ -17,7 +17,7 @@ export default function LearnMore({ text: { content } }) {
         <Heading as={'h2'} mb='10'>
           {content.h2}
         </Heading>
-        <Grid gap='2' gridTemplateColumns={{ base: '1fr', md: '1.5fr 1fr' }}>
+        <Grid gap='2' gridTemplateColumns={{ base: '1fr', md: '1.25fr 1fr' }}>
           <Stack
             bg={'white'}
             borderRadius='md'
@@ -29,8 +29,13 @@ export default function LearnMore({ text: { content } }) {
             <Heading as={'h3'} fontSize='lg'>
               {content.box1.title}
             </Heading>
-            <Grid gridTemplateColumns={'2fr 1fr'} flexGrow='1' gap='2'>
+            <Flex
+              flexDir={{ base: 'column-reverse' }}
+              flexGrow='1'
+              sx={{ gap: '0.5rem' }}
+            >
               <GridItem
+                flex={'1'}
                 as={Text}
                 bg='common.second'
                 p={2}
@@ -40,6 +45,7 @@ export default function LearnMore({ text: { content } }) {
                 {content.box1.p}
               </GridItem>
               <GridItem
+                flex={'0.5'}
                 as={Box}
                 fontSize='0'
                 borderRadius={'md'}
@@ -47,12 +53,12 @@ export default function LearnMore({ text: { content } }) {
               >
                 <Image
                   alt='Signis gathering in the FingeRate Metaverse'
-                  width={400}
-                  height={400}
-                  src='/learn more/signis/church.png'
+                  src='/learn more/signis/church-lg.png'
+                  width={720}
+                  height={405}
                 />
               </GridItem>
-            </Grid>
+            </Flex>
           </Stack>
           <Stack bg={'white'} borderRadius='md' w='100%' p={2} h='fit-content'>
             <Heading as={'h3'} fontSize='lg'>
@@ -77,7 +83,7 @@ export default function LearnMore({ text: { content } }) {
                   borderColor='white'
                 >
                   <Image
-                    alt=''
+                    alt='Thumbnail of SoT Device'
                     width={200}
                     height={200}
                     src='/learn more/locations/S.png'
@@ -103,7 +109,7 @@ export default function LearnMore({ text: { content } }) {
                   borderColor='white'
                 >
                   <Image
-                    alt=''
+                    alt='Thumbnail of SoT Device'
                     width={200}
                     height={200}
                     src='/learn more/locations/A.png'
@@ -128,7 +134,7 @@ export default function LearnMore({ text: { content } }) {
                   borderColor='white'
                 >
                   <Image
-                    alt=''
+                    alt='Thumbnail of SoT Device'
                     width={200}
                     height={200}
                     src='/learn more/locations/B.png'

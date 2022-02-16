@@ -33,16 +33,22 @@ export default function Flowchart({
             sm: '1fr 18px 1fr',
             md: '1fr 18px 1fr 18px 0.75fr',
           }}
-          gridTemplateRows={'1fr 18px 1fr'}
+          gridTemplateRows={{ md: '1fr 18px 1fr' }}
           gridTemplateAreas={{
             base: `'img1' 'arr1' 'img2' 'arr2' 'img3' 'arr3' 'img4' 'arr4' 'img5' 'arr5' 'img6'`,
             sm: `'img1 arr1 img2' '. . arr2' 'img4 arr3 img3' 'arr4 . .' 'img5 arr5 img6'`,
             md: `'img1 arr1 img2 arr2 img3' '. . . . arr3' 'img6 arr5 img5 arr4 img4'`,
           }}
-          alignItems={'center'}
+          alignItems={{ sm: 'center', md: 'center' }}
           gap='4'
         >
-          <GridItem textAlign={'center'} gridArea='img1'>
+          <GridItem
+            bg={'white'}
+            borderRadius='md'
+            p='2'
+            textAlign={'center'}
+            gridArea='img1'
+          >
             <Box
               fontSize={{ base: 'md' }}
               fontWeight='bold'
@@ -70,7 +76,13 @@ export default function Flowchart({
               color={'common.main'}
             />
           </GridItem>
-          <GridItem textAlign={'center'} gridArea='img2'>
+          <GridItem
+            bg={'white'}
+            borderRadius='md'
+            p='2'
+            textAlign={'center'}
+            gridArea='img2'
+          >
             <Grid gridTemplateColumns={'1fr 1fr'} gap={2}>
               <GridItem>
                 <Box
@@ -115,6 +127,9 @@ export default function Flowchart({
             />
           </GridItem>
           <GridItem
+            bg={'white'}
+            borderRadius='md'
+            p='2'
             as={Flex}
             textAlign={'center'}
             gridArea='img3'
@@ -152,7 +167,13 @@ export default function Flowchart({
               color={'common.main'}
             />
           </GridItem>
-          <GridItem textAlign={'center'} gridArea='img4'>
+          <GridItem
+            bg={'white'}
+            borderRadius='md'
+            p='2'
+            textAlign={'center'}
+            gridArea='img4'
+          >
             <Box
               fontSize={{ base: 'md' }}
               fontWeight='bold'
@@ -181,7 +202,13 @@ export default function Flowchart({
               color={'common.main'}
             />
           </GridItem>
-          <GridItem textAlign={'center'} gridArea='img5'>
+          <GridItem
+            bg={'white'}
+            borderRadius='md'
+            p='2'
+            textAlign={'center'}
+            gridArea='img5'
+          >
             <Grid gridTemplateColumns={'1fr 1fr'} gap={2}>
               <GridItem>
                 <Box
@@ -229,7 +256,13 @@ export default function Flowchart({
               color={'common.main'}
             />
           </GridItem>
-          <GridItem textAlign={'center'} gridArea='img6'>
+          <GridItem
+            bg={'white'}
+            borderRadius='md'
+            p='2'
+            textAlign={'center'}
+            gridArea='img6'
+          >
             <Box
               fontSize={{ base: 'md' }}
               fontWeight='bold'
