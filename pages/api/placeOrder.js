@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const { userId, userEmail, sotId } = req.body;
 
   try {
-    await limiter.check(res, 5, 'CACHE_TOKEN');
+    // await limiter.check(res, 5, 'CACHE_TOKEN');
 
     const userSnap = await auth.getUser(userId);
     if (!userSnap || !userSnap.emailVerified) {
