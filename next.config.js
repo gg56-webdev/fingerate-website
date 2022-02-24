@@ -1,8 +1,8 @@
 module.exports = {
   reactStrictMode: true,
   i18n: {
-    locales: ['en', 'ko'],
-    defaultLocale: 'en',
+    locales: ['ko'],
+    defaultLocale: 'ko',
   },
   images: {
     domains: ['res.cloudinary.com'],

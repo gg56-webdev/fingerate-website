@@ -22,7 +22,7 @@ export default function Flowchart({
   },
 }) {
   return (
-    <Box id='flowchart' bg={'white'}>
+    <Box id='flowchart'>
       <Container maxW={'container.xl'} py='8' px='1'>
         <Heading as={'h2'} textAlign='center' mb='10'>
           {h2}
@@ -289,12 +289,7 @@ export default function Flowchart({
                 w={'100%'}
               >
                 {slides[7].avatars.map((avatar) => (
-                  <GridItem
-                    key={avatar}
-                    fontSize='md'
-                    fontStyle={'italic'}
-                    color={'blue.400'}
-                  >
+                  <GridItem key={avatar} fontSize='md' fontStyle={'italic'}>
                     {avatar}
                   </GridItem>
                 ))}

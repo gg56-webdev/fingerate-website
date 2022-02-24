@@ -13,7 +13,7 @@ import {
 
 export default function Roadmap({ text: { content, title } }) {
   return (
-    <Box>
+    <Box overflow={'hidden'}>
       <Container maxW={'container.xl'} textAlign='center' py={8} px='1'>
         <Heading as={'h2'} mb='10'>
           {content.h2}

@@ -29,7 +29,7 @@ export default function Dropdown({ item, onToggle }) {
         }}
         onMouseEnter={onOpen}
         onClick={onToggleDrop}
-        // onMouseLeave={onClose}
+        onMouseLeave={onClose}
       >
         {item.n}
         {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}

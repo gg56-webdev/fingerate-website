@@ -24,7 +24,7 @@ export default function AboutSot({ text: { content } }) {
           }}
           gap='4'
           bg={'white'}
-          p='2'
+          p='6'
           borderRadius={'md'}
           alignItems='center'
         >
@@ -39,7 +39,9 @@ export default function AboutSot({ text: { content } }) {
             </Heading>
             <UnorderedList>
               {content.list1.listItems.map((item) => (
-                <ListItem listStylePos={'inside'}>{item}</ListItem>
+                <ListItem listStylePos={'inside'} key={item}>
+                  {item}
+                </ListItem>
               ))}
             </UnorderedList>
           </GridItem>

@@ -6,6 +6,8 @@ import {
   useDisclosure,
   Link,
   Select,
+  Spinner,
+  Spacer,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
@@ -18,18 +20,23 @@ import ko from '../../locales/ko/header.json';
 import { useRouter } from 'next/router';
 import Dropdown from './Dropdown';
 
+import { useContext } from 'react';
+import { UserContext } from '../../context/user';
+
 export default function Header() {
   const router = useRouter();
-  const { locale, pathname } = router;
+  const { locale, pathname, asPath, query } = router;
   const t = locale === 'en' ? en : ko;
 
   const { isOpen, onToggle } = useDisclosure();
 
   const changeLang = (e) => {
     const locale = e.target.value;
-    router.push(pathname, pathname, { locale });
+    router.push({ pathname, query }, asPath, { locale });
     onToggle();
   };
+
+  const { user, loading, error } = useContext(UserContext);
 
   return (
     <Box
@@ -79,7 +86,7 @@ export default function Header() {
             // pb={[4, 4, 0, 0]}
           >
             <Stack
-              spacing={2}
+              spacing={3}
               align='center'
               justify={['center', 'space-evenly', 'flex-end', 'flex-end']}
               direction={['column', 'column', 'column', 'row']}
@@ -116,6 +123,19 @@ export default function Header() {
                     </NLink>
                   );
               })}
+              <Spacer />
+              <Box color={'common.main'}>
+                {error ? (
+                  error
+                ) : loading ? (
+                  <Spinner />
+                ) : user ? (
+                  <NLink href={'/user'}>{user.email.split('@')[0]}</NLink>
+                ) : (
+                  <NLink href='/enter'>Login / Sign Up</NLink>
+                )}
+              </Box>
+              <Spacer />
 
               <Box w='auto' p={1}>
                 <Select
@@ -128,7 +148,7 @@ export default function Header() {
                   border='1px solid'
                   borderColor='common.main'
                 >
-                  <option value='en'>English</option>
+                  {/* <option value='en'>English</option> */}
                   <option value='ko'>한국어</option>
                 </Select>
               </Box>

@@ -6,7 +6,9 @@ import {
   Flex,
   Button,
   Grid,
+  Link,
 } from '@chakra-ui/react';
+import { default as NLink } from 'next/link';
 import { motion } from 'framer-motion';
 import styles from '../../styles/animation.module.css';
 
@@ -117,48 +119,41 @@ export default function Hero({ text: { content } }) {
                 </MotionText>
               ))}
             </Grid>
-            <Flex justifyContent={'center'} mb='2'>
-              <MotionButton
-                flex='1'
-                rel='noopener noreferrer'
-                as='a'
-                href={link}
-                variants={item}
-                variant='outline'
-                border='1px solid'
-                borderColor='text.second'
-                color='text.second'
-                fontSize='x-large'
-                mr={4}
-                _hover={{
-                  bg: 'common.main',
-                  color: 'text.second',
-                  boxShadow: 'md',
-                }}
-                target='_blank'
-              >
-                {content.btn1}
-              </MotionButton>
-              <MotionButton
-                flex='1'
-                rel='noopener noreferrer'
-                as='a'
-                href={link}
-                variants={item}
-                variant='outline'
-                border='1px solid'
-                borderColor='text.second'
-                color='text.second'
-                fontSize='x-large'
-                _hover={{
-                  bg: 'common.main',
-                  color: 'text.second',
-                  boxShadow: 'md',
-                }}
-                target='_blank'
-              >
-                {content.btn2}
-              </MotionButton>
+            <Flex
+              justifyContent={'center'}
+              mb='2'
+              sx={{ gap: '1.5rem' }}
+              textAlign='center'
+              mt='4'
+            >
+              <NLink href={'/sots'}>
+                <Link
+                  fontSize={'2xl'}
+                  borderRadius='md'
+                  _hover={{ bg: 'common.main' }}
+                  border='1px solid'
+                  borderColor={'white'}
+                  color='white'
+                  px='6'
+                  py='2'
+                >
+                  {content.btn1}
+                </Link>
+              </NLink>
+              <NLink href={'/enter'}>
+                <Link
+                  fontSize={'2xl'}
+                  borderRadius='md'
+                  _hover={{ bg: 'common.main' }}
+                  border='1px solid'
+                  borderColor={'white'}
+                  color='white'
+                  px='6'
+                  py='2'
+                >
+                  {content.btn2}
+                </Link>
+              </NLink>
             </Flex>
           </MotionBox>
 

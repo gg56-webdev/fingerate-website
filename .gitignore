@@ -32,3 +32,11 @@ yarn-error.log*
 
 # vercel
 .vercel
+secret.json
+functions/.gitignore
+functions/index.js
+functions/package-lock.json
+functions/package.json
+ui-debug.log
+firebase.json
+.firebaserc

@@ -67,7 +67,6 @@ export default function Price({
                 borderRadius={'md'}
                 bg='white'
                 fontSize='xl'
-                bg='white'
               >
                 {row[1]}
               </Box>

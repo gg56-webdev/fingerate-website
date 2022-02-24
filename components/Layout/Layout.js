@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { Header, Footer } from '../index';
+import { Box } from '@chakra-ui/react';
 
 const footerCancel = ['/marketplace', '/map'];
 
@@ -9,7 +10,13 @@ export default function Layout({ children }) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <Box
+        as={'main'}
+        minH='100vh'
+        pb={!footerCancel.includes(pathname) && { base: '165px', sm: '117px' }}
+      >
+        {children}
+      </Box>
       {!footerCancel.includes(pathname) && <Footer />}
     </>
   );

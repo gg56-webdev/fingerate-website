@@ -2,7 +2,7 @@ import { Box, Container, Heading, Grid, GridItem } from '@chakra-ui/react';
 
 export default function History({ text: { content } }) {
   return (
-    <Box bg='white'>
+    <Box bg='white' overflow={'hidden'}>
       <Container maxW={'container.xl'} textAlign='center' py={8} px='1'>
         <Heading as='h2' mb='10'>
           {content.h2}
