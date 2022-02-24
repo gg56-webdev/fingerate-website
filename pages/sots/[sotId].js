@@ -53,6 +53,7 @@ export default function Sot({ sot }) {
         setErrorMsg(error);
       }
       if (err) console.error(err);
+      console.log(`msg: ${msg}`);
     } catch (err) {
       console.log(err);
     } finally {

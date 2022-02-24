@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         },
         (error) => {
           if (error) {
-            res.status(500).json({ msg: 'Server Failed' });
+            res.status(500).json({ msg: 'Server Failed', err: error });
             return;
           }
         }
