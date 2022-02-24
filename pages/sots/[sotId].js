@@ -45,13 +45,14 @@ export default function Sot({ sot }) {
           'Content-Type': 'application/json',
         },
       });
-      const { msg, url, error } = await res.json();
+      const { msg, url, error, err } = await res.json();
       if (!error) {
         setIFrame(url);
         onOpen();
       } else {
         setErrorMsg(error);
       }
+      if (err) console.error(err);
     } catch (err) {
       console.log(err);
     } finally {

@@ -50,6 +50,7 @@ export default async function handler(req, res) {
       url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${odrderKey}`,
     });
   } catch (err) {
-    res.status(429).json({ error: 'Rate limit exceeded' });
+    console.error(err);
+    res.status(429).json({ error: 'Rate limit exceeded', err });
   }
 }
