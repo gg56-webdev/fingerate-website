@@ -1,5 +1,6 @@
 import { db, auth, rtd } from '../../lib/firebaseAdmin';
 import rateLimit from '../../utils/rate-limit';
+import {} from 'firebase-admin/database';
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds
@@ -26,7 +27,7 @@ export default async function handler(req, res) {
       res.status(400).json({ msg: 'Cannot be purchased' });
       return;
     }
-    const odrderKey = await rtd
+    rtd
       .ref('/Orders')
       .push(
         {
@@ -35,6 +36,7 @@ export default async function handler(req, res) {
           SoTID: sotId,
           Paid: 'No',
           Price: docSnap.get('price'),
+          createAt: new Date().getTime(),
         },
         (error) => {
           if (error) {
@@ -43,12 +45,13 @@ export default async function handler(req, res) {
           }
         }
       )
-      .getKey();
-
-    res.status(201).json({
-      msg: 'Order Created',
-      url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${odrderKey}`,
-    });
+      .then((snap) => {
+        const key = snap.key;
+        res.status(201).json({
+          msg: 'Order Created',
+          url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${key}`,
+        });
+      });
   } catch (err) {
     console.error(err);
     res.status(429).json({ error: 'Rate limit exceeded', err });
