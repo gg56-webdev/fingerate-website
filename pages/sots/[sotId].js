@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Head from 'next/head';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../context/user';
 
 export default function Sot({ sot }) {
@@ -29,6 +29,7 @@ export default function Sot({ sot }) {
   const [loading, setLoading] = useState(false);
   const [iFrame, setIFrame] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [extUrl, setExtUrl] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleSubmit = async () => {
@@ -47,19 +48,25 @@ export default function Sot({ sot }) {
       });
       const { msg, url, error, err } = await res.json();
       if (!error) {
-        setIFrame(url);
-        onOpen();
+        setExtUrl(url);
       } else {
         setErrorMsg(error);
       }
       if (err) console.error(err);
       console.log(`msg: ${msg}`);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (extUrl) {
+      window.open(extUrl, '_blank');
+    }
+  }, [extUrl]);
+
   return (
     <>
       <Head>

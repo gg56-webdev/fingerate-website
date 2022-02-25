@@ -29,7 +29,7 @@ import { UserContext } from '../context/user';
 import { useContext } from 'react';
 
 export default function Enter() {
-  const [screen, setScreen] = useState('Login');
+  const [screen, setScreen] = useState('로그인');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -49,10 +49,10 @@ export default function Enter() {
     event.preventDefault();
     setError('');
     try {
-      if (screen === 'Login') {
+      if (screen === '로그인') {
         await signInWithEmailAndPassword(auth, email, password);
         router.back();
-      } else if (screen === 'Sign Up') {
+      } else if (screen === '가입하기') {
         const { user } = await createUserWithEmailAndPassword(
           auth,
           email,
@@ -66,7 +66,7 @@ export default function Enter() {
         router.push('/', '/', { locale });
       } else {
         await sendPasswordResetEmail(auth, email);
-        setScreen('Login');
+        setScreen('로그인');
       }
     } catch (err) {
       setError(err.code.split('/')[1].split('-').join(' '));
@@ -94,17 +94,17 @@ export default function Enter() {
           <Heading>{screen}</Heading>
 
           <Text fontSize={'md'}>
-            {screen === 'Login'
-              ? 'Login in to existing account'
-              : screen === 'Sign Up'
-              ? 'Create a new account'
-              : 'Reset password for account'}
+            {screen === '로그인'
+              ? ''
+              : screen === '가입하기'
+              ? ''
+              : '비밀번호를 재설정하세요'}
           </Text>
         </Stack>
 
         <Stack as={'form'} onSubmit={(e) => handleSubmit(e)} spacing='4'>
           <FormControl>
-            <FormLabel htmlFor='email'>Email Address</FormLabel>
+            <FormLabel htmlFor='email'>이메일 주소</FormLabel>
             <Input
               id='email'
               type='email'
@@ -112,25 +112,25 @@ export default function Enter() {
               required
             />
           </FormControl>
-          {(screen === 'Login' || screen === 'Sign Up') && (
+          {(screen === '로그인' || screen === '가입하기') && (
             <FormControl>
-              <FormLabel htmlFor='password'>Password</FormLabel>
+              <FormLabel htmlFor='password'>비밀번호</FormLabel>
               <Input
                 id='password'
                 type='password'
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              {!screen && (
+              {/* {!screen && (
                 <FormHelperText>Please choose a secure password</FormHelperText>
-              )}
+              )} */}
             </FormControl>
           )}
           <Button type='submit' colorScheme={'purple'}>
-            {screen === 'Login'
-              ? 'Login'
-              : screen === 'Sign Up'
-              ? 'Sign Up'
+            {screen === '로그인'
+              ? '로그인'
+              : screen === '가입하기'
+              ? '가입하기'
               : 'Send'}
           </Button>
           {error && (
@@ -140,20 +140,20 @@ export default function Enter() {
             </Alert>
           )}
         </Stack>
-        {screen === 'Login' && (
-          <Link onClick={() => changeScreen('Forgot Password')}>
-            Forgot password?
+        {screen === '로그인' && (
+          <Link onClick={() => changeScreen('비밀번호 찾기')}>
+            비밀번호 찾기
           </Link>
         )}
 
-        {screen === 'Login' ? (
-          <Link fontSize={'sm'} onClick={() => changeScreen('Sign Up')}>
-            Create new account
+        {screen === '로그인' ? (
+          <Link fontSize={'sm'} onClick={() => changeScreen('가입하기')}>
+            가입하기
           </Link>
         ) : (
           <Text fontSize={'sm'}>
-            Already have an account?{' '}
-            <Link onClick={() => changeScreen('Login')}>Login</Link>
+            이미 회원이신가요?{' '}
+            <Link onClick={() => changeScreen('로그인')}>로그인하기</Link>
           </Text>
         )}
       </Stack>
