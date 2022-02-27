@@ -53,7 +53,7 @@ export default function LearnMore({ text: { content } }) {
               >
                 <Image
                   alt='Signis gathering in the FingeRate Metaverse'
-                  src='/learn more/signis/church-lg.png'
+                  src='/learnMore/signis/church-lg.png'
                   width={720}
                   height={405}
                 />
@@ -86,7 +86,7 @@ export default function LearnMore({ text: { content } }) {
                     alt='Thumbnail of SoT Device'
                     width={200}
                     height={200}
-                    src='/learn more/locations/S.png'
+                    src='/learnMore/locations/S.png'
                   />
                 </Box>
               </Flex>
@@ -112,7 +112,7 @@ export default function LearnMore({ text: { content } }) {
                     alt='Thumbnail of SoT Device'
                     width={200}
                     height={200}
-                    src='/learn more/locations/A.png'
+                    src='/learnMore/locations/A.png'
                   />
                 </Box>
               </Flex>
@@ -137,7 +137,7 @@ export default function LearnMore({ text: { content } }) {
                     alt='Thumbnail of SoT Device'
                     width={200}
                     height={200}
-                    src='/learn more/locations/B.png'
+                    src='/learnMore/locations/B.png'
                   />
                 </Box>
               </Flex>
