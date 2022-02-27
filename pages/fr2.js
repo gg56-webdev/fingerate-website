@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import en from '../locales/en/fr2.json';
 import ko from '../locales/ko/fr2.json';
 
-export default function fr2() {
+export default function Fr2() {
   const router = useRouter();
   const { locale } = router;
   const t = locale === 'en' ? en : ko;

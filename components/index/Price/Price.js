@@ -43,13 +43,7 @@ export default function Price({
               color='white'
               sx={{ gap: '0.25rem' }}
             >
-              <Box
-                flex={1}
-                p='2'
-                bg='white'
-                borderRadius={'md'}
-                bg={`grades.${row[2]}`}
-              >
+              <Box flex={1} p='2' borderRadius={'md'} bg={`grades.${row[2]}`}>
                 <Box as={'strong'} display='block' fontSize='xxl'>
                   {row[0][0]}
                 </Box>
@@ -63,7 +57,6 @@ export default function Price({
                 placeItems='center'
                 p='2'
                 borderRadius={'md'}
-                bg='white'
                 fontSize='xl'
                 bg={`grades.${row[2]}`}
               >

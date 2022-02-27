@@ -22,29 +22,31 @@ export default function User() {
   const [noSots, setNoSots] = useState(false);
   const router = useRouter();
   const { locale } = router;
-  useEffect(async () => {
+  useEffect(() => {
     if ((!loading && !user) || error) {
       router.push('/enter', '/enter', { locale });
     }
     if (!loading && user) {
-      try {
-        const sotCol = collection(db, 'sots');
-        const cq = query(sotCol, where('owner', '==', user.uid));
-        const snap = await getDocs(cq);
+      (async () => {
+        try {
+          const sotCol = collection(db, 'sots');
+          const cq = query(sotCol, where('owner', '==', user.uid));
+          const snap = await getDocs(cq);
 
-        if (snap.empty) {
-          setNoSots(true);
-          return;
+          if (snap.empty) {
+            setNoSots(true);
+            return;
+          }
+
+          const sotArr = snap.docs.map((doc) => {
+            const { name, country, city, grade, image } = doc.data();
+            return { name, country, city, grade, image, id: doc.id };
+          });
+          setSots(sotArr);
+        } catch (err) {
+          console.error(err);
         }
-
-        const sotArr = snap.docs.map((doc) => {
-          const { name, country, city, grade, image } = doc.data();
-          return { name, country, city, grade, image, id: doc.id };
-        });
-        setSots(sotArr);
-      } catch (err) {
-        console.error(err);
-      }
+      })();
     }
   }, [user, error, loading, locale, router]);
 
