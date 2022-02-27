@@ -12,7 +12,7 @@ import Image from 'next/image';
 
 export default function LearnMore({ text: { content } }) {
   return (
-    <Box>
+    <Box bg='gray.200'>
       <Container maxW={'container.xl'} textAlign={'center'} py='8'>
         <Heading as={'h2'} mb='10'>
           {content.h2}

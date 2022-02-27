@@ -33,6 +33,7 @@ export default function Enter() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [alert, setAlert] = useState('');
   const [isValid, setIsValid] = useState(false);
 
   const { user } = useContext(UserContext);
@@ -59,26 +60,27 @@ export default function Enter() {
           password
         );
         await sendEmailVerification(user);
+        setAlert(`Please check your ${email} email to verify your account!`);
         await setDoc(doc(db, 'users', user.uid), {
           email: user.email,
           sots: [],
         });
-        router.push('/', '/', { locale });
       } else {
         await sendPasswordResetEmail(auth, email);
         setScreen('로그인');
       }
     } catch (err) {
+      console.error(err);
       setError(err.code.split('/')[1].split('-').join(' '));
     }
   };
 
   useEffect(() => {
-    user && router.push('/', '/', { locale });
-  }, [user, router, locale]);
+    user && setScreen('가입하기');
+  }, [user]);
 
   return (
-    <Grid placeItems={'center'} h='calc(100vh - 70px)' pt={'70px'}>
+    <Grid placeItems={'center'} h='calc(100vh - 70px - 117px)' pt={'70px'}>
       <Stack
         bg={'white'}
         p='2'
@@ -137,6 +139,12 @@ export default function Enter() {
             <Alert status='error'>
               <AlertIcon />
               <AlertTitle>{error}</AlertTitle>
+            </Alert>
+          )}
+          {alert && (
+            <Alert status='info'>
+              <AlertIcon />
+              <AlertTitle>{alert}</AlertTitle>
             </Alert>
           )}
         </Stack>

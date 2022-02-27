@@ -7,6 +7,8 @@ import {
   Text,
   Grid,
   Stack,
+  Select,
+  Input,
 } from '@chakra-ui/react';
 import { db } from '../../lib/firebase';
 import { getDocs, collection, where, query } from 'firebase/firestore';
@@ -16,6 +18,7 @@ import Head from 'next/head';
 
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { RepeatIcon } from '@chakra-ui/icons';
 
 export default function Sots({ sots }) {
   const [filteredSots, setFilteredSots] = useState(sots);
@@ -23,12 +26,15 @@ export default function Sots({ sots }) {
   const [country, setCountry] = useState(null);
   const router = useRouter();
   const { locale } = router;
+
+  const availableCountries = [...new Set(sots.map((sot) => sot.country))];
+
   return (
     <>
       <Head>
         <title>SoTs</title>
       </Head>
-      <Container maxW={'1400px'} pt='70px' px='1'>
+      <Container maxW={'1400px'} pt='70px' px='1' pb='8'>
         <Stack p={'2'} bg='white' borderRadius={'md'}>
           <Heading as='h1' textAlign='center'>
             SoTs
@@ -42,24 +48,62 @@ export default function Sots({ sots }) {
             borderRadius='md'
             border={'2px solid'}
             borderColor='blue.100'
+            w={'fit-content'}
           >
-            <Box>Filter</Box>
+            <Stack direction={'row'}>
+              <Input
+                list='countries'
+                onChange={(e) => setCountry(e.target.value)}
+                placeholder='Country'
+                color='common.main'
+                border='1px solid'
+                borderColor='common.main'
+                width={'fit-content'}
+                value={country || ''}
+              />
+
+              <datalist id='countries'>
+                {availableCountries.map((c, i) => (
+                  <option value={c} key={c + i} />
+                ))}
+              </datalist>
+              <Select
+                width={'fit-content'}
+                variant='outline'
+                color='common.main'
+                onChange={(e) => setGrade(e.target.value)}
+                placeholder='Grade'
+                border='1px solid'
+                borderColor='common.main'
+                value={grade || ''}
+              >
+                <option value='S'>S</option>
+                <option value='A'>A</option>
+                <option value='B'>B</option>
+              </Select>
+              <Button
+                colorScheme={'gray'}
+                onClick={() => {
+                  setCountry(null);
+                  setGrade(null);
+                }}
+              >
+                <RepeatIcon />
+              </Button>
+            </Stack>
           </Stack>
           <Grid
             gap='2'
-            gridTemplateColumns={'repeat(auto-fit, minmax(200px, 1fr))'}
+            gridTemplateColumns={'repeat(auto-fill, minmax(200px, 1fr))'}
             px='2'
           >
             {filteredSots
-              .filter((item) =>
-                grade
-                  ? item.grade.toLocaleLowerCase() === grade.toLocaleLowerCase()
-                  : true
+              .filter((sot) =>
+                grade ? sot.grade.toLowerCase() === grade.toLowerCase() : true
               )
-              .filter((item) =>
+              .filter((sot) =>
                 country
-                  ? item.country.toLocaleLowerCase() ===
-                    country.toLocaleLowerCase()
+                  ? sot.country.toLowerCase() === country.toLowerCase()
                   : true
               )
               .map((sot) => (
@@ -80,29 +124,6 @@ export default function Sots({ sots }) {
                     cursor: 'pointer',
                   }}
                 >
-                  <Stack
-                    direction='row'
-                    alignItems={'center'}
-                    borderRadius={'md'}
-                    border={'2px solid'}
-                    borderColor='common.second'
-                    spacing={'0.5'}
-                  >
-                    <Box p='1' fontWeight={'bold'}>
-                      {sot.grade}
-                    </Box>
-                    <Box
-                      flex={1}
-                      py={'1'}
-                      px={'4'}
-                      bg='common.second'
-                      borderRadius={'md'}
-                      fontWeight='bold'
-                      color={'common.main'}
-                    >
-                      $ {sot.price}
-                    </Box>
-                  </Stack>
                   <Box borderRadius={'md'} overflow='hidden'>
                     <Image
                       src={sot.image}
@@ -112,12 +133,28 @@ export default function Sots({ sots }) {
                       layout='responsive'
                     />
                   </Box>
-                  <Stack spacing={1}>
+                  <Stack spacing={1} flex='1' justifyContent='space-between'>
                     <Box as={'strong'}>{`SoT ${sot.id} - ${sot.name}`}</Box>
                     <Box as={'small'}>
                       {sot.country}, {sot.city}
                     </Box>
                   </Stack>
+                  <Flex
+                    textAlign={'center'}
+                    fontWeight={'bold'}
+                    bg='common.second'
+                    p='1'
+                    borderRadius={'md'}
+                    alignItems='center'
+                    sx={{ gap: '0.5rem' }}
+                  >
+                    <Box bg={'white'} borderRadius='md' p='1'>
+                      {sot.grade}
+                    </Box>
+                    <Text as={'span'} fontWeight='bold' color={'common.main'}>
+                      ₩ {sot.price}
+                    </Text>
+                  </Flex>
                 </Stack>
               ))}
           </Grid>
@@ -129,10 +166,7 @@ export default function Sots({ sots }) {
 
 export async function getStaticProps() {
   const colRef = collection(db, 'sots');
-  const cq = query(
-    colRef
-    // where('grade', '==', 'A')
-  );
+  const cq = query(colRef, where('owner', '==', ''));
   const snap = await getDocs(cq);
 
   const sots = snap.docs.map((doc) => {
@@ -142,5 +176,6 @@ export async function getStaticProps() {
 
   return {
     props: { sots },
+    revalidate: 1000 * 60 * 30,
   };
 }

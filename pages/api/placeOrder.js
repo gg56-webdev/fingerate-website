@@ -1,6 +1,5 @@
 import { db, auth, rtd } from '../../lib/firebaseAdmin';
 import rateLimit from '../../utils/rate-limit';
-import {} from 'firebase-admin/database';
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds
@@ -11,7 +10,36 @@ export default async function handler(req, res) {
   const { userId, userEmail, sotId } = req.body;
 
   try {
-    // await limiter.check(res, 5, 'CACHE_TOKEN');
+    await limiter.check(res, 3, 'CACHE_TOKEN');
+    let orderExists = false;
+
+    await rtd
+      .ref('/Orders')
+      .orderByChild('CombinedID')
+      .equalTo(userId + sotId)
+      .once('value')
+      .then((snap) => {
+        if (snap.exists()) {
+          orderExists = true;
+
+          snap.forEach((childSnap) => {
+            res.status(201).json({
+              msg: 'Order Exists',
+              url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${childSnap.key}`,
+            });
+            return;
+          });
+        }
+      });
+
+    if (orderExists) return;
+    // if (order.exists()) {
+    //   res.status(201).json({
+    //     msg: 'Order Exists',
+    //     url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${order.key}`,
+    //   });
+    //   return;
+    // }
 
     const userSnap = await auth.getUser(userId);
     if (!userSnap || !userSnap.emailVerified) {
@@ -27,7 +55,7 @@ export default async function handler(req, res) {
       res.status(400).json({ msg: 'Cannot be purchased' });
       return;
     }
-    rtd
+    await rtd
       .ref('/Orders')
       .push(
         {
@@ -36,7 +64,8 @@ export default async function handler(req, res) {
           SoTID: sotId,
           Paid: 'No',
           Price: docSnap.get('price'),
-          createAt: new Date().getTime(),
+          CreatedAt: new Date().getTime(),
+          CombinedID: userId + sotId,
         },
         (error) => {
           if (error) {

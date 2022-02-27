@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { theme, koreanTheme } from '../styles/theme';
 import { useRouter } from 'next/router';
-import { Layout } from '../components';
+import Layout from '../components/Layout/Layout';
 import { UserContext } from '../context/user';
 import { useUserData } from '../hooks/useUserData';
 

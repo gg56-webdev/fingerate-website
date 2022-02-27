@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { default as NLink } from 'next/link';
 import { motion } from 'framer-motion';
-import styles from '../../styles/animation.module.css';
+import styles from '../../../styles/animation.module.css';
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -177,7 +177,7 @@ export default function Hero({ text: { content } }) {
           </MotionBox>
         </Flex>
       </Container>
-      <Box
+      {/* <Box
         h={'fit-content'}
         bg='white'
         borderTop={'1px solid'}
@@ -203,7 +203,7 @@ export default function Hero({ text: { content } }) {
             </Box>
           </Box>
         </Container>
-      </Box>
+      </Box> */}
     </Flex>
   );
 }

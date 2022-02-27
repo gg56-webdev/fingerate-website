@@ -35,7 +35,7 @@ export default function Home() {
       <Price text={t.sections.price} />
       <LearnMore text={t.sections.learnMore} />
       <History text={t.sections.history} />
-      {/* <Roadmap text={t.sections.roadmap} /> */}
+      <Roadmap text={t.sections.roadmap} />
     </>
   );
 }

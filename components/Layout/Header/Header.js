@@ -13,15 +13,17 @@ import { HamburgerIcon, CloseIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
 
+import frLogo from '../../../public/background/fr2.svg';
+
 // import nav from './nav.json';
-import en from '../../locales/en/header.json';
-import ko from '../../locales/ko/header.json';
+import en from '../../../locales/en/header.json';
+import ko from '../../../locales/ko/header.json';
 
 import { useRouter } from 'next/router';
 import Dropdown from './Dropdown';
 
 import { useContext } from 'react';
-import { UserContext } from '../../context/user';
+import { UserContext } from '../../../context/user';
 
 export default function Header() {
   const router = useRouter();
@@ -52,19 +54,21 @@ export default function Header() {
         backgroundColor='white'
         borderRadius={6}
         boxShadow={'lg'}
-        px={1}
+        p={1}
         border={'1px solid'}
         borderColor={'gray.300'}
       >
         <Flex as='nav' align='center' justify='space-between' wrap='wrap'>
-          <Flex as='a' href='/' align='center'>
-            <Image
-              src='/logo_1.png'
-              alt='FingeRate logo'
-              width='50'
-              height='50'
-            />
-            <Box color='common.main' fontSize='2xl' fontWeight='bold'>
+          <Flex as='a' href='/' align='center' sx={{ gap: '0.25rem' }}>
+            <Box fontSize={0} borderRadius='md' overflow={'hidden'}>
+              <Image src={frLogo} alt='FingeRate logo' width='40' height='40' />
+            </Box>
+            <Box
+              color='common.main'
+              fontSize='2xl'
+              fontWeight='bold'
+              fontFamily={'sans-serif'}
+            >
               FingeRate
             </Box>
           </Flex>
@@ -132,26 +136,25 @@ export default function Header() {
                 ) : user ? (
                   <NLink href={'/user'}>{user.email.split('@')[0]}</NLink>
                 ) : (
-                  <NLink href='/enter'>Login / Sign Up</NLink>
+                  <NLink href='/enter'>로그인/가입하기</NLink>
                 )}
               </Box>
               <Spacer />
 
-              <Box w='auto' p={1}>
-                <Select
-                  size='xs'
-                  variant='outline'
-                  color='common.main'
-                  bgColor='white'
-                  onChange={changeLang}
-                  defaultValue={locale}
-                  border='1px solid'
-                  borderColor='common.main'
-                >
-                  {/* <option value='en'>English</option> */}
-                  <option value='ko'>한국어</option>
-                </Select>
-              </Box>
+              <Select
+                w={'fit-content'}
+                size='sm'
+                variant='outline'
+                color='common.main'
+                bgColor='white'
+                onChange={changeLang}
+                defaultValue={locale}
+                border='1px solid'
+                borderColor='common.main'
+              >
+                {/* <option value='en'>English</option> */}
+                <option value='ko'>한국어</option>
+              </Select>
             </Stack>
           </Box>
         </Flex>

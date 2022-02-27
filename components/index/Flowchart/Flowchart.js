@@ -5,13 +5,6 @@ import {
   Box,
   Grid,
   GridItem,
-  Popover,
-  PopoverTrigger,
-  PopoverBody,
-  PopoverContent,
-  PopoverArrow,
-  PopoverCloseButton,
-  Button,
   Flex,
 } from '@chakra-ui/react';
 import Image from 'next/image';

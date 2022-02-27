@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import { Header, Footer } from '../index';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
 import { Box } from '@chakra-ui/react';
 
 const footerCancel = ['/marketplace', '/map'];

@@ -17,6 +17,13 @@ export const theme = extendTheme({
       mainLight: '#c301fe',
       second: '#BFFFB3',
     },
+    grades: {
+      S: '#710193',
+      A: '#d5b342',
+      B: '#50adff',
+      C: '#d56173',
+      D: '#ba8c63',
+    },
     text: {
       main: '#09244d',
       second: '#ffffff',

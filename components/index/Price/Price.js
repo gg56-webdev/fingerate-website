@@ -6,17 +6,6 @@ import {
   Heading,
   Flex,
 } from '@chakra-ui/react';
-import { Fragment } from 'react';
-
-const gradeColors = {
-  S: { r: 80, g: 173, b: 255 },
-  A: { r: 213, g: 179, b: 66 },
-  B: { r: 178, g: 202, b: 205 },
-  C: { r: 213, g: 97, b: 115 },
-  D: { r: 186, g: 140, b: 99 },
-};
-
-const getRGBcolor = ({ r = 20, g = 20, b = 20 }) => `rgb(${r},${g},${b})`;
 
 export default function Price({
   text: {
@@ -25,9 +14,16 @@ export default function Price({
   },
 }) {
   return (
-    <Box>
+    <Box bgImage={'/price/metaverse3.webp'} bgSize='cover'>
       <Container maxW={'container.lg'} textAlign='center' py={8}>
-        <Heading as={'h2'} mb='10'>
+        <Heading
+          as={'h2'}
+          mb='10'
+          color={'common.second'}
+          p='2'
+          bg={'common.main'}
+          borderRadius='md'
+        >
           {h2}
         </Heading>
         <Grid
@@ -41,18 +37,20 @@ export default function Price({
               key={row}
               as={Flex}
               flexDirection={{ base: 'column', md: 'row' }}
-              p='2'
+              p='1'
               borderRadius={'md'}
-              bg={getRGBcolor(gradeColors[row[2]])}
-              sx={{ gap: '0.5rem' }}
+              bg={'white'}
+              color='white'
+              sx={{ gap: '0.25rem' }}
             >
-              <Box flex={1} p='2' bg='white' borderRadius={'md'}>
-                <Box
-                  as={'strong'}
-                  display='block'
-                  color={getRGBcolor(gradeColors[row[2]])}
-                  fontSize='xxl'
-                >
+              <Box
+                flex={1}
+                p='2'
+                bg='white'
+                borderRadius={'md'}
+                bg={`grades.${row[2]}`}
+              >
+                <Box as={'strong'} display='block' fontSize='xxl'>
                   {row[0][0]}
                 </Box>
                 <Box as={'small'} fontSize='sm'>
@@ -60,13 +58,14 @@ export default function Price({
                 </Box>
               </Box>
               <Box
-                flex={1}
+                flex={0.75}
                 display={'grid'}
                 placeItems='center'
                 p='2'
                 borderRadius={'md'}
                 bg='white'
                 fontSize='xl'
+                bg={`grades.${row[2]}`}
               >
                 {row[1]}
               </Box>

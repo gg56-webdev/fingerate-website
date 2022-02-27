@@ -2,7 +2,7 @@ import { Box, Container, Heading, Grid, GridItem } from '@chakra-ui/react';
 
 export default function History({ text: { content } }) {
   return (
-    <Box bg='white' overflow={'hidden'}>
+    <Box bg='blue.100' overflow={'hidden'}>
       <Container maxW={'container.xl'} textAlign='center' py={8} px='1'>
         <Heading as='h2' mb='10'>
           {content.h2}
@@ -31,6 +31,11 @@ export default function History({ text: { content } }) {
               display='grid'
               placeItems={'center'}
               borderRadius={'md'}
+              border='2px solid'
+              borderColor={'white'}
+              color='common.main'
+              fontSize={'lg'}
+              fontWeight='bold'
               p='2'
             >
               {ev}
@@ -47,7 +52,7 @@ export default function History({ text: { content } }) {
               content: `''`,
               position: 'absolute',
               justifySelf: 'center',
-              width: { md: '104%', base: '4px' },
+              width: { md: '102%', base: '4px' },
               height: { md: '4px', base: '102%' },
               bg: 'common.main',
               zIndex: 1,

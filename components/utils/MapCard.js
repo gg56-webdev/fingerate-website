@@ -7,11 +7,12 @@ import {
   Text,
   Spacer,
   GridItem,
+  Heading,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
 
-export default function MapCard({ sot, price, onSelectSoT }) {
+export default function MapCard({ sot, onSelectSoT }) {
   return (
     <Grid
       gap={2}
@@ -20,33 +21,58 @@ export default function MapCard({ sot, price, onSelectSoT }) {
       borderColor={'gray.300'}
       borderRadius={6}
       transition={'ease-in-out'}
-      _hover={{ boxShadow: 'outline' }}
+      _hover={{ boxShadow: 'outline', cursor: 'pointer' }}
       alignItems={'center'}
     >
-      <Button onClick={() => onSelectSoT(sot)}>See on map</Button>
-      <Image
-        width={200}
-        height={200}
-        src={sot.image}
-        blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkrAcAAIcAgit25/8AAAAASUVORK5CYII='
-        placeholder='blur'
-        alt={`Thumbnail of ${sot.id}`}
-      />
-      <Flex justifyContent={'space-between'}>
-        <Link
-          bg={'common.main'}
-          color={'white'}
-          py='1'
-          px='2'
-          fontSize={'small'}
-          borderRadius={6}
-          href={sot.url}
-          target={'_blank'}
-          isExternal
+      <Box>
+        <Image
+          width={200}
+          height={200}
+          src={sot.image}
+          layout='responsive'
+          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkrAcAAIcAgit25/8AAAAASUVORK5CYII='
+          placeholder='blur'
+          alt={`Thumbnail of ${sot.id}`}
+          onClick={() => onSelectSoT(sot)}
+        />
+      </Box>
+      <Heading as='h2' fontSize={'lg'}>
+        {sot.name}
+      </Heading>
+
+      <Flex
+        alignItems={'center'}
+        sx={{ gap: '0.25rem' }}
+        flexWrap='wrap-reverse'
+      >
+        <NLink href={`/sots/${sot.id}`}>
+          <Link
+            bg={'common.mainLight'}
+            color={'white'}
+            py='1'
+            px='2'
+            fontSize={'md'}
+            borderRadius={6}
+          >
+            Buy SoT
+          </Link>
+        </NLink>
+        <Flex
+          flex={'1'}
+          sx={{ gap: '0.5rem' }}
+          p='1'
+          alignItems={'center'}
+          bg={'common.second'}
+          borderRadius={'md'}
+          fontWeight={'bold'}
         >
-          Buy SoT
-        </Link>
-        <Text>₩ {price}</Text>
+          <Box bg='white' borderRadius={'md'} px='1'>
+            {sot.grade}
+          </Box>
+          <Text as={'span'} color='common.main'>
+            ₩ {sot.price}
+          </Text>
+        </Flex>
       </Flex>
     </Grid>
   );

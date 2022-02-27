@@ -7,6 +7,7 @@ import ReactMapGL, {
 } from 'react-map-gl';
 import Image from 'next/image';
 import Head from 'next/head';
+import { default as NLink } from 'next/link';
 import getSoTData from '../utils/getSoTData';
 import {
   Box,
@@ -21,16 +22,18 @@ import {
   useMediaQuery,
   Link,
   Button,
+  Heading,
+  Stack,
 } from '@chakra-ui/react';
 import { SmallCloseIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import MapCard from '../components/utils/MapCard';
+import { db } from '../lib/firebase';
+import { getDocs, collection, where, query } from 'firebase/firestore';
 
 const geolocateControlStyle = {
   right: 10,
   bottom: 40,
 };
-
-const priceListWon = { S: 1_000_000, A: 750_000, B: 500_000 };
 
 export default function Map({ sots }) {
   const [viewport, setViewport] = useState({
@@ -70,7 +73,7 @@ export default function Map({ sots }) {
     (sot) => {
       setViewport({
         longitude: sot.long,
-        latitude: sot.lati,
+        latitude: sot.lat,
         zoom: 15,
         transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
         transitionDuration: 'auto',
@@ -106,7 +109,7 @@ export default function Map({ sots }) {
           <Marker
             key={terminal.id + terminal.name}
             longitude={terminal.long}
-            latitude={terminal.lati}
+            latitude={terminal.lat}
             offsetLeft={-30}
             offsetTop={-30}
             onClick={() => {
@@ -123,7 +126,7 @@ export default function Map({ sots }) {
         ))}
         {selectedMark && (
           <Popup
-            latitude={selectedMark.lati}
+            latitude={selectedMark.lat}
             longitude={selectedMark.long}
             closeButton={true}
             closeOnClick={false}
@@ -132,33 +135,52 @@ export default function Map({ sots }) {
             // offsetTop={}
             offsetLeft={20}
           >
-            <Image
-              width={200}
-              height={200}
-              src={selectedMark.image}
-              blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkrAcAAIcAgit25/8AAAAASUVORK5CYII='
-              placeholder='blur'
-              alt={`Thumbnail of ${selectedMark.id}`}
-            />
-            <Text maxW={200}>{selectedMark.description}</Text>
-            <Text textAlign={'center'} fontWeight={'bold'}>
-              ₩ {priceListWon[selectedMark.grade]}
-            </Text>
-            <Link
-              bg={'common.main'}
-              display={'block'}
-              width={'100%'}
-              textAlign={'center'}
-              color={'white'}
-              py='1'
-              px='2'
-              borderRadius={6}
-              href={selectedMark.url}
-              target={'_blank'}
-              isExternal
-            >
-              Buy SoT
-            </Link>
+            <Stack maxW='calc(200px + 1rem)' spacing={1}>
+              <Image
+                width={200}
+                height={200}
+                src={selectedMark.image}
+                blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkrAcAAIcAgit25/8AAAAASUVORK5CYII='
+                placeholder='blur'
+                alt={`Thumbnail of ${selectedMark.id}`}
+              />
+              <Heading as='h2' fontSize={'lg'}>
+                SoT{selectedMark.id} - {selectedMark.name}
+              </Heading>
+              <Text>
+                {selectedMark.country}, {selectedMark.city}
+              </Text>
+              <Flex
+                textAlign={'center'}
+                fontWeight={'bold'}
+                bg='common.second'
+                p='1'
+                borderRadius={'md'}
+                alignItems='center'
+                sx={{ gap: '0.5rem' }}
+              >
+                <Box bg={'white'} borderRadius='md' p='1'>
+                  {selectedMark.grade}
+                </Box>
+                <Text as={'span'} fontWeight='bold' color={'common.main'}>
+                  ₩ {selectedMark.price}
+                </Text>
+              </Flex>
+              <NLink href={`/sots/${selectedMark.id}`}>
+                <Link
+                  bg={'common.mainLight'}
+                  display={'block'}
+                  width={'100%'}
+                  textAlign={'center'}
+                  color={'white'}
+                  py='1'
+                  px='2'
+                  borderRadius={6}
+                >
+                  Buy SoT
+                </Link>
+              </NLink>
+            </Stack>
           </Popup>
         )}
         <GeolocateControl
@@ -231,19 +253,17 @@ export default function Map({ sots }) {
           {/* <IconButton icon={<SmallCloseIcon />} onClick={resetFilters} /> */}
         </Grid>
         <Grid
-          templateColumns={'repeat(2, 1fr)'}
+          templateColumns={{
+            base: 'repeat(auto-fit, minmax(150px, 1fr))',
+          }}
           padding={1}
           height={'auto'}
-          gap={3}
+          gap={2}
           overflowY={'scroll'}
+          justifyContent='center'
         >
-          {filteredSots.map((item) => (
-            <MapCard
-              key={item.id}
-              sot={item}
-              price={priceListWon[item.grade]}
-              onSelectSoT={onSelectSoT}
-            />
+          {filteredSots.map((sot) => (
+            <MapCard key={sot.id} sot={sot} onSelectSoT={onSelectSoT} />
           ))}
         </Grid>
       </Flex>
@@ -252,6 +272,25 @@ export default function Map({ sots }) {
 }
 
 export async function getStaticProps() {
-  const sots = await getSoTData();
-  return { props: { sots } };
+  const colRef = collection(db, 'sots');
+  const cq = query(colRef, where('owner', '==', ''));
+  const snap = await getDocs(cq);
+
+  const sots = snap.docs.map((doc) => {
+    const {
+      name,
+      country,
+      city,
+      grade,
+      image,
+      price,
+      location: { _lat: lat, _long: long },
+    } = doc.data();
+    return { name, country, city, grade, image, price, id: doc.id, lat, long };
+  });
+
+  return {
+    props: { sots },
+    revalidate: 1000 * 60 * 30,
+  };
 }

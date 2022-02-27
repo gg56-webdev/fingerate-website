@@ -47,15 +47,14 @@ export default function Sot({ sot }) {
         },
       });
       const { msg, url, error, err } = await res.json();
-      if (!error) {
-        setExtUrl(url);
-      } else {
+
+      if (err || error) {
+        console.error(err, error);
         setErrorMsg(error);
+      } else {
+        setExtUrl({ url });
+        console.log(`msg: ${msg}`);
       }
-      if (err) console.error(err);
-      console.log(`msg: ${msg}`);
-    } catch (err) {
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -63,7 +62,7 @@ export default function Sot({ sot }) {
 
   useEffect(() => {
     if (extUrl) {
-      window.open(extUrl, '_blank');
+      window.open(extUrl.url, '_blank');
     }
   }, [extUrl]);
 
@@ -178,11 +177,11 @@ export default function Sot({ sot }) {
                   color={'common.main'}
                   display='block'
                 >
-                  $ {sot.price}
+                  ₩ {sot.price}
                 </Box>
               </Box>
 
-              {errorMsg ? (
+              {sot?.owner ? null : errorMsg ? (
                 <Alert status='error'>
                   <AlertIcon />
                   <AlertTitle>{errorMsg}</AlertTitle>
@@ -192,6 +191,7 @@ export default function Sot({ sot }) {
                   p='8'
                   isDisabled={!user || !user.emailVerified}
                   colorScheme='purple'
+                  bg='common.mainLight'
                   color={'white'}
                   fontSize='xl'
                   onClick={handleSubmit}
@@ -258,6 +258,6 @@ export async function getStaticProps({ params: { sotId } }) {
 
   return {
     props: { sot },
-    revalidate: 10000,
+    revalidate: 1000 * 60 * 60,
   };
 }

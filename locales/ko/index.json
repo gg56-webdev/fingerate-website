@@ -67,7 +67,7 @@
     "price": {
       "id": "price",
       "content": {
-        "h2": "SoT 가격 차트 (사전 판매)",
+        "h2": "SoT 파헤치기! (사전 판매)",
         "list": [
           [
             [
@@ -145,20 +145,119 @@
         "h2": "Roadmap",
         "steps": [
           {
-            "title": "title1",
-            "p": "text with explanation fdfsdfd fdsdfdf sdfsd fdfdfdfd"
+            "title": "SoT (NFT) Sale",
+            "year": 2021,
+            "sections": [
+              {
+                "title": "FingeRate2.0 platform development",
+                "points": [
+                  "Web / metaverse platform design",
+                  "Blueprint formation for 10,000 SOTs"
+                ]
+              },
+              {
+                "title": "OpenSea Integration",
+                "points": [
+                  "Integration of OpenSea NFT marketplace with SOT platform",
+                  "SOT smart contract development",
+                  "Minting 1,000 SOTs and uploading on OpenSea"
+                ]
+              }
+            ]
           },
           {
-            "title": "title2",
-            "p": "text with explanation fdsjlkfjoidsj jfiosdj iofsjdjfiosdj fiosjdoi joi joisdjf o"
+            "title": "FingeRate Launch",
+            "year": 2022,
+
+            "sections": [
+              {
+                "title": "FingeRate polling / satisfaction survey launch",
+                "points": [
+                  "Polling system development",
+                  "AR-based satisfaction survey system development and testing",
+                  "FingerRate2.0 app development"
+                ]
+              },
+              {
+                "title": "FingeRate Meeting Room",
+                "points": [
+                  "Meeting room design and development",
+                  "Service testing"
+                ]
+              },
+              {
+                "title": "FingeRate marketplace",
+                "points": [
+                  "FingeRate2.0 App marketplace planning and development",
+                  "Integration with NFT creation of marketplace items"
+                ]
+              }
+            ]
           },
           {
-            "title": "title3",
-            "p": "text with explanation pfjsdipjfiosdjiofjsdiofj j soidjfiosdj ijsdi jisdj fisjdoi fjso"
+            "title": "Blockchain Development",
+            "year": 2023,
+
+            "sections": [
+              {
+                "title": "Smart Contract",
+                "points": [
+                  "Survey exchange system",
+                  "Real-time revenue settlement process",
+                  "SOT valuation method"
+                ]
+              },
+              {
+                "title": "Mainnet development",
+                "points": [
+                  "Creation of wallet, block explorer, dApp functionalities for stronger blockchain ecosystem",
+                  "Implementation of cross chain compatibility",
+                  "Integration of DeFi capabilities"
+                ]
+              }
+            ]
           },
           {
-            "title": "title4",
-            "p": "text with explanation fijiodsjfiosdjf jfiodsjfiosdj jfoio jdiofj oisd"
+            "title": "Research & AI Development",
+            "year": 2024,
+
+            "sections": [
+              {
+                "title": "SoT Deep Research Introduction",
+                "points": [
+                  "Launch of Company's deep research services, a proprietary methodology of collecting and analyzing indepth consumer opinions",
+                  "Development of Deep Research API"
+                ]
+              },
+              {
+                "title": "AI Survey Introduction",
+                "points": [
+                  "Automation of survey development and collection",
+                  "Development of AI technology for quantitative + qualitative data analysis of survey results"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Research & AI Reinforcement",
+            "year": 2025,
+
+            "sections": [
+              {
+                "title": "SoT Deep Research Reinforcement",
+                "points": [
+                  "Addition of AI capabilities for deep research services",
+                  "Sales / licensing of API"
+                ]
+              },
+              {
+                "title": "AI Survey Reinforcement",
+                "points": [
+                  "Development of fully automated generation of reports analyzing",
+                  "Survey data"
+                ]
+              }
+            ]
           }
         ]
       }

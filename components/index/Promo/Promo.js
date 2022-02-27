@@ -4,7 +4,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper';
 import Image from 'next/image';
 
 import SlideShow from './slideshow/SlideShow';
-import SlideAnim from '../utils/SlideAnim';
+import SlideAnim from '../../utils/SlideAnim';
 import { Button } from '@chakra-ui/react';
 
 // export default function Promo({ text: { name, content } }) {

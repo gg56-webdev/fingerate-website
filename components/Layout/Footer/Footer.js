@@ -1,14 +1,14 @@
 import { Container, Box, Text, Stack, Link } from '@chakra-ui/react';
 import { default as NLink } from 'next/link';
 import Image from 'next/image';
-import Contact from '../Contact/Contact';
-import gg56logo from '../../public/footer/gg56.svg';
+import Contact from './Contact/Contact';
+import gg56logo from '../../../public/footer/gg56.svg';
 
 export default function Footer() {
   return (
     <Box
       as={'footer'}
-      bg='blue.100'
+      bg='white'
       pos={'absolute'}
       bottom='0'
       w={'100%'}
