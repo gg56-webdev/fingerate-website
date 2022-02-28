@@ -15,6 +15,7 @@ export default function Dropdown({ item, onToggle }) {
   return (
     <Menu isOpen={isOpen}>
       <MenuButton
+        disabled={item?.disabled}
         border={item.important && '1px solid'}
         borderColor={item.important && 'common.main'}
         fontWeight={item.important && 'bold'}

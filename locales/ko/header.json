@@ -41,6 +41,7 @@
       "n": "지원",
       "important": true,
       "external": false,
+      "disabled": true,
       "dropdown": [
         {
           "n": "공지 사항",

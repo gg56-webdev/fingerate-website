@@ -37,10 +37,12 @@ export default function LearnMore({ text: { content } }) {
               <GridItem
                 flex={'1'}
                 as={Text}
-                bg='common.second'
+                border='2px solid'
+                borderColor='common.second'
                 p={2}
                 borderRadius='md'
                 textAlign={'left'}
+                whiteSpace='pre-line'
               >
                 {content.box1.p}
               </GridItem>
