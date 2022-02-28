@@ -142,119 +142,120 @@
     "roadmap": {
       "id": "roadmap",
       "content": {
-        "h2": "Roadmap",
+        "h2": "기술 로드맵",
         "steps": [
           {
-            "title": "SoT (NFT) Sale",
+            "title": "SOT 가상자산 분양",
             "year": 2021,
             "sections": [
               {
-                "title": "FingeRate2.0 platform development",
+                "title": "FingeRate2.0 플랫폼 개발",
                 "points": [
-                  "Web / metaverse platform design",
-                  "Blueprint formation for 10,000 SOTs"
+                  "웹 플랫폼 개발 및 오픈 SOT 1만대 좌표 정의",
+                  "모델하우스 구성"
                 ]
               },
               {
                 "title": "OpenSea Integration",
                 "points": [
-                  "Integration of OpenSea NFT marketplace with SOT platform",
-                  "SOT smart contract development",
-                  "Minting 1,000 SOTs and uploading on OpenSea"
+                  "OpenSea NFT 플랫폼과SOT 시스템 연동",
+                  "SOT 관련 Smart contract 작성",
+                  "SOT 1,000대 민팅하여 OpenSea에 upload"
                 ]
               }
             ]
           },
           {
-            "title": "FingeRate Launch",
+            "title": "SOT 서비스 개시",
             "year": 2022,
 
             "sections": [
               {
-                "title": "FingeRate polling / satisfaction survey launch",
+                "title": "SOT 여론, 만족도조사 개시",
                 "points": [
-                  "Polling system development",
-                  "AR-based satisfaction survey system development and testing",
-                  "FingerRate2.0 app development"
+                  "여론조사 시스템 개발",
+                  "만족도 조사 AR 시스템개발 및 테스트",
+                  "FingeRate2.0 앱 개발"
                 ]
               },
               {
-                "title": "FingeRate Meeting Room",
-                "points": [
-                  "Meeting room design and development",
-                  "Service testing"
-                ]
+                "title": "SoT Meeting Room",
+                "points": ["미팅룸 구성", "미팅룸 개발", "서비스 테스트"]
               },
               {
-                "title": "FingeRate marketplace",
+                "title": "SoT Marketplace",
                 "points": [
-                  "FingeRate2.0 App marketplace planning and development",
-                  "Integration with NFT creation of marketplace items"
+                  "FingeRate2.0 앱 마켓플레이스 기획 및 개발",
+                  "마켓플레이스 아이템 NFT와 연동"
                 ]
               }
             ]
           },
           {
-            "title": "Blockchain Development",
+            "title": "블록체인 고도화",
             "year": 2023,
 
             "sections": [
               {
                 "title": "Smart Contract",
                 "points": [
-                  "Survey exchange system",
-                  "Real-time revenue settlement process",
-                  "SOT valuation method"
+                  "Survey Exchange시스템",
+                  "실시간 수익 정산",
+                  "SOT 가치 평가 시스템"
                 ]
               },
               {
-                "title": "Mainnet development",
+                "title": "자체 메인넷 개발",
                 "points": [
-                  "Creation of wallet, block explorer, dApp functionalities for stronger blockchain ecosystem",
-                  "Implementation of cross chain compatibility",
-                  "Integration of DeFi capabilities"
+                  "메인넷 개발",
+                  "자체 DeFi 서비스 게시",
+                  "자체 블록체인 생태계구축"
                 ]
               }
             ]
           },
           {
-            "title": "Research & AI Development",
+            "title": "딥리서치 & AI 구축",
             "year": 2024,
 
             "sections": [
               {
-                "title": "SoT Deep Research Introduction",
+                "title": "딥리서치 도입",
                 "points": [
-                  "Launch of Company's deep research services, a proprietary methodology of collecting and analyzing indepth consumer opinions",
-                  "Development of Deep Research API"
+                  "Survey 딥리서치 구축",
+                  "딥리서치 기반 Survey서비스 개시",
+                  "딥리서치 API 구축"
                 ]
               },
               {
-                "title": "AI Survey Introduction",
+                "title": "AI Survey 도입",
                 "points": [
-                  "Automation of survey development and collection",
-                  "Development of AI technology for quantitative + qualitative data analysis of survey results"
+                  "Survey 자동화",
+                  "정성 분석 AI 도입",
+                  "분석 보고서 초안 생성"
                 ]
               }
             ]
           },
           {
-            "title": "Research & AI Reinforcement",
+            "title": "딥리서치 & AI 강화",
             "year": 2025,
 
             "sections": [
               {
-                "title": "SoT Deep Research Reinforcement",
+                "title": "딥리서치 강화",
                 "points": [
-                  "Addition of AI capabilities for deep research services",
-                  "Sales / licensing of API"
+                  "Survey 딥리서치 강화",
+                  "딥리서치 기반 AI Survey 개시",
+                  "딥리서치 API 판매"
                 ]
               },
               {
-                "title": "AI Survey Reinforcement",
+                "title": "AI Survey 강화",
                 "points": [
-                  "Development of fully automated generation of reports analyzing",
-                  "Survey data"
+                  "Survey 자동화",
+                  "정성 분석 AI 강화",
+                  "분석 보고서 완전 자동생성"
                 ]
               }
             ]

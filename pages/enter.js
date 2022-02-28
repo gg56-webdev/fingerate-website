@@ -63,7 +63,6 @@ export default function Enter() {
         setAlert(`Please check your ${email} email to verify your account!`);
         await setDoc(doc(db, 'users', user.uid), {
           email: user.email,
-          sots: [],
         });
       } else {
         await sendPasswordResetEmail(auth, email);

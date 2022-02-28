@@ -48,7 +48,8 @@ export default function Sots({ sots }) {
             borderRadius='md'
             border={'2px solid'}
             borderColor='blue.100'
-            w={'fit-content'}
+            w={'100%'}
+            maxW='fit-content'
           >
             <Stack direction={'row'}>
               <Input

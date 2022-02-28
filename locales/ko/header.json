@@ -28,12 +28,6 @@
           "l": "/marketplace",
           "important": false,
           "external": false
-        },
-        {
-          "n": "구매 방법",
-          "l": "/",
-          "important": false,
-          "external": false
         }
       ]
     },

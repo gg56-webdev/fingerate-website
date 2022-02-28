@@ -37,6 +37,78 @@
           ]
         ]
       }
+    },
+    "background": {
+      "id": "Background",
+      "content": {
+        "h2": "Background",
+        "table": {
+          "topRow": [
+            {
+              "imgs": ["/background/sot.svg", "/background/fr.svg"],
+              "text": "Generation 1.0: Offline SoT"
+            },
+            {
+              "imgs": ["/background/fr2.svg"],
+              "text": "Generation 2.0: Metaverse SoT"
+            }
+          ],
+          "rows": [
+            {
+              "color": "blue",
+              "title": "Solution",
+              "list1": [
+                "Polling and satisfaction survey solution",
+                "SoT installed in tourist attractions, restaurants, etc. - users can indicate opinion / satisfaction level with simple finger gesture",
+                "Aggregate response data displayed in app"
+              ],
+              "list2": [
+                "Location-based poll and satisfaction survey solution",
+                "Trading of SOT minted as NFT and renting capabilities of meeting rooms / virtual space",
+                "Developed on FingeRate2.0 metaverse platform"
+              ]
+            },
+            {
+              "color": "purple",
+              "title": "Technology",
+              "list1": [
+                "AI motion / image analysis technology",
+                "Recognition of face and hand motions to analyze satisfaction level of each user"
+              ],
+              "list2": [
+                "Location-based polling and virtual space renting",
+                "Blockchain-based NFT Smart Contract for SOT revenue distribution",
+                "Deep-research / Big Data Analysis"
+              ]
+            },
+            {
+              "color": "green",
+              "title": "Patent",
+              "list1": [
+                "Satisfaction survey system via camera-based motion recognition"
+              ],
+              "list2": [
+                "Metaverse survey system based on user location",
+                "Cryptocurrency-based offline mileage payment system"
+              ]
+            },
+            {
+              "color": "orange",
+              "title": "Platform",
+              "list1": [
+                "FingeRate 1.0(App)",
+                "Location-based, satisfaction analysis technology",
+                "Supported by Android"
+              ],
+              "list2": [
+                "FingeRate 2.0(App / Web)",
+                "Supported by Android, iOS, Web browser",
+                "NFT (ERC-721 Token)"
+              ]
+            }
+          ]
+        }
+      }
     }
   }
 }

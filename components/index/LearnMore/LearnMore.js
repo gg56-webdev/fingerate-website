@@ -73,7 +73,7 @@ export default function LearnMore({ text: { content } }) {
                 bg='blue.100'
               >
                 <Box borderRadius={'md'} bg={'white'} flexGrow={'1'} p={2}>
-                  United States, New York, Times Square
+                  춘천 구곡폭포
                 </Box>
                 <Box
                   fontSize='0'
@@ -84,9 +84,9 @@ export default function LearnMore({ text: { content } }) {
                 >
                   <Image
                     alt='Thumbnail of SoT Device'
-                    width={200}
-                    height={200}
-                    src='/learnMore/locations/S.png'
+                    width={450}
+                    height={316}
+                    src='/learnMore/locations/1.png'
                   />
                 </Box>
               </Flex>
@@ -99,7 +99,7 @@ export default function LearnMore({ text: { content } }) {
                 bg='yellow.100'
               >
                 <Box borderRadius={'md'} bg={'white'} flexGrow={'1'} p={2}>
-                  Germany, Hamburg, Hamburg Townhall
+                  춘천 스카이워크
                 </Box>
                 <Box
                   fontSize='0'
@@ -110,9 +110,9 @@ export default function LearnMore({ text: { content } }) {
                 >
                   <Image
                     alt='Thumbnail of SoT Device'
-                    width={200}
-                    height={200}
-                    src='/learnMore/locations/A.png'
+                    width={295}
+                    height={391}
+                    src='/learnMore/locations/2.jpg'
                   />
                 </Box>
               </Flex>
@@ -124,7 +124,7 @@ export default function LearnMore({ text: { content } }) {
                 bg='gray.100'
               >
                 <Box borderRadius={'md'} bg={'white'} flexGrow={'1'} p={2}>
-                  Japan, Sapporo, Sapporo Odori Park
+                  YBM 어학원 종로 본사
                 </Box>
                 <Box
                   fontSize='0'
@@ -135,9 +135,9 @@ export default function LearnMore({ text: { content } }) {
                 >
                   <Image
                     alt='Thumbnail of SoT Device'
-                    width={200}
-                    height={200}
-                    src='/learnMore/locations/B.png'
+                    width={294}
+                    height={391}
+                    src='/learnMore/locations/3.jpg'
                   />
                 </Box>
               </Flex>

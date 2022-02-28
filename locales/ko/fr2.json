@@ -41,68 +41,66 @@
     "background": {
       "id": "Background",
       "content": {
-        "h2": "Background",
+        "h2": "세대별 개발 현황",
         "table": {
           "topRow": [
             {
               "imgs": ["/background/sot.svg", "/background/fr.svg"],
-              "text": "Generation 1.0: Offline SoT"
+              "text": "1.0세대: 오프라인SoT"
             },
             {
               "imgs": ["/background/fr2.svg"],
-              "text": "Generation 2.0: Metaverse SoT"
+              "text": "2.0세대: 메타버스SoT"
             }
           ],
           "rows": [
             {
               "color": "blue",
-              "title": "Solution",
+              "title": "솔루션",
               "list1": [
-                "Polling and satisfaction survey solution",
-                "SoT installed in tourist attractions, restaurants, etc. - users can indicate opinion / satisfaction level with simple finger gesture",
-                "Aggregate response data displayed in app"
+                "여론조사 및 만족도조사 솔루션",
+                "관광지 등에 설치된 SoT에서 손가락으로 표시한 만족도를 데이터 값으로 인식",
+                "FingeRate 1.0 앱에서 인식된 만족도 값을 집계 및 표시"
               ],
               "list2": [
-                "Location-based poll and satisfaction survey solution",
-                "Trading of SOT minted as NFT and renting capabilities of meeting rooms / virtual space",
-                "Developed on FingeRate2.0 metaverse platform"
+                "위치기반 여론조사 및 만족도조사 솔루션",
+                "NFT를 기반으로 민팅 된 SOT, 유저의 위치에 따라 인식되는 SoT에서 여론/만족도 조사 참여 및 미팅 룸예약",
+                "FingeRate 2.0 웹 플랫폼에서 구현"
               ]
             },
             {
               "color": "purple",
-              "title": "Technology",
+              "title": "기술",
               "list1": [
-                "AI motion / image analysis technology",
-                "Recognition of face and hand motions to analyze satisfaction level of each user"
+                "인공지능 영상 분석 기술",
+                "영상에서 안면을 인식 및 구분하고, 손동작을 분석하여 특정 사용자의 만족도를 조사하는 기술"
               ],
               "list2": [
-                "Location-based polling and virtual space renting",
-                "Blockchain-based NFT Smart Contract for SOT revenue distribution",
-                "Deep-research / Big Data Analysis"
+                "위치 기반 서비스 기술",
+                "NFT 연계 스마트 계약을 통한 수익 자동 배분 기술",
+                "빅데이터 분석 기술"
               ]
             },
             {
               "color": "green",
-              "title": "Patent",
-              "list1": [
-                "Satisfaction survey system via camera-based motion recognition"
-              ],
+              "title": "특허",
+              "list1": ["현장 공간에서의 동작 인식을 통한 만족도 조사 시스템"],
               "list2": [
-                "Metaverse survey system based on user location",
-                "Cryptocurrency-based offline mileage payment system"
+                "위치를 기반으로 하는 메타버스 상의 설문 조사 시스템",
+                "가상 화폐 기반 오프라인 마일리지 결제 시스템"
               ]
             },
             {
               "color": "orange",
-              "title": "Platform",
+              "title": "플랫폼",
               "list1": [
                 "FingeRate 1.0(App)",
-                "Location-based, satisfaction analysis technology",
-                "Supported by Android"
+                "위치 기반 서비스 기술, 만족도 분석 기술",
+                "안드로이드 버전 서비스 중"
               ],
               "list2": [
                 "FingeRate 2.0(App / Web)",
-                "Supported by Android, iOS, Web browser",
+                "안드로이드, 애플, 웹브라우저지원",
                 "NFT (ERC-721 Token)"
               ]
             }

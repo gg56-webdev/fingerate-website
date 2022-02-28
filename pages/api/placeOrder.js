@@ -40,16 +40,8 @@ export default async function handler(req, res) {
 
     if (paid) {
       res.status(409).json({ msg: 'Already Paid' });
-      return;
     }
-    if (orderExists) return;
-    // if (order.exists()) {
-    //   res.status(201).json({
-    //     msg: 'Order Exists',
-    //     url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${order.key}`,
-    //   });
-    //   return;
-    // }
+    if (orderExists || paid) return;
 
     const userSnap = await auth.getUser(userId);
     if (!userSnap || !userSnap.emailVerified) {
