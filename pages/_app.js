@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Layout from '../components/Layout/Layout';
 import { UserContext } from '../context/user';
 import { useUserData } from '../hooks/useUserData';
+import NextNProgress from 'nextjs-progressbar';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={currentTheme}>
       <UserContext.Provider value={{ user, loading, error, logout }}>
+        <NextNProgress height={5} color='#710193' />
         <Layout>
           <Component {...pageProps} />
         </Layout>

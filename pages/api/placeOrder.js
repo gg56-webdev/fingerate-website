@@ -12,6 +12,7 @@ export default async function handler(req, res) {
   try {
     await limiter.check(res, 3, 'CACHE_TOKEN');
     let orderExists = false;
+    let paid = false;
 
     await rtd
       .ref('/Orders')
@@ -20,6 +21,11 @@ export default async function handler(req, res) {
       .once('value')
       .then((snap) => {
         if (snap.exists()) {
+          if (snap.val().Paid === 'Yes') {
+            paid = true;
+            return;
+          }
+
           orderExists = true;
 
           snap.forEach((childSnap) => {
@@ -32,6 +38,10 @@ export default async function handler(req, res) {
         }
       });
 
+    if (paid) {
+      res.status(409).json({ msg: 'Already Paid' });
+      return;
+    }
     if (orderExists) return;
     // if (order.exists()) {
     //   res.status(201).json({
