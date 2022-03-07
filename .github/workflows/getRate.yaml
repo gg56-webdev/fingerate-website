@@ -1,4 +1,4 @@
-name: Rate Cron
+name: XR Cron
 on:
   schedule:
     - cron: '*/15 * * * *'
