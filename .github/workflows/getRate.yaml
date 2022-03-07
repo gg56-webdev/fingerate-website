@@ -8,6 +8,4 @@ jobs:
     steps:
       - name: get-xr-data
         run: |
-          curl --request POST \
-          --url 'https://staging--fr2.netlify.app/api/getRate' \
-          --header 'Authorization: Bearer ${{ secrets.CRON_API_KEY }}'
+          curl --request POST --url 'https://staging--fr2.netlify.app/api/getRate' --header 'Authorization: Bearer ${{ secrets.CRON_API_KEY }}'
