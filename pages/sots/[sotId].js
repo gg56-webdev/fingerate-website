@@ -37,9 +37,9 @@ import { useRouter } from 'next/router';
 
 import en from '../../locales/en/[sotId].json';
 import ko from '../../locales/ko/[sotId].json';
-import getExchange from '../../utils/getExchange';
+import getXR from '../../lib/exchangeRate';
 
-export default function Sot({ sot, KRWExchange }) {
+export default function Sot({ sot, KRWxr }) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [iFrame, setIFrame] = useState('');
@@ -214,7 +214,7 @@ export default function Sot({ sot, KRWExchange }) {
                   >
                     {t.currency} {sot.price.toLocaleString()}
                   </Tag>
-                  {KRWExchange && (
+                  {KRWxr && (
                     <Tag
                       textTransform='uppercase'
                       bg={'common.main'}
@@ -222,7 +222,7 @@ export default function Sot({ sot, KRWExchange }) {
                       size='lg'
                       fontWeight={'bold'}
                     >
-                      ₩ ~{(sot.price * KRWExchange.toFixed(0)).toLocaleString()}
+                      ₩ {(sot.price * KRWxr.toFixed(0)).toLocaleString()}
                     </Tag>
                   )}
                 </Flex>
@@ -420,10 +420,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { sotId } }) {
   const docRef = doc(db, 'sots', sotId);
-  const [snap, KRWExchange] = await Promise.all([
-    getDoc(docRef),
-    getExchange(),
-  ]);
+  const [snap, { KRW: KRWxr }] = await Promise.all([getDoc(docRef), getXR()]);
 
   if (!snap.exists()) return { notFound: true };
 
@@ -433,9 +430,8 @@ export async function getStaticProps({ params: { sotId } }) {
   } = snap.data();
 
   const sot = { id: snap.id, lat, long, ...data };
-
   return {
-    props: { sot, KRWExchange },
-    revalidate: 1000 * 60 * 60,
+    props: { sot, KRWxr },
+    revalidate: 1000 * 60 * 30,
   };
 }
