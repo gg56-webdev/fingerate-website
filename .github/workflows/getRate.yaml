@@ -1,4 +1,4 @@
-name: get-xr-data
+name: 15-minute-cron
 on:
   schedule:
     - cron: '*/15 * * * *'
@@ -6,5 +6,8 @@ jobs:
   cron:
     runs-on: ubuntu-latest
     steps:
-      - name: get-xr-data
-        run: curl --request POST --url 'https://staging--fr2.netlify.app/api/getRate' --header 'Authorization: Bearer ${{ secrets.CRON_API_KEY }}'
+      - name: Call our API route
+        run: |
+          curl --request POST \
+          --url 'https://staging--fr2.netlify.app/api/getRate' \
+          --header 'Authorization: Bearer ${{ secrets.CRON_API_KEY }}'
