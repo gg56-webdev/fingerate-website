@@ -1,4 +1,4 @@
-name: XR Cron jobs
+name: XR Cron job
 on:
   schedule:
     - cron: '*/15 * * * *'
