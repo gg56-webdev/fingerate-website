@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call getRate
-      - run: |
+        run: |
           curl --request POST \
           --url 'https://staging--fr2.netlify.app/api/getRate' \
           --header 'Authorization: Bearer ${{secrets.CRON_API_KEY}}'
