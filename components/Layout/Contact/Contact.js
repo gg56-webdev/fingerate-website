@@ -3,9 +3,14 @@ import { Box, Flex, Heading, Container, Stack } from '@chakra-ui/layout';
 import Image from 'next/image';
 import contact from './contact.json';
 
-export default function Contact() {
+export default function Contact({ vertical }) {
   return (
-    <Stack as='ul' listStyleType='none' direction='row' justify='center'>
+    <Stack
+      as='ul'
+      listStyleType='none'
+      direction={vertical ? 'column' : 'row'}
+      justify='center'
+    >
       {contact.map((item) => (
         <Box
           key={item.n}

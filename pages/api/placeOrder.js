@@ -45,16 +45,16 @@ export default async function handler(req, res) {
 
     const userSnap = await auth.getUser(userId);
     if (!userSnap || !userSnap.emailVerified) {
-      res.status(401).json({ msg: 'Unauthorized' });
+      res.status(401).json({ msg: 'Unauthorized', error: ' ' });
       return;
     }
     const docSnap = await db.doc(`sots/${sotId}`).get();
     if (!docSnap.exists) {
-      res.status(404).json({ msg: 'SoT not Found' });
+      res.status(404).json({ msg: 'SoT not Found', error: ' ' });
       return;
     }
     if (docSnap.get('owner')) {
-      res.status(400).json({ msg: 'Cannot be purchased' });
+      res.status(400).json({ msg: 'Cannot be purchased', error: ' ' });
       return;
     }
     await rtd

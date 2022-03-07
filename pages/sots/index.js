@@ -9,23 +9,34 @@ import {
   Stack,
   Select,
   Input,
+  Icon,
+  Checkbox,
 } from '@chakra-ui/react';
 import { db } from '../../lib/firebase';
 import { getDocs, collection, where, query } from 'firebase/firestore';
-import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
+
+import ko from '../../locales/ko/sots.json';
+import en from '../../locales/en/sots.json';
 
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { RepeatIcon } from '@chakra-ui/icons';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const MotionGrid = motion(Grid);
+const MotionStack = motion(Stack);
 
 export default function Sots({ sots }) {
   const [filteredSots, setFilteredSots] = useState(sots);
   const [grade, setGrade] = useState(null);
   const [country, setCountry] = useState(null);
+  const [ownership, setOwnership] = useState(false);
   const router = useRouter();
   const { locale } = router;
+
+  const t = locale === 'ko' ? ko : en;
 
   const availableCountries = [...new Set(sots.map((sot) => sot.country))];
 
@@ -82,101 +93,166 @@ export default function Sots({ sots }) {
                 <option value='A'>A</option>
                 <option value='B'>B</option>
               </Select>
+              <Stack justifyContent={'center'} p='1'>
+                <Checkbox
+                  isChecked={ownership}
+                  onChange={() => setOwnership(!ownership)}
+                >
+                  구매 가능
+                </Checkbox>
+              </Stack>
               <Button
                 colorScheme={'gray'}
                 onClick={() => {
                   setCountry(null);
                   setGrade(null);
+                  setOwnership(false);
                 }}
               >
                 <RepeatIcon />
               </Button>
             </Stack>
           </Stack>
-          <Grid
+          <MotionGrid
             gap='2'
             gridTemplateColumns={'repeat(auto-fill, minmax(200px, 1fr))'}
             px='2'
+            layout
           >
-            {filteredSots
-              .filter((sot) =>
-                grade ? sot.grade.toLowerCase() === grade.toLowerCase() : true
-              )
-              .filter((sot) =>
-                country
-                  ? sot.country.toLowerCase() === country.toLowerCase()
-                  : true
-              )
-              .map((sot) => (
-                <Stack
-                  key={sot.id}
-                  shadow='md'
-                  borderRadius={'md'}
-                  p='1'
-                  onClick={() =>
-                    router.push(`/sots/${sot.id}`, `/sots/${sot.id}`, {
-                      locale,
-                    })
-                  }
-                  transition='all 0.2s'
-                  _hover={{
-                    outline: '2px solid',
-                    outlineColor: 'common.main',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <Box borderRadius={'md'} overflow='hidden'>
-                    <Image
-                      src={sot.image}
-                      alt={`Thumbnail of SoT${sot.id}`}
-                      width='400'
-                      height='400'
-                      layout='responsive'
-                    />
-                  </Box>
-                  <Stack spacing={1} flex='1' justifyContent='space-between'>
-                    <Box as={'strong'}>{`SoT ${sot.id} - ${sot.name}`}</Box>
-                    <Box as={'small'}>
-                      {sot.country}, {sot.city}
-                    </Box>
-                  </Stack>
-                  <Flex
-                    textAlign={'center'}
-                    fontWeight={'bold'}
-                    bg='common.second'
-                    p='1'
+            <AnimatePresence>
+              {filteredSots
+                .filter((sot) =>
+                  grade ? sot.grade.toLowerCase() === grade.toLowerCase() : true
+                )
+                .filter((sot) =>
+                  country
+                    ? sot.country.toLowerCase() === country.toLowerCase()
+                    : true
+                )
+                .filter((sot) => (ownership ? !sot.owner : true))
+                .map((sot) => (
+                  <MotionStack
+                    key={sot.id}
+                    shadow='md'
                     borderRadius={'md'}
-                    alignItems='center'
-                    sx={{ gap: '0.5rem' }}
+                    bg='cyan.50'
+                    p='1'
+                    onClick={() =>
+                      router.push(`/sots/${sot.id}`, `/sots/${sot.id}`, {
+                        locale,
+                      })
+                    }
+                    transition='all 0.2s'
+                    _hover={{
+                      outline: '2px solid',
+                      outlineColor: 'common.main',
+                      cursor: 'pointer',
+                    }}
+                    border='1px solid'
+                    borderColor={'blue.100'}
+                    layout
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    exit={{ opacity: 0 }}
                   >
-                    <Box bg={'white'} borderRadius='md' p='1'>
-                      {sot.grade}
+                    <Box borderRadius={'md'} overflow='hidden'>
+                      <Image
+                        src={sot.image}
+                        alt={`Thumbnail of SoT${sot.id}`}
+                        width='400'
+                        height='400'
+                        layout='responsive'
+                      />
                     </Box>
-                    <Text as={'span'} fontWeight='bold' color={'common.main'}>
-                      ₩ {sot.price}
-                    </Text>
-                  </Flex>
-                </Stack>
-              ))}
-          </Grid>
+                    <Stack spacing={1} flex='1' justifyContent='space-between'>
+                      <Stack spacing={1}>
+                        <Box
+                          as={'strong'}
+                          color='common.main'
+                          fontFamily={'sans-serif'}
+                          fontSize='100%'
+                        >
+                          {sot.name}
+                        </Box>
+                        <Box
+                          as={'small'}
+                          color='blue.400'
+                          fontFamily={'mono'}
+                        >{`SoT ${sot.id}`}</Box>
+                      </Stack>
+                      <Box as={'small'} color='blue'>
+                        <Icon>
+                          <path
+                            fill='currentColor'
+                            fillRule='evenodd'
+                            d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z'
+                            clipRule='evenodd'
+                          />
+                        </Icon>
+                        {sot.country}, {sot.city}
+                      </Box>
+                    </Stack>
+                    <Flex
+                      textAlign={'center'}
+                      fontWeight={'bold'}
+                      bg={sot.owner ? 'gray.100' : 'common.second'}
+                      p='1'
+                      borderRadius={'md'}
+                      alignItems='center'
+                      sx={{ gap: '0.5rem' }}
+                    >
+                      <Box
+                        bg={'white'}
+                        borderRadius='md'
+                        p='2'
+                        fontFamily={'sans-serif'}
+                        border='2px solid'
+                        borderColor={`grades.${sot.grade}`}
+                      >
+                        {sot.grade}
+                      </Box>
+                      <Text as={'span'} color={'common.main'}>
+                        {sot.owner ? (
+                          <>
+                            판매 완료{' '}
+                            <Text
+                              as={'span'}
+                              fontSize='sm'
+                              fontStyle={'italic'}
+                            >
+                              ({t.currency} {sot.price})
+                            </Text>
+                          </>
+                        ) : (
+                          `${t.currency} ${sot.price.toLocaleString()}`
+                        )}
+                      </Text>
+                    </Flex>
+                  </MotionStack>
+                ))}
+            </AnimatePresence>
+          </MotionGrid>
         </Stack>
       </Container>
     </>
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const colRef = collection(db, 'sots');
-  const cq = query(colRef, where('owner', '==', ''));
+  const cq = query(
+    colRef
+    //  where('owner', '==', '')
+  );
   const snap = await getDocs(cq);
 
   const sots = snap.docs.map((doc) => {
-    const { name, country, city, grade, image, price } = doc.data();
-    return { name, country, city, grade, image, price, id: doc.id };
+    const { name, country, city, grade, image, price, owner } = doc.data();
+    return { name, country, city, grade, image, price, id: doc.id, owner };
   });
 
   return {
     props: { sots },
-    revalidate: 1000 * 60 * 30,
+    // revalidate: 1000 * 60 * 30,
   };
 }

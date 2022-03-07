@@ -10,7 +10,13 @@ import {
 } from '@chakra-ui/react';
 import { default as NLink } from 'next/link';
 import { motion } from 'framer-motion';
-import styles from '../../../styles/animation.module.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper';
+import Feed from './Feed/Feed';
+import News from './News/News';
+
+import 'swiper/css';
+import 'swiper/css/effect-cube';
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -72,28 +78,32 @@ export default function Hero({ text: { content } }) {
           flexDirection={{ base: 'column-reverse', md: 'row' }}
           h='100%'
           alignContent='center'
+          pb={4}
+          sx={{ gap: '0.5rem' }}
         >
           <MotionBox
-            w={{ base: '100%', md: '50%' }}
             textAlign={{ base: 'center', md: 'left' }}
             pr={{ md: 2 }}
             variants={container}
             initial='hidden'
             animate='enter'
             exit='exit'
+            display='flex'
+            flexDirection='column'
+            sx={{ gap: '1rem' }}
+            pl={{ md: 3 }}
+            flex={{ base: 0, md: '0.6' }}
           >
             <MotionHeading
               variants={item}
               as='h1'
               color='text.second'
               fontSize={['xx-large', 'xx-large', '5xl']}
-              mb='2'
               whiteSpace={{ md: 'pre-wrap' }}
-              pl={{ md: 6 }}
             >
               {content.h2}
             </MotionHeading>
-            <Grid
+            {/* <Grid
               gridTemplateColumns={{ base: '1fr 1fr', md: '0.25fr 1fr 0.25fr' }}
               gap={2}
               mb='2'
@@ -118,24 +128,50 @@ export default function Hero({ text: { content } }) {
                   {feature}
                 </MotionText>
               ))}
-            </Grid>
+            </Grid> */}
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              direction={'vertical'}
+              pagination={{
+                clickable: true,
+              }}
+              loop={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              speed={500}
+              className='swiper-cards'
+            >
+              {content.features.map((feature) => (
+                <SwiperSlide key={feature} className='swiper-cards__slide'>
+                  {feature}
+                </SwiperSlide>
+              ))}
+            </Swiper>
             <Flex
-              justifyContent={'center'}
-              mb='2'
-              sx={{ gap: '1.5rem' }}
+              justifyContent={{ base: 'center', md: 'left' }}
+              sx={{ gap: '1rem' }}
               textAlign='center'
-              mt='4'
+              flexWrap={'wrap'}
             >
               <NLink href={'/sots'}>
                 <Link
                   fontSize={'2xl'}
                   borderRadius='md'
-                  _hover={{ bg: 'common.main' }}
+                  bg={'white'}
+                  _hover={{
+                    bg: 'common.main',
+                    color: 'white',
+                    borderColor: 'common.main',
+                  }}
                   border='1px solid'
                   borderColor={'white'}
-                  color='white'
+                  color='common.main'
                   px='6'
                   py='2'
+                  fontWeight={'bold'}
+                  flex={1}
                 >
                   {content.btn1}
                 </Link>
@@ -144,12 +180,14 @@ export default function Hero({ text: { content } }) {
                 <Link
                   fontSize={'2xl'}
                   borderRadius='md'
-                  _hover={{ bg: 'common.main' }}
+                  _hover={{ bg: 'common.main', borderColor: 'common.main' }}
                   border='1px solid'
                   borderColor={'white'}
                   color='white'
                   px='6'
                   py='2'
+                  fontWeight={'bold'}
+                  flex={1}
                 >
                   {content.btn2}
                 </Link>
@@ -158,52 +196,31 @@ export default function Hero({ text: { content } }) {
           </MotionBox>
 
           <MotionBox
-            w={{ base: '100%', md: '50%' }}
+            flex='1'
             // display={['none', 'none', 'block']}
             variants={container}
             initial='hidden'
             animate='enter'
             pos='relative'
-            flexGrow='1'
             h='100%'
+            w='100%'
+            display='flex'
+            flexDirection='column'
           >
-            <iframe
+            <Box
+              as='iframe'
+              flex='1'
               src='https://my.spline.design/sotdevice-fb79e2d7b8093da7f604cef8e68b8715/'
               frameBorder='0'
               width='100%'
               height='100%'
               loading='lazy'
-            ></iframe>
+            ></Box>
+            <Feed feed={content.feed} />
           </MotionBox>
         </Flex>
       </Container>
-      {/* <Box
-        h={'fit-content'}
-        bg='white'
-        borderTop={'1px solid'}
-        borderBottom={'1px solid'}
-        borderColor='common.mainLight'
-      >
-        <Container
-          maxW='container.xl'
-          h={'100%'}
-          textAlign='center'
-          overflow={'hidden'}
-        >
-          <Box className={styles.animation} h='100%'>
-            <Box display={'inline-block'}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-              volutpat, ante eu bibendum tincidunt, sem lacus vehicula augue, ut
-              suscipit.
-            </Box>
-            <Box display={'inline-block'}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-              volutpat, ante eu bibendum tincidunt, sem lacus vehicula augue, ut
-              suscipit.
-            </Box>
-          </Box>
-        </Container>
-      </Box> */}
+      <News />
     </Flex>
   );
 }

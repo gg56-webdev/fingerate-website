@@ -1,0 +1,16 @@
+{
+  "i18n": {
+    "locales": ["ko", "en"],
+    "defaultLocale": "ko",
+    "pages": {
+      "*": ["common"],
+      "/": ["index"],
+      "/map": ["map"],
+      "/sots": ["sots"],
+      "/sots/[sotId]": ["[sotId]"],
+      "/user": ["user"],
+      "/enter": ["enter"],
+      "/fr2": ["fr2"]
+    }
+  }
+}

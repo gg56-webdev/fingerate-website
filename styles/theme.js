@@ -19,10 +19,10 @@ export const theme = extendTheme({
     },
     grades: {
       S: '#710193',
-      A: '#d5b342',
+      A: '#06e08c', //#FFD700
       B: '#50adff',
       C: '#d56173',
-      D: '#ba8c63',
+      D: '#b784a7', //#ba8c63
     },
     text: {
       main: '#09244d',
@@ -44,6 +44,7 @@ export const koreanTheme = extendTheme(
       Heading: {
         baseStyle: {
           fontWeight: 'normal',
+          letterSpacing: '1px',
         },
       },
     },

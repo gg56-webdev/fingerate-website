@@ -1,3 +1,4 @@
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 import {
   Box,
   Container,
@@ -7,8 +8,15 @@ import {
   GridItem,
   Text,
   Stack,
+  Link,
 } from '@chakra-ui/react';
 import Image from 'next/image';
+
+import loc1 from '../../../public/learnMore/locations/1.png';
+import loc2 from '../../../public/learnMore/locations/3.png';
+import loc3 from '../../../public/learnMore/locations/5.png';
+
+const imgArr = [loc1, loc2, loc3];
 
 export default function LearnMore({ text: { content } }) {
   return (
@@ -17,7 +25,7 @@ export default function LearnMore({ text: { content } }) {
         <Heading as={'h2'} mb='10'>
           {content.h2}
         </Heading>
-        <Grid gap='2' gridTemplateColumns={{ base: '1fr', md: '1.25fr 1fr' }}>
+        <Grid gap='2' gridTemplateColumns={{ base: '1fr', md: '1fr 0.75fr' }}>
           <Stack
             bg={'white'}
             borderRadius='md'
@@ -26,7 +34,12 @@ export default function LearnMore({ text: { content } }) {
             flexDir='column'
             h={'fit-content'}
           >
-            <Heading as={'h3'} fontSize='lg'>
+            <Heading
+              as={'h3'}
+              fontSize='2xl'
+              fontFamily={'Gowun Dodum'}
+              fontWeight='bold'
+            >
               {content.box1.title}
             </Heading>
             <Flex
@@ -45,6 +58,14 @@ export default function LearnMore({ text: { content } }) {
                 whiteSpace='pre-line'
               >
                 {content.box1.p}
+                <br />
+                <Link
+                  color={'blue'}
+                  href='https://news.yahoo.com/news/2022-seoul-signis-world-congress-212300440.html'
+                  isExternal
+                >
+                  Yahoo News <ExternalLinkIcon />
+                </Link>
               </GridItem>
               <GridItem
                 flex={'0.5'}
@@ -58,92 +79,56 @@ export default function LearnMore({ text: { content } }) {
                   src='/learnMore/signis/church-lg.png'
                   width={720}
                   height={405}
+                  layout='responsive'
                 />
               </GridItem>
             </Flex>
           </Stack>
           <Stack bg={'white'} borderRadius='md' w='100%' p={2} h='fit-content'>
-            <Heading as={'h3'} fontSize='lg'>
+            <Heading
+              as={'h3'}
+              fontSize='2xl'
+              fontFamily={'Gowun Dodum'}
+              fontWeight='bold'
+            >
               {content.box2.title}
             </Heading>
-            <Stack>
-              <Flex
-                sx={{ gap: '1rem' }}
-                alignItems={'center'}
-                p={2}
-                borderRadius={'md'}
-                bg='blue.100'
-              >
-                <Box borderRadius={'md'} bg={'white'} flexGrow={'1'} p={2}>
-                  춘천 구곡폭포
-                </Box>
+            <Grid
+              gridTemplateColumns={{ base: '1fr 1fr' }}
+              justifyItems='center'
+              gap='1'
+            >
+              {content.box2.locations.map((location, _id) => (
                 <Box
-                  fontSize='0'
-                  borderRadius={'md'}
+                  key={location}
+                  borderRadius={'lg'}
                   overflow='hidden'
                   border={'2px solid'}
                   borderColor='white'
+                  position={'relative'}
+                  w='fit-content'
+                  fontSize={'0'}
+                  // alignSelf={_id % 2 ? 'flex-end' : 'flex-start'}
+                  gridColumn={{
+                    base: _id === 0 ? 'span 2' : '',
+                  }}
                 >
-                  <Image
-                    alt='Thumbnail of SoT Device'
-                    width={450}
-                    height={316}
-                    src='/learnMore/locations/1.png'
-                  />
+                  <Image alt='Photo of SoT device location' src={imgArr[_id]} />
+                  <Box
+                    borderRadius={'md'}
+                    p={2}
+                    position='absolute'
+                    left={'10px'}
+                    bottom={'10px'}
+                    fontSize='xl'
+                    bg='blackAlpha.700'
+                    color={'white'}
+                  >
+                    {location}
+                  </Box>
                 </Box>
-              </Flex>
-              <Flex
-                sx={{ gap: '1rem' }}
-                alignItems={'center'}
-                p={2}
-                borderRadius={'md'}
-                flexDir={'row-reverse'}
-                bg='yellow.100'
-              >
-                <Box borderRadius={'md'} bg={'white'} flexGrow={'1'} p={2}>
-                  춘천 스카이워크
-                </Box>
-                <Box
-                  fontSize='0'
-                  borderRadius={'md'}
-                  overflow='hidden'
-                  border={'2px solid'}
-                  borderColor='white'
-                >
-                  <Image
-                    alt='Thumbnail of SoT Device'
-                    width={295}
-                    height={391}
-                    src='/learnMore/locations/2.jpg'
-                  />
-                </Box>
-              </Flex>
-              <Flex
-                sx={{ gap: '1rem' }}
-                alignItems={'center'}
-                p={2}
-                borderRadius={'md'}
-                bg='gray.100'
-              >
-                <Box borderRadius={'md'} bg={'white'} flexGrow={'1'} p={2}>
-                  YBM 어학원 종로 본사
-                </Box>
-                <Box
-                  fontSize='0'
-                  borderRadius={'md'}
-                  overflow='hidden'
-                  border={'2px solid'}
-                  borderColor='white'
-                >
-                  <Image
-                    alt='Thumbnail of SoT Device'
-                    width={294}
-                    height={391}
-                    src='/learnMore/locations/3.jpg'
-                  />
-                </Box>
-              </Flex>
-            </Stack>
+              ))}
+            </Grid>
           </Stack>
         </Grid>
       </Container>

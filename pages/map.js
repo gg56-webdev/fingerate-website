@@ -116,12 +116,14 @@ export default function Map({ sots }) {
               setSelectedMark(terminal);
             }}
           >
-            <Image
-              width='60px'
-              height='60px'
-              src='/sot_icon.svg'
-              alt='SoT terminal icon'
-            />
+            <Box opacity={terminal.owner ? '0.5' : '1'}>
+              <Image
+                width='60px'
+                height='60px'
+                src='/sot_icon.svg'
+                alt='SoT terminal icon'
+              />
+            </Box>
           </Marker>
         ))}
         {selectedMark && (
@@ -150,36 +152,42 @@ export default function Map({ sots }) {
               <Text>
                 {selectedMark.country}, {selectedMark.city}
               </Text>
-              <Flex
-                textAlign={'center'}
-                fontWeight={'bold'}
-                bg='common.second'
-                p='1'
-                borderRadius={'md'}
-                alignItems='center'
-                sx={{ gap: '0.5rem' }}
-              >
-                <Box bg={'white'} borderRadius='md' p='1'>
-                  {selectedMark.grade}
-                </Box>
-                <Text as={'span'} fontWeight='bold' color={'common.main'}>
-                  ₩ {selectedMark.price}
-                </Text>
-              </Flex>
-              <NLink href={`/sots/${selectedMark.id}`}>
-                <Link
-                  bg={'common.mainLight'}
-                  display={'block'}
-                  width={'100%'}
-                  textAlign={'center'}
-                  color={'white'}
-                  py='1'
-                  px='2'
-                  borderRadius={6}
-                >
-                  Buy SoT
-                </Link>
-              </NLink>
+              {selectedMark.owner ? (
+                <Text>판매 완료</Text>
+              ) : (
+                <>
+                  <Flex
+                    textAlign={'center'}
+                    fontWeight={'bold'}
+                    bg='common.second'
+                    p='1'
+                    borderRadius={'md'}
+                    alignItems='center'
+                    sx={{ gap: '0.5rem' }}
+                  >
+                    <Box bg={'white'} borderRadius='md' p='1'>
+                      {selectedMark.grade}
+                    </Box>
+                    <Text as={'span'} fontWeight='bold' color={'common.main'}>
+                      ₩ {selectedMark.price}
+                    </Text>
+                  </Flex>
+                  <NLink href={`/sots/${selectedMark.id}`}>
+                    <Link
+                      bg={'common.mainLight'}
+                      display={'block'}
+                      width={'100%'}
+                      textAlign={'center'}
+                      color={'white'}
+                      py='1'
+                      px='2'
+                      borderRadius={6}
+                    >
+                      SOT 구매
+                    </Link>
+                  </NLink>
+                </>
+              )}
             </Stack>
           </Popup>
         )}
@@ -253,6 +261,7 @@ export default function Map({ sots }) {
           {/* <IconButton icon={<SmallCloseIcon />} onClick={resetFilters} /> */}
         </Grid>
         <Grid
+          as={'aside'}
           templateColumns={{
             base: 'repeat(auto-fit, minmax(150px, 1fr))',
           }}
@@ -273,7 +282,10 @@ export default function Map({ sots }) {
 
 export async function getStaticProps() {
   const colRef = collection(db, 'sots');
-  const cq = query(colRef, where('owner', '==', ''));
+  const cq = query(
+    colRef
+    // where('owner', '==', '')
+  );
   const snap = await getDocs(cq);
 
   const sots = snap.docs.map((doc) => {
@@ -284,13 +296,25 @@ export async function getStaticProps() {
       grade,
       image,
       price,
+      owner,
       location: { _lat: lat, _long: long },
     } = doc.data();
-    return { name, country, city, grade, image, price, id: doc.id, lat, long };
+    return {
+      name,
+      country,
+      city,
+      grade,
+      image,
+      price,
+      id: doc.id,
+      owner,
+      lat,
+      long,
+    };
   });
 
   return {
     props: { sots },
-    revalidate: 1000 * 60 * 30,
+    revalidate: 1000 * 60 * 10,
   };
 }

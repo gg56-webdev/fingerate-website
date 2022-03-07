@@ -45,34 +45,41 @@ export default function MapCard({ sot, onSelectSoT }) {
         sx={{ gap: '0.25rem' }}
         flexWrap='wrap-reverse'
       >
-        <NLink href={`/sots/${sot.id}`}>
-          <Link
-            bg={'common.mainLight'}
-            color={'white'}
-            py='1'
-            px='2'
-            fontSize={'md'}
-            borderRadius={6}
-          >
-            Buy SoT
-          </Link>
-        </NLink>
-        <Flex
-          flex={'1'}
-          sx={{ gap: '0.5rem' }}
-          p='1'
-          alignItems={'center'}
-          bg={'common.second'}
-          borderRadius={'md'}
-          fontWeight={'bold'}
-        >
-          <Box bg='white' borderRadius={'md'} px='1'>
-            {sot.grade}
-          </Box>
-          <Text as={'span'} color='common.main'>
-            ₩ {sot.price}
-          </Text>
-        </Flex>
+        {sot.owner ? (
+          '판매 완료'
+        ) : (
+          <>
+            <NLink href={`/sots/${sot.id}`}>
+              <Link
+                bg={'common.mainLight'}
+                color={'white'}
+                py='1'
+                px='2'
+                fontSize={'md'}
+                borderRadius={6}
+              >
+                SOT 구매
+              </Link>
+            </NLink>
+
+            <Flex
+              flex={'1'}
+              sx={{ gap: '0.5rem' }}
+              p='1'
+              alignItems={'center'}
+              bg={'common.second'}
+              borderRadius={'md'}
+              fontWeight={'bold'}
+            >
+              <Box bg='white' borderRadius={'md'} px='1'>
+                {sot.grade}
+              </Box>
+              <Text as={'span'} color='common.main'>
+                ₩ {sot.price}
+              </Text>
+            </Flex>
+          </>
+        )}
       </Flex>
     </Grid>
   );

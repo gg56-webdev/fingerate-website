@@ -6,6 +6,8 @@ import {
   Heading,
   UnorderedList,
   ListItem,
+  Text,
+  Stack,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 
@@ -46,14 +48,22 @@ export default function AboutSot({ text: { content } }) {
             </UnorderedList>
           </GridItem>
           <GridItem gridArea={'img'} justifySelf='center'>
-            <Box>
+            <Stack textAlign={'center'}>
               <Image
                 alt='SoT device'
-                src='/about/sot.png'
+                src='/about/fr-hand.png'
                 width={500}
                 height={500}
               />
-            </Box>
+              <Text
+                fontSize={'xl'}
+                whiteSpace='pre-wrap'
+                fontWeight={'bold'}
+                color='common.main'
+              >
+                {content.imgCaption}
+              </Text>
+            </Stack>
           </GridItem>
           <GridItem gridArea={'list2'}>
             <Heading

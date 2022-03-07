@@ -1,7 +1,7 @@
 import { Container, Box, Text, Stack, Link } from '@chakra-ui/react';
 import { default as NLink } from 'next/link';
 import Image from 'next/image';
-import Contact from './Contact/Contact';
+import Contact from '../Contact/Contact';
 import gg56logo from '../../../public/footer/gg56.svg';
 
 export default function Footer() {
@@ -40,7 +40,7 @@ export default function Footer() {
           <Box color={'blue'}>
             <NLink href={'/terms'}>서비스 이용약관</NLink>
           </Box>
-          <Contact />
+          {/* <Contact /> */}
         </Box>
         <Text fontSize='smaller' textAlign={'center'} mt='2'>
           @ {new Date().getFullYear()} GG56 Ltd. ALL RIGHTS RESERVED.

@@ -14,6 +14,7 @@ import {
   AlertIcon,
   AlertTitle,
 } from '@chakra-ui/react';
+import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { auth, db } from '../lib/firebase';
 import {
@@ -60,7 +61,7 @@ export default function Enter() {
           password
         );
         await sendEmailVerification(user);
-        setAlert(`Please check your ${email} email to verify your account!`);
+        setAlert(`계정인증을 위해서 이메일을 확인해주세요`);
         await setDoc(doc(db, 'users', user.uid), {
           email: user.email,
         });
@@ -80,6 +81,9 @@ export default function Enter() {
 
   return (
     <Grid placeItems={'center'} h='calc(100vh - 70px - 117px)' pt={'70px'}>
+      <Head>
+        <title>로그인/가입하기</title>
+      </Head>
       <Stack
         bg={'white'}
         p='2'

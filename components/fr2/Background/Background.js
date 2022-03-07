@@ -67,7 +67,7 @@ export default function Background({
               display='flex'
               alignItems={{ md: 'center' }}
               p={2}
-              sx={{ gap: '0.5rem' }}
+              sx={{ gap: '0.75rem' }}
               flexDirection={{ base: 'column', md: 'row' }}
             >
               <Box
@@ -85,7 +85,7 @@ export default function Background({
               >
                 {row.title}
               </Box>
-              <UnorderedList flex={'1'} listStylePosition='inside'>
+              <UnorderedList flex={'1'}>
                 {row.list1.map((listItem) => (
                   <ListItem key={listItem}>{listItem}</ListItem>
                 ))}
@@ -97,7 +97,7 @@ export default function Background({
                 color={'common.main'}
                 transform={{ base: 'rotate(90deg)', md: 'none' }}
               />
-              <UnorderedList flex={'1'} listStylePosition='inside'>
+              <UnorderedList flex={'1'}>
                 {row.list2.map((listItem) => (
                   <ListItem key={listItem} color='common.main'>
                     {listItem}

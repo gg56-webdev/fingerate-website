@@ -5,14 +5,33 @@ body {
   word-break: keep-all;
 }
 
-.swiper-button-prev {
-  left: 0;
+.swiper-cards {
+  height: 100px;
+  width: fit-content;
+  border-radius: var(--chakra-radii-md);
+  margin: 0;
 }
 
-.swiper-button-next {
-  right: 0;
+.swiper-cards__slide {
+  height: fit-content;
+  background-color: var(--chakra-colors-cyan-100);
+  font-weight: bold;
+  font-size: 1.25rem;
+  display: grid;
+  align-items: center;
+  padding-inline: var(--chakra-space-8) var(--chakra-space-1);
 }
 
-.swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
-  bottom: auto;
+.swiper-cards__slide:nth-child(2n) {
+  background-color: var(--chakra-colors-common-second);
+  color: var(--chakra-colors-common-main);
+}
+
+.swiper-pagination {
+  width: fit-content;
+}
+
+.swiper-pagination-vertical.swiper-pagination-bullets,
+.swiper-vertical > .swiper-pagination-bullets {
+  left: var(--chakra-space-2);
 }

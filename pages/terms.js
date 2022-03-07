@@ -3,10 +3,14 @@ import fs from 'fs';
 import path from 'path';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import Head from 'next/head';
 
 export default function terms({ text }) {
   return (
     <Container maxW={'container.lg'} pt='70px'>
+      <Head>
+        <title>서비스 이용약관</title>
+      </Head>
       <Heading textAlign={'center'}>서비스 이용약관</Heading>
       <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
         {text}

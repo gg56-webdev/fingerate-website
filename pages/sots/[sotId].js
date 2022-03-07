@@ -18,19 +18,38 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  UnorderedList,
+  ListItem,
+  Table,
+  Tbody,
+  Tr,
+  Td,
+  Divider,
+  Link,
+  Tag,
 } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import Head from 'next/head';
 import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../context/user';
+import { useRouter } from 'next/router';
 
-export default function Sot({ sot }) {
+import en from '../../locales/en/[sotId].json';
+import ko from '../../locales/ko/[sotId].json';
+import getExchange from '../../utils/getExchange';
+
+export default function Sot({ sot, KRWExchange }) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [iFrame, setIFrame] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [extUrl, setExtUrl] = useState('');
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
+
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === 'en' ? en : ko;
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -71,7 +90,7 @@ export default function Sot({ sot }) {
       <Head>
         <title>{`SoT ${sot.id} - ${sot.name}`}</title>
       </Head>
-      <Box>
+      <Box pb='2'>
         <Container maxW={'container.lg'} pt={'70px'}>
           <Grid
             gridTemplateColumns={{
@@ -91,17 +110,29 @@ export default function Sot({ sot }) {
                 height={800}
               />
             </Box>
-            <Stack spacing={4}>
-              <Box>
-                <Heading as={'h1'} mb='4' fontSize={'2xl'}>
-                  {`SoT ${sot.id}`}
-                  <br />
+            <Stack spacing={4} justifyContent='space-between'>
+              <Stack spacing={1}>
+                <Heading
+                  as={'h1'}
+                  fontSize={'3xl'}
+                  fontWeight='bold'
+                  fontFamily='sans-serif'
+                  color={'common.main'}
+                >
                   {sot.name}
                 </Heading>
-                <Text>
-                  {`${sot.grade} grade SoT with 100m² HideOut space, located at Latitude = ${sot.lat}, Longitude = ${sot.long}`}
-                </Text>
-              </Box>
+                <Box
+                  as='small'
+                  fontFamily={'mono'}
+                  color='blue.400'
+                  fontSize={'md'}
+                >
+                  {`SoT ${sot.id}`}
+                </Box>
+              </Stack>
+              <Text>
+                {`${sot.grade}급 SoT, 100m²의 HideOut이 포함 위도 = ${sot.lat}, 경도 = ${sot.long}`}
+              </Text>
               <Flex sx={{ gap: '0.5rem' }} flexWrap='wrap'>
                 <Box
                   flex={'1'}
@@ -168,17 +199,33 @@ export default function Sot({ sot }) {
                   as={'small'}
                   textTransform='uppercase'
                   color={'common.main'}
-                >
-                  Price{' '}
-                </Box>
-                <Box
-                  as={'strong'}
-                  textTransform='uppercase'
-                  color={'common.main'}
                   display='block'
+                  mb='2'
                 >
-                  ₩ {sot.price}
+                  Price
                 </Box>
+                <Flex flexDirection={'row'} sx={{ gap: '0.5rem' }}>
+                  <Tag
+                    textTransform='uppercase'
+                    bg={'common.main'}
+                    color='white'
+                    size='lg'
+                    fontWeight={'bold'}
+                  >
+                    {t.currency} {sot.price.toLocaleString()}
+                  </Tag>
+                  {KRWExchange && (
+                    <Tag
+                      textTransform='uppercase'
+                      bg={'common.main'}
+                      color='white'
+                      size='lg'
+                      fontWeight={'bold'}
+                    >
+                      ₩ ~{(sot.price * KRWExchange.toFixed(0)).toLocaleString()}
+                    </Tag>
+                  )}
+                </Flex>
               </Box>
 
               {sot?.owner ? null : errorMsg ? (
@@ -199,16 +246,144 @@ export default function Sot({ sot }) {
                 >
                   {user
                     ? user.emailVerified
-                      ? 'Buy SoT'
-                      : 'Verify your Email to Buy SoT'
-                    : 'Login to Buy SoT'}
+                      ? t.btn.buy
+                      : t.btn.verifyToBuy
+                    : t.btn.loginToBuy}
                 </Button>
               )}
+            </Stack>
+            <Stack gridColumn={{ md: 'span 2' }} spacing='0'>
+              <Box h={isOpen ? 'auto' : 0} overflow='hidden'>
+                <Divider />
+                <Stack p='2' spacing={4}>
+                  <Box>
+                    <Text mb='1'>{t.description.para1}</Text>
+                    <Text mb='1'>{t.description.grades[sot.grade]}</Text>
+                    <Text mb='1'>{t.description.para2}</Text>
+                    <UnorderedList mb='1'>
+                      {t.description.paraList.map((item) => (
+                        <ListItem key={item}>{item}</ListItem>
+                      ))}
+                    </UnorderedList>
+                    <Text>{t.description.para3}</Text>
+                  </Box>
+                  <Flex pb={2} flexDirection={{ base: 'column', md: 'row' }}>
+                    <Table size='sm'>
+                      <Tbody>
+                        <Tr>
+                          <Td
+                            color={'common.main'}
+                            fontWeight='bold'
+                            bg={'blue.50'}
+                          >
+                            Country
+                          </Td>
+                          <Td>{sot.country}</Td>
+                        </Tr>
+                        <Tr>
+                          <Td
+                            color={'common.main'}
+                            fontWeight='bold'
+                            bg={'blue.50'}
+                          >
+                            City
+                          </Td>
+                          <Td>{sot.city}</Td>
+                        </Tr>
+                        <Tr>
+                          <Td
+                            color={'common.main'}
+                            fontWeight='bold'
+                            bg={'blue.50'}
+                          >
+                            Latitude
+                          </Td>
+                          <Td>{sot.lat}</Td>
+                        </Tr>
+                        <Tr>
+                          <Td
+                            color={'common.main'}
+                            fontWeight='bold'
+                            bg={'blue.50'}
+                          >
+                            Longitude
+                          </Td>
+                          <Td>{sot.long}</Td>
+                        </Tr>
+                      </Tbody>
+                    </Table>
+                    <Table size='sm'>
+                      <Tbody>
+                        <Tr>
+                          <Td
+                            color={'common.main'}
+                            fontWeight='bold'
+                            bg={'blue.50'}
+                          >
+                            Location name
+                          </Td>
+                          <Td>{sot.name}</Td>
+                        </Tr>
+                        <Tr>
+                          <Td
+                            color={'common.main'}
+                            fontWeight='bold'
+                            bg={'blue.50'}
+                          >
+                            Grade
+                          </Td>
+                          <Td>{sot.grade}</Td>
+                        </Tr>
+                        <Tr>
+                          <Td
+                            color={'common.main'}
+                            fontWeight='bold'
+                            bg={'blue.50'}
+                          >
+                            Price
+                          </Td>
+                          <Td>
+                            {t.currency} {sot.price}
+                          </Td>
+                        </Tr>
+                        <Tr>
+                          <Td
+                            color={'common.main'}
+                            fontWeight='bold'
+                            bg={'blue.50'}
+                          >
+                            Owner
+                          </Td>
+                          <Td>
+                            {sot?.owner || (
+                              <Text as={'span'} fontStyle='italic'>
+                                No Owner
+                              </Text>
+                            )}
+                          </Td>
+                        </Tr>
+                      </Tbody>
+                    </Table>
+                  </Flex>
+                  <Box fontStyle={'italic'} color='gray'>
+                    * {t.description.disclaimer}
+                    <ArrowForwardIcon mx='2' />
+                    <Link href='mailto:info@gg56.world' color={'blue'}>
+                      info@gg56.world
+                    </Link>
+                  </Box>
+                </Stack>
+              </Box>
+              <Stack>
+                <Button onClick={onToggle}>
+                  {isOpen ? '닫기' : 'SoT정보 더보기'}
+                </Button>
+              </Stack>
             </Stack>
           </Grid>
         </Container>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size='full'>
+      {/* <Modal isOpen={isOpen} onClose={onClose} size='full'>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
@@ -223,7 +398,7 @@ export default function Sot({ sot }) {
             />
           </ModalBody>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
@@ -245,7 +420,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { sotId } }) {
   const docRef = doc(db, 'sots', sotId);
-  const snap = await getDoc(docRef);
+  const [snap, KRWExchange] = await Promise.all([
+    getDoc(docRef),
+    getExchange(),
+  ]);
 
   if (!snap.exists()) return { notFound: true };
 
@@ -257,7 +435,7 @@ export async function getStaticProps({ params: { sotId } }) {
   const sot = { id: snap.id, lat, long, ...data };
 
   return {
-    props: { sot },
+    props: { sot, KRWExchange },
     revalidate: 1000 * 60 * 60,
   };
 }

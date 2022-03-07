@@ -1,15 +1,18 @@
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 import {
   Box,
   Container,
-  Grid,
-  GridItem,
   Heading,
   Flex,
+  Stack,
+  Text,
+  Grid,
+  Link,
 } from '@chakra-ui/react';
 
 export default function Price({
   text: {
-    content: { list, h2 },
+    content: { list, h2, currency, disclaimer },
     title,
   },
 }) {
@@ -26,45 +29,82 @@ export default function Price({
         >
           {h2}
         </Heading>
-        <Grid
-          gridTemplateColumns={{ base: '1fr' }}
+        <Stack
           gap='4'
-          fontSize={'x-large'}
-          color='common.main'
+          alignItems={'center'}
+          bg='whiteAlpha.800'
+          p='2'
+          borderRadius={'md'}
         >
           {list.map((row) => (
-            <GridItem
-              key={row}
-              as={Flex}
+            <Flex
+              key={row.grade}
               flexDirection={{ base: 'column', md: 'row' }}
-              p='1'
               borderRadius={'md'}
-              bg={'white'}
-              color='white'
-              sx={{ gap: '0.25rem' }}
+              bg={`grades.${row.grade.charAt(0)}`}
+              w={{ base: '100%' }}
+              sx={{
+                boxShadow: 'inset 0px 0px 20px 3px rgb(255 255 255 / 25%)',
+              }}
             >
-              <Box flex={1} p='2' borderRadius={'md'} bg={`grades.${row[2]}`}>
-                <Box as={'strong'} display='block' fontSize='xxl'>
-                  {row[0][0]}
-                </Box>
-                <Box as={'small'} fontSize='sm'>
-                  {row[0][1]}
-                </Box>
-              </Box>
-              <Box
-                flex={0.75}
-                display={'grid'}
-                placeItems='center'
+              <Stack
+                spacing={1}
+                color='white'
+                flexShrink={0}
+                flexBasis='125px'
+                sx={{ aspectRatio: '1/1' }}
                 p='2'
-                borderRadius={'md'}
-                fontSize='xl'
-                bg={`grades.${row[2]}`}
+                justifyContent='center'
+                fontFamily={'sans-serif'}
               >
-                {row[1]}
-              </Box>
-            </GridItem>
+                <Box as={'strong'} fontWeight='bold' fontSize={'3xl'}>
+                  {row.grade}
+                </Box>
+                <Box fontSize={'2xl'}>
+                  {currency} {row.price}
+                </Box>
+              </Stack>
+              <Grid
+                flex='1'
+                p={2}
+                borderRadius={'md'}
+                gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }}
+                gap='2'
+                fontWeight={'bold'}
+              >
+                <Text
+                  fontSize={'xl'}
+                  bg='white'
+                  p='2'
+                  display={'grid'}
+                  placeItems='center'
+                  borderRadius='md'
+                  shadow={'md'}
+                >
+                  {row.description}
+                </Text>
+                <Text
+                  fontSize={'xl'}
+                  bg='white'
+                  p='2'
+                  display={'grid'}
+                  placeItems='center'
+                  borderRadius='md'
+                  shadow={'md'}
+                >
+                  {row.explanation}
+                </Text>
+              </Grid>
+            </Flex>
           ))}
-        </Grid>
+          <Box fontStyle={'italic'} fontSize='xl'>
+            {disclaimer}
+            <ArrowForwardIcon mx='2' />
+            <Link href='mailto:info@gg56.world' color={'blue'}>
+              info@gg56.world
+            </Link>
+          </Box>
+        </Stack>
       </Container>
     </Box>
   );

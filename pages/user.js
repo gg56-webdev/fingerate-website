@@ -15,6 +15,7 @@ import Image from 'next/image';
 import { sendEmailVerification } from 'firebase/auth';
 import { db } from '../lib/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
+import Head from 'next/head';
 
 export default function User() {
   const { user, loading, error, logout } = useContext(UserContext);
@@ -52,6 +53,9 @@ export default function User() {
 
   return (
     <Box minH={'100%'}>
+      <Head>
+        <title>My Page</title>
+      </Head>
       <Container maxW={'container.lg'} pt={'70px'}>
         <Box
           spacing={'6'}
@@ -89,7 +93,7 @@ export default function User() {
               alignSelf='center'
               textAlign='center'
             >
-              Refresh the page after you verify your email
+              이메일을 확인한 뒤에 페이지를 새로 고침하세요
             </Text>
           )}
         </Box>
