@@ -9,6 +9,7 @@ import {
   Stack,
   Text,
   Spinner,
+  Icon,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -121,7 +122,10 @@ export default function User() {
                   key={sot.id}
                   shadow='md'
                   borderRadius={'md'}
+                  bg='cyan.50'
                   p='1'
+                  border='1px solid'
+                  borderColor={'blue.100'}
                   onClick={() =>
                     router.push(`/sots/${sot.id}`, `/sots/${sot.id}`, {
                       locale,
@@ -134,29 +138,6 @@ export default function User() {
                     cursor: 'pointer',
                   }}
                 >
-                  {/* <Stack
-                    direction='row'
-                    alignItems={'center'}
-                    borderRadius={'md'}
-                    border={'2px solid'}
-                    borderColor='common.second'
-                    spacing={'0.5'}
-                  >
-                    <Box p='1' fontWeight={'bold'}>
-                      {sot.grade}
-                    </Box>
-                    <Box
-                      flex={1}
-                      py={'1'}
-                      px={'4'}
-                      bg='common.second'
-                      borderRadius={'md'}
-                      fontWeight='bold'
-                      color={'common.main'}
-                    >
-                      ₩ {sot.price}
-                    </Box>
-                  </Stack> */}
                   <Box borderRadius={'md'} overflow='hidden'>
                     <Image
                       src={sot.image}
@@ -166,9 +147,31 @@ export default function User() {
                       layout='responsive'
                     />
                   </Box>
-                  <Stack spacing={1}>
-                    <Box as={'strong'}>{`SoT ${sot.id} - ${sot.name}`}</Box>
-                    <Box as={'small'}>
+                  <Stack spacing={1} flex='1' justifyContent='space-between'>
+                    <Stack spacing={1}>
+                      <Box
+                        as={'strong'}
+                        color='common.main'
+                        fontFamily={'sans-serif'}
+                        fontSize='100%'
+                      >
+                        {sot.name}
+                      </Box>
+                      <Box
+                        as={'small'}
+                        color='blue.400'
+                        fontFamily={'mono'}
+                      >{`SoT ${sot.id}`}</Box>
+                    </Stack>
+                    <Box as={'small'} color='blue'>
+                      <Icon>
+                        <path
+                          fill='currentColor'
+                          fillRule='evenodd'
+                          d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z'
+                          clipRule='evenodd'
+                        />
+                      </Icon>
                       {sot.country}, {sot.city}
                     </Box>
                   </Stack>

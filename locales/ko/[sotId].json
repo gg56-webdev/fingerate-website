@@ -6,6 +6,8 @@
     "buy": "SOT 구매"
   },
   "description": {
+    "nftNotice": "잠깐! 지금 구입하시는 SoT가 나만의 SoT임을 증명하고 싶으시다고요?\nFingeRate가 지금 구입하시는 SoT를 NFT에 담아 회원님의 SoT임을 증명해 드릴게요!\n추가비용 10,000원(or USD 10)으로 SoT NFT 서비스를 신청해서 회원님의 SoT를 자랑해 보세요!",
+    "contactUs": "자세한 문의",
     "more": "SoT정보 더보기",
     "para1": "지금 바로 나만의 SoT를 구매해야 하는 이유!",
     "grades": {

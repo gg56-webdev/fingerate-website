@@ -26,15 +26,15 @@ export default async function handler(req, res) {
             return;
           }
 
-          orderExists = true;
+          // orderExists = true;
 
-          snap.forEach((childSnap) => {
-            res.status(201).json({
-              msg: 'Order Exists',
-              url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${childSnap.key}`,
-            });
-            return;
-          });
+          // snap.forEach((childSnap) => {
+          //   res.status(201).json({
+          //     msg: 'Order Exists',
+          //     url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${childSnap.key}`,
+          //   });
+          //   return;
+          // });
         }
       });
 
@@ -57,6 +57,7 @@ export default async function handler(req, res) {
       res.status(400).json({ msg: 'Cannot be purchased', error: ' ' });
       return;
     }
+    const XR = await db.doc('XR/15min').get();
     await rtd
       .ref('/Orders')
       .push(
@@ -65,7 +66,7 @@ export default async function handler(req, res) {
           UserEmail: userEmail,
           SoTID: sotId,
           Paid: 'No',
-          Price: docSnap.get('price'),
+          Price: (docSnap.get('price') * XR.get('rates.KRW.value')).toFixed(0),
           CreatedAt: new Date().getTime(),
           CombinedID: userId + sotId,
         },

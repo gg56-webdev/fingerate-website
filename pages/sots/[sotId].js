@@ -37,7 +37,6 @@ import { useRouter } from 'next/router';
 
 import en from '../../locales/en/[sotId].json';
 import ko from '../../locales/ko/[sotId].json';
-import getXR from '../../lib/exchangeRate';
 
 export default function Sot({ sot, KRWxr }) {
   const { user } = useContext(UserContext);
@@ -222,7 +221,10 @@ export default function Sot({ sot, KRWxr }) {
                       size='lg'
                       fontWeight={'bold'}
                     >
-                      ₩ {(sot.price * KRWxr.toFixed(0)).toLocaleString()}
+                      ₩{' '}
+                      {(sot.price * KRWxr).toLocaleString(undefined, {
+                        maximumFractionDigits: 0,
+                      })}
                     </Tag>
                   )}
                 </Flex>
@@ -256,6 +258,24 @@ export default function Sot({ sot, KRWxr }) {
               <Box h={isOpen ? 'auto' : 0} overflow='hidden'>
                 <Divider />
                 <Stack p='2' spacing={4}>
+                  <Box
+                    bg='common.second'
+                    borderRadius={'md'}
+                    p='2'
+                    color={'common.main'}
+                    fontSize='xl'
+                  >
+                    <Text whiteSpace={'pre-wrap'} fontWeight={'bold'}>
+                      {t.description.nftNotice}
+                    </Text>
+                    <Box>
+                      {t.description.contactUs}
+                      <ArrowForwardIcon mx='2' />
+                      <Link href='mailto:info@gg56.world' color={'blue'}>
+                        info@gg56.world
+                      </Link>
+                    </Box>
+                  </Box>
                   <Box>
                     <Text mb='1'>{t.description.para1}</Text>
                     <Text mb='1'>{t.description.grades[sot.grade]}</Text>
@@ -420,12 +440,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { sotId } }) {
   const docRef = doc(db, 'sots', sotId);
-  const [
-    snap,
-    {
-      KRW: { value: KRWxr },
-    },
-  ] = await Promise.all([getDoc(docRef), getXR()]);
+  const xrRef = doc(db, 'XR', '15min');
+  const [snap, xrSnap] = await Promise.all([getDoc(docRef), getDoc(xrRef)]);
 
   if (!snap.exists()) return { notFound: true };
 
@@ -433,6 +449,12 @@ export async function getStaticProps({ params: { sotId } }) {
     location: { _lat: lat, _long: long },
     ...data
   } = snap.data();
+
+  const {
+    rates: {
+      KRW: { value: KRWxr },
+    },
+  } = xrSnap.data();
 
   const sot = { id: snap.id, lat, long, ...data };
   return {
