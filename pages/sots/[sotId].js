@@ -420,7 +420,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { sotId } }) {
   const docRef = doc(db, 'sots', sotId);
-  const [snap, { KRW: KRWxr }] = await Promise.all([getDoc(docRef), getXR()]);
+  const [
+    snap,
+    {
+      KRW: { value: KRWxr },
+    },
+  ] = await Promise.all([getDoc(docRef), getXR()]);
 
   if (!snap.exists()) return { notFound: true };
 

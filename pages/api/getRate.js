@@ -12,13 +12,13 @@ export default async function handler(req, res) {
     try {
       const {
         data: { data: XRData },
-      } = await axios.get('https://freecurrencyapi.net/api/v2/latest', {
+      } = await axios.get('https://api.currencyapi.com/v3/latest', {
         params: { apikey: process.env.EXCHANGE_API_KEY },
       });
 
       fs.writeFileSync(XR_CACHE_PATH, JSON.stringify(XRData));
       console.log('Wrote to XR cache');
-
+      console.log(XRData);
       res.status(201).json({ msg: 'XRData updated', XRData });
     } catch (err) {
       console.log(err);

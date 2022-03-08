@@ -41,3 +41,4 @@ functions/package.json
 ui-debug.log
 firebase.json
 .firebaserc
+functions/.env
