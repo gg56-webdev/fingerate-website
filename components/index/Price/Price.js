@@ -100,8 +100,8 @@ export default function Price({
           <Box fontStyle={'italic'} fontSize='xl'>
             {disclaimer}
             <ArrowForwardIcon mx='2' />
-            <Link href='mailto:info@gg56.world' color={'blue'}>
-              info@gg56.world
+            <Link href='mailto:admin@fingerate.world' color={'blue'}>
+              admin@fingerate.world
             </Link>
           </Box>
         </Stack>

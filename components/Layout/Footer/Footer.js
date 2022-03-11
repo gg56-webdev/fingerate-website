@@ -31,7 +31,9 @@ export default function Footer() {
               <Stack as='address' spacing={'0'}>
                 <Box as='small'>
                   Contact:{' '}
-                  <Link href='mailto:info@gg56.world'>info@gg56.world</Link>
+                  <Link href='mailto:admin@fingerate.world'>
+                    admin@fingerate.world
+                  </Link>
                 </Box>
                 <Box as='small'>사업자등록번호 : 351-86-01750</Box>
               </Stack>

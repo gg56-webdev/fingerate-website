@@ -31,7 +31,7 @@ export default async function handler(req, res) {
           // snap.forEach((childSnap) => {
           //   res.status(201).json({
           //     msg: 'Order Exists',
-          //     url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${childSnap.key}`,
+          //     url: `https://payment.fingerate.world/kspay_wh_order.php?orderNumber=${childSnap.key}`,
           //   });
           //   return;
           // });
@@ -81,7 +81,7 @@ export default async function handler(req, res) {
         const key = snap.key;
         res.status(201).json({
           msg: 'Order Created',
-          url: `http://15.164.220.169/kspay_wh_order.php?orderNumber=${key}`,
+          url: `https://payment.fingerate.world/kspay_wh_order.php?orderNumber=${key}`,
         });
       });
   } catch (err) {

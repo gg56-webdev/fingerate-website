@@ -27,6 +27,7 @@ import {
   Divider,
   Link,
   Tag,
+  Spinner,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
@@ -44,7 +45,8 @@ export default function Sot({ sot, KRWxr }) {
   const [iFrame, setIFrame] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [extUrl, setExtUrl] = useState('');
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure();
+  const [KRWrate, setKRWrate] = useState('');
 
   const router = useRouter();
   const { locale } = router;
@@ -83,6 +85,21 @@ export default function Sot({ sot, KRWxr }) {
       window.open(extUrl.url, '_blank');
     }
   }, [extUrl]);
+
+  async function getXR() {
+    const xrRef = doc(db, 'XR', '15min');
+    const xrSnap = await getDoc(xrRef);
+    const {
+      rates: {
+        KRW: { value: KRWxr },
+      },
+    } = xrSnap.data();
+    setKRWrate(KRWxr);
+  }
+
+  useEffect(() => {
+    getXR();
+  }, []);
 
   return (
     <>
@@ -213,7 +230,7 @@ export default function Sot({ sot, KRWxr }) {
                   >
                     {t.currency} {sot.price.toLocaleString()}
                   </Tag>
-                  {KRWxr && (
+                  {KRWrate ? (
                     <Tag
                       textTransform='uppercase'
                       bg={'common.main'}
@@ -222,10 +239,12 @@ export default function Sot({ sot, KRWxr }) {
                       fontWeight={'bold'}
                     >
                       ₩{' '}
-                      {(sot.price * KRWxr).toLocaleString(undefined, {
+                      {(sot.price * KRWrate).toLocaleString(undefined, {
                         maximumFractionDigits: 0,
                       })}
                     </Tag>
+                  ) : (
+                    <Spinner />
                   )}
                 </Flex>
               </Box>
@@ -271,8 +290,8 @@ export default function Sot({ sot, KRWxr }) {
                     <Box>
                       {t.description.contactUs}
                       <ArrowForwardIcon mx='2' />
-                      <Link href='mailto:info@gg56.world' color={'blue'}>
-                        info@gg56.world
+                      <Link href='mailto:admin@fingerate.world' color={'blue'}>
+                        admin@fingerate.world
                       </Link>
                     </Box>
                   </Box>
@@ -388,8 +407,8 @@ export default function Sot({ sot, KRWxr }) {
                   <Box fontStyle={'italic'} color='gray'>
                     * {t.description.disclaimer}
                     <ArrowForwardIcon mx='2' />
-                    <Link href='mailto:info@gg56.world' color={'blue'}>
-                      info@gg56.world
+                    <Link href='mailto:admin@fingerate.world' color={'blue'}>
+                      admin@fingerate.world
                     </Link>
                   </Box>
                 </Stack>
@@ -440,8 +459,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { sotId } }) {
   const docRef = doc(db, 'sots', sotId);
-  const xrRef = doc(db, 'XR', '15min');
-  const [snap, xrSnap] = await Promise.all([getDoc(docRef), getDoc(xrRef)]);
+  const [snap] = await Promise.all([getDoc(docRef)]);
 
   if (!snap.exists()) return { notFound: true };
 
@@ -450,15 +468,9 @@ export async function getStaticProps({ params: { sotId } }) {
     ...data
   } = snap.data();
 
-  const {
-    rates: {
-      KRW: { value: KRWxr },
-    },
-  } = xrSnap.data();
-
   const sot = { id: snap.id, lat, long, ...data };
   return {
-    props: { sot, KRWxr },
-    revalidate: 1000 * 60 * 30,
+    props: { sot },
+    revalidate: 60 * 30,
   };
 }

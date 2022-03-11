@@ -13,7 +13,16 @@ import {
   Checkbox,
 } from '@chakra-ui/react';
 import { db } from '../../lib/firebase';
-import { getDocs, collection, where, query } from 'firebase/firestore';
+import {
+  getDocs,
+  collection,
+  where,
+  query,
+  limit,
+  startAfter,
+  orderBy,
+  documentId,
+} from 'firebase/firestore';
 import Image from 'next/image';
 import Head from 'next/head';
 
@@ -33,6 +42,39 @@ export default function Sots({ sots }) {
   const [grade, setGrade] = useState(null);
   const [country, setCountry] = useState(null);
   const [ownership, setOwnership] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCollectionEnd, setIsCollectionEnd] = useState(false);
+
+  const getMore = async () => {
+    setIsLoading(true);
+    const { id: lastId } = filteredSots[filteredSots.length - 1];
+    try {
+      const colRef = collection(db, 'sots');
+
+      const cq = query(
+        colRef,
+        //  where('owner', '==', '')
+        orderBy(documentId()),
+        startAfter(lastId),
+        limit(LIMIT)
+      );
+      const snap = await getDocs(cq);
+
+      const moreSoTs = snap.docs.map((doc) => {
+        const { name, country, city, grade, image, price, owner } = doc.data();
+        return { name, country, city, grade, image, price, id: doc.id, owner };
+      });
+
+      setFilteredSots([...filteredSots, ...moreSoTs]);
+      setIsLoading(false);
+
+      if (moreSoTs.length < LIMIT) setIsCollectionEnd(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const router = useRouter();
   const { locale } = router;
 
@@ -232,17 +274,32 @@ export default function Sots({ sots }) {
                 ))}
             </AnimatePresence>
           </MotionGrid>
+          {/* {!isCollectionEnd && (
+            <Button
+              w='fit-content'
+              alignSelf={'center'}
+              colorScheme='purple'
+              onClick={getMore}
+              isLoading={isLoading}
+            >
+              Load more
+            </Button>
+          )} */}
         </Stack>
       </Container>
     </>
   );
 }
 
+const LIMIT = 6 * 5;
+
 export async function getServerSideProps() {
   const colRef = collection(db, 'sots');
+
   const cq = query(
-    colRef
+    colRef,
     //  where('owner', '==', '')
+    limit(LIMIT)
   );
   const snap = await getDocs(cq);
 
@@ -253,6 +310,6 @@ export async function getServerSideProps() {
 
   return {
     props: { sots },
-    // revalidate: 1000 * 60 * 30,
+    // revalidate: 60 * 30,
   };
 }
