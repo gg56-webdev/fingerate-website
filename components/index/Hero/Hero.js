@@ -220,7 +220,7 @@ export default function Hero({ text: { content } }) {
           </MotionBox>
         </Flex>
       </Container>
-      {/* <News /> */}
+      <News />
     </Flex>
   );
 }

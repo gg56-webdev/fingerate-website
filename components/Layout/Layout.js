@@ -16,7 +16,7 @@ export default function Layout({ children }) {
       <Box
         as={'main'}
         minH='100vh'
-        pb={!footerCancel.includes(pathname) && { base: '165px', sm: '117px' }}
+        pb={!footerCancel.includes(pathname) && { base: '240px', sm: '138px' }}
       >
         {children}
       </Box>

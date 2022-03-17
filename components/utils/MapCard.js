@@ -36,9 +36,9 @@ export default function MapCard({ sot, onSelectSoT }) {
           onClick={() => onSelectSoT(sot)}
         />
       </Box>
-      <Heading as='h2' fontSize={'lg'}>
+      <Box as='strong' fontSize={'lg'} fontFamily='sans-serif'>
         {sot.name}
-      </Heading>
+      </Box>
 
       <Flex
         alignItems={'center'}
@@ -75,7 +75,7 @@ export default function MapCard({ sot, onSelectSoT }) {
                 {sot.grade}
               </Box>
               <Text as={'span'} color='common.main'>
-                ₩ {sot.price}
+                $ {sot.price.toLocaleString()}
               </Text>
             </Flex>
           </>

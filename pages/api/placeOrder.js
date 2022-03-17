@@ -39,22 +39,37 @@ export default async function handler(req, res) {
       });
 
     if (paid) {
-      res.status(409).json({ msg: 'Already Paid' });
+      res.status(409).json({ error: { title: 'Already Paid', body: '' } });
     }
     if (orderExists || paid) return;
 
     const userSnap = await auth.getUser(userId);
     if (!userSnap || !userSnap.emailVerified) {
-      res.status(401).json({ msg: 'Unauthorized', error: ' ' });
+      res.status(401).json({
+        error: {
+          title: 'Unauthorized',
+          body: 'You need to verify your account',
+        },
+      });
       return;
     }
     const docSnap = await db.doc(`sots/${sotId}`).get();
     if (!docSnap.exists) {
-      res.status(404).json({ msg: 'SoT not Found', error: ' ' });
+      res.status(404).json({
+        error: {
+          title: 'SoT Not Found',
+          body: '',
+        },
+      });
       return;
     }
     if (docSnap.get('owner')) {
-      res.status(400).json({ msg: 'Cannot be purchased', error: ' ' });
+      res.status(400).json({
+        error: {
+          title: 'Cannot be purchased',
+          body: 'The SoT is already purchased by other user',
+        },
+      });
       return;
     }
     const XR = await db.doc('XR/15min').get();
@@ -70,9 +85,11 @@ export default async function handler(req, res) {
           CreatedAt: new Date().getTime(),
           CombinedID: userId + sotId,
         },
-        (error) => {
-          if (error) {
-            res.status(500).json({ msg: 'Server Failed', err: error });
+        (_err) => {
+          if (_err) {
+            res
+              .status(500)
+              .json({ error: { title: 'Server Failed', body: _err } });
             return;
           }
         }
@@ -84,8 +101,10 @@ export default async function handler(req, res) {
           url: `https://payment.fingerate.world/kspay_wh_order.php?orderNumber=${key}`,
         });
       });
-  } catch (err) {
-    console.error(err);
-    res.status(429).json({ error: 'Rate limit exceeded', err });
+  } catch (_err) {
+    console.error(_err);
+    res
+      .status(429)
+      .json({ error: { title: 'Rate limit exceeded', body: _err } });
   }
 }

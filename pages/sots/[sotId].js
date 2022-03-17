@@ -9,15 +9,11 @@ import {
   Stack,
   Text,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
-  ModalCloseButton,
   useDisclosure,
   Alert,
   AlertIcon,
   AlertTitle,
+  AlertDescription,
   UnorderedList,
   ListItem,
   Table,
@@ -66,11 +62,12 @@ export default function Sot({ sot, KRWxr }) {
           'Content-Type': 'application/json',
         },
       });
-      const { msg, url, error, err } = await res.json();
+      const { msg, url, error } = await res.json();
 
-      if (err || error) {
-        console.error(err, error);
-        setErrorMsg(error);
+      if (error) {
+        console.error(error);
+        const { title, body } = error;
+        setErrorMsg({ title, body });
       } else {
         setExtUrl({ url });
         console.log(`msg: ${msg}`);
@@ -82,7 +79,8 @@ export default function Sot({ sot, KRWxr }) {
 
   useEffect(() => {
     if (extUrl) {
-      window.open(extUrl.url, '_blank');
+      window.open(extUrl.url, '_blank', 'popup') ||
+        window.location.assign(extUrl.url);
     }
   }, [extUrl]);
 
@@ -252,7 +250,8 @@ export default function Sot({ sot, KRWxr }) {
               {sot?.owner ? null : errorMsg ? (
                 <Alert status='error'>
                   <AlertIcon />
-                  <AlertTitle>{errorMsg}</AlertTitle>
+                  <AlertTitle>{errorMsg?.title}</AlertTitle>
+                  <AlertDescription>{errorMsg?.body}</AlertDescription>
                 </Alert>
               ) : (
                 <Button

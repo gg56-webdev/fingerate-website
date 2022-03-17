@@ -23,6 +23,7 @@ import {
   Link,
   Button,
   Heading,
+  Icon,
   Stack,
 } from '@chakra-ui/react';
 import { SmallCloseIcon, ChevronRightIcon } from '@chakra-ui/icons';
@@ -146,12 +147,23 @@ export default function Map({ sots }) {
                 placeholder='blur'
                 alt={`Thumbnail of ${selectedMark.id}`}
               />
-              <Heading as='h2' fontSize={'lg'}>
-                SoT{selectedMark.id} - {selectedMark.name}
-              </Heading>
-              <Text>
+              <Box as='strong' fontSize={'lg'} fontFamily='sans-serif'>
+                {selectedMark.name}
+              </Box>
+              <Box as='small' fontFamily={'mono'} color='cyan.400'>
+                SoT{selectedMark.id}
+              </Box>
+              <Box as={'small'} color='blue'>
+                <Icon>
+                  <path
+                    fill='currentColor'
+                    fillRule='evenodd'
+                    d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z'
+                    clipRule='evenodd'
+                  />
+                </Icon>
                 {selectedMark.country}, {selectedMark.city}
-              </Text>
+              </Box>
               {selectedMark.owner ? (
                 <Text>판매 완료</Text>
               ) : (
@@ -169,7 +181,7 @@ export default function Map({ sots }) {
                       {selectedMark.grade}
                     </Box>
                     <Text as={'span'} fontWeight='bold' color={'common.main'}>
-                      ₩ {selectedMark.price}
+                      $ {selectedMark.price.toLocaleString()}
                     </Text>
                   </Flex>
                   <NLink href={`/sots/${selectedMark.id}`}>
@@ -315,6 +327,6 @@ export async function getStaticProps() {
 
   return {
     props: { sots },
-    revalidate: 1000 * 60 * 10,
+    revalidate: 60 * 30,
   };
 }

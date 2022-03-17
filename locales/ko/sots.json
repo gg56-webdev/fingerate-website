@@ -1,3 +1,8 @@
 {
-  "currency": "$"
+  "filters": {
+    "country": "나라",
+    "grade": "등급",
+    "price": "가격순",
+    "ownership": "구매 가능"
+  }
 }

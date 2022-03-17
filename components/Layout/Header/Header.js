@@ -141,7 +141,7 @@ export default function Header() {
               </Box>
               <Spacer />
 
-              <Select
+              {/* <Select
                 w={'fit-content'}
                 size='sm'
                 variant='outline'
@@ -152,9 +152,9 @@ export default function Header() {
                 border='1px solid'
                 borderColor='common.main'
               >
-                {/* <option value='en'>English</option> */}
+                <option value='en'>English</option>
                 <option value='ko'>한국어</option>
-              </Select>
+              </Select> */}
             </Stack>
           </Box>
         </Flex>

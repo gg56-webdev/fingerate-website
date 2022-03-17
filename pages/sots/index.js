@@ -11,6 +11,7 @@ import {
   Input,
   Icon,
   Checkbox,
+  Switch,
 } from '@chakra-ui/react';
 import { db } from '../../lib/firebase';
 import {
@@ -31,7 +32,7 @@ import en from '../../locales/en/sots.json';
 
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { RepeatIcon } from '@chakra-ui/icons';
+import { ArrowDownIcon, ArrowUpIcon, RepeatIcon } from '@chakra-ui/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const MotionGrid = motion(Grid);
@@ -42,6 +43,7 @@ export default function Sots({ sots }) {
   const [grade, setGrade] = useState(null);
   const [country, setCountry] = useState(null);
   const [ownership, setOwnership] = useState(false);
+  const [sort, setSort] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
   const [isCollectionEnd, setIsCollectionEnd] = useState(false);
@@ -96,59 +98,84 @@ export default function Sots({ sots }) {
             p={2}
             position='sticky'
             top={'65px'}
-            bg='white'
             zIndex={'2'}
             borderRadius='md'
-            border={'2px solid'}
-            borderColor='blue.100'
-            w={'100%'}
+            bg='blue.100'
             maxW='fit-content'
+            shadow={'sm'}
           >
-            <Stack direction={'row'}>
-              <Input
-                list='countries'
-                onChange={(e) => setCountry(e.target.value)}
-                placeholder='Country'
-                color='common.main'
-                border='1px solid'
-                borderColor='common.main'
-                width={'fit-content'}
-                value={country || ''}
-              />
+            <Stack direction={'row'} color='common.main'>
+              <Box bg='white' borderRadius={'md'}>
+                <Input
+                  list='countries'
+                  onChange={(e) => setCountry(e.target.value)}
+                  placeholder={t.filters.country}
+                  value={country || ''}
+                />
 
-              <datalist id='countries'>
-                {availableCountries.map((c, i) => (
-                  <option value={c} key={c + i} />
-                ))}
-              </datalist>
-              <Select
-                width={'fit-content'}
-                variant='outline'
-                color='common.main'
-                onChange={(e) => setGrade(e.target.value)}
-                placeholder='Grade'
-                border='1px solid'
-                borderColor='common.main'
-                value={grade || ''}
-              >
-                <option value='S'>S</option>
-                <option value='A'>A</option>
-                <option value='B'>B</option>
-              </Select>
-              <Stack justifyContent={'center'} p='1'>
-                <Checkbox
+                <datalist id='countries'>
+                  {availableCountries.map((c, i) => (
+                    <option value={c} key={c + i} />
+                  ))}
+                </datalist>
+              </Box>
+              <Box bg='white' borderRadius={'md'}>
+                <Select
+                  variant='outline'
+                  onChange={(e) => setGrade(e.target.value)}
+                  placeholder={t.filters.grade}
+                  value={grade || ''}
+                >
+                  {['S', 'A', 'B', 'C', 'D'].map((val) => (
+                    <option value={val} key={val}>
+                      {val}
+                    </option>
+                  ))}
+                </Select>
+              </Box>
+              {!grade && (
+                <Flex
+                  bg='white'
+                  flexDirection={'row'}
+                  alignItems='center'
+                  borderRadius={'md'}
+                  p={1}
+                >
+                  <Button
+                    fontSize={'md'}
+                    fontWeight='normal'
+                    colorScheme={sort ? 'blue' : 'gray'}
+                    variant={sort ? 'solid' : 'ghost'}
+                    size={'sm'}
+                    onClick={() =>
+                      sort === 'desc' ? setSort('asc') : setSort('desc')
+                    }
+                    rightIcon={
+                      sort &&
+                      (sort === 'desc' ? <ArrowDownIcon /> : <ArrowUpIcon />)
+                    }
+                  >
+                    {t.filters.price}
+                  </Button>
+                </Flex>
+              )}
+              <Grid bg='white' px='1' borderRadius={'md'} placeItems='center'>
+                <Switch
+                  fontSize={'md'}
                   isChecked={ownership}
                   onChange={() => setOwnership(!ownership)}
                 >
-                  구매 가능
-                </Checkbox>
-              </Stack>
+                  {t.filters.ownership}
+                </Switch>
+              </Grid>
               <Button
+                alignSelf={'center'}
                 colorScheme={'gray'}
                 onClick={() => {
                   setCountry(null);
                   setGrade(null);
                   setOwnership(false);
+                  setSort('');
                 }}
               >
                 <RepeatIcon />
@@ -158,7 +185,6 @@ export default function Sots({ sots }) {
           <MotionGrid
             gap='2'
             gridTemplateColumns={'repeat(auto-fill, minmax(200px, 1fr))'}
-            px='2'
             layout
           >
             <AnimatePresence>
@@ -172,6 +198,13 @@ export default function Sots({ sots }) {
                     : true
                 )
                 .filter((sot) => (ownership ? !sot.owner : true))
+                .sort((a, b) =>
+                  sort === 'desc'
+                    ? b.price - a.price
+                    : sort === 'asc'
+                    ? a.price - b.price
+                    : 0
+                )
                 .map((sot) => (
                   <MotionStack
                     key={sot.id}
@@ -262,11 +295,11 @@ export default function Sots({ sots }) {
                               fontSize='sm'
                               fontStyle={'italic'}
                             >
-                              ({t.currency} {sot.price})
+                              ($ {sot.price})
                             </Text>
                           </>
                         ) : (
-                          `${t.currency} ${sot.price.toLocaleString()}`
+                          `$ ${sot.price.toLocaleString()}`
                         )}
                       </Text>
                     </Flex>

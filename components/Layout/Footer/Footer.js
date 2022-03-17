@@ -1,4 +1,12 @@
-import { Container, Box, Text, Stack, Link } from '@chakra-ui/react';
+import {
+  Container,
+  Box,
+  Text,
+  Stack,
+  Link,
+  Divider,
+  Flex,
+} from '@chakra-ui/react';
 import { default as NLink } from 'next/link';
 import Image from 'next/image';
 import Contact from '../Contact/Contact';
@@ -28,15 +36,28 @@ export default function Footer() {
               <Box as={'strong'} color='common.main'>
                 GG56 LIMITED
               </Box>
-              <Stack as='address' spacing={'0'}>
-                <Box as='small'>
-                  Contact:{' '}
-                  <Link href='mailto:admin@fingerate.world'>
-                    admin@fingerate.world
-                  </Link>
-                </Box>
-                <Box as='small'>사업자등록번호 : 351-86-01750</Box>
-              </Stack>
+              <Flex as='address' flexDirection='row' sx={{ gap: '0.5rem' }}>
+                <Stack spacing={'0'}>
+                  <Box as='small'>
+                    Contact:{' '}
+                    <Link href='mailto:admin@fingerate.world'>
+                      admin@fingerate.world
+                    </Link>
+                  </Box>
+                  <Box as='small'>사업자등록번호 : 351-86-01750</Box>
+                  <Box as='small'>상호명:주식회사 지지56코리아</Box>
+                </Stack>
+
+                <Stack spacing='0'>
+                  <Box as='small'>대표자:김영군</Box>
+                  <Box as='small'>
+                    사업자주소:서울특별시 강남구 테헤란로 437
+                  </Box>
+                  <Box as='small'>
+                    연락처: <Link href='tel:025566780'>02-556-6780</Link>
+                  </Box>
+                </Stack>
+              </Flex>
             </Stack>
           </Stack>
           <Box color={'blue'}>

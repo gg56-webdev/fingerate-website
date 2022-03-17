@@ -39,3 +39,15 @@ export default function Home() {
     </>
   );
 }
+
+// export async function getStaticProps() {
+//   let news = [];
+//   const newsSnap = await db.collection('news').get();
+//   newsSnap.forEach((doc) => {
+//     const { title, time, link } = doc.data();
+//     news.push({ title, time: time.toDate().toString(), link });
+//   });
+//   return {
+//     props: { news },
+//   };
+// }
