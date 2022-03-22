@@ -3,62 +3,53 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
-const news = '';
-export default function News() {
+export default function News({ news, title }) {
   return (
     <Box
       zIndex={2}
       flexBasis={'50px'}
-      bg='cyan.100'
+      bg="cyan.100"
       borderTop={'1px solid'}
       borderBottom={'1px solid'}
-      borderColor='common.mainLight'
-    >
-      <Container maxW='container.lg' overflow={'hidden'} px='2'>
+      borderColor="common.mainLight">
+      <Container maxW="container.lg" overflow={'hidden'} p="1">
         <Grid gridTemplateColumns={'auto 1fr'} gap={{ base: 2, md: 4 }}>
           <Box
             alignSelf={'center'}
-            color='common.main'
+            color="common.main"
             fontWeight={'bold'}
-            fontSize='xl'
+            fontSize="xl"
             pr={{ base: 2, md: 4 }}
             borderRight={'4px solid'}
-            borderColor='common.main'
-          >
-            News
+            borderColor="common.main"
+            display={{ base: 'none', md: 'block' }}>
+            {title}
           </Box>
           <Swiper
             modules={[Autoplay]}
             direction={'vertical'}
             loop={true}
             autoplay={{
-              delay: 3000,
+              delay: 5000,
               disableOnInteraction: false,
             }}
             speed={500}
-            style={{ height: '50px', width: '100%' }}
-          >
+            style={{ height: '50px', width: '100%' }}>
             {news &&
               news.map((article) => (
-                <SwiperSlide key={article.article}>
+                <SwiperSlide key={article.title}>
                   <Flex
-                    h='100%'
+                    h="100%"
                     justifyContent={'space-between'}
-                    flexDir='row'
+                    flexDir="row"
                     overflow={'hidden'}
-                    alignItems={{ md: 'center' }}
-                  >
-                    <Link href={article.href} isExternal color='blue'>
-                      {article.article}
+                    alignItems={{ md: 'center' }}>
+                    <Link href={article.link} isExternal color="blue" lineHeight={1}>
+                      {article.title}
                       <ExternalLinkIcon />
                     </Link>
-                    <Box
-                      as='time'
-                      dateTime={article.date}
-                      fontSize={{ base: 'sm', md: 'md' }}
-                      alignSelf='center'
-                    >
-                      {article.date}
+                    <Box as="time" dateTime={article.time} fontSize={{ base: 'sm', md: 'md' }} alignSelf="center">
+                      {article.time.replaceAll(' ', '')}
                     </Box>
                   </Flex>
                 </SwiperSlide>

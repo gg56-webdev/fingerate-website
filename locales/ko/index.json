@@ -14,12 +14,11 @@
 
         "btn1": "SoT 구매",
         "btn2": "회원가입",
-        "milestones": ["프리세일, 현제 분양 가능 수량"],
-        "latestNews": "news",
+        "latestNews": "뉴스",
         "feed": [
-          { "item": "Pre-sales:", "number": "1000+" },
-          { "item": "Total Supply:", "number": "1.2 mil." },
-          { "item": "Circulating:", "number": "50K" }
+          { "item": "선 분양", "number": "1000+" },
+          { "item": "총 SoT 대수", "number": "1.2 mil." },
+          { "item": "현제 분양 가능 수량", "number": "50K" }
         ]
       }
     },
@@ -38,12 +37,7 @@
         },
         "list2": {
           "h3": "수익 생성",
-          "listItems": [
-            "조사의뢰비의 50%",
-            "데이터 판매의 50%",
-            "조사 의뢰 보상비의 50%",
-            "재판매 시 시세 차이"
-          ]
+          "listItems": ["조사의뢰비의 50%", "데이터 판매의 50%", "조사 의뢰 보상비의 50%", "재판매 시 시세 차이"]
         },
         "imgCaption": "SoT 1대만 소유해도\n이 모든 수익이 팡팡!"
       }
@@ -118,11 +112,7 @@
         },
         "box2": {
           "title": "실제 세계에서 작동하고 있는 SoT",
-          "locations": [
-            "춘천 구곡폭포",
-            "춘천 스카이워크",
-            "YBM 어학원 종로 본사"
-          ]
+          "locations": ["춘천 구곡폭포", "춘천 스카이워크", "YBM 어학원 종로 본사"]
         }
       }
     },
@@ -157,11 +147,7 @@
             "sections": [
               {
                 "title": "FingeRate2.0 플랫폼 개발",
-                "points": [
-                  "웹 플랫폼 개발 및 오픈",
-                  "SOT 1만대 좌표 정의",
-                  "모델하우스 구성"
-                ]
+                "points": ["웹 플랫폼 개발 및 오픈", "SOT 1만대 좌표 정의", "모델하우스 구성"]
               },
               {
                 "title": "OpenSea Integration",
@@ -180,11 +166,7 @@
             "sections": [
               {
                 "title": "SOT 여론, 만족도조사 개시",
-                "points": [
-                  "여론조사 시스템 개발",
-                  "만족도 조사 AR 시스템 개발 및 테스트",
-                  "FingeRate2.0 앱 개발"
-                ]
+                "points": ["여론조사 시스템 개발", "만족도 조사 AR 시스템 개발 및 테스트", "FingeRate2.0 앱 개발"]
               },
               {
                 "title": "SoT Meeting Room",
@@ -192,10 +174,7 @@
               },
               {
                 "title": "SoT Marketplace",
-                "points": [
-                  "FingeRate2.0앱 마켓플레이스 기획 및 개발",
-                  "마켓플레이스 아이템 NFT와 연동"
-                ]
+                "points": ["FingeRate2.0앱 마켓플레이스 기획 및 개발", "마켓플레이스 아이템 NFT와 연동"]
               }
             ]
           },
@@ -206,19 +185,11 @@
             "sections": [
               {
                 "title": "Smart Contract",
-                "points": [
-                  "Survey Exchange시스템",
-                  "실시간 수익 정산",
-                  "SOT 가치 평가 시스템"
-                ]
+                "points": ["Survey Exchange시스템", "실시간 수익 정산", "SOT 가치 평가 시스템"]
               },
               {
                 "title": "자체 메인넷 개발",
-                "points": [
-                  "메인넷 개발",
-                  "자체 DeFi 서비스 게시",
-                  "자체 블록체인 생태계 구축"
-                ]
+                "points": ["메인넷 개발", "자체 DeFi 서비스 게시", "자체 블록체인 생태계 구축"]
               }
             ]
           },
@@ -229,19 +200,11 @@
             "sections": [
               {
                 "title": "딥리서치 도입",
-                "points": [
-                  "Survey 딥리서치 구축",
-                  "딥리서치 기반 Survey 서비스 개시",
-                  "딥리서치 API 구축"
-                ]
+                "points": ["Survey 딥리서치 구축", "딥리서치 기반 Survey 서비스 개시", "딥리서치 API 구축"]
               },
               {
                 "title": "AI Survey 도입",
-                "points": [
-                  "Survey 자동화",
-                  "정성 분석 AI 도입",
-                  "분석 보고서 초안 생성"
-                ]
+                "points": ["Survey 자동화", "정성 분석 AI 도입", "분석 보고서 초안 생성"]
               }
             ]
           },
@@ -252,19 +215,11 @@
             "sections": [
               {
                 "title": "딥리서치 강화",
-                "points": [
-                  "Survey 딥리서치 강화",
-                  "딥리서치 기반 AI Survey 개시",
-                  "딥리서치 API 판매"
-                ]
+                "points": ["Survey 딥리서치 강화", "딥리서치 기반 AI Survey 개시", "딥리서치 API 판매"]
               },
               {
                 "title": "AI Survey 강화",
-                "points": [
-                  "Survey 자동화",
-                  "정성 분석 AI 강화",
-                  "분석 보고서 완전 자동 생성"
-                ]
+                "points": ["Survey 자동화", "정성 분석 AI 강화", "분석 보고서 완전 자동 생성"]
               }
             ]
           }

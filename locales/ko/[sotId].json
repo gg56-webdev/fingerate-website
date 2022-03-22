@@ -1,5 +1,16 @@
 {
   "currency": "$",
+  "stats": {
+    "country": "국가",
+    "city": "도시",
+    "grade": "등급",
+    "price": "가격",
+    "latitude": "위도",
+    "longitude": "경도",
+    "location": "위치",
+    "owner": "소유자",
+    "noOwner": "소유자 없음"
+  },
   "btn": {
     "loginToBuy": "SOT 구매를 위해 로그인 해주세요",
     "verifyToBuy": "SOT 구매를 위해 이메일을 확인해주세요",

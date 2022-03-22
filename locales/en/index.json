@@ -14,7 +14,7 @@
 
         "btn1": "SoT 구매",
         "btn2": "회원가입",
-        "milestones": ["프리세일, 현제 분양 가능 수량"],
+        "milestones": ["프리세일:", "Total Supply:", "현제 분양 가능 수량:"],
         "latestNews": "news"
       }
     },

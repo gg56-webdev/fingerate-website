@@ -7,7 +7,7 @@ export default function Feed({ feed }) {
         bg='whiteAlpha.700'
         borderRadius={'md'}
         direction='row'
-        w='75%'
+        w='80%'
         mx='auto'
         textAlign={'center'}
         shadow='md'

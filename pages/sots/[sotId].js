@@ -79,8 +79,8 @@ export default function Sot({ sot, KRWxr }) {
 
   useEffect(() => {
     if (extUrl) {
-      window.open(extUrl.url, '_blank', 'popup') ||
-        window.location.assign(extUrl.url);
+      // window.open(extUrl.url, '_blank', 'popup') ||
+      window.location.assign(extUrl.url);
     }
   }, [extUrl]);
 
@@ -104,138 +104,63 @@ export default function Sot({ sot, KRWxr }) {
       <Head>
         <title>{`SoT ${sot.id} - ${sot.name}`}</title>
       </Head>
-      <Box pb='2'>
+      <Box pb="2">
         <Container maxW={'container.lg'} pt={'70px'}>
           <Grid
             gridTemplateColumns={{
               md: 'minmax(200px, 400px) 1fr',
               base: '1fr',
             }}
-            gap='4'
-            bg='white'
+            gap="4"
+            bg="white"
             p={2}
-            borderRadius='md'
-          >
-            <Box overflow={'hidden'} borderRadius='md' fontSize={0}>
-              <Image
-                src={sot.image}
-                alt={`thumbnail of SoT${sot.id}`}
-                width={800}
-                height={800}
-              />
+            borderRadius="md">
+            <Box overflow={'hidden'} borderRadius="md" fontSize={0}>
+              <Image src={sot.image} alt={`thumbnail of SoT${sot.id}`} width={800} height={800} />
             </Box>
-            <Stack spacing={4} justifyContent='space-between'>
+            <Stack spacing={4} justifyContent="space-between">
               <Stack spacing={1}>
-                <Heading
-                  as={'h1'}
-                  fontSize={'3xl'}
-                  fontWeight='bold'
-                  fontFamily='sans-serif'
-                  color={'common.main'}
-                >
+                <Heading as={'h1'} fontSize={'3xl'} fontWeight="bold" fontFamily="sans-serif" color={'common.main'}>
                   {sot.name}
                 </Heading>
-                <Box
-                  as='small'
-                  fontFamily={'mono'}
-                  color='blue.400'
-                  fontSize={'md'}
-                >
+                <Box as="small" fontFamily={'mono'} color="blue.400" fontSize={'md'}>
                   {`SoT ${sot.id}`}
                 </Box>
               </Stack>
-              <Text>
-                {`${sot.grade}급 SoT, 100m²의 HideOut이 포함 위도 = ${sot.lat}, 경도 = ${sot.long}`}
-              </Text>
-              <Flex sx={{ gap: '0.5rem' }} flexWrap='wrap'>
-                <Box
-                  flex={'1'}
-                  borderRadius={'md'}
-                  bg='purple.50'
-                  p='2'
-                  gap='1'
-                  textAlign={'center'}
-                >
-                  <Text
-                    as={'small'}
-                    textTransform='uppercase'
-                    color={'common.main'}
-                  >
-                    country
+              <Text>{`${sot.grade}급 SoT, 100m²의 HideOut이 포함 위도 = ${sot.lat}, 경도 = ${sot.long}`}</Text>
+              <Flex sx={{ gap: '0.5rem' }} flexWrap="wrap">
+                <Box flex={'1'} borderRadius={'md'} bg="purple.50" p="2" gap="1" textAlign={'center'}>
+                  <Text as={'small'} fontSize="lg" textTransform="uppercase" color={'common.main'}>
+                    {t.stats.country}
                   </Text>
                   <br />
                   {sot.country}
                 </Box>
-                <Box
-                  flex={'1'}
-                  borderRadius={'md'}
-                  bg='purple.50'
-                  p='2'
-                  gap='1'
-                  textAlign={'center'}
-                >
-                  <Text
-                    as={'small'}
-                    textTransform='uppercase'
-                    color={'common.main'}
-                  >
-                    city
+                <Box flex={'1'} borderRadius={'md'} bg="purple.50" p="2" gap="1" textAlign={'center'}>
+                  <Text as={'small'} fontSize="lg" textTransform="uppercase" color={'common.main'}>
+                    {t.stats.city}
                   </Text>
                   <br />
                   {sot.city}
                 </Box>
-                <Box
-                  flex={'1'}
-                  borderRadius={'md'}
-                  bg='purple.50'
-                  p='2'
-                  gap='1'
-                  textAlign={'center'}
-                >
-                  <Text
-                    as={'small'}
-                    textTransform='uppercase'
-                    color={'common.main'}
-                  >
-                    grade
+                <Box flex={'1'} borderRadius={'md'} bg="purple.50" p="2" gap="1" textAlign={'center'}>
+                  <Text as={'small'} fontSize="lg" textTransform="uppercase" color={'common.main'}>
+                    {t.stats.grade}
                   </Text>
                   <br />
                   {sot.grade}
                 </Box>
               </Flex>
-              <Box
-                p='2'
-                border={'2px solid'}
-                borderColor={'common.main'}
-                borderRadius='md'
-              >
-                <Box
-                  as={'small'}
-                  textTransform='uppercase'
-                  color={'common.main'}
-                  display='block'
-                  mb='2'
-                >
-                  Price
+              <Box p="2" border={'2px solid'} borderColor={'common.main'} borderRadius="md">
+                <Box as={'small'} textTransform="uppercase" color={'common.main'} display="block" mb="2" fontSize="xl">
+                  {t.stats.price}
                 </Box>
                 <Flex flexDirection={'row'} sx={{ gap: '0.5rem' }}>
-                  <Tag
-                    textTransform='uppercase'
-                    bg={'common.main'}
-                    color='white'
-                    size='lg'
-                    fontWeight={'bold'}
-                  >
+                  <Tag textTransform="uppercase" bg={'common.main'} color="white" size="lg" fontWeight={'bold'}>
                     {t.currency} {sot.price.toLocaleString()}
                   </Tag>
                   {KRWrate ? (
-                    <Tag
-                      textTransform='uppercase'
-                      bg={'common.main'}
-                      color='white'
-                      size='lg'
-                      fontWeight={'bold'}
-                    >
+                    <Tag textTransform="uppercase" bg={'common.main'} color="white" size="lg" fontWeight={'bold'}>
                       ₩{' '}
                       {(sot.price * KRWrate).toLocaleString(undefined, {
                         maximumFractionDigits: 0,
@@ -248,57 +173,46 @@ export default function Sot({ sot, KRWxr }) {
               </Box>
 
               {sot?.owner ? null : errorMsg ? (
-                <Alert status='error'>
+                <Alert status="error">
                   <AlertIcon />
                   <AlertTitle>{errorMsg?.title}</AlertTitle>
                   <AlertDescription>{errorMsg?.body}</AlertDescription>
                 </Alert>
               ) : (
                 <Button
-                  p='8'
+                  p="8"
                   isDisabled={!user || !user.emailVerified}
-                  colorScheme='purple'
-                  bg='common.mainLight'
+                  colorScheme="purple"
+                  bg="common.mainLight"
                   color={'white'}
-                  fontSize='xl'
+                  fontSize="xl"
                   onClick={handleSubmit}
-                  isLoading={loading}
-                >
-                  {user
-                    ? user.emailVerified
-                      ? t.btn.buy
-                      : t.btn.verifyToBuy
-                    : t.btn.loginToBuy}
+                  isLoading={loading}>
+                  {user ? (user.emailVerified ? t.btn.buy : t.btn.verifyToBuy) : t.btn.loginToBuy}
                 </Button>
               )}
             </Stack>
-            <Stack gridColumn={{ md: 'span 2' }} spacing='0'>
-              <Box h={isOpen ? 'auto' : 0} overflow='hidden'>
+            <Stack gridColumn={{ md: 'span 2' }} spacing="0">
+              <Box h={isOpen ? 'auto' : 0} overflow="hidden">
                 <Divider />
-                <Stack p='2' spacing={4}>
-                  <Box
-                    bg='common.second'
-                    borderRadius={'md'}
-                    p='2'
-                    color={'common.main'}
-                    fontSize='xl'
-                  >
+                <Stack p="2" spacing={4}>
+                  <Box bg="common.second" borderRadius={'md'} p="2" color={'common.main'} fontSize="xl">
                     <Text whiteSpace={'pre-wrap'} fontWeight={'bold'}>
                       {t.description.nftNotice}
                     </Text>
                     <Box>
                       {t.description.contactUs}
-                      <ArrowForwardIcon mx='2' />
-                      <Link href='mailto:admin@fingerate.world' color={'blue'}>
+                      <ArrowForwardIcon mx="2" />
+                      <Link href="mailto:admin@fingerate.world" color={'blue'}>
                         admin@fingerate.world
                       </Link>
                     </Box>
                   </Box>
                   <Box>
-                    <Text mb='1'>{t.description.para1}</Text>
-                    <Text mb='1'>{t.description.grades[sot.grade]}</Text>
-                    <Text mb='1'>{t.description.para2}</Text>
-                    <UnorderedList mb='1'>
+                    <Text mb="1">{t.description.para1}</Text>
+                    <Text mb="1">{t.description.grades[sot.grade]}</Text>
+                    <Text mb="1">{t.description.para2}</Text>
+                    <UnorderedList mb="1">
                       {t.description.paraList.map((item) => (
                         <ListItem key={item}>{item}</ListItem>
                       ))}
@@ -306,96 +220,64 @@ export default function Sot({ sot, KRWxr }) {
                     <Text>{t.description.para3}</Text>
                   </Box>
                   <Flex pb={2} flexDirection={{ base: 'column', md: 'row' }}>
-                    <Table size='sm'>
+                    <Table size="sm">
                       <Tbody>
                         <Tr>
-                          <Td
-                            color={'common.main'}
-                            fontWeight='bold'
-                            bg={'blue.50'}
-                          >
-                            Country
+                          <Td color={'common.main'} fontWeight="bold" bg={'blue.50'}>
+                            {t.stats.country}
                           </Td>
                           <Td>{sot.country}</Td>
                         </Tr>
                         <Tr>
-                          <Td
-                            color={'common.main'}
-                            fontWeight='bold'
-                            bg={'blue.50'}
-                          >
-                            City
+                          <Td color={'common.main'} fontWeight="bold" bg={'blue.50'}>
+                            {t.stats.city}
                           </Td>
                           <Td>{sot.city}</Td>
                         </Tr>
                         <Tr>
-                          <Td
-                            color={'common.main'}
-                            fontWeight='bold'
-                            bg={'blue.50'}
-                          >
-                            Latitude
+                          <Td color={'common.main'} fontWeight="bold" bg={'blue.50'}>
+                            {t.stats.latitude}
                           </Td>
                           <Td>{sot.lat}</Td>
                         </Tr>
                         <Tr>
-                          <Td
-                            color={'common.main'}
-                            fontWeight='bold'
-                            bg={'blue.50'}
-                          >
-                            Longitude
+                          <Td color={'common.main'} fontWeight="bold" bg={'blue.50'}>
+                            {t.stats.longitude}
                           </Td>
                           <Td>{sot.long}</Td>
                         </Tr>
                       </Tbody>
                     </Table>
-                    <Table size='sm'>
+                    <Table size="sm">
                       <Tbody>
                         <Tr>
-                          <Td
-                            color={'common.main'}
-                            fontWeight='bold'
-                            bg={'blue.50'}
-                          >
-                            Location name
+                          <Td color={'common.main'} fontWeight="bold" bg={'blue.50'}>
+                            {t.stats.location}
                           </Td>
                           <Td>{sot.name}</Td>
                         </Tr>
                         <Tr>
-                          <Td
-                            color={'common.main'}
-                            fontWeight='bold'
-                            bg={'blue.50'}
-                          >
-                            Grade
+                          <Td color={'common.main'} fontWeight="bold" bg={'blue.50'}>
+                            {t.stats.grade}
                           </Td>
                           <Td>{sot.grade}</Td>
                         </Tr>
                         <Tr>
-                          <Td
-                            color={'common.main'}
-                            fontWeight='bold'
-                            bg={'blue.50'}
-                          >
-                            Price
+                          <Td color={'common.main'} fontWeight="bold" bg={'blue.50'}>
+                            {t.stats.price}
                           </Td>
                           <Td>
                             {t.currency} {sot.price}
                           </Td>
                         </Tr>
                         <Tr>
-                          <Td
-                            color={'common.main'}
-                            fontWeight='bold'
-                            bg={'blue.50'}
-                          >
-                            Owner
+                          <Td color={'common.main'} fontWeight="bold" bg={'blue.50'}>
+                            {t.stats.owner}
                           </Td>
                           <Td>
                             {sot?.owner || (
-                              <Text as={'span'} fontStyle='italic'>
-                                No Owner
+                              <Text as={'span'} fontStyle="italic">
+                                {t.stats.noOwner}
                               </Text>
                             )}
                           </Td>
@@ -403,19 +285,17 @@ export default function Sot({ sot, KRWxr }) {
                       </Tbody>
                     </Table>
                   </Flex>
-                  <Box fontStyle={'italic'} color='gray'>
+                  <Box fontStyle={'italic'} color="gray">
                     * {t.description.disclaimer}
-                    <ArrowForwardIcon mx='2' />
-                    <Link href='mailto:admin@fingerate.world' color={'blue'}>
+                    <ArrowForwardIcon mx="2" />
+                    <Link href="mailto:admin@fingerate.world" color={'blue'}>
                       admin@fingerate.world
                     </Link>
                   </Box>
                 </Stack>
               </Box>
               <Stack>
-                <Button onClick={onToggle}>
-                  {isOpen ? '닫기' : 'SoT정보 더보기'}
-                </Button>
+                <Button onClick={onToggle}>{isOpen ? '닫기' : 'SoT정보 더보기'}</Button>
               </Stack>
             </Stack>
           </Grid>

@@ -1,10 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import ReactMapGL, {
-  Marker,
-  Popup,
-  GeolocateControl,
-  FlyToInterpolator,
-} from 'react-map-gl';
+import ReactMapGL, { Marker, Popup, GeolocateControl, FlyToInterpolator } from 'react-map-gl';
 import Image from 'next/image';
 import Head from 'next/head';
 import { default as NLink } from 'next/link';
@@ -54,11 +49,7 @@ export default function Map({ sots }) {
   };
 
   const filterByCountry = (e) => {
-    setFilteredSots(
-      sots.filter(
-        (sot) => sot.country.toLowerCase() === e.target.value.toLowerCase()
-      )
-    );
+    setFilteredSots(sots.filter((sot) => sot.country.toLowerCase() === e.target.value.toLowerCase()));
     if (e.target.value === '') setFilteredSots(sots);
   };
 
@@ -91,21 +82,17 @@ export default function Map({ sots }) {
     <>
       <Head>
         <title>Map of SoTs</title>
-        <meta
-          name='description'
-          content='Map of all SoTs currently deployed around the world'
-        />
+        <meta name="description" content="Map of all SoTs currently deployed around the world" />
         {/* <meta name='keywords' content={t.keywords} /> */}
-        <meta name='robots' content='index, follow' />
-        <meta charSet='utf-8' />
-        <link rel='icon' href='/favicon.ico' />
+        <meta name="robots" content="index, follow" />
+        <meta charSet="utf-8" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <ReactMapGL
         {...viewport}
-        mapStyle='mapbox://styles/orv1s/ckvrp1ezz019v15mv2crcoxla'
+        mapStyle="mapbox://styles/orv1s/ckvrp1ezz019v15mv2crcoxla"
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-        onViewportChange={(nextViewport) => setViewport(nextViewport)}
-      >
+        onViewportChange={(nextViewport) => setViewport(nextViewport)}>
         {filteredSots.map((terminal) => (
           <Marker
             key={terminal.id + terminal.name}
@@ -115,15 +102,9 @@ export default function Map({ sots }) {
             offsetTop={-30}
             onClick={() => {
               setSelectedMark(terminal);
-            }}
-          >
+            }}>
             <Box opacity={terminal.owner ? '0.5' : '1'}>
-              <Image
-                width='60px'
-                height='60px'
-                src='/sot_icon.svg'
-                alt='SoT terminal icon'
-              />
+              <Image width="60px" height="60px" src="/sot_icon.svg" alt="SoT terminal icon" />
             </Box>
           </Marker>
         ))}
@@ -134,32 +115,31 @@ export default function Map({ sots }) {
             closeButton={true}
             closeOnClick={false}
             onClose={() => setSelectedMark(null)}
-            anchor='left'
+            anchor="left"
             // offsetTop={}
-            offsetLeft={20}
-          >
-            <Stack maxW='calc(200px + 1rem)' spacing={1}>
+            offsetLeft={20}>
+            <Stack maxW="calc(200px + 1rem)" spacing={1}>
               <Image
                 width={200}
                 height={200}
                 src={selectedMark.image}
-                blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkrAcAAIcAgit25/8AAAAASUVORK5CYII='
-                placeholder='blur'
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkrAcAAIcAgit25/8AAAAASUVORK5CYII="
+                placeholder="blur"
                 alt={`Thumbnail of ${selectedMark.id}`}
               />
-              <Box as='strong' fontSize={'lg'} fontFamily='sans-serif'>
+              <Box as="strong" fontSize={'lg'} fontFamily="sans-serif">
                 {selectedMark.name}
               </Box>
-              <Box as='small' fontFamily={'mono'} color='cyan.400'>
+              <Box as="small" fontFamily={'mono'} color="cyan.400">
                 SoT{selectedMark.id}
               </Box>
-              <Box as={'small'} color='blue'>
+              <Box as={'small'} color="blue">
                 <Icon>
                   <path
-                    fill='currentColor'
-                    fillRule='evenodd'
-                    d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z'
-                    clipRule='evenodd'
+                    fill="currentColor"
+                    fillRule="evenodd"
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                    clipRule="evenodd"
                   />
                 </Icon>
                 {selectedMark.country}, {selectedMark.city}
@@ -171,16 +151,15 @@ export default function Map({ sots }) {
                   <Flex
                     textAlign={'center'}
                     fontWeight={'bold'}
-                    bg='common.second'
-                    p='1'
+                    bg="common.second"
+                    p="1"
                     borderRadius={'md'}
-                    alignItems='center'
-                    sx={{ gap: '0.5rem' }}
-                  >
-                    <Box bg={'white'} borderRadius='md' p='1'>
+                    alignItems="center"
+                    sx={{ gap: '0.5rem' }}>
+                    <Box bg={'white'} borderRadius="md" p="1">
                       {selectedMark.grade}
                     </Box>
-                    <Text as={'span'} fontWeight='bold' color={'common.main'}>
+                    <Text as={'span'} fontWeight="bold" color={'common.main'}>
                       $ {selectedMark.price.toLocaleString()}
                     </Text>
                   </Flex>
@@ -191,10 +170,9 @@ export default function Map({ sots }) {
                       width={'100%'}
                       textAlign={'center'}
                       color={'white'}
-                      py='1'
-                      px='2'
-                      borderRadius={6}
-                    >
+                      py="1"
+                      px="2"
+                      borderRadius={6}>
                       SOT 구매
                     </Link>
                   </NLink>
@@ -213,7 +191,7 @@ export default function Map({ sots }) {
       {/* Sot list */}
 
       <Flex
-        flexDir='column'
+        flexDir="column"
         pos={'fixed'}
         left={2}
         bottom={8}
@@ -225,11 +203,10 @@ export default function Map({ sots }) {
         overflow={'hidden'}
         boxShadow={'lg'}
         border={'1px solid'}
-        borderColor='gray.300'
+        borderColor="gray.300"
         transform={`translateX(${isOpen ? '0' : '-95%'})`}
         transition={'all 0.4s'}
-        pr={10}
-      >
+        pr={10}>
         <IconButton
           pos={'absolute'}
           top={'50%'}
@@ -243,32 +220,31 @@ export default function Map({ sots }) {
         />
         <Grid gridTemplateColumns={'1fr 1fr auto'} gap={1} p={1}>
           <Input
-            list='countries'
+            list="countries"
             onChange={filterByCountry}
-            placeholder='Country'
-            color='common.main'
-            border='1px solid'
-            borderColor='common.main'
+            placeholder="국가"
+            color="common.main"
+            border="1px solid"
+            borderColor="common.main"
             flex={1}
           />
 
-          <datalist id='countries'>
+          <datalist id="countries">
             {availableCountries.map((c, i) => (
               <option value={c} key={c + i} />
             ))}
           </datalist>
           <Select
             flex={1}
-            variant='outline'
-            color='common.main'
+            variant="outline"
+            color="common.main"
             onChange={filterByGrade}
-            placeholder='Grade'
-            border='1px solid'
-            borderColor='common.main'
-          >
-            <option value='S'>S</option>
-            <option value='A'>A</option>
-            <option value='B'>B</option>
+            placeholder="등급"
+            border="1px solid"
+            borderColor="common.main">
+            <option value="S">S</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
           </Select>
           {/* <IconButton icon={<SmallCloseIcon />} onClick={resetFilters} /> */}
         </Grid>
@@ -281,8 +257,7 @@ export default function Map({ sots }) {
           height={'auto'}
           gap={2}
           overflowY={'scroll'}
-          justifyContent='center'
-        >
+          justifyContent="center">
           {filteredSots.map((sot) => (
             <MapCard key={sot.id} sot={sot} onSelectSoT={onSelectSoT} />
           ))}

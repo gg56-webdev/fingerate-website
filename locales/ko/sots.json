@@ -1,6 +1,6 @@
 {
   "filters": {
-    "country": "나라",
+    "country": "국가",
     "grade": "등급",
     "price": "가격순",
     "ownership": "구매 가능"
