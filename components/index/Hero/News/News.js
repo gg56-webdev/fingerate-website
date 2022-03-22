@@ -49,7 +49,7 @@ export default function News({ news, title }) {
                       <ExternalLinkIcon />
                     </Link>
                     <Box as="time" dateTime={article.time} fontSize={{ base: 'sm', md: 'md' }} alignSelf="center">
-                      {article.time.replaceAll(' ', '')}
+                      {article.time.replace(/ /g, '')}
                     </Box>
                   </Flex>
                 </SwiperSlide>
