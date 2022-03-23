@@ -7,14 +7,16 @@ export default function Marketplace() {
       <Head>
         <title>NFT Marketplace</title>
       </Head>
-      <Box
-        as='iframe'
-        src='https://opensea.io/collection/fingeratesot?embed=true'
-        width='100%'
-        minH='100vh'
-        frameBorder='0'
-        allowFullScreen
-      ></Box>
+      <Box pt={'70px'}>
+        <Box
+          as='iframe'
+          src='https://opensea.io/collection/fingeratesot?embed=true'
+          width='100%'
+          minH='calc(100vh - 70px)'
+          frameBorder='0'
+          allowFullScreen
+        />
+      </Box>
     </>
   );
 }
