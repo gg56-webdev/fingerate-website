@@ -1,12 +1,4 @@
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  useDisclosure,
-  Link,
-  ExternalLinkIcon,
-} from '@chakra-ui/react';
+import { Menu, MenuButton, MenuList, MenuItem, useDisclosure, Link, ExternalLinkIcon } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { default as NLink } from 'next/link';
 
@@ -30,12 +22,11 @@ export default function Dropdown({ item, onToggle }) {
         }}
         onMouseEnter={onOpen}
         onClick={onToggleDrop}
-        onMouseLeave={onClose}
-      >
+        onMouseLeave={onClose}>
         {item.n}
         {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </MenuButton>
-      <MenuList onMouseEnter={onOpen} onMouseLeave={onClose} w>
+      <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
         {item.dropdown.map((item) => (
           <MenuItem
             key={item.n}
@@ -49,14 +40,9 @@ export default function Dropdown({ item, onToggle }) {
               bg: 'common.second',
               color: 'common.main',
               boxShadow: 'md',
-            }}
-          >
+            }}>
             <NLink href={item.l} passHref={item.external}>
-              <Link
-                w={'100%'}
-                isExternal={item.external}
-                _hover={{ textDecoration: 'none' }}
-              >
+              <Link w={'100%'} isExternal={item.external} _hover={{ textDecoration: 'none' }}>
                 {item.n}
                 {item.external && <ExternalLinkIcon mx='2px' />}
               </Link>

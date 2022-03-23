@@ -1,14 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Stack,
-  useDisclosure,
-  Link,
-  Select,
-  Spinner,
-  Spacer,
-} from '@chakra-ui/react';
+import { Box, Container, Flex, Stack, useDisclosure, Link, Select, Spinner, Spacer } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
@@ -41,14 +31,7 @@ export default function Header() {
   const { user, loading, error } = useContext(UserContext);
 
   return (
-    <Box
-      as='header'
-      pos='fixed'
-      w='100%'
-      color='text.second'
-      zIndex='sticky'
-      padding={2}
-    >
+    <Box as='header' pos='fixed' w='100%' color='text.second' zIndex='sticky' padding={2}>
       <Container
         maxW='container.xl'
         backgroundColor='white'
@@ -56,29 +39,18 @@ export default function Header() {
         boxShadow={'lg'}
         p={1}
         border={'1px solid'}
-        borderColor={'gray.300'}
-      >
+        borderColor={'gray.300'}>
         <Flex as='nav' align='center' justify='space-between' wrap='wrap'>
           <Flex as='a' href='/' align='center' sx={{ gap: '0.25rem' }}>
             <Box fontSize={0} borderRadius='md' overflow={'hidden'}>
               <Image src={frLogo} alt='FingeRate logo' width='40' height='40' />
             </Box>
-            <Box
-              color='common.main'
-              fontSize='2xl'
-              fontWeight='bold'
-              fontFamily={'sans-serif'}
-            >
+            <Box color='common.main' fontSize='2xl' fontWeight='bold' fontFamily={'sans-serif'}>
               FingeRate
             </Box>
           </Flex>
 
-          <Box
-            display={{ base: 'block', lg: 'none' }}
-            onClick={onToggle}
-            color={'common.main'}
-            mr={2}
-          >
+          <Box display={{ base: 'block', lg: 'none' }} onClick={onToggle} color={'common.main'} mr={2}>
             {isOpen ? <CloseIcon /> : <HamburgerIcon boxSize='6' />}
           </Box>
           <Box
@@ -100,7 +72,9 @@ export default function Header() {
               {t.nav.map((item) => {
                 if (item.dropdown)
                   return (
-                    <Dropdown item={item} key={item.n} onToggle={onToggle} />
+                    <Box key={item.n}>
+                      <Dropdown item={item} onToggle={onToggle} />
+                    </Box>
                   );
                 if (item.l)
                   return (
@@ -119,8 +93,7 @@ export default function Header() {
                           color: 'common.main',
                           boxShadow: 'md',
                         }}
-                        isExternal={item.external}
-                      >
+                        isExternal={item.external}>
                         {item.n}
                         {item.external && <ExternalLinkIcon mx='2px' />}
                       </Link>
