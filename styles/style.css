@@ -35,3 +35,19 @@ body {
 .swiper-vertical > .swiper-pagination-bullets {
   left: var(--chakra-space-2);
 }
+
+.markdown :is(h2, h3) {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.markdown h2 {
+  font-size: 2rem;
+}
+.markdown h3 {
+  font-size: 1.5rem;
+}
+
+.markdown p {
+  margin-bottom: 0.5rem;
+}
