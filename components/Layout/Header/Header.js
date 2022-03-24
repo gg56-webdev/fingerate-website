@@ -1,5 +1,5 @@
 import { Box, Container, Flex, Stack, useDisclosure, Link, Select, Spinner, Spacer } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, ExternalLinkIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, ExternalLinkIcon, CheckCircleIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
 
@@ -107,7 +107,10 @@ export default function Header() {
                 ) : loading ? (
                   <Spinner />
                 ) : user ? (
-                  <NLink href={'/user'}>{user.email.split('@')[0]}</NLink>
+                  <Stack direction={'row'} alignItems='center' spacing={'1'}>
+                    <NLink href={'/user'}>{user.email.split('@')[0]}</NLink>
+                    {user.emailVerified && <CheckCircleIcon />}
+                  </Stack>
                 ) : (
                   <NLink href='/enter'>로그인/가입하기</NLink>
                 )}

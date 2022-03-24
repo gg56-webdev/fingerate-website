@@ -53,16 +53,16 @@ export default function User() {
         <title>My SoTs</title>
       </Head>
       <Container maxW={'container.lg'} pt={'70px'}>
-        <Box spacing={'6'} bg="purple.100" w={'fit-content'} mx="auto" p={'4'} borderRadius="md">
-          <Heading as={'h1'} textAlign="center" mb="5">
+        <Box spacing={'6'} bg='purple.100' w={'fit-content'} mx='auto' p={'4'} borderRadius='md'>
+          <Heading as={'h1'} textAlign='center' mb='5'>
             {loading ? 'loading' : user && user.email}{' '}
             {!loading && !user?.emailVerified && (
-              <Text as="span" color="red.400">
+              <Text as='span' color='red.400'>
                 ({t.notVerified})
               </Text>
             )}
           </Heading>
-          <Stack direction="row" justifyContent={'center'} textAlign="center">
+          <Stack direction='row' justifyContent={'center'} textAlign='center'>
             {!loading && !user?.emailVerified && (
               <Button colorScheme={'purple'} onClick={() => sendEmailVerification(user)}>
                 {t.sendEmail}
@@ -73,13 +73,13 @@ export default function User() {
             </Button>
           </Stack>
           {!loading && !user?.emailVerified && (
-            <Text as="small" fontStyle={'italic'} alignSelf="center" textAlign="center">
+            <Text as='small' fontStyle={'italic'} display='block' mt='2' textAlign='center' color={'blue'}>
               {t.reload}
             </Text>
           )}
         </Box>
-        <Box py="8" display={'flex'} flexDirection="column">
-          <Heading as={'h2'} mb="5" textAlign="center">
+        <Box py='8' display={'flex'} flexDirection='column'>
+          <Heading as={'h2'} mb='5' textAlign='center'>
             My SoTs
           </Heading>
 
@@ -87,13 +87,13 @@ export default function User() {
             <Spinner alignSelf={'center'} />
           ) : noSots ? (
             <Box textAlign={'center'}>
-              <Box fontSize="lg" fontWeight={'bold'}>
+              <Box fontSize='lg' fontWeight={'bold'}>
                 {t.noSots}
               </Box>
-              <Text as={'small'} fontSize="md">
+              <Text as={'small'} fontSize='md'>
                 {t.visitMarket}{' '}
                 <NLink href={'/sots'}>
-                  <Link fontWeight="bold" color="blue" _hover={{ textDecoration: 'underline' }}>
+                  <Link fontWeight='bold' color='blue' _hover={{ textDecoration: 'underline' }}>
                     {t.sotsMarket}
                   </Link>
                 </NLink>
@@ -101,54 +101,54 @@ export default function User() {
             </Box>
           ) : (
             <Grid
-              bg="white"
-              gap="2"
+              bg='white'
+              gap='2'
               gridTemplateColumns={'repeat(auto-fill, minmax(200px, 1fr))'}
-              p="2"
+              p='2'
               borderRadius={'md'}>
               {sots.map((sot) => (
                 <Stack
                   key={sot.id}
-                  shadow="md"
+                  shadow='md'
                   borderRadius={'md'}
-                  bg="cyan.50"
-                  p="1"
-                  border="1px solid"
+                  bg='cyan.50'
+                  p='1'
+                  border='1px solid'
                   borderColor={'blue.100'}
                   onClick={() =>
                     router.push(`/sots/${sot.id}`, `/sots/${sot.id}`, {
                       locale,
                     })
                   }
-                  transition="all 0.2s"
+                  transition='all 0.2s'
                   _hover={{
                     outline: '2px solid',
                     outlineColor: 'common.main',
                     cursor: 'pointer',
                   }}>
-                  <Box borderRadius={'md'} overflow="hidden">
+                  <Box borderRadius={'md'} overflow='hidden'>
                     <Image
                       src={sot.image}
                       alt={`Thumbnail of SoT${sot.id}`}
-                      width="400"
-                      height="400"
-                      layout="responsive"
+                      width='400'
+                      height='400'
+                      layout='responsive'
                     />
                   </Box>
-                  <Stack spacing={1} flex="1" justifyContent="space-between">
+                  <Stack spacing={1} flex='1' justifyContent='space-between'>
                     <Stack spacing={1}>
-                      <Box as={'strong'} color="common.main" fontFamily={'sans-serif'} fontSize="100%">
+                      <Box as={'strong'} color='common.main' fontFamily={'sans-serif'} fontSize='100%'>
                         {sot.name}
                       </Box>
-                      <Box as={'small'} color="blue.400" fontFamily={'mono'}>{`SoT ${sot.id}`}</Box>
+                      <Box as={'small'} color='blue.400' fontFamily={'mono'}>{`SoT ${sot.id}`}</Box>
                     </Stack>
-                    <Box as={'small'} color="blue">
+                    <Box as={'small'} color='blue'>
                       <Icon>
                         <path
-                          fill="currentColor"
-                          fillRule="evenodd"
-                          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                          clipRule="evenodd"
+                          fill='currentColor'
+                          fillRule='evenodd'
+                          d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z'
+                          clipRule='evenodd'
                         />
                       </Icon>
                       {sot.country}, {sot.city}

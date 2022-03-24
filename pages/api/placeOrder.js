@@ -7,7 +7,7 @@ const limiter = rateLimit({
 });
 
 export default async function handler(req, res) {
-  const { userId, userEmail, sotId } = req.body;
+  const { userId, sotId } = req.body;
 
   try {
     await limiter.check(res, 3, 'CACHE_TOKEN');
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     if (orderExists || paid) return;
 
     const userSnap = await auth.getUser(userId);
-    if (!userSnap || !userSnap.emailVerified) {
+    if (!userSnap.emailVerified) {
       res.status(401).json({
         error: {
           title: 'Unauthorized',
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
       .push(
         {
           UserID: userId,
-          UserEmail: userEmail,
+          UserEmail: userSnap.email,
           SoTID: sotId,
           Paid: 'No',
           Price: (docSnap.get('price') * XR.get('rates.KRW.value')).toFixed(0),
@@ -87,9 +87,7 @@ export default async function handler(req, res) {
         },
         (_err) => {
           if (_err) {
-            res
-              .status(500)
-              .json({ error: { title: 'Server Failed', body: _err } });
+            res.status(500).json({ error: { title: 'Server Failed', body: _err } });
             return;
           }
         }
@@ -103,8 +101,20 @@ export default async function handler(req, res) {
       });
   } catch (_err) {
     console.error(_err);
-    res
-      .status(429)
-      .json({ error: { title: 'Rate limit exceeded', body: _err } });
+
+    switch (_err?.code) {
+      case 'auth/user-not-found':
+        return res.status(404).json({
+          error: {
+            title: 'User not found',
+            body: 'There is no user record corresponding to the provided identifier',
+          },
+        });
+        break;
+
+      default:
+        break;
+    }
+    return res.status(429).json({ error: { title: 'Rate limit exceeded', body: 'Too many requests' } });
   }
 }
