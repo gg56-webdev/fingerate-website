@@ -28,6 +28,12 @@
           "l": "/marketplace",
           "important": false,
           "external": false
+        },
+        {
+          "n": "How to Buy SoT",
+          "l": "/howto",
+          "important": false,
+          "external": false
         }
       ]
     },
