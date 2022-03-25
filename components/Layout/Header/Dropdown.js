@@ -1,5 +1,5 @@
-import { Menu, MenuButton, MenuList, MenuItem, useDisclosure, Link, ExternalLinkIcon } from '@chakra-ui/react';
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
+import { Menu, MenuButton, MenuList, MenuItem, useDisclosure, Link } from '@chakra-ui/react';
+import { ChevronDownIcon, ChevronUpIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import { default as NLink } from 'next/link';
 
 export default function Dropdown({ item, onToggle }) {
