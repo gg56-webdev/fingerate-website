@@ -3,15 +3,18 @@ import { Box, Container, Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from
 import { useEffect, useState } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 
+import ko from '../locales/ko/howto.json';
+
 export default function Howto() {
+  const t = ko;
   return (
     <>
       <Head>
-        <title>How to Buy SoT</title>
+        <title>{t.title}</title>
       </Head>
       <Container maxW={'container.lg'} pt='70px' pb='4'>
         <Heading as='h1' textAlign={'center'}>
-          How to buy SoT
+          {t.title}
         </Heading>
         <Tabs
           isFitted
@@ -27,16 +30,26 @@ export default function Howto() {
             <Tab>with Crypto</Tab>
           </TabList>
 
-          <TabPanels minHeight={'300vh'} p='2'>
+          <TabPanels p='2'>
             <TabPanel>
-              <div>card</div>
+              <Card text={t.card} />
             </TabPanel>
             <TabPanel>
-              <Crypto />
+              <Crypto text={t.crypto} />
             </TabPanel>
           </TabPanels>
         </Tabs>
       </Container>
+    </>
+  );
+}
+
+function Card({ text }) {
+  return (
+    <>
+      {text.steps.map((step) => (
+        <div>{step}</div>
+      ))}
     </>
   );
 }
