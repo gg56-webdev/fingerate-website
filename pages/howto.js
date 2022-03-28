@@ -1,14 +1,28 @@
 import Head from 'next/head';
-import { Box, Container, Heading, Tabs, TabList, TabPanels, Tab, TabPanel, Text, Flex } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Heading,
+  Tabs,
+  TabList,
+  Link,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Text,
+  Flex,
+  Grid,
+} from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
+import { default as NLink } from 'next/link';
 
+import ko from '../locales/ko/howto.json';
+
+import Image from 'next/image';
 import { card1, card2, card3, card4 } from '../public/howToBuy/card/imgs';
 
 const cardImgs = [card1, card2, card3, card4];
-
-import ko from '../locales/ko/howto.json';
-import Image from 'next/image';
 
 export default function Howto() {
   const t = ko;
@@ -22,6 +36,7 @@ export default function Howto() {
           {t.title}
         </Heading>
         <Tabs
+          pt='2'
           shadow={'sm'}
           isFitted
           colorScheme={'purple'}
@@ -30,6 +45,8 @@ export default function Howto() {
           onChange={() => window.scrollTo(0, 0)}
           borderRadius={'md'}>
           <TabList
+            border={'1px solid'}
+            borderColor='blue.100'
             position={'sticky'}
             top='80px'
             p={'2'}
@@ -82,6 +99,23 @@ function Card({ text }) {
           </Text>
         </Flex>
       ))}
+      <Grid placeItems='center' p='4'>
+        <NLink href={'/sots'} passHref>
+          <Link
+            _hover={{ textDecor: 'none', bg: 'purple.700' }}
+            _focus={{ textDecor: 'none', bg: 'purple.700' }}
+            py='2'
+            px='4'
+            borderRadius={'md'}
+            colorScheme='purple'
+            bg='common.mainLight'
+            color='white'
+            fontSize='2xl'
+            fontWeight={'bold'}>
+            {text.sotsLink}
+          </Link>
+        </NLink>
+      </Grid>
     </Flex>
   );
 }
