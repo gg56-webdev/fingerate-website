@@ -1,9 +1,14 @@
 import Head from 'next/head';
-import { Box, Container, Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { Box, Container, Heading, Tabs, TabList, TabPanels, Tab, TabPanel, Text, Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 
+import { card1, card2, card3, card4 } from '../public/howToBuy/card/imgs';
+
+const cardImgs = [card1, card2, card3, card4];
+
 import ko from '../locales/ko/howto.json';
+import Image from 'next/image';
 
 export default function Howto() {
   const t = ko;
@@ -17,24 +22,32 @@ export default function Howto() {
           {t.title}
         </Heading>
         <Tabs
+          shadow={'sm'}
           isFitted
-          isLazy
           colorScheme={'purple'}
           bg='white'
           variant='solid-rounded'
           onChange={() => window.scrollTo(0, 0)}
-          borderRadius={'md'}
-          p='2'>
-          <TabList position={'sticky'} top='80px' p={'2'} bg='white' shadow={'md'} borderRadius={'full'} mx={'auto'}>
+          borderRadius={'md'}>
+          <TabList
+            position={'sticky'}
+            top='80px'
+            p={'2'}
+            bg='white'
+            shadow={'md'}
+            borderRadius={'full'}
+            mx={'2'}
+            gap='2'
+            zIndex={2}>
             <Tab>with Card</Tab>
             <Tab>with Crypto</Tab>
           </TabList>
 
-          <TabPanels p='2'>
-            <TabPanel>
+          <TabPanels>
+            <TabPanel p='0'>
               <Card text={t.card} />
             </TabPanel>
-            <TabPanel>
+            <TabPanel p='0'>
               <Crypto text={t.crypto} />
             </TabPanel>
           </TabPanels>
@@ -46,11 +59,30 @@ export default function Howto() {
 
 function Card({ text }) {
   return (
-    <>
-      {text.steps.map((step) => (
-        <div>{step}</div>
+    <Flex flexDirection={'column'}>
+      {text.steps.map((step, id) => (
+        <Flex
+          key={step}
+          flexDir={{ base: 'column', md: id % 2 === 0 ? 'row-reverse' : 'row' }}
+          p='4'
+          bg={id % 2 !== 0 && 'blue.50'}
+          alignItems='center'>
+          <Box width={'100%'}>
+            <Image src={cardImgs[id]} alt={step} placeholder='blur' />
+          </Box>
+          <Text
+            width={'100%'}
+            p='2'
+            fontSize={'3xl'}
+            borderRadius='md'
+            shadow={'md'}
+            bg={id % 2 === 0 ? 'blue.50' : 'white'}
+            textAlign={'center'}>
+            {step}
+          </Text>
+        </Flex>
       ))}
-    </>
+    </Flex>
   );
 }
 
@@ -69,5 +101,9 @@ function Crypto() {
   useEffect(() => {
     getProvider();
   }, []);
-  return <div>{ethProvider ? 'hello' : 'false'}</div>;
+  return (
+    <Text textAlign={'center'} p='4'>
+      Coming soon
+    </Text>
+  );
 }
