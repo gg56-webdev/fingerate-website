@@ -92,7 +92,7 @@ export default function User() {
               </Box>
               <Text as={'small'} fontSize='md'>
                 {t.visitMarket}{' '}
-                <NLink href={'/sots'}>
+                <NLink href={'/sots'} passHref>
                   <Link fontWeight='bold' color='blue' _hover={{ textDecoration: 'underline' }}>
                     {t.sotsMarket}
                   </Link>

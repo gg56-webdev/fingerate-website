@@ -78,7 +78,7 @@ export default function Header() {
                   );
                 if (item.l)
                   return (
-                    <NLink key={item.n} href={item.l} passHref={item.external}>
+                    <NLink key={item.n} href={item.l} passHref>
                       <Link
                         onClick={onToggle}
                         border={item.important && '1px solid'}

@@ -35,14 +35,14 @@ const link = 'https://opensea.io/collection/fingeratesot';
 export default function Hero({ text: { content }, news }) {
   return (
     <Flex
-      as="section"
-      w="100%"
-      h="100vh"
-      minH="720px"
+      as='section'
+      w='100%'
+      h='100vh'
+      minH='720px'
       maxH={'1080px'}
       // bgColor='common.main'
-      bgGradient="linear(to-br, common.mainLight, common.second)"
-      position="relative"
+      bgGradient='linear(to-br, common.mainLight, common.second)'
+      position='relative'
       _after={{
         content: `""`,
         position: 'absolute',
@@ -53,34 +53,34 @@ export default function Hero({ text: { content }, news }) {
         height: '100%',
         zIndex: '1',
       }}
-      overflowX="hidden"
+      overflowX='hidden'
       flexDir={'column'}>
-      <Container maxW="container.xl" flexGrow="1" position="relative" zIndex="2">
+      <Container maxW='container.xl' flexGrow='1' position='relative' zIndex='2'>
         <Flex
           pt={'65px'}
-          align="center"
-          justify="center"
+          align='center'
+          justify='center'
           flexDirection={{ base: 'column-reverse', md: 'row' }}
-          h="100%"
-          alignContent="center"
+          h='100%'
+          alignContent='center'
           pb={4}
           sx={{ gap: '0.5rem' }}>
           <MotionBox
             textAlign={{ base: 'center', md: 'left' }}
             pr={{ md: 2 }}
             variants={container}
-            initial="hidden"
-            animate="enter"
-            exit="exit"
-            display="flex"
-            flexDirection="column"
+            initial='hidden'
+            animate='enter'
+            exit='exit'
+            display='flex'
+            flexDirection='column'
             sx={{ gap: '1rem' }}
             pl={{ md: 3 }}
             flex={{ base: 0, md: '0.6' }}>
             <MotionHeading
               variants={item}
-              as="h1"
-              color="text.second"
+              as='h1'
+              color='text.second'
               fontSize={['xx-large', 'xx-large', '5xl']}
               whiteSpace={{ md: 'pre-wrap' }}>
               {content.h2}
@@ -123,9 +123,9 @@ export default function Hero({ text: { content }, news }) {
                 disableOnInteraction: false,
               }}
               speed={500}
-              className="swiper-cards">
+              className='swiper-cards'>
               {content.features.map((feature) => (
-                <SwiperSlide key={feature} className="swiper-cards__slide">
+                <SwiperSlide key={feature} className='swiper-cards__slide'>
                   {feature}
                 </SwiperSlide>
               ))}
@@ -133,38 +133,44 @@ export default function Hero({ text: { content }, news }) {
             <Flex
               justifyContent={{ base: 'center', md: 'left' }}
               sx={{ gap: '1rem' }}
-              textAlign="center"
+              textAlign='center'
               flexWrap={'wrap'}>
-              <NLink href={'/sots'}>
+              <NLink href={'/sots'} passHref>
                 <Link
                   fontSize={'2xl'}
-                  borderRadius="md"
+                  borderRadius='md'
                   bg={'white'}
                   _hover={{
                     bg: 'common.main',
                     color: 'white',
                     borderColor: 'common.main',
                   }}
-                  border="1px solid"
+                  _focus={{
+                    bg: 'common.main',
+                    color: 'white',
+                    borderColor: 'common.main',
+                  }}
+                  border='1px solid'
                   borderColor={'white'}
-                  color="common.main"
-                  px="6"
-                  py="2"
+                  color='common.main'
+                  px='6'
+                  py='2'
                   fontWeight={'bold'}
                   flex={1}>
                   {content.btn1}
                 </Link>
               </NLink>
-              <NLink href={'/enter'}>
+              <NLink href={'/enter'} passHref>
                 <Link
                   fontSize={'2xl'}
-                  borderRadius="md"
+                  borderRadius='md'
                   _hover={{ bg: 'common.main', borderColor: 'common.main' }}
-                  border="1px solid"
+                  _focus={{ bg: 'common.main', borderColor: 'common.main' }}
+                  border='1px solid'
                   borderColor={'white'}
-                  color="white"
-                  px="6"
-                  py="2"
+                  color='white'
+                  px='6'
+                  py='2'
                   fontWeight={'bold'}
                   flex={1}>
                   {content.btn2}
@@ -174,24 +180,24 @@ export default function Hero({ text: { content }, news }) {
           </MotionBox>
 
           <MotionBox
-            flex="1"
+            flex='1'
             // display={['none', 'none', 'block']}
             variants={container}
-            initial="hidden"
-            animate="enter"
-            pos="relative"
-            h="100%"
-            w="100%"
-            display="flex"
-            flexDirection="column">
+            initial='hidden'
+            animate='enter'
+            pos='relative'
+            h='100%'
+            w='100%'
+            display='flex'
+            flexDirection='column'>
             <Box
-              as="iframe"
-              flex="1"
-              src="https://my.spline.design/sotdevice-fb79e2d7b8093da7f604cef8e68b8715/"
-              frameBorder="0"
-              width="100%"
-              height="100%"
-              loading="lazy"></Box>
+              as='iframe'
+              flex='1'
+              src='https://my.spline.design/sotdevice-fb79e2d7b8093da7f604cef8e68b8715/'
+              frameBorder='0'
+              width='100%'
+              height='100%'
+              loading='lazy'></Box>
             <Feed feed={content.feed} />
           </MotionBox>
         </Flex>

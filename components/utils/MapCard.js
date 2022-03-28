@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  Link,
-  Text,
-  Spacer,
-  GridItem,
-  Heading,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Grid, Link, Text, Spacer, GridItem, Heading } from '@chakra-ui/react';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
 
@@ -22,8 +12,7 @@ export default function MapCard({ sot, onSelectSoT }) {
       borderRadius={6}
       transition={'ease-in-out'}
       _hover={{ boxShadow: 'outline', cursor: 'pointer' }}
-      alignItems={'center'}
-    >
+      alignItems={'center'}>
       <Box>
         <Image
           width={200}
@@ -40,24 +29,13 @@ export default function MapCard({ sot, onSelectSoT }) {
         {sot.name}
       </Box>
 
-      <Flex
-        alignItems={'center'}
-        sx={{ gap: '0.25rem' }}
-        flexWrap='wrap-reverse'
-      >
+      <Flex alignItems={'center'} sx={{ gap: '0.25rem' }} flexWrap='wrap-reverse'>
         {sot.owner ? (
           '판매 완료'
         ) : (
           <>
-            <NLink href={`/sots/${sot.id}`}>
-              <Link
-                bg={'common.mainLight'}
-                color={'white'}
-                py='1'
-                px='2'
-                fontSize={'md'}
-                borderRadius={6}
-              >
+            <NLink href={`/sots/${sot.id}`} passHref>
+              <Link bg={'common.mainLight'} color={'white'} py='1' px='2' fontSize={'md'} borderRadius={6}>
                 SOT 구매
               </Link>
             </NLink>
@@ -69,8 +47,7 @@ export default function MapCard({ sot, onSelectSoT }) {
               alignItems={'center'}
               bg={'common.second'}
               borderRadius={'md'}
-              fontWeight={'bold'}
-            >
+              fontWeight={'bold'}>
               <Box bg='white' borderRadius={'md'} px='1'>
                 {sot.grade}
               </Box>

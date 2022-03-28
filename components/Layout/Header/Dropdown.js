@@ -41,7 +41,7 @@ export default function Dropdown({ item, onToggle }) {
               color: 'common.main',
               boxShadow: 'md',
             }}>
-            <NLink href={item.l} passHref={item.external}>
+            <NLink href={item.l} passHref>
               <Link w={'100%'} isExternal={item.external} _hover={{ textDecoration: 'none' }}>
                 {item.n}
                 {item.external && <ExternalLinkIcon mx='2px' />}
