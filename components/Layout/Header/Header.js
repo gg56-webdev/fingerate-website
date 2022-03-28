@@ -101,7 +101,7 @@ export default function Header() {
                   );
               })}
               <Spacer />
-              <Box color={'common.main'}>
+              <Box color={'common.main'} onClick={onToggle}>
                 {error ? (
                   error
                 ) : loading ? (
