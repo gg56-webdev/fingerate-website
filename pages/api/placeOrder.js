@@ -7,7 +7,7 @@ const limiter = rateLimit({
 });
 
 export default async function handler(req, res) {
-  const { userId, sotId } = req.body;
+  const { userId, sotId, isMobile } = req.body;
 
   try {
     await limiter.check(res, 3, 'CACHE_TOKEN');
@@ -96,7 +96,7 @@ export default async function handler(req, res) {
         const key = snap.key;
         res.status(201).json({
           msg: 'Order Created',
-          url: `https://payment.fingerate.world/kspay_wh_order.php?orderNumber=${key}`,
+          url: `https://payment.fingerate.world/kspay_wh_order${isMobile ? '_m' : ''}.php?orderNumber=${key}`,
         });
       });
   } catch (_err) {

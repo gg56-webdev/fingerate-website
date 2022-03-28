@@ -43,6 +43,7 @@ export default function Sot({ sot }) {
   const [extUrl, setExtUrl] = useState('');
   const { isOpen, onToggle } = useDisclosure();
   const [KRWrate, setKRWrate] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
 
   const router = useRouter();
   const { locale } = router;
@@ -56,6 +57,7 @@ export default function Sot({ sot }) {
         body: JSON.stringify({
           userId: user.uid,
           sotId: sot.id,
+          isMobile,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -98,6 +100,14 @@ export default function Sot({ sot }) {
     if (!sot?.owner) getXR();
   }, [sot]);
 
+  useEffect(() => {
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.platform)
+    ) {
+      setIsMobile(true);
+    }
+  }, []);
   return (
     <>
       <Head>
