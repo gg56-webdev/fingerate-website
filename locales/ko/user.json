@@ -1,0 +1,9 @@
+{
+  "sendEmail": "Send Email Verification",
+  "notVerified": "Not Verified",
+  "logout": "로그아웃",
+  "reload": "이메일을 확인한 뒤에 페이지를 새로 고침하세요",
+  "noSots": "아직 소유한 SoT가 없습니다",
+  "visitMarket": "SoT 마켓플레이스로 이동하려면 여기를 클릭해주새요",
+  "sotsMarket": "SoT구매"
+}

@@ -1,105 +1,236 @@
 {
-    "title": "FingeRate 메타버스",
-    "description": "FingeRate is the very first metaverse platform with actual utility in the real world. It offers revolutionary research & survey experiences with so much fun and plentiful rewards!",
-    "keywords": "metaverse, app, nft, blockchain, sot, survey, vr ,ar",
-    "sections": {
-        "hero": {
-            "title": "Hero",
-            "content": {
-                "h2": "세계 최초\n실용성이 가득한\n메타버스 플랫폼",
-                "p": "리서치 & 설문조사를\n더욱 재미있고 즐겁게!\n리워드도 팡팡!",
-                "btn1": "지금 탐험해보세요!",
-                "btn2": "지금 구매하세요"
-            }
+  "title": "FingeRate Metaverse",
+  "sections": {
+    "hero": {
+      "id": "hero",
+      "content": {
+        "h2": "세계 최초\n메타버스로 만나는\n설문조사 플랫폼",
+        "features": [
+          "실제 세상을 그대로 옮겨 놓은\n메타버스 세상!",
+          "전세계 유명 랜드마크에 위치한\nSoT NFT 리서치 부동산!",
+          "SoT NFT로 다양한 리서치와 설문조사를\n더욱 재미있고 즐겁고 간편하게!",
+          "SoT로 리서치 데이터 확보부터\n데이터 판매까지 수익도 팡팡!"
+        ],
+
+        "btn1": "SoT 구매",
+        "btn2": "회원가입",
+        "latestNews": "뉴스",
+        "feed": [
+          { "item": "선 분양", "number": "1000+" },
+          { "item": "총 SoT 대수", "number": "1.2 mil." },
+          { "item": "현제 분양 가능 수량", "number": "50K" }
+        ]
+      }
+    },
+    "aboutSot": {
+      "id": "sot",
+      "content": {
+        "h2": "SoT (Satisfaction of Things)를 만나볼까요",
+        "list1": {
+          "h3": "나만의 디지털 자산",
+          "listItems": [
+            "실제 세계를 그대로 매핑한 “FingeRate 메타버스”에서 만나는 리서치 & 설문조사 NFT 자산",
+            "SoT 1대 구매 시 1km²의 대지도 함께 제공",
+            "조사 의뢰를 통해 다양한 리서치&설문조사 진행",
+            "SoT 소유주가 직접 조사해서 원하는 데이터 확보부터 판매까지!"
+          ]
         },
-        "promo": {
-            "title": "Promo",
-            "content": [
-                ["실제 세계를 매핑한\nFingeRate 메타버스로\n여행을 떠나보세요"],
-                [
-                    "당신이 원하는 곳에서\n나만의 SoT를 가져보세요",
-                    [
-                        "광화문, 에펠탑, 타임스스퀘어 등\n수 천 개의 SoT가\n실제 세계 곳곳에 위치해 있습니다"
-                    ]
-                ],
-                ["지금 당장\nSoT 컬렉션에서\n당신의 SoT를 구입하세요!"],
-                [
-                    "나만의 SoT로\n더 많은 혜택을 즐기세요!",
-                    [
-                        "더 많은 설문조사가 진행될 수록",
-                        "더 많은 사람이 설문조사에 참여할 수록\nSoT로 얻는 수익은 늘어나고",
-                        "더 높은 가격에 SoT를 판매할 수도 있습니다"
-                    ]
-                ]
-            ]
+        "list2": {
+          "h3": "수익 생성",
+          "listItems": ["조사의뢰비의 50%", "데이터 판매의 50%", "조사 의뢰 보상비의 50%", "재판매 시 시세 차이"]
         },
-        "about": {
-            "title": "About",
-            "content": [
-                {
-                    "title": "선택하기",
-                    "h3": "원하는 장소에서 당신의 SoT를 선택하세요",
-                    "p": "실제 세계를 그대로 옮겨놓은 핑거레이트 메타버스에서\n수 천 곳의 다양한 장소에 위치한 SoT를 만나보세요!\n여러분이 제일 좋아하는 장소나 또는 사람들에게 가장 인기 있는 장소를 골라\n당신만의 SoT를 선택할 수 있습니다."
-                },
-                {
-                    "title": "구매하기",
-                    "h3": "OpenSea의 SoT 컬렉션을 통해\n당신의 첫 SoT를 가져보세요!",
-                    "p": "NFT 마켓플레이스를 통해 경매에 참여하거나 판매 중인 SoT를 구입하면,\n누구나 SoT의 주인이 될 수 있습니다.\n더욱 가치 있는 SoT 일수록, 그 경쟁이 더욱 더 치열하겠죠?\n어서 서둘러 당신의 SoT를 가져보세요!"
-                },
-                {
-                    "title": "SoT로 수익 창출",
-                    "h3": "SoT를 더 많이 가질수록 더 많이 벌 수 있답니다!",
-                    "p": "SoT는 단순한 가상 자산이 아닙니다.\nSoT를 통해 실제로 돈을 벌 수 있답니다!\nFingeRate 메타버스의 모든 설문조사는 SoT 단말기에서 진행되기 때문에,\nSoT 소유주는 자신의 SoT에서 진행되는 설문조사로 수익을 얻을 수 있습니다.\n즉, SoT를 더 많이 소유하면 더 많은 설문조사가 진행될 것이고,\n그렇다면 소유주는 더욱 많은 수익을 얻을 수 있겠죠?"
-                }
-            ],
-            "sot": {
-                "h2": "SoT는 무엇인가요",
-                "p": "SoT(Satisfaction of Things)는\n실제 세계를 매핑한 FingeRate 메타버스의\n리서치 & 설문조사 단말기입니다.\n\n각각의 SoT는 300m~500m 간격으로 설치되며\n미팅룸과 함께 제공됩니다.",
-                "how": "시스템 작동 방식",
-                "ol": [
-                    "설문조사 의뢰자들은 원하는 SoT 단말기에서 설문조사를 실행할 수 있으며\n설문조사 참여자에게 보상을 지급합니다.",
-                    "설문조사 참여자는 자신에 현재 위치에서 사용 가능한 SoT를 통해 설문조사에 참여 할 수 있습니다.",
-                    "설문조사 참여자는 설문조사 완료 후 SoM (SoT 마일리지)을 보상으로 지급 받게 됩니다.\nSoM은 아바타를 업그레이드하거나 마켓플레이스에서 다양한 아이템&서비스를 구입하는 데 사용할 수 있습니다."
-                ],
-                "benefit": "다양한 혜택",
-                "table": [
-                    [
-                        "SoT 소유주",
-                        "SoT를 통한 수익 창출",
-                        "더 높은 가격에 재판매 가능",
-                        "linear(to-l, blue.200, cyan.600)",
-                        "blue.400"
-                    ],
-                    [
-                        "설문조사 참여자",
-                        "설문조사 참여 시\n보상으로 지급되는 SoM",
-                        "더욱 재미있고 즐거운\n설문조사 참여",
-                        "linear(to-br, teal.300, yellow.400)",
-                        "orange.500"
-                    ],
-                    [
-                        "설문조사 의뢰자",
-                        "지역(위치)별 조사대상\n선정 및 세분화 가능",
-                        "스마트 컨트랙트 기반의\n안전한 조사 시스템",
-                        "linear(to-tr, #9A22F5, #F4A261)",
-                        "green.500"
-                    ]
-                ]
-            }
+        "imgCaption": "SoT 1대만 소유해도\n이 모든 수익이 팡팡!"
+      }
+    },
+    "flow": {
+      "id": "flow",
+      "content": {
+        "h2": "SoT Flow",
+        "slides": [
+          { "title": "누구나 쉽고 간편하게 원하는 SoT 구매하기", "info": "" },
+          { "title": "개인 또는 기업/기관 등 제3자의 조사 의뢰", "info": "" },
+          { "title": "GG56 또는 SoT 소유주가 직접 조사 진행", "info": "" },
+          { "title": "다양한 설문조사/리서치 참여 후 보상 받기", "info": "" },
+          { "title": "조사 종료 후  통계데이터 생성", "info": "" },
+          { "title": "의뢰한 조사의 통계데이터 확보 및 활용", "info": "" },
+          { "title": "자체 조사로 수집/가공한 데이터 판매하기 ", "info": "" },
+          {
+            "title": "모두가 윈윈하는 Satisfaction of Things!",
+            "info": "",
+            "avatars": ["GG56", "SoT 소유주", "일반 사용자", "조사 의뢰자"]
+          }
+        ]
+      }
+    },
+    "price": {
+      "id": "price",
+      "content": {
+        "h2": "SoT 파헤치기! (사전 판매)",
+        "currency": "$",
+        "list": [
+          {
+            "grade": "S급",
+            "price": 2000,
+            "description": "6개월마다 산정된 조사참여 상위 1% SoT에게만 주어지는 최상위 타이틀",
+            "explanation": "전세계 1% 밖에 없는 희귀한 SoT"
+          },
+          {
+            "grade": "A급",
+            "price": 1000,
+            "description": "유동인구가 많은 랜드마크, 주요 공항/역, 광장 또는 인구 100만 이상 도시에 설치된 SoT",
+            "explanation": "전세계 20%으로 배치된 SoT"
+          },
+          {
+            "grade": "B급",
+            "price": 750,
+            "description": "평균 인구 50만 이상 도시에 설치된 SoT ",
+            "explanation": "전세계 40%으로 배치된 SoT"
+          },
+          {
+            "grade": "C급",
+            "price": 500,
+            "description": "평균 인구 10만 이상 도시에 설치된 SoT",
+            "explanation": "전세계 30%으로 배치된 SoT"
+          },
+          {
+            "grade": "D급",
+            "price": 300,
+            "description": "수익창출보다는 나만의 의미 있는 장소, 특별한 장소에 설치된 소장가치가 있는 SoT",
+            "explanation": "전세계 9%으로 배치된 컬렉션 만들어서 재판매하기 좋은 SoT"
+          }
+        ],
+        "disclaimer": "SoT 10개 이상 단체 주문시 스페셜 할인 제공!! 자세한 문의"
+      }
+    },
+    "learnMore": {
+      "id": "more",
+      "content": {
+        "h2": "더 알고 싶나요?",
+        "box1": {
+          "title": "FingeRate에서 만나는 전세계 가톨릭인들의 축제! 시그니스 총회",
+          "p": "이번 업무협약을 통해, GG56코리아는 오는 8월 16일부터 22일까지 “디지털 세상의 평화”라는 주제로 열리는 2022 서울 시그니스 세계총회의 메타버스 플랫폼 구축을 위한 기술 지원에 나선다."
         },
-        "feed": {
-            "title": "Live Feed",
-            "content": ["SoTs sold In total:", "Ongoing Auctions:"]
-        },
-        "social": {
-            "title": "#FingeRate Social"
-        },
-        "contact": {
-            "title": "Contact",
-            "content": [
-                { "h3": "Keep in touch" },
-                { "h3": "Subscribe to updates from us!" }
-            ]
+        "box2": {
+          "title": "실제 세계에서 작동하고 있는 SoT",
+          "locations": ["춘천 구곡폭포", "춘천 스카이워크", "YBM 어학원 종로 본사"]
         }
+      }
+    },
+    "history": {
+      "id": "history",
+      "content": {
+        "h2": "FingeRate의 진화는 계속된다 (특허 History)",
+        "events": [
+          "가상화폐 기반 오프라인 마일리지 결제 시스템",
+          "위치 기반 메타버스 설문조사 시스템",
+          "현장에서 동작 인식을 통한 만족도 조사 시스템",
+          "아바타 토큰화를 이용한 메타버스 시스템",
+          "전자지갑 기반 아바타의 이력 관리를 위한 메타버스 시스템",
+          "심층분석을 위한 설문조사 시스템"
+        ]
+      }
+    },
+    "sotOwners": {
+      "id": "owners",
+      "content": {
+        "h2": "Meet the SoT Owners"
+      }
+    },
+    "roadmap": {
+      "id": "roadmap",
+      "content": {
+        "h2": "기술 로드맵",
+        "steps": [
+          {
+            "title": "SOT 가상자산 분양",
+            "year": 2021,
+            "sections": [
+              {
+                "title": "FingeRate2.0 플랫폼 개발",
+                "points": ["웹 플랫폼 개발 및 오픈", "SOT 1만대 좌표 정의", "모델하우스 구성"]
+              },
+              {
+                "title": "OpenSea Integration",
+                "points": [
+                  "OpenSea NFT 플랫폼과 SOT 시스템 연동",
+                  "SOT 관련 Smart contract 작성",
+                  "SOT 1,000대 민팅하여 OpenSea에 upload"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "SOT 서비스 개시",
+            "year": 2022,
+
+            "sections": [
+              {
+                "title": "SOT 여론, 만족도조사 개시",
+                "points": ["여론조사 시스템 개발", "만족도 조사 AR 시스템 개발 및 테스트", "FingeRate2.0 앱 개발"]
+              },
+              {
+                "title": "SoT Meeting Room",
+                "points": ["미팅룸 구성", "미팅룸 개발", "서비스 테스트"]
+              },
+              {
+                "title": "SoT Marketplace",
+                "points": ["FingeRate2.0앱 마켓플레이스 기획 및 개발", "마켓플레이스 아이템 NFT와 연동"]
+              }
+            ]
+          },
+          {
+            "title": "블록체인 고도화",
+            "year": 2023,
+
+            "sections": [
+              {
+                "title": "Smart Contract",
+                "points": ["Survey Exchange시스템", "실시간 수익 정산", "SOT 가치 평가 시스템"]
+              },
+              {
+                "title": "자체 메인넷 개발",
+                "points": ["메인넷 개발", "자체 DeFi 서비스 게시", "자체 블록체인 생태계 구축"]
+              }
+            ]
+          },
+          {
+            "title": "딥리서치 & AI 구축",
+            "year": 2024,
+
+            "sections": [
+              {
+                "title": "딥리서치 도입",
+                "points": ["Survey 딥리서치 구축", "딥리서치 기반 Survey 서비스 개시", "딥리서치 API 구축"]
+              },
+              {
+                "title": "AI Survey 도입",
+                "points": ["Survey 자동화", "정성 분석 AI 도입", "분석 보고서 초안 생성"]
+              }
+            ]
+          },
+          {
+            "title": "딥리서치 & AI 강화",
+            "year": 2025,
+
+            "sections": [
+              {
+                "title": "딥리서치 강화",
+                "points": ["Survey 딥리서치 강화", "딥리서치 기반 AI Survey 개시", "딥리서치 API 판매"]
+              },
+              {
+                "title": "AI Survey 강화",
+                "points": ["Survey 자동화", "정성 분석 AI 강화", "분석 보고서 완전 자동 생성"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "partners": {
+      "id": "partners",
+      "content": {
+        "h2": "Partners"
+      }
     }
+  }
 }

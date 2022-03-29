@@ -1,0 +1,79 @@
+{
+  "nav": [
+    {
+      "n": "SoT란?",
+      "l": "/",
+      "important": true,
+      "external": false
+    },
+    {
+      "n": "SoT구매",
+      "important": true,
+      "external": false,
+      "dropdown": [
+        {
+          "n": "구매",
+          "l": "/sots",
+          "important": false,
+          "external": false
+        },
+        {
+          "n": "맵에서구매",
+          "l": "/map",
+          "important": false,
+          "external": false
+        },
+        {
+          "n": "SoT NFT 마켓프레이스",
+          "l": "/marketplace",
+          "important": false,
+          "external": false
+        },
+        {
+          "n": "구매 방법",
+          "l": "/howto",
+          "important": false,
+          "external": false
+        }
+      ]
+    },
+    {
+      "n": "FingeRate 2.0",
+      "l": "/fr2",
+      "important": true,
+      "external": false
+    },
+    {
+      "n": "지원",
+      "important": true,
+      "external": false,
+      "disabled": true,
+      "dropdown": [
+        {
+          "n": "공지 사항",
+          "l": "/",
+          "important": false,
+          "external": false
+        },
+        {
+          "n": "이용자 가이드",
+          "l": "/",
+          "important": false,
+          "external": false
+        },
+        {
+          "n": "FAQ",
+          "l": "/",
+          "important": false,
+          "external": false
+        },
+        {
+          "n": "문의하기",
+          "l": "/",
+          "important": false,
+          "external": false
+        }
+      ]
+    }
+  ]
+}
