@@ -12,18 +12,10 @@ import {
   Icon,
   Checkbox,
   Switch,
+  FormLabel,
 } from '@chakra-ui/react';
 import { db } from '../../lib/firebase';
-import {
-  getDocs,
-  collection,
-  where,
-  query,
-  limit,
-  startAfter,
-  orderBy,
-  documentId,
-} from 'firebase/firestore';
+import { getDocs, collection, where, query, limit, startAfter, orderBy, documentId } from 'firebase/firestore';
 import Image from 'next/image';
 import Head from 'next/head';
 
@@ -94,23 +86,15 @@ export default function Sots({ sots }) {
           <Heading as='h1' textAlign='center'>
             SoTs
           </Heading>
-          <Stack
-            p={2}
-            position='sticky'
-            top={'65px'}
-            zIndex={'2'}
-            borderRadius='md'
-            bg='blue.100'
-            maxW='fit-content'
-            shadow={'sm'}
-          >
-            <Stack direction={'row'} color='common.main'>
+          <Box overflowX={'auto'} position='sticky' top={'65px'} zIndex={'2'}>
+            <Stack direction={'row'} color='common.main' p={2} borderRadius='md' bg='blue.100' w={'max-content'}>
               <Box bg='white' borderRadius={'md'}>
                 <Input
                   list='countries'
                   onChange={(e) => setCountry(e.target.value)}
                   placeholder={t.filters.country}
                   value={country || ''}
+                  h='full'
                 />
 
                 <datalist id='countries'>
@@ -124,8 +108,7 @@ export default function Sots({ sots }) {
                   variant='outline'
                   onChange={(e) => setGrade(e.target.value)}
                   placeholder={t.filters.grade}
-                  value={grade || ''}
-                >
+                  value={grade || ''}>
                   {['S', 'A', 'B', 'C', 'D'].map((val) => (
                     <option value={val} key={val}>
                       {val}
@@ -134,40 +117,31 @@ export default function Sots({ sots }) {
                 </Select>
               </Box>
               {!grade && (
-                <Flex
-                  bg='white'
-                  flexDirection={'row'}
-                  alignItems='center'
-                  borderRadius={'md'}
-                  p={1}
-                >
+                <Flex bg='white' flexDirection={'row'} alignItems='center' borderRadius={'md'} px={1}>
                   <Button
                     fontSize={'md'}
                     fontWeight='normal'
                     colorScheme={sort ? 'blue' : 'gray'}
                     variant={sort ? 'solid' : 'ghost'}
                     size={'sm'}
-                    onClick={() =>
-                      sort === 'desc' ? setSort('asc') : setSort('desc')
-                    }
-                    rightIcon={
-                      sort &&
-                      (sort === 'desc' ? <ArrowDownIcon /> : <ArrowUpIcon />)
-                    }
-                  >
+                    onClick={() => (sort === 'desc' ? setSort('asc') : setSort('desc'))}
+                    rightIcon={sort && (sort === 'desc' ? <ArrowDownIcon /> : <ArrowUpIcon />)}>
                     {t.filters.price}
                   </Button>
                 </Flex>
               )}
-              <Grid bg='white' px='1' borderRadius={'md'} placeItems='center'>
+              <Flex bg='white' borderRadius={'md'} alignItems='center' px='1'>
                 <Switch
+                  id='ownership-switch'
                   fontSize={'md'}
                   isChecked={ownership}
                   onChange={() => setOwnership(!ownership)}
-                >
+                  mr='1'
+                />
+                <FormLabel htmlFor='ownership-switch' m='0'>
                   {t.filters.ownership}
-                </Switch>
-              </Grid>
+                </FormLabel>
+              </Flex>
               <Button
                 alignSelf={'center'}
                 colorScheme={'gray'}
@@ -176,35 +150,18 @@ export default function Sots({ sots }) {
                   setGrade(null);
                   setOwnership(false);
                   setSort('');
-                }}
-              >
+                }}>
                 <RepeatIcon />
               </Button>
             </Stack>
-          </Stack>
-          <MotionGrid
-            gap='2'
-            gridTemplateColumns={'repeat(auto-fill, minmax(200px, 1fr))'}
-            layout
-          >
+          </Box>
+          <MotionGrid gap='2' gridTemplateColumns={'repeat(auto-fill, minmax(200px, 1fr))'} layout>
             <AnimatePresence>
               {filteredSots
-                .filter((sot) =>
-                  grade ? sot.grade.toLowerCase() === grade.toLowerCase() : true
-                )
-                .filter((sot) =>
-                  country
-                    ? sot.country.toLowerCase() === country.toLowerCase()
-                    : true
-                )
+                .filter((sot) => (grade ? sot.grade.toLowerCase() === grade.toLowerCase() : true))
+                .filter((sot) => (country ? sot.country.toLowerCase() === country.toLowerCase() : true))
                 .filter((sot) => (ownership ? !sot.owner : true))
-                .sort((a, b) =>
-                  sort === 'desc'
-                    ? b.price - a.price
-                    : sort === 'asc'
-                    ? a.price - b.price
-                    : 0
-                )
+                .sort((a, b) => (sort === 'desc' ? b.price - a.price : sort === 'asc' ? a.price - b.price : 0))
                 .map((sot) => (
                   <MotionStack
                     key={sot.id}
@@ -228,8 +185,7 @@ export default function Sots({ sots }) {
                     layout
                     animate={{ opacity: 1 }}
                     initial={{ opacity: 0 }}
-                    exit={{ opacity: 0 }}
-                  >
+                    exit={{ opacity: 0 }}>
                     <Box borderRadius={'md'} overflow='hidden'>
                       <Image
                         src={sot.image}
@@ -241,19 +197,10 @@ export default function Sots({ sots }) {
                     </Box>
                     <Stack spacing={1} flex='1' justifyContent='space-between'>
                       <Stack spacing={1}>
-                        <Box
-                          as={'strong'}
-                          color='common.main'
-                          fontFamily={'sans-serif'}
-                          fontSize='100%'
-                        >
+                        <Box as={'strong'} color='common.main' fontFamily={'sans-serif'} fontSize='100%'>
                           {sot.name}
                         </Box>
-                        <Box
-                          as={'small'}
-                          color='blue.400'
-                          fontFamily={'mono'}
-                        >{`SoT ${sot.id}`}</Box>
+                        <Box as={'small'} color='blue.400' fontFamily={'mono'}>{`SoT ${sot.id}`}</Box>
                       </Stack>
                       <Box as={'small'} color='blue'>
                         <Icon>
@@ -274,27 +221,21 @@ export default function Sots({ sots }) {
                       p='1'
                       borderRadius={'md'}
                       alignItems='center'
-                      sx={{ gap: '0.5rem' }}
-                    >
+                      sx={{ gap: '0.5rem' }}>
                       <Box
                         bg={'white'}
                         borderRadius='md'
                         p='2'
                         fontFamily={'sans-serif'}
                         border='2px solid'
-                        borderColor={`grades.${sot.grade}`}
-                      >
+                        borderColor={`grades.${sot.grade}`}>
                         {sot.grade}
                       </Box>
                       <Text as={'span'} color={'common.main'}>
                         {sot.owner ? (
                           <>
                             판매 완료{' '}
-                            <Text
-                              as={'span'}
-                              fontSize='sm'
-                              fontStyle={'italic'}
-                            >
+                            <Text as={'span'} fontSize='sm' fontStyle={'italic'}>
                               ($ {sot.price})
                             </Text>
                           </>

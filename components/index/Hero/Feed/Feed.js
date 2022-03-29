@@ -7,32 +7,17 @@ export default function Feed({ feed }) {
         bg='whiteAlpha.700'
         borderRadius={'md'}
         direction='row'
-        w='80%'
+        w={{ sm: '80%' }}
         mx='auto'
         textAlign={'center'}
         shadow='md'
-        flexWrap='wrap'
-      >
+        flexWrap='wrap'>
         {feed.map((item) => (
-          <Stack
-            key={item.item}
-            p='2'
-            alignItems={'center'}
-            flex='1'
-            spacing={1}
-          >
-            <Box
-              as='strong'
-              fontSize={{ base: 'lg', md: '3xl' }}
-              color={'common.main'}
-            >
+          <Stack key={item.item} p='2' alignItems={'center'} flex='1' spacing={1}>
+            <Box as='strong' fontSize={{ base: 'lg', md: '3xl' }} color={'common.main'}>
               {item.number}
             </Box>
-            <Box
-              as='small'
-              fontSize={{ base: 'sm', md: 'xl' }}
-              fontStyle='italic'
-            >
+            <Box as='small' fontSize={{ base: 'sm', md: 'xl' }} fontStyle='italic'>
               {item.item}
             </Box>
           </Stack>
