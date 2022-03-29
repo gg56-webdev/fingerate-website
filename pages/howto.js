@@ -56,8 +56,8 @@ export default function Howto() {
             mx={'2'}
             gap='2'
             zIndex={2}>
-            <Tab>with Card</Tab>
-            <Tab>with Crypto</Tab>
+            <Tab>{t.card.with}</Tab>
+            <Tab>{t.crypto.with}</Tab>
           </TabList>
 
           <TabPanels>
