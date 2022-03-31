@@ -1,5 +1,4 @@
 import axios from 'axios';
-import backupData from '../data/newData.json';
 import parseMetadata from './parseMetadata';
 
 export default async function getSoTData() {
@@ -27,6 +26,5 @@ export default async function getSoTData() {
     return sots;
   } catch (err) {
     console.error(err);
-    return (sots = backupData);
   }
 }

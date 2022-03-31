@@ -1,0 +1,16 @@
+{
+  "general": {
+    "buy": "SoT 구매",
+    "buyPolygon": "SoT 구매",
+    "view": "상세 정보",
+    "sold": "판매 완료"
+  },
+  "filters": {
+    "country": "국가",
+    "grade": "등급",
+    "ownership": "구매 가능",
+    "source": "구매 방법",
+    "buyWithCard": "카드 결제",
+    "buyWithCrypto": "암호화폐 결제"
+  }
+}
