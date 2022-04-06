@@ -47,29 +47,10 @@
       "n": "지원",
       "important": true,
       "external": false,
-      "disabled": true,
       "dropdown": [
         {
-          "n": "공지 사항",
-          "l": "/",
-          "important": false,
-          "external": false
-        },
-        {
-          "n": "이용자 가이드",
-          "l": "/",
-          "important": false,
-          "external": false
-        },
-        {
-          "n": "FAQ",
-          "l": "/",
-          "important": false,
-          "external": false
-        },
-        {
           "n": "문의하기",
-          "l": "/",
+          "l": "/help/email-us",
           "important": false,
           "external": false
         }
