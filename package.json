@@ -16,6 +16,7 @@
     "@fontsource/do-hyeon": "^4.5.0",
     "@fontsource/gowun-dodum": "^4.5.1",
     "@metamask/detect-provider": "^1.2.0",
+    "@turf/circle": "^6.5.0",
     "axios": "^0.24.0",
     "firebase": "^9.6.7",
     "firebase-admin": "^10.0.2",
@@ -27,10 +28,12 @@
     "react-dom": "17.0.2",
     "react-firebase-hooks": "^5.0.2",
     "react-intersection-observer": "^8.32.1",
-    "react-map-gl": "^6.1.16",
+    "react-map-gl": "^6.1.19",
     "react-markdown": "^8.0.1",
+    "supercluster": "^7.1.4",
     "swiper": "^7.0.8",
-    "swr": "^1.1.2"
+    "swr": "^1.1.2",
+    "use-supercluster": "^0.4.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",
