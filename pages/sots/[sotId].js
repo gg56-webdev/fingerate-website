@@ -114,7 +114,7 @@ export default function Sot({ sot }) {
         <title>{`SoT ${sot.id} - ${sot.name}`}</title>
       </Head>
       <Box pb='2'>
-        <Container maxW={'container.lg'} pt={'70px'}>
+        <Container maxW={'container.lg'} pt={'80px'}>
           <Grid
             gridTemplateColumns={{
               md: 'minmax(200px, 400px) 1fr',
@@ -123,7 +123,9 @@ export default function Sot({ sot }) {
             gap='4'
             bg='white'
             p={2}
-            borderRadius='md'>
+            borderRadius='md'
+            shadow='md'
+          >
             <Box overflow={'hidden'} borderRadius='md' fontSize={0}>
               <Image src={sot.image} alt={`thumbnail of SoT${sot.id}`} width={800} height={800} />
             </Box>
@@ -196,7 +198,8 @@ export default function Sot({ sot }) {
                     color='white'
                     fontSize='xl'
                     onClick={handleSubmit}
-                    isLoading={loading}>
+                    isLoading={loading}
+                  >
                     {t.btn.buy}
                   </Button>
                 ) : (

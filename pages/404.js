@@ -11,7 +11,7 @@ export default function NotFound() {
     return () => clearTimeout(timer);
   }, [router]);
   return (
-    <Grid placeItems={'center'} py={'70px'}>
+    <Grid placeItems={'center'} py={'80px'}>
       <Box onClick={() => router.push('/')}>Page not found :(</Box>
     </Grid>
   );

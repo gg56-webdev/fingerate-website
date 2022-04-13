@@ -1,9 +1,9 @@
-import { CloseIcon, LinkIcon } from '@chakra-ui/icons';
-import { Box, Button, Stack, useDisclosure } from '@chakra-ui/react';
+import { ChevronRightIcon, CloseIcon, LinkIcon } from '@chakra-ui/icons';
+import { Box, IconButton, useDisclosure } from '@chakra-ui/react';
 import Contact from '../Contact/Contact';
 
 export default function Social() {
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
   return (
     <Box
       as='aside'
@@ -16,21 +16,23 @@ export default function Social() {
       p='4'
       borderLeftRadius={'md'}
       transition='all 0.2s'
+      shadow={isOpen ? 'md' : 'none'}
     >
-      <Button
+      <IconButton
+        aria-label='toggle show social links'
         position={'absolute'}
-        top='50%'
-        left={'0'}
-        transform='translate(calc(-100% - 4px), -50%)'
+        top={'50%'}
+        left={0}
+        transform={isOpen ? 'translate(-100%, -50%)' : 'translate(calc(-100% - 4px), -50%)'}
         onClick={onToggle}
         borderRadius='full'
-        w={12}
-        h={12}
-        bg='whiteAlpha.700'
-        color={'common.main'}
-      >
-        {isOpen ? <CloseIcon /> : <LinkIcon boxSize={'1.5em'} />}
-      </Button>
+        w={10}
+        h={10}
+        variant={isOpen ? 'ghost' : 'solid'}
+        colorScheme={'purple'}
+        icon={isOpen ? <ChevronRightIcon boxSize={'2em'} /> : <LinkIcon boxSize={'1.5em'} />}
+        transition='0.2s'
+      />
       <Contact vertical />
     </Box>
   );

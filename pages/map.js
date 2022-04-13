@@ -1,4 +1,4 @@
-import { useState, useRef, memo } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 import useMapFilter from '../hooks/useMapFilter';
 import useSupercluster from 'use-supercluster';
 import Head from 'next/head';
@@ -24,7 +24,7 @@ import {
   FormLabel,
   Switch,
 } from '@chakra-ui/react';
-import { CloseIcon, ExternalLinkIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon, ExternalLinkIcon, HamburgerIcon } from '@chakra-ui/icons';
 import ReactMapGl, { Marker, FlyToInterpolator, Popup, GeolocateControl } from 'react-map-gl';
 import sotIcon from '../public/sot_icon.svg';
 import sotIconPG from '../public/sot_icon_pg.svg';
@@ -33,6 +33,7 @@ import { getDocs, collection, where, query } from 'firebase/firestore';
 import getSoTData from '../utils/getSoTData';
 
 import ko from '../locales/ko/map.json';
+import axios from 'axios';
 
 export async function getStaticProps() {
   const colRef = collection(db, 'sots');
@@ -69,10 +70,19 @@ export async function getStaticProps() {
 
   const sotsData = [...sotsFB, ...sotsPG];
 
-  const availableCountries = sotsData.reduce((acc, { country }) => {
+  let availableCountries = sotsData.reduce((acc, { country }) => {
     if (!acc.includes(country)) return [...acc, country];
     return acc;
   }, []);
+
+  availableCountries = await Promise.all(
+    availableCountries.map(async (c) => {
+      const {
+        data: [{ latlng }],
+      } = await axios.get(`https://restcountries.com/v3.1/name/${c}`);
+      return { country: c, latlng };
+    })
+  );
 
   return {
     props: { sotsData, availableCountries },
@@ -226,6 +236,7 @@ export default function Map({ sotsData, availableCountries }) {
 
 const MarkerPopup = ({ longitude, latitude, zoomToMarker, props, content }) => {
   const [open, setOpen] = useState(false);
+  const [clicked, setClicked] = useState();
   return (
     <>
       <Marker
@@ -234,10 +245,15 @@ const MarkerPopup = ({ longitude, latitude, zoomToMarker, props, content }) => {
         offsetLeft={-30}
         offsetTop={-30}
         onClick={() => {
-          zoomToMarker(longitude, latitude + 0.001), setOpen(true);
+          zoomToMarker(longitude, latitude + 0.001), setClicked(true);
         }}
       >
-        <Box cursor={'pointer'} opacity={props.sotOwner ? 0.35 : 1}>
+        <Box
+          cursor={'pointer'}
+          opacity={props.sotOwner ? 0.35 : 1}
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+        >
           <Image
             src={props.sotSource === 'Polygon' ? sotIconPG : sotIcon}
             alt={'SoT Device Icon'}
@@ -246,18 +262,26 @@ const MarkerPopup = ({ longitude, latitude, zoomToMarker, props, content }) => {
           />
         </Box>
       </Marker>
-      {open && (
-        <Popup longitude={longitude} latitude={latitude} offsetTop={-30} closeButton={false} className={'popup'}>
-          <CloseButton
-            onClick={() => setOpen(false)}
-            alignSelf='end'
-            pos={'absolute'}
-            top={0}
-            right={0}
-            transform={'translate(50%, -50%)'}
-            bg={'gray.50'}
-            borderRadius={'full'}
-          />
+      {(open || clicked) && (
+        <Popup
+          longitude={longitude}
+          latitude={latitude}
+          offsetTop={-30}
+          closeButton={false}
+          className={`popup ${open ? 'popup-hovered' : clicked ? 'popup-clicked' : ''}`}
+        >
+          {clicked && (
+            <CloseButton
+              onClick={() => setClicked(false)}
+              alignSelf='end'
+              pos={'absolute'}
+              top={0}
+              right={0}
+              transform={'translate(50%, -50%)'}
+              bg={'gray.50'}
+              borderRadius={'full'}
+            />
+          )}
           <Box as='strong' fontSize={'lg'} fontFamily='sans-serif'>
             {props.sotName}
           </Box>
@@ -298,19 +322,21 @@ const MarkerPopup = ({ longitude, latitude, zoomToMarker, props, content }) => {
               {props.sotOwner && <Badge fontSize={'0.8em'}>{content.sold}</Badge>}
             </Box>
           </Flex>
-          <NLink href={props.sotSource === 'Polygon' ? props.sotUrl : `/sots/${props.sotId}`} passHref>
-            <Button
-              as={Link}
-              isExternal
-              _hover={{ textDecoration: 'none', outline: '1px solid purple' }}
-              colorScheme={props.sotSource === 'Polygon' ? 'blue' : props.sotOwner ? 'gray' : 'purple'}
-              textDecoration={'none'}
-              fontSize={'xl'}
-            >
-              {props.sotSource === 'Polygon' ? content.buyPolygon : props.sotOwner ? content.view : content.buy}
-              {props.sotSource === 'Polygon' && <ExternalLinkIcon />}
-            </Button>
-          </NLink>
+          {clicked && (
+            <NLink href={props.sotSource === 'Polygon' ? props.sotUrl : `/sots/${props.sotId}`} passHref>
+              <Button
+                as={Link}
+                isExternal
+                _hover={{ textDecoration: 'none', outline: '1px solid purple' }}
+                colorScheme={props.sotSource === 'Polygon' ? 'blue' : props.sotOwner ? 'gray' : 'purple'}
+                textDecoration={'none'}
+                fontSize={'xl'}
+              >
+                {props.sotSource === 'Polygon' ? content.buyPolygon : props.sotOwner ? content.view : content.buy}
+                {props.sotSource === 'Polygon' && <ExternalLinkIcon />}
+              </Button>
+            </NLink>
+          )}
         </Popup>
       )}
     </>
@@ -322,7 +348,13 @@ const sotsAreEqual = ({ sots: prevSots }, { sots: nextSots }) => {
 };
 
 const MapMenu = memo((props) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const [isMobile] = useMediaQuery('(max-width: 1150px)');
+  const { isOpen, onClose, onToggle } = useDisclosure({ defaultIsOpen: true });
+
+  useEffect(() => {
+    isMobile && onClose();
+  }, [isMobile, onClose]);
+
   return (
     <Flex
       as={'aside'}
@@ -337,11 +369,12 @@ const MapMenu = memo((props) => {
       borderTopRightRadius={'md'}
       borderBottomRightRadius={'md'}
       shadow={'md'}
-      zIndex={3}
+      zIndex={5}
       p={1}
       flexDir='column'
     >
-      <Button
+      <IconButton
+        aria-label='toggle list of sot devices'
         onClick={onToggle}
         position={'absolute'}
         top={isOpen ? '0' : '50%'}
@@ -349,19 +382,20 @@ const MapMenu = memo((props) => {
         transform={'translate(calc(100% + 4px), 0%)'}
         w={12}
         h={12}
-        variant={isOpen ? 'outline' : 'solid'}
+        variant={isOpen ? 'ghost' : 'solid'}
         borderRadius='full'
-        colorScheme={isOpen ? 'gray' : 'purple'}
+        colorScheme='purple'
         transition='0.2s'
-      >
-        {isOpen ? <CloseIcon /> : <HamburgerIcon boxSize={'1.5em'} />}
-      </Button>
+        icon={isOpen ? <ChevronLeftIcon boxSize={'2em'} /> : <HamburgerIcon boxSize={'1.5em'} />}
+      />
+
       <Filters {...props} />
       <SotList
         sots={props.sots}
         content={props.content.general}
         zoomToMarker={props.zoomToMarker}
         onToggle={onToggle}
+        isMobile={isMobile}
       />
       {props.sots.length == 0 && (
         <Grid placeItems={'center'} h='100%'>
@@ -381,13 +415,26 @@ const Filters = ({
   content: { filters },
   setSourceFilter,
   setForSaleFilter,
+  zoomToMarker,
 }) => {
   return (
     <Flex sx={{ gap: 1 }} p='1' bg={'blue.50'} borderRadius='md' mb='1'>
-      <Select bg='white' onChange={(e) => setCountryFilter(e.target.value)} placeholder={filters.country}>
-        {availableCountries.map((c) => (
-          <option key={c} value={c}>
-            {c}
+      <Select
+        bg='white'
+        onChange={(e) => {
+          setCountryFilter(e.target.value);
+          if (e.target.value) {
+            const {
+              latlng: [lat, long],
+            } = availableCountries.find((item) => item.country === e.target.value);
+            zoomToMarker(long, lat, 4);
+          }
+        }}
+        placeholder={filters.country}
+      >
+        {availableCountries.map(({ country }) => (
+          <option key={country} value={country}>
+            {country}
           </option>
         ))}
       </Select>
@@ -428,8 +475,7 @@ const Filters = ({
   );
 };
 
-const SotList = ({ sots, content, zoomToMarker, onToggle }) => {
-  const [isMobile] = useMediaQuery('(max-width: 1150px)');
+const SotList = ({ sots, content, zoomToMarker, onToggle, isMobile }) => {
   return (
     <UnorderedList overflowY={'auto'} listStyleType={'none'} m='0' p='1' spacing={'1'} bg='gray.50'>
       {sots.map((sot) => (
@@ -488,6 +534,7 @@ const SotList = ({ sots, content, zoomToMarker, onToggle }) => {
               }
               colorScheme={'blue'}
               variant={'outline'}
+              bg='white'
               onClick={() => {
                 zoomToMarker(sot.long, sot.lati), isMobile && onToggle();
               }}

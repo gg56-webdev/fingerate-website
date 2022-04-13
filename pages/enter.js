@@ -76,21 +76,22 @@ export default function Enter() {
   }, [user]);
 
   return (
-    <Grid placeItems={'center'} h="calc(100vh - 70px - 140px)" pt={'70px'}>
+    <Grid placeItems={'center'} h='calc(100vh - 80px - 140px)' pt={'80px'}>
       <Head>
         <title>로그인/가입하기</title>
       </Head>
       <Stack
         bg={'white'}
-        p="2"
-        pt="4"
+        p='2'
+        pt='4'
         borderRadius={'md'}
-        maxW="500px"
+        maxW='500px'
         minW={'350px'}
         textAlign={'center'}
-        alignItems="center"
+        alignItems='center'
         spacing={5}
-        boxShadow="md">
+        boxShadow='md'
+      >
         <Stack>
           <Heading>{screen}</Heading>
 
@@ -99,31 +100,31 @@ export default function Enter() {
           </Text>
         </Stack>
 
-        <Stack as={'form'} onSubmit={(e) => handleSubmit(e)} spacing="4">
+        <Stack as={'form'} onSubmit={(e) => handleSubmit(e)} spacing='4'>
           <FormControl>
-            <FormLabel htmlFor="email">이메일 주소</FormLabel>
-            <Input id="email" type="email" onChange={(e) => setEmail(e.target.value)} required />
+            <FormLabel htmlFor='email'>이메일 주소</FormLabel>
+            <Input id='email' type='email' onChange={(e) => setEmail(e.target.value)} required />
           </FormControl>
           {(screen === '로그인' || screen === '가입하기') && (
             <FormControl>
-              <FormLabel htmlFor="password">비밀번호</FormLabel>
-              <Input id="password" type="password" onChange={(e) => setPassword(e.target.value)} required />
+              <FormLabel htmlFor='password'>비밀번호</FormLabel>
+              <Input id='password' type='password' onChange={(e) => setPassword(e.target.value)} required />
               {/* {!screen && (
                 <FormHelperText>Please choose a secure password</FormHelperText>
               )} */}
             </FormControl>
           )}
-          <Button type="submit" colorScheme={'purple'}>
+          <Button type='submit' colorScheme={'purple'}>
             {screen === '로그인' ? '로그인' : screen === '가입하기' ? '가입하기' : 'Send'}
           </Button>
           {error && (
-            <Alert status="error">
+            <Alert status='error'>
               <AlertIcon />
               <AlertTitle>{error}</AlertTitle>
             </Alert>
           )}
           {alert && (
-            <Alert status="info">
+            <Alert status='info'>
               <AlertIcon />
               <AlertTitle>{alert}</AlertTitle>
             </Alert>
@@ -132,13 +133,13 @@ export default function Enter() {
         {screen === '로그인' && <Link onClick={() => changeScreen('비밀번호 찾기')}>비밀번호 찾기</Link>}
 
         {screen === '로그인' ? (
-          <Link fontSize={'sm'} onClick={() => changeScreen('가입하기')} color="blue">
+          <Link fontSize={'sm'} onClick={() => changeScreen('가입하기')} color='blue'>
             가입하기
           </Link>
         ) : (
           <Text fontSize={'sm'}>
             이미 회원이신가요?{' '}
-            <Link onClick={() => changeScreen('로그인')} color="blue">
+            <Link onClick={() => changeScreen('로그인')} color='blue'>
               로그인하기
             </Link>
           </Text>

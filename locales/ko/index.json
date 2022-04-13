@@ -1,5 +1,7 @@
 {
   "title": "FingeRate Metaverse",
+  "description": "FingeRate is the very first metaverse platform with actual utility in the real world. It offers revolutionary research & survey experiences with so much fun and plentiful rewards!",
+  "keywords": "metaverse, app, nft, blockchain, sot, survey, vr ,ar",
   "sections": {
     "hero": {
       "id": "hero",
@@ -18,7 +20,7 @@
         "feed": [
           { "item": "선 분양", "number": "1000+" },
           { "item": "총 SoT 대수", "number": "1.2 mil." },
-          { "item": "현제 분양 가능 수량", "number": "50K" }
+          { "item": "현제 분양 가능 수량", "number": "10K" }
         ]
       }
     },

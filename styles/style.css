@@ -10,6 +10,7 @@ body {
   width: fit-content;
   border-radius: var(--chakra-radii-md);
   margin: 0;
+  box-shadow: var(--chakra-shadows-md);
 }
 
 .swiper-cards__slide {
@@ -54,6 +55,15 @@ body {
 
 .popup {
   z-index: 2;
+}
+
+.popup-clicked {
+  z-index:3;
+}
+
+.popup-hovered {
+  z-index: 4;
+  pointer-events: none;
 }
 
 .popup .mapboxgl-popup-content {

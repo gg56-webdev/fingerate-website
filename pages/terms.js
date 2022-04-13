@@ -6,7 +6,7 @@ import Head from 'next/head';
 
 export default function terms({ text }) {
   return (
-    <Container maxW={'container.lg'} pt='70px' pb='4'>
+    <Container maxW={'container.lg'} pt='80px' pb='4'>
       <Head>
         <title>서비스 이용약관</title>
       </Head>

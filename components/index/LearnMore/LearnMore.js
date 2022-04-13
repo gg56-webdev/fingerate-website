@@ -1,15 +1,5 @@
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import {
-  Box,
-  Container,
-  Heading,
-  Flex,
-  Grid,
-  GridItem,
-  Text,
-  Stack,
-  Link,
-} from '@chakra-ui/react';
+import { Box, Container, Heading, Flex, Grid, GridItem, Text, Stack, Link } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import loc1 from '../../../public/learnMore/locations/1.png';
@@ -26,27 +16,11 @@ export default function LearnMore({ text: { content } }) {
           {content.h2}
         </Heading>
         <Grid gap='2' gridTemplateColumns={{ base: '1fr', md: '1fr 0.75fr' }}>
-          <Stack
-            bg={'white'}
-            borderRadius='md'
-            w='100%'
-            p={2}
-            flexDir='column'
-            h={'fit-content'}
-          >
-            <Heading
-              as={'h3'}
-              fontSize='2xl'
-              fontFamily={'Gowun Dodum'}
-              fontWeight='bold'
-            >
+          <Stack bg={'white'} shadow='md' borderRadius='md' w='100%' p={2} flexDir='column' h={'fit-content'}>
+            <Heading as={'h3'} fontSize='2xl' fontFamily={'Gowun Dodum'} fontWeight='bold'>
               {content.box1.title}
             </Heading>
-            <Flex
-              flexDir={{ base: 'column-reverse' }}
-              flexGrow='1'
-              sx={{ gap: '0.5rem' }}
-            >
+            <Flex flexDir={{ base: 'column-reverse' }} flexGrow='1' sx={{ gap: '0.5rem' }}>
               <GridItem
                 flex={'1'}
                 as={Text}
@@ -59,6 +33,10 @@ export default function LearnMore({ text: { content } }) {
               >
                 {content.box1.p}
                 <br />
+                <Link color={'blue'} href='http://swc2022.cafe24.com/contents.php?mcd=192' isExternal>
+                  SIGNIS 배경 및 목적 <ExternalLinkIcon />
+                </Link>
+                <br />
                 <Link
                   color={'blue'}
                   href='https://news.yahoo.com/news/2022-seoul-signis-world-congress-212300440.html'
@@ -67,13 +45,7 @@ export default function LearnMore({ text: { content } }) {
                   Yahoo News <ExternalLinkIcon />
                 </Link>
               </GridItem>
-              <GridItem
-                flex={'0.5'}
-                as={Box}
-                fontSize='0'
-                borderRadius={'md'}
-                overflow='hidden'
-              >
+              <GridItem flex={'0.5'} as={Box} fontSize='0' borderRadius={'md'} overflow='hidden'>
                 <Image
                   alt='Signis gathering in the FingeRate Metaverse'
                   src='/learnMore/signis/church-lg.png'
@@ -84,20 +56,11 @@ export default function LearnMore({ text: { content } }) {
               </GridItem>
             </Flex>
           </Stack>
-          <Stack bg={'white'} borderRadius='md' w='100%' p={2} h='fit-content'>
-            <Heading
-              as={'h3'}
-              fontSize='2xl'
-              fontFamily={'Gowun Dodum'}
-              fontWeight='bold'
-            >
+          <Stack bg={'white'} shadow='md' borderRadius='md' w='100%' p={2} h='fit-content'>
+            <Heading as={'h3'} fontSize='2xl' fontFamily={'Gowun Dodum'} fontWeight='bold'>
               {content.box2.title}
             </Heading>
-            <Grid
-              gridTemplateColumns={{ base: '1fr 1fr' }}
-              justifyItems='center'
-              gap='1'
-            >
+            <Grid gridTemplateColumns={{ base: '1fr 1fr' }} justifyItems='center' gap='1'>
               {content.box2.locations.map((location, _id) => (
                 <Box
                   key={location}

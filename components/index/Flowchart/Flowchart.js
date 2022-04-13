@@ -1,12 +1,5 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import {
-  Container,
-  Heading,
-  Box,
-  Grid,
-  GridItem,
-  Flex,
-} from '@chakra-ui/react';
+import { Container, Heading, Box, Grid, GridItem, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
 
 export default function Flowchart({
@@ -35,13 +28,7 @@ export default function Flowchart({
           alignItems={{ sm: 'center', md: 'center' }}
           gap='4'
         >
-          <GridItem
-            bg={'white'}
-            borderRadius='md'
-            p='2'
-            textAlign={'center'}
-            gridArea='img1'
-          >
+          <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' textAlign={'center'} gridArea='img1'>
             <Box
               fontSize={{ base: 'md' }}
               fontWeight='bold'
@@ -53,29 +40,13 @@ export default function Flowchart({
               {slides[0].title}
             </Box>
             <Box>
-              <Image
-                alt='Avatar with SoT device'
-                src={'/flowchart/1.png'}
-                width={480}
-                height={370}
-              />
+              <Image alt='Avatar with SoT device' src={'/flowchart/1.png'} width={480} height={370} />
             </Box>
           </GridItem>
           <GridItem textAlign={'center'} gridArea='arr1'>
-            <ArrowForwardIcon
-              transform={{ base: 'rotate(90deg)', sm: 'none' }}
-              w={6}
-              h={6}
-              color={'common.main'}
-            />
+            <ArrowForwardIcon transform={{ base: 'rotate(90deg)', sm: 'none' }} w={6} h={6} color={'common.main'} />
           </GridItem>
-          <GridItem
-            bg={'white'}
-            borderRadius='md'
-            p='2'
-            textAlign={'center'}
-            gridArea='img2'
-          >
+          <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' textAlign={'center'} gridArea='img2'>
             <Grid gridTemplateColumns={'1fr 1fr'} gap={2}>
               <GridItem>
                 <Box
@@ -112,15 +83,11 @@ export default function Flowchart({
             </Grid>
           </GridItem>
           <GridItem textAlign={'center'} gridArea='arr2'>
-            <ArrowForwardIcon
-              transform={{ base: 'rotate(90deg)', md: 'none' }}
-              w={6}
-              h={6}
-              color={'common.main'}
-            />
+            <ArrowForwardIcon transform={{ base: 'rotate(90deg)', md: 'none' }} w={6} h={6} color={'common.main'} />
           </GridItem>
           <GridItem
             bg={'white'}
+            shadow='md'
             borderRadius='md'
             p='2'
             as={Flex}
@@ -160,13 +127,7 @@ export default function Flowchart({
               color={'common.main'}
             />
           </GridItem>
-          <GridItem
-            bg={'white'}
-            borderRadius='md'
-            p='2'
-            textAlign={'center'}
-            gridArea='img4'
-          >
+          <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' textAlign={'center'} gridArea='img4'>
             <Box
               fontSize={{ base: 'md' }}
               fontWeight='bold'
@@ -179,12 +140,7 @@ export default function Flowchart({
             </Box>
 
             <Box>
-              <Image
-                alt='GG56 Avatar collects and analyzes data'
-                src={'/flowchart/4.png'}
-                width={360}
-                height={370}
-              />
+              <Image alt='GG56 Avatar collects and analyzes data' src={'/flowchart/4.png'} width={360} height={370} />
             </Box>
           </GridItem>
           <GridItem textAlign={'center'} gridArea='arr4'>
@@ -195,13 +151,7 @@ export default function Flowchart({
               color={'common.main'}
             />
           </GridItem>
-          <GridItem
-            bg={'white'}
-            borderRadius='md'
-            p='2'
-            textAlign={'center'}
-            gridArea='img5'
-          >
+          <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' textAlign={'center'} gridArea='img5'>
             <Grid gridTemplateColumns={'1fr 1fr'} gap={2}>
               <GridItem>
                 <Box
@@ -249,13 +199,7 @@ export default function Flowchart({
               color={'common.main'}
             />
           </GridItem>
-          <GridItem
-            bg={'white'}
-            borderRadius='md'
-            p='2'
-            textAlign={'center'}
-            gridArea='img6'
-          >
+          <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' textAlign={'center'} gridArea='img6'>
             <Box
               fontSize={{ base: 'md' }}
               fontWeight='bold'

@@ -1,16 +1,5 @@
 import { ArrowRightIcon } from '@chakra-ui/icons';
-import {
-  Box,
-  Container,
-  Grid,
-  GridItem,
-  Heading,
-  Stack,
-  Text,
-  Flex,
-  UnorderedList,
-  ListItem,
-} from '@chakra-ui/react';
+import { Box, Container, Grid, GridItem, Heading, Stack, Text, Flex, UnorderedList, ListItem } from '@chakra-ui/react';
 
 export default function Roadmap({ text: { content, title } }) {
   return (
@@ -49,13 +38,7 @@ export default function Roadmap({ text: { content, title } }) {
               alignItems='center'
               sx={{ gap: '0.5rem' }}
             >
-              <Box
-                w='20px'
-                height='20px'
-                flexShrink='0'
-                bg={'common.main'}
-                borderRadius='50%'
-              />
+              <Box w='20px' height='20px' flexShrink='0' bg={'common.main'} borderRadius='50%' />
               <Box
                 fontSize='xx-large'
                 fontWeight={'bold'}
@@ -66,12 +49,7 @@ export default function Roadmap({ text: { content, title } }) {
               >
                 {step.year}
               </Box>
-              <Stack
-                borderRadius={'md'}
-                bg='white'
-                p={2}
-                flexGrow={{ base: 1, md: 0 }}
-              >
+              <Stack borderRadius={'md'} bg='white' p={2} flexGrow={{ base: 1, md: 0 }} shadow='md'>
                 <Heading
                   as={'h3'}
                   fontSize='xl'
@@ -85,13 +63,7 @@ export default function Roadmap({ text: { content, title } }) {
                 </Heading>
                 <Stack>
                   {step.sections.map((section) => (
-                    <Box
-                      key={section.title}
-                      borderRadius='md'
-                      border='1px solid'
-                      borderColor='common.main'
-                      p='2'
-                    >
+                    <Box key={section.title} borderRadius='md' border='1px solid' borderColor='common.main' p='2'>
                       <Heading as='h4' textAlign='center' fontSize='lg'>
                         {section.title}
                       </Heading>

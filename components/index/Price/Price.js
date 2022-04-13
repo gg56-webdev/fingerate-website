@@ -1,14 +1,5 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import {
-  Box,
-  Container,
-  Heading,
-  Flex,
-  Stack,
-  Text,
-  Grid,
-  Link,
-} from '@chakra-ui/react';
+import { Box, Container, Heading, Flex, Stack, Text, Grid, Link } from '@chakra-ui/react';
 
 export default function Price({
   text: {
@@ -19,23 +10,10 @@ export default function Price({
   return (
     <Box bgImage={'/price/metaverse3.webp'} bgSize='cover'>
       <Container maxW={'container.lg'} textAlign='center' py={8}>
-        <Heading
-          as={'h2'}
-          mb='10'
-          color={'common.second'}
-          p='2'
-          bg={'common.main'}
-          borderRadius='md'
-        >
+        <Heading as={'h2'} mb='10' color={'common.second'} p='2' bg={'common.main'} borderRadius='md'>
           {h2}
         </Heading>
-        <Stack
-          gap='4'
-          alignItems={'center'}
-          bg='whiteAlpha.800'
-          p='2'
-          borderRadius={'md'}
-        >
+        <Stack gap='2' bg='whiteAlpha.800' px='2' py='4' borderRadius={'md'}>
           {list.map((row) => (
             <Flex
               key={row.grade}
@@ -97,7 +75,7 @@ export default function Price({
               </Grid>
             </Flex>
           ))}
-          <Box fontStyle={'italic'} fontSize='xl'>
+          <Box fontStyle={'italic'} fontWeight='bold' fontSize='2xl' bg='white' p='4' borderRadius='md' shadow='lg'>
             {disclaimer}
             <ArrowForwardIcon mx='2' />
             <Link href='mailto:admin@fingerate.world' color={'blue'}>

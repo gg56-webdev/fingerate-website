@@ -1,19 +1,19 @@
 import { Container, Box, Text, Stack, Link, Divider, Flex } from '@chakra-ui/react';
 import { default as NLink } from 'next/link';
 import Image from 'next/image';
-import Contact from '../Contact/Contact';
 import gg56logo from '../../../public/footer/gg56.svg';
 
 export default function Footer() {
   return (
-    <Box as={'footer'} bg='white' pos={'absolute'} bottom='0' w={'100%'} zIndex='2'>
+    <Box as={'footer'} bg='white' pos={'absolute'} bottom='0' w={'100%'} zIndex='2' shadow='sm'>
       <Container maxW='container.lg' p='2'>
         <Box
           display={'flex'}
           justifyContent={{ base: 'center', sm: 'space-between' }}
           alignItems={'center'}
           sx={{ gap: '0.5rem' }}
-          flexWrap={'wrap-reverse'}>
+          flexWrap={'wrap-reverse'}
+        >
           <Stack direction={'row'} alignItems='center'>
             <Box display={{ base: 'none', sm: 'block' }}>
               <Image src={gg56logo} alt='GG56 Logo' width={60} height={60} />

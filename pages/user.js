@@ -52,7 +52,7 @@ export default function User() {
       <Head>
         <title>My SoTs</title>
       </Head>
-      <Container maxW={'container.lg'} pt={'70px'}>
+      <Container maxW={'container.lg'} pt={'80px'}>
         <Box spacing={'6'} bg='purple.100' w={'fit-content'} mx='auto' p={'4'} borderRadius='md'>
           <Heading as={'h1'} textAlign='center' mb='5'>
             {loading ? 'loading' : user && user.email}{' '}
@@ -105,7 +105,8 @@ export default function User() {
               gap='2'
               gridTemplateColumns={'repeat(auto-fill, minmax(200px, 1fr))'}
               p='2'
-              borderRadius={'md'}>
+              borderRadius={'md'}
+            >
               {sots.map((sot) => (
                 <Stack
                   key={sot.id}
@@ -125,7 +126,8 @@ export default function User() {
                     outline: '2px solid',
                     outlineColor: 'common.main',
                     cursor: 'pointer',
-                  }}>
+                  }}
+                >
                   <Box borderRadius={'md'} overflow='hidden'>
                     <Image
                       src={sot.image}

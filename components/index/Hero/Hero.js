@@ -54,7 +54,8 @@ export default function Hero({ text: { content }, news }) {
         zIndex: '1',
       }}
       overflowX='hidden'
-      flexDir={'column'}>
+      flexDir={'column'}
+    >
       <Container maxW='container.xl' flexGrow='1' position='relative' zIndex='2'>
         <Flex
           pt={'65px'}
@@ -64,7 +65,8 @@ export default function Hero({ text: { content }, news }) {
           h='100%'
           alignContent='center'
           pb={4}
-          sx={{ gap: '0.5rem' }}>
+          sx={{ gap: '0.5rem' }}
+        >
           <MotionBox
             textAlign={{ base: 'center', md: 'left' }}
             pr={{ md: 2 }}
@@ -76,41 +78,18 @@ export default function Hero({ text: { content }, news }) {
             flexDirection='column'
             sx={{ gap: '1rem' }}
             pl={{ md: 3 }}
-            flex={{ base: 0, md: '0.6' }}>
+            flex={{ base: 0, md: '0.6' }}
+          >
             <MotionHeading
               variants={item}
               as='h1'
               color='text.second'
               fontSize={['xx-large', 'xx-large', '5xl']}
-              whiteSpace={{ md: 'pre-wrap' }}>
+              whiteSpace={{ md: 'pre-wrap' }}
+            >
               {content.h2}
             </MotionHeading>
-            {/* <Grid
-              gridTemplateColumns={{ base: '1fr 1fr', md: '0.25fr 1fr 0.25fr' }}
-              gap={2}
-              mb='2'
-              px={2}
-            >
-              {content.features.map((feature, _id) => (
-                <MotionText
-                  key={feature}
-                  variants={item}
-                  bg='common.second'
-                  color='common.main'
-                  textAlign={'center'}
-                  fontSize={{ base: 'sm', md: 'xl' }}
-                  p={2}
-                  borderRadius='md'
-                  whiteSpace={{ md: 'pre-wrap' }}
-                  fontWeight='bold'
-                  display='grid'
-                  placeItems='center'
-                  gridColumn={{ md: _id % 2 === 0 ? '1 / 3' : '2 / -1' }}
-                >
-                  {feature}
-                </MotionText>
-              ))}
-            </Grid> */}
+
             <Swiper
               modules={[Autoplay, Pagination]}
               direction={'vertical'}
@@ -123,7 +102,8 @@ export default function Hero({ text: { content }, news }) {
                 disableOnInteraction: false,
               }}
               speed={500}
-              className='swiper-cards'>
+              className='swiper-cards'
+            >
               {content.features.map((feature) => (
                 <SwiperSlide key={feature} className='swiper-cards__slide'>
                   {feature}
@@ -134,7 +114,8 @@ export default function Hero({ text: { content }, news }) {
               justifyContent={{ base: 'center', md: 'left' }}
               sx={{ gap: '1rem' }}
               textAlign='center'
-              flexWrap={'wrap'}>
+              flexWrap={'wrap'}
+            >
               <NLink href={'/sots'} passHref>
                 <Link
                   fontSize={'2xl'}
@@ -156,7 +137,8 @@ export default function Hero({ text: { content }, news }) {
                   px='6'
                   py='2'
                   fontWeight={'bold'}
-                  flex={1}>
+                  flex={1}
+                >
                   {content.btn1}
                 </Link>
               </NLink>
@@ -172,7 +154,8 @@ export default function Hero({ text: { content }, news }) {
                   px='6'
                   py='2'
                   fontWeight={'bold'}
-                  flex={1}>
+                  flex={1}
+                >
                   {content.btn2}
                 </Link>
               </NLink>
@@ -189,15 +172,18 @@ export default function Hero({ text: { content }, news }) {
             h='100%'
             w='100%'
             display='flex'
-            flexDirection='column'>
+            flexDirection='column'
+          >
             <Box
+              title='SoT device'
               as='iframe'
               flex='1'
               src='https://my.spline.design/sotdevice-fb79e2d7b8093da7f604cef8e68b8715/'
               frameBorder='0'
               width='100%'
               height='100%'
-              loading='lazy'></Box>
+              loading='eager'
+            />
             <Feed feed={content.feed} />
           </MotionBox>
         </Flex>

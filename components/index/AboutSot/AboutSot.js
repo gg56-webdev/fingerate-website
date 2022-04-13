@@ -1,14 +1,4 @@
-import {
-  Box,
-  Container,
-  Grid,
-  GridItem,
-  Heading,
-  UnorderedList,
-  ListItem,
-  Text,
-  Stack,
-} from '@chakra-ui/react';
+import { Box, Container, Grid, GridItem, Heading, UnorderedList, ListItem, Text, Stack } from '@chakra-ui/react';
 import Image from 'next/image';
 
 export default function AboutSot({ text: { content } }) {
@@ -29,14 +19,10 @@ export default function AboutSot({ text: { content } }) {
           p='6'
           borderRadius={'md'}
           alignItems='center'
+          shadow='md'
         >
           <GridItem gridArea={'list1'}>
-            <Heading
-              textAlign={{ base: 'center', md: 'left' }}
-              mb='2'
-              fontSize={'xl'}
-              as={'h3'}
-            >
+            <Heading textAlign={{ base: 'center', md: 'left' }} mb='2' fontSize={'xl'} as={'h3'}>
               {content.list1.h3}
             </Heading>
             <UnorderedList>
@@ -49,29 +35,14 @@ export default function AboutSot({ text: { content } }) {
           </GridItem>
           <GridItem gridArea={'img'} justifySelf='center'>
             <Stack textAlign={'center'}>
-              <Image
-                alt='SoT device'
-                src='/about/fr-hand.png'
-                width={500}
-                height={500}
-              />
-              <Text
-                fontSize={'xl'}
-                whiteSpace='pre-wrap'
-                fontWeight={'bold'}
-                color='common.main'
-              >
+              <Image alt='SoT device' src='/about/fr-hand.png' width={500} height={500} />
+              <Text fontSize={'xl'} whiteSpace='pre-wrap' fontWeight={'bold'} color='common.main'>
                 {content.imgCaption}
               </Text>
             </Stack>
           </GridItem>
           <GridItem gridArea={'list2'}>
-            <Heading
-              textAlign={{ base: 'center', md: 'left' }}
-              mb='2'
-              fontSize={'xl'}
-              as={'h3'}
-            >
+            <Heading textAlign={{ base: 'center', md: 'left' }} mb='2' fontSize={'xl'} as={'h3'}>
               {content.list2.h3}
             </Heading>
             <UnorderedList display={'flex'} flexWrap='wrap'>

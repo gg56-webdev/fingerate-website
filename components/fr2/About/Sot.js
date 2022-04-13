@@ -30,7 +30,7 @@ const boxVariants = {
 
 export default function Sot({ text: { content } }) {
   return (
-    <Container maxW='container.xl' pt='70px' pb='8'>
+    <Container maxW='container.xl' pt='80px' pb='8'>
       <Grid
         gridTemplateAreas={{
           base: `'img' 'heading' 'list'`,
@@ -52,20 +52,11 @@ export default function Sot({ text: { content } }) {
           </Stack>
         </Card>
         <Box gridArea='img'>
-          <Image
-            src={SotImg}
-            alt='SoT virtual terminal with example of survey on the screen'
-            placeholder='blur'
-          />
+          <Image src={SotImg} alt='SoT virtual terminal with example of survey on the screen' placeholder='blur' />
         </Box>
         <Stack spacing='16' gridArea='list'>
           <Card as={Stack} spacing='6'>
-            <Heading
-              fontSize='2xl'
-              as='h3'
-              textAlign='center'
-              textDecoration='underline'
-            >
+            <Heading fontSize='2xl' as='h3' textAlign='center' textDecoration='underline'>
               {content.how}
             </Heading>
             <OrderedList spacing='4' pl='4'>
@@ -76,12 +67,7 @@ export default function Sot({ text: { content } }) {
           </Card>
 
           <Stack spacing='6'>
-            <Heading
-              fontSize='2xl'
-              as='h3'
-              textAlign='center'
-              textDecoration='underline'
-            >
+            <Heading fontSize='2xl' as='h3' textAlign='center' textDecoration='underline'>
               {content.benefit}
             </Heading>
             <SlideAnim stagger={0.2}>
@@ -99,13 +85,7 @@ export default function Sot({ text: { content } }) {
                     borderColor={i[4]}
                     variants={boxVariants}
                   >
-                    <Heading
-                      as='h4'
-                      fontSize={'2xl'}
-                      textAlign='center'
-                      mb='4'
-                      color={i[4]}
-                    >
+                    <Heading as='h4' fontSize={'2xl'} textAlign='center' mb='4' color={i[4]}>
                       {i[0]}
                     </Heading>
                     <UnorderedList spacing='4' listStyleType='none'>

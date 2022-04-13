@@ -37,6 +37,7 @@ export default function History({ text: { content } }) {
               fontSize={'lg'}
               fontWeight='bold'
               p='2'
+              shadow='md'
             >
               {ev}
             </GridItem>
