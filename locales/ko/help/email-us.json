@@ -4,5 +4,6 @@
   "email": "이메일 주소",
   "name": "이름",
   "message": "질문 및 의견",
-  "submit": "제출하기"
+  "submit": "제출하기",
+  "success": { "thanks": "감사합니다! 최대한 빨리 답변 드리겠습니다.", "goMain": "Go to Main" }
 }
