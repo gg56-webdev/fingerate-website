@@ -8,6 +8,7 @@ import News from './News/News';
 
 import 'swiper/css';
 import 'swiper/css/effect-cube';
+import { useState } from 'react';
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -33,6 +34,7 @@ const item = {
 const link = 'https://opensea.io/collection/fingeratesot';
 
 export default function Hero({ text: { content }, news }) {
+  const [loaded, setLoaded] = useState(false);
   return (
     <Flex
       as='section'
@@ -177,12 +179,16 @@ export default function Hero({ text: { content }, news }) {
             <Box
               title='SoT device'
               as='iframe'
-              flex='1'
-              src='https://my.spline.design/sotdevice-fb79e2d7b8093da7f604cef8e68b8715/'
+              src='https://my.spline.design/sotdevicecopy-e1d4a0f1fcf8d3f04e831dc52abcdc42/'
               frameBorder='0'
-              width='100%'
-              height='100%'
               loading='eager'
+              w='full'
+              h='full'
+              backgroundImage={!loaded && `url('./about/sot_device.png')`}
+              backgroundPosition='center'
+              backgroundRepeat='no-repeat'
+              backgroundSize='50%'
+              onLoad={() => setLoaded(true)}
             />
             <Feed feed={content.feed} />
           </MotionBox>
