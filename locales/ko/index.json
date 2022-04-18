@@ -144,30 +144,30 @@
         "h2": "기술 로드맵",
         "steps": [
           {
-            "title": "SOT 가상자산 분양",
+            "title": "SoT 가상자산 분양",
             "year": 2021,
             "sections": [
               {
                 "title": "FingeRate2.0 플랫폼 개발",
-                "points": ["웹 플랫폼 개발 및 오픈", "SOT 1만대 좌표 정의", "모델하우스 구성"]
+                "points": ["웹 플랫폼 개발 및 오픈", "SoT 1만대 좌표 정의", "모델하우스 구성"]
               },
               {
                 "title": "OpenSea Integration",
                 "points": [
-                  "OpenSea NFT 플랫폼과 SOT 시스템 연동",
-                  "SOT 관련 Smart contract 작성",
-                  "SOT 1,000대 민팅하여 OpenSea에 upload"
+                  "OpenSea NFT 플랫폼과 SoT 시스템 연동",
+                  "SoT 관련 Smart contract 작성",
+                  "SoT 1,000대 민팅하여 OpenSea에 upload"
                 ]
               }
             ]
           },
           {
-            "title": "SOT 서비스 개시",
+            "title": "SoT 서비스 개시",
             "year": 2022,
 
             "sections": [
               {
-                "title": "SOT 여론, 만족도조사 개시",
+                "title": "SoT 여론, 만족도조사 개시",
                 "points": ["여론조사 시스템 개발", "만족도 조사 AR 시스템 개발 및 테스트", "FingeRate2.0 앱 개발"]
               },
               {
@@ -187,7 +187,7 @@
             "sections": [
               {
                 "title": "Smart Contract",
-                "points": ["Survey Exchange시스템", "실시간 수익 정산", "SOT 가치 평가 시스템"]
+                "points": ["Survey Exchange시스템", "실시간 수익 정산", "SoT 가치 평가 시스템"]
               },
               {
                 "title": "자체 메인넷 개발",

@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
 import { ChevronRightIcon, CloseIcon, LinkIcon } from '@chakra-ui/icons';
-import { Box, IconButton, useDisclosure } from '@chakra-ui/react';
+import { Box, IconButton, useDisclosure, useMediaQuery } from '@chakra-ui/react';
 import Contact from '../Contact/Contact';
 
 export default function Social() {
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
+  const [isMobile] = useMediaQuery('(max-width: 1150px)');
+  const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: true });
+  useEffect(() => {
+    isMobile && onClose();
+  }, [isMobile, onClose]);
+
   return (
     <Box
       as='aside'

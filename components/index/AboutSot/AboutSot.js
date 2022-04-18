@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function AboutSot({ text: { content } }) {
   return (
-    <Box bg='purple.100'>
+    <Box bg='purple.100' id='about-sot'>
       <Container maxW={'container.lg'} py='8'>
         <Heading as='h2' textAlign={'center'} mb='10'>
           {content.h2}

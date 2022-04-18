@@ -69,7 +69,7 @@ export default function Roadmap({ text: { content, title } }) {
                       </Heading>
                       <UnorderedList>
                         {section.points.map((point) => (
-                          <ListItem key={point} fontSize='md'>
+                          <ListItem key={point} fontSize='md' sx={{ '&::marker': { color: 'common.main' } }}>
                             {point}
                           </ListItem>
                         ))}

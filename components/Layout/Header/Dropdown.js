@@ -22,13 +22,15 @@ export default function Dropdown({ item, onToggle }) {
         }}
         onMouseEnter={onOpen}
         onClick={onToggleDrop}
-        onMouseLeave={onClose}>
+        onMouseLeave={onClose}
+      >
         {item.n}
         {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </MenuButton>
       <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
         {item.dropdown.map((item) => (
           <MenuItem
+            p='0'
             key={item.n}
             onClick={onToggle}
             border={item.important && '1px solid'}
@@ -40,9 +42,10 @@ export default function Dropdown({ item, onToggle }) {
               bg: 'common.second',
               color: 'common.main',
               boxShadow: 'md',
-            }}>
+            }}
+          >
             <NLink href={item.l} passHref>
-              <Link w={'100%'} isExternal={item.external} _hover={{ textDecoration: 'none' }}>
+              <Link w={'100%'} isExternal={item.external} _hover={{ textDecoration: 'none' }} p='2'>
                 {item.n}
                 {item.external && <ExternalLinkIcon mx='2px' />}
               </Link>
