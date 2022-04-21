@@ -12,14 +12,14 @@
       "external": false,
       "dropdown": [
         {
-          "n": "구매",
-          "l": "/sots",
+          "n": "맵에서구매",
+          "l": "/map",
           "important": false,
           "external": false
         },
         {
-          "n": "맵에서구매",
-          "l": "/map",
+          "n": "카드 결제 구매",
+          "l": "/sots",
           "important": false,
           "external": false
         },
