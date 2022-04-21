@@ -5,7 +5,7 @@ import gg56logo from '../../../public/footer/gg56.svg';
 
 export default function Footer() {
   return (
-    <Box as={'footer'} bg='white' pos={'absolute'} bottom='0' w={'100%'} zIndex='2' shadow='sm'>
+    <Box as={'footer'} bg='white' marginBlockStart='auto'>
       <Container maxW='container.lg' p='2'>
         <Box
           display={'flex'}

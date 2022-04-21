@@ -1,8 +1,15 @@
-html,
+html, body, #__next {
+  height: 100%;
+}
 body {
   scroll-behavior: smooth;
   scroll-padding: 60px;
   word-break: keep-all;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
 }
 
 .swiper-cards {

@@ -20,7 +20,7 @@
         "feed": [
           { "item": "선 분양", "number": "1000+" },
           { "item": "총 SoT 대수", "number": "1.2 mil." },
-          { "item": "현제 분양 가능 수량", "number": "10K" }
+          { "item": "현재 분양 가능 수량", "number": "10K" }
         ]
       }
     },

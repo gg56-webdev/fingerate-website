@@ -14,7 +14,7 @@ export default function Layout({ children }) {
     <>
       <Header />
       {!socialCancel.includes(pathname) && <Social />}
-      <Box as={'main'} minH='100vh' pb={!footerCancel.includes(pathname) && { base: '240px', sm: '138px' }}>
+      <Box as={'main'} flex='1'>
         {children}
       </Box>
       {!footerCancel.includes(pathname) && <Footer />}

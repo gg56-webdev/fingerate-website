@@ -76,75 +76,77 @@ export default function Enter() {
   }, [user]);
 
   return (
-    <Grid placeItems={'center'} h='calc(100vh - 80px - 140px)' pt={'80px'}>
+    <>
       <Head>
         <title>로그인/가입하기</title>
       </Head>
-      <Stack
-        bg={'white'}
-        p='2'
-        pt='4'
-        borderRadius={'md'}
-        maxW='500px'
-        minW={'350px'}
-        textAlign={'center'}
-        alignItems='center'
-        spacing={5}
-        boxShadow='md'
-      >
-        <Stack>
-          <Heading>{screen}</Heading>
+      <Box display='grid' h='full' placeItems='center' pt='80px' px='2' pb='4'>
+        <Stack
+          bg={'white'}
+          p='2'
+          pt='4'
+          borderRadius={'md'}
+          maxW='350px'
+          w='full'
+          textAlign={'center'}
+          alignItems='center'
+          spacing={5}
+          boxShadow='md'
+        >
+          <Stack>
+            <Heading>{screen}</Heading>
 
-          <Text fontSize={'md'}>
-            {screen === '로그인' ? '' : screen === '가입하기' ? '' : '비밀번호를 재설정하세요'}
-          </Text>
-        </Stack>
+            <Text fontSize={'md'}>
+              {screen === '로그인' ? '' : screen === '가입하기' ? '' : '비밀번호를 재설정하세요'}
+            </Text>
+          </Stack>
 
-        <Stack as={'form'} onSubmit={(e) => handleSubmit(e)} spacing='4'>
-          <FormControl>
-            <FormLabel htmlFor='email'>이메일 주소</FormLabel>
-            <Input id='email' type='email' onChange={(e) => setEmail(e.target.value)} required />
-          </FormControl>
-          {(screen === '로그인' || screen === '가입하기') && (
+          <Stack as={'form'} onSubmit={(e) => handleSubmit(e)} spacing='4'>
             <FormControl>
-              <FormLabel htmlFor='password'>비밀번호</FormLabel>
-              <Input id='password' type='password' onChange={(e) => setPassword(e.target.value)} required />
-              {/* {!screen && (
+              <FormLabel htmlFor='email'>이메일 주소</FormLabel>
+              <Input id='email' type='email' onChange={(e) => setEmail(e.target.value)} required />
+            </FormControl>
+            {(screen === '로그인' || screen === '가입하기') && (
+              <FormControl>
+                <FormLabel htmlFor='password'>비밀번호</FormLabel>
+                <Input id='password' type='password' onChange={(e) => setPassword(e.target.value)} required />
+                {/* {!screen && (
                 <FormHelperText>Please choose a secure password</FormHelperText>
               )} */}
-            </FormControl>
-          )}
-          <Button type='submit' colorScheme={'purple'}>
-            {screen === '로그인' ? '로그인' : screen === '가입하기' ? '가입하기' : 'Send'}
-          </Button>
-          {error && (
-            <Alert status='error'>
-              <AlertIcon />
-              <AlertTitle>{error}</AlertTitle>
-            </Alert>
-          )}
-          {alert && (
-            <Alert status='info'>
-              <AlertIcon />
-              <AlertTitle>{alert}</AlertTitle>
-            </Alert>
+              </FormControl>
+            )}
+            <Button type='submit' colorScheme={'purple'}>
+              {screen === '로그인' ? '로그인' : screen === '가입하기' ? '가입하기' : 'Send'}
+            </Button>
+            {error && (
+              <Alert status='error'>
+                <AlertIcon />
+                <AlertTitle>{error}</AlertTitle>
+              </Alert>
+            )}
+            {alert && (
+              <Alert status='info'>
+                <AlertIcon />
+                <AlertTitle>{alert}</AlertTitle>
+              </Alert>
+            )}
+          </Stack>
+          {screen === '로그인' && <Link onClick={() => changeScreen('비밀번호 찾기')}>비밀번호 찾기</Link>}
+
+          {screen === '로그인' ? (
+            <Link fontSize={'sm'} onClick={() => changeScreen('가입하기')} color='blue'>
+              가입하기
+            </Link>
+          ) : (
+            <Text fontSize={'sm'}>
+              이미 회원이신가요?{' '}
+              <Link onClick={() => changeScreen('로그인')} color='blue'>
+                로그인하기
+              </Link>
+            </Text>
           )}
         </Stack>
-        {screen === '로그인' && <Link onClick={() => changeScreen('비밀번호 찾기')}>비밀번호 찾기</Link>}
-
-        {screen === '로그인' ? (
-          <Link fontSize={'sm'} onClick={() => changeScreen('가입하기')} color='blue'>
-            가입하기
-          </Link>
-        ) : (
-          <Text fontSize={'sm'}>
-            이미 회원이신가요?{' '}
-            <Link onClick={() => changeScreen('로그인')} color='blue'>
-              로그인하기
-            </Link>
-          </Text>
-        )}
-      </Stack>
-    </Grid>
+      </Box>
+    </>
   );
 }
