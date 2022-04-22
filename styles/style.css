@@ -27,7 +27,7 @@ body {
   font-size: 1.25rem;
   display: grid;
   align-items: center;
-  padding-inline: var(--chakra-space-8) var(--chakra-space-1);
+  padding-inline: var(--chakra-space-8) var(--chakra-space-2);
 }
 
 .swiper-cards__slide:nth-child(2n) {

@@ -1,25 +1,21 @@
 import Head from 'next/head';
 import { Hero, AboutSot, Flowchart, Price, LearnMore, History, Roadmap } from '../components';
-import { useRouter } from 'next/router';
 import { db } from '../lib/firebaseAdmin';
 
-import en from '../locales/en/index.json';
 import ko from '../locales/ko/index.json';
 
 export default function Home({ news }) {
-  const router = useRouter();
-  const { locale } = router;
-  const t = locale === 'en' ? en : ko;
+  const t = ko;
 
   return (
     <>
       <Head>
         <title>{t.title}</title>
-        <meta name="description" content={t.description} />
-        <meta name="keywords" content={t.keywords} />
-        <meta name="robots" content="index, follow" />
-        <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name='description' content={t.description} />
+        <meta name='keywords' content={t.keywords} />
+        <meta name='robots' content='index, follow' />
+        <meta charSet='utf-8' />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <Hero text={t.sections.hero} news={news} />
