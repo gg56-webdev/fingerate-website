@@ -15,17 +15,12 @@ import '../styles/style.css';
 import '@fontsource/do-hyeon';
 import '@fontsource/gowun-dodum';
 
-import 'mapbox-gl/dist/mapbox-gl.css';
-
 function MyApp({ Component, pageProps }) {
-  const router = useRouter();
-  const { locale } = router;
-  const currentTheme = locale === 'ko' ? koreanTheme : theme;
-
+  const { locale } = useRouter();
   const { user, loading, error, logout } = useUserData();
 
   return (
-    <ChakraProvider theme={currentTheme}>
+    <ChakraProvider theme={locale === 'ko' ? koreanTheme : theme}>
       <UserContext.Provider value={{ user, loading, error, logout }}>
         <NextNProgress height={5} color='#710193' />
         <Layout>

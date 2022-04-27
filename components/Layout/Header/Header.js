@@ -1,5 +1,17 @@
-import { Box, Container, Flex, Stack, useDisclosure, Link, Select, Spinner, Spacer } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, ExternalLinkIcon, CheckCircleIcon } from '@chakra-ui/icons';
+import {
+  Box,
+  Container,
+  Flex,
+  Stack,
+  useDisclosure,
+  Link,
+  Select,
+  Spinner,
+  Spacer,
+  Button,
+  IconButton,
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon, ExternalLinkIcon, CheckCircleIcon, WarningIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
 
@@ -20,7 +32,7 @@ export default function Header() {
   const { locale, pathname, asPath, query } = router;
   const t = locale === 'en' ? en : ko;
 
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
 
   const changeLang = (e) => {
     const locale = e.target.value;
@@ -28,95 +40,77 @@ export default function Header() {
     onToggle();
   };
 
-  const { user, loading, error } = useContext(UserContext);
-
   return (
-    <Box as='header' pos='fixed' w='100%' color='text.second' zIndex='sticky' padding={2}>
+    <Box as='header' pos='fixed' w='full' color='white' zIndex='sticky' padding='2'>
       <Container
         maxW='container.xl'
         backgroundColor='white'
-        borderRadius={6}
-        boxShadow={'lg'}
-        p={1}
-        border={'1px solid'}
-        borderColor={'gray.300'}>
+        borderRadius='md'
+        boxShadow='lg'
+        p='1'
+        border='1px solid'
+        borderColor='gray.300'
+      >
         <Flex as='nav' align='center' justify='space-between' wrap='wrap'>
-          <Flex as='a' href='/' align='center' sx={{ gap: '0.25rem' }}>
+          <Flex align='center' sx={{ gap: '0.25rem' }}>
             <Box fontSize={0} borderRadius='md' overflow={'hidden'}>
               <Image src={frLogo} alt='FingeRate logo' width='40' height='40' />
             </Box>
-            <Box color='common.main' fontSize='2xl' fontWeight='bold' fontFamily={'sans-serif'}>
-              FingeRate
-            </Box>
+            <NLink href='/' passHref>
+              <Link color='common.main' fontSize='2xl' fontWeight='bold' fontFamily={'sans-serif'} onClick={onClose}>
+                FingeRate
+              </Link>
+            </NLink>
           </Flex>
 
-          <Box display={{ base: 'block', lg: 'none' }} onClick={onToggle} color={'common.main'} mr={2}>
-            {isOpen ? <CloseIcon /> : <HamburgerIcon boxSize='6' />}
-          </Box>
+          <IconButton
+            aria-label={`${isOpen ? 'close' : 'open'} navbar`}
+            display={{ base: 'grid', lg: 'none' }}
+            placeItems='center'
+            onClick={onToggle}
+            color={'common.main'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon boxSize='6' />}
+            variant='ghost'
+            colorScheme='purple'
+          />
+
           <Box
             display={{
               base: isOpen ? 'block' : 'none',
               lg: 'block',
             }}
-            flexBasis={{ base: '100%', lg: 'auto' }}
-            // pb={[4, 4, 0, 0]}
+            flexBasis={{ base: 'full', lg: 'auto' }}
           >
-            <Stack
-              spacing={3}
+            <Flex
               align='center'
-              justify={['center', 'space-evenly', 'flex-end', 'flex-end']}
-              direction={['column', 'column', 'column', 'row']}
-              pt={[4, 4, 0, 0]}
-              // bgColor={['common.main', 'common.main', 'transparent']}
+              direction={{ base: 'column', lg: 'row' }}
+              pt={{ base: 4, lg: 0 }}
+              pb={{ base: 2, lg: 0 }}
+              sx={{ gap: 2 }}
             >
               {t.nav.map((item) => {
-                if (item.dropdown)
-                  return (
-                    <Box key={item.n}>
-                      <Dropdown item={item} onToggle={onToggle} />
-                    </Box>
-                  );
-                if (item.l)
-                  return (
-                    <NLink key={item.n} href={item.l} passHref>
-                      <Link
-                        onClick={onToggle}
-                        border={item.important && '1px solid'}
-                        borderColor={item.important && 'common.main'}
-                        fontWeight={item.important && 'bold'}
-                        bg={item.important && 'common.main'}
-                        color={item.important ? 'white' : 'common.main'}
-                        px='2'
-                        borderRadius='md'
-                        _hover={{
-                          bg: 'common.second',
-                          color: 'common.main',
-                          boxShadow: 'md',
-                        }}
-                        isExternal={item.external}>
-                        {item.n}
-                        {item.external && <ExternalLinkIcon mx='2px' />}
-                      </Link>
-                    </NLink>
-                  );
+                if (item.dropdown) return <Dropdown key={item.n} item={item} onClose={onClose} />;
+                return (
+                  <NLink key={item.n} href={item.l} passHref>
+                    <Button
+                      as='a'
+                      size='sm'
+                      fontSize='lg'
+                      colorScheme='purple'
+                      bg='common.main'
+                      fontWeight='bold'
+                      _hover={{ bg: 'common.second', color: 'common.main', shadow: 'md' }}
+                      _active={{ bg: 'common.second', color: 'common.main' }}
+                      onClick={onClose}
+                    >
+                      {item.n}
+                    </Button>
+                  </NLink>
+                );
               })}
               <Spacer />
-              <Box color={'common.main'} onClick={onToggle}>
-                {error ? (
-                  error
-                ) : loading ? (
-                  <Spinner />
-                ) : user ? (
-                  <Stack direction={'row'} alignItems='center' spacing={'1'}>
-                    <NLink href={'/user'}>{user.email.split('@')[0]}</NLink>
-                    {user.emailVerified && <CheckCircleIcon />}
-                  </Stack>
-                ) : (
-                  <NLink href='/enter'>로그인/가입하기</NLink>
-                )}
-              </Box>
+              <Auth onClick={onClose} t={t} />
               <Spacer />
-
               {/* <Select
                 w={'fit-content'}
                 size='sm'
@@ -131,10 +125,36 @@ export default function Header() {
                 <option value='en'>English</option>
                 <option value='ko'>한국어</option>
               </Select> */}
-            </Stack>
+            </Flex>
           </Box>
         </Flex>
       </Container>
     </Box>
+  );
+}
+
+function Auth({ onClick, t }) {
+  const { user, loading, error } = useContext(UserContext);
+  if (error)
+    return (
+      <Flex align='center' p='1' color='red'>
+        Auth error
+        <WarningIcon ml='1' />
+      </Flex>
+    );
+  if (loading) return <Spinner />;
+  if (user !== null)
+    return (
+      <NLink href='/user' passHref>
+        <Link color='common.main' onClick={onClick}>
+          {user.email.split('@')[0]}
+          {user.emailVerified && <CheckCircleIcon ml='1' />}
+        </Link>
+      </NLink>
+    );
+  return (
+    <NLink href='/enter' passHref>
+      <Link color='common.main' onClick={onClick}>{`${t.login}/${t.signup}`}</Link>
+    </NLink>
   );
 }

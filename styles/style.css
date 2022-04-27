@@ -1,7 +1,7 @@
 html, body, #__next {
   height: 100%;
 }
-body {
+html {
   scroll-behavior: smooth;
   scroll-padding: 60px;
   word-break: keep-all;

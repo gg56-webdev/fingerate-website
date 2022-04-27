@@ -26,6 +26,7 @@ import {
 } from '@chakra-ui/react';
 import { ChevronLeftIcon, ExternalLinkIcon, HamburgerIcon } from '@chakra-ui/icons';
 import ReactMapGl, { Marker, FlyToInterpolator, Popup, GeolocateControl } from 'react-map-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import sotIcon from '../public/sot_icon.svg';
 import sotIconPG from '../public/sot_icon_pg.svg';
 import { db } from '../lib/firebase';
