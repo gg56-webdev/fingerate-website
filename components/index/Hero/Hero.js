@@ -28,20 +28,16 @@ export default function Hero({ text: { content }, news }) {
       }}
     >
       <Container maxW='container.xl' flex='1' position='relative' zIndex='2' pt='65px' pb={{ base: 2, md: 4 }}>
-        <Flex align='center' flexDirection={{ base: 'column-reverse', md: 'row' }} h='full' sx={{ gap: 2 }}>
+        <Flex flexDirection={{ base: 'column-reverse', md: 'row' }} h='full' sx={{ gap: 2 }}>
           <Stack
+            alignSelf='center'
             textAlign={{ base: 'center', md: 'left' }}
             display='flex'
             flexDirection='column'
             spacing={{ base: 2, md: 4 }}
             flex={{ base: 0, md: 0.5 }}
           >
-            <Heading
-              as='h1'
-              color='text.second'
-              fontSize={['xx-large', 'xx-large', '5xl']}
-              whiteSpace={{ md: 'pre-wrap' }}
-            >
+            <Heading as='h1' color='text.second' fontSize={{ base: '3xl', lg: '5xl' }} whiteSpace={{ md: 'pre-wrap' }}>
               {content.h2}
             </Heading>
 
@@ -65,21 +61,35 @@ export default function Hero({ text: { content }, news }) {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <Grid gap={{ base: 2, md: 4 }} textAlign='center' gridAutoFlow='column'>
+            <Grid gap={{ base: 2, md: 4 }} gridAutoFlow='column'>
               <NLink href={'/sots'} passHref>
-                <Button as={'a'} colorScheme='purple' size='lg' fontSize='2xl' bg='common.main'>
+                <Button
+                  as={'a'}
+                  size='md'
+                  bg='common.main'
+                  color='white'
+                  shadow='md'
+                  _hover={{ color: 'white', bg: 'common.mainLight' }}
+                >
                   {content.btn1}
                 </Button>
               </NLink>
               <NLink href={'/enter'} passHref>
-                <Button as={'a'} variant='outline' colorScheme='gray' size='lg' fontSize='2xl' color='common.main'>
+                <Button
+                  as={'a'}
+                  size='md'
+                  color='common.main'
+                  bg='white'
+                  shadow='md'
+                  _hover={{ color: 'white', bg: 'common.mainLight' }}
+                >
                   {content.btn2}
                 </Button>
               </NLink>
             </Grid>
           </Stack>
 
-          <Stack flex='1' h='full' w='full' spacing='0'>
+          <Flex flex='1' flexDirection='column' h='full' sx={{ gap: 2 }}>
             <Box
               title='SoT device'
               as='iframe'
@@ -87,7 +97,7 @@ export default function Hero({ text: { content }, news }) {
               frameBorder='0'
               loading='eager'
               w='full'
-              h='full'
+              flex='1'
               backgroundImage={!loaded && `url('./about/sot_device.png')`}
               backgroundPosition='center'
               backgroundRepeat='no-repeat'
@@ -95,7 +105,7 @@ export default function Hero({ text: { content }, news }) {
               onLoad={() => setLoaded(true)}
             />
             <Feed feed={content.feed} />
-          </Stack>
+          </Flex>
         </Flex>
       </Container>
       <News news={news} title={content.latestNews} />

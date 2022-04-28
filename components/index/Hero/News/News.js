@@ -5,14 +5,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 export default function News({ news, title }) {
   return (
-    <Box
-      zIndex={2}
-      flexBasis={'50px'}
-      bg='cyan.100'
-      borderTop={'1px solid'}
-      borderBottom={'1px solid'}
-      borderColor='common.mainLight'
-    >
+    <Box zIndex='2' bg='cyan.100' borderTop={'1px solid'} borderBottom={'1px solid'} borderColor='common.mainLight'>
       <Container maxW='container.lg' p='1'>
         <Grid gridTemplateColumns={'auto 1fr'} gap={{ md: 4 }}>
           <Box
@@ -36,23 +29,24 @@ export default function News({ news, title }) {
               disableOnInteraction: false,
             }}
             speed={500}
-            style={{ height: '50px', width: '100%' }}
+            style={{ height: '55px', width: '100%' }}
           >
             {news &&
               news.map((article) => (
                 <SwiperSlide key={article.title}>
                   <Flex
-                    h='100%'
+                    as='article'
+                    h='full'
                     justifyContent={'space-between'}
                     flexDir='row'
-                    overflow={'hidden'}
-                    alignItems={{ md: 'center' }}
+                    alignItems='center'
+                    sx={{ gap: 1 }}
                   >
-                    <Link href={article.link} isExternal color='blue' lineHeight={0.9}>
+                    <Link href={article.link} isExternal color='blue' lineHeight='0.9' noOfLines='3'>
                       {article.title}
                       <ExternalLinkIcon />
                     </Link>
-                    <Box as='time' dateTime={article.time} fontSize={{ base: 'sm', md: 'md' }} alignSelf='center'>
+                    <Box as='time' dateTime={article.time} fontSize={{ base: 'sm', md: 'md' }}>
                       {article.time.replace(/ /g, '')}
                     </Box>
                   </Flex>
