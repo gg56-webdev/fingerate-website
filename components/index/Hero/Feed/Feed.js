@@ -1,4 +1,4 @@
-import { Box, Stack, Grid } from '@chakra-ui/react';
+import { Box, Stack } from '@chakra-ui/react';
 
 export default function Feed({ feed }) {
   return (

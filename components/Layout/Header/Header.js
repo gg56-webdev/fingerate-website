@@ -87,6 +87,8 @@ export default function Header() {
               pt={{ base: 4, lg: 0 }}
               pb={{ base: 2, lg: 0 }}
               sx={{ gap: 2 }}
+              fontSize='md'
+              fontWeight='bold'
             >
               {t.nav.map((item) => {
                 if (item.dropdown) return <Dropdown key={item.n} item={item} onClose={onClose} />;
@@ -95,10 +97,10 @@ export default function Header() {
                     <Button
                       as='a'
                       size='sm'
-                      fontSize='lg'
                       colorScheme='purple'
                       bg='common.main'
-                      fontWeight='bold'
+                      fontSize='inherit'
+                      fontWeight='inherit'
                       _hover={{ bg: 'common.second', color: 'common.main', shadow: 'md' }}
                       _active={{ bg: 'common.second', color: 'common.main' }}
                       onClick={onClose}
@@ -142,11 +144,11 @@ function Auth({ onClick, t }) {
         <WarningIcon ml='1' />
       </Flex>
     );
-  if (loading) return <Spinner />;
+  if (loading) return <Spinner color='common.mainLight' />;
   if (user !== null)
     return (
       <NLink href='/user' passHref>
-        <Link color='common.main' onClick={onClick}>
+        <Link color='common.mainLight' onClick={onClick}>
           {user.email.split('@')[0]}
           {user.emailVerified && <CheckCircleIcon ml='1' />}
         </Link>
@@ -154,7 +156,7 @@ function Auth({ onClick, t }) {
     );
   return (
     <NLink href='/enter' passHref>
-      <Link color='common.main' onClick={onClick}>{`${t.login}/${t.signup}`}</Link>
+      <Link color='common.mainLight' onClick={onClick}>{`${t.login}/${t.signup}`}</Link>
     </NLink>
   );
 }

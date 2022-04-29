@@ -9,11 +9,11 @@ export default function Dropdown({ item, onClose }) {
         <MenuButton
           as={Button}
           size='sm'
-          fontSize='lg'
           rightIcon={<ChevronDownIcon boxSize={6} />}
           colorScheme='purple'
           bg='common.main'
-          fontWeight='bold'
+          fontSize='inherit'
+          fontWeight='inherit'
           sx={{
             '&[data-active] svg': { transform: 'rotateZ(180deg)' },
             '& svg': { transition: 'transform 0.2s' },
@@ -23,7 +23,7 @@ export default function Dropdown({ item, onClose }) {
           {item.n}
         </MenuButton>
       )}
-      <MenuList color='common.main' fontWeight='bold' fontSize='lg'>
+      <MenuList color='common.main'>
         {item.dropdown.map((item) => (
           <NLink key={item.n} href={item.l} passHref>
             <MenuItem as='a' _hover={{ bg: 'common.second' }} onClick={onClose}>

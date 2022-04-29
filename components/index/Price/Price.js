@@ -10,30 +10,26 @@ export default function Price({
   return (
     <Box bgImage={'/price/metaverse3.webp'} bgSize='cover'>
       <Container maxW={'container.lg'} textAlign='center' py={8}>
-        <Heading as={'h2'} mb='10' color={'common.second'} p='2' bg={'common.main'} borderRadius='md'>
+        <Heading as={'h2'} mb='10' color={'common.second'} p='2' bg={'common.main'} borderRadius='md' shadow='md'>
           {h2}
         </Heading>
-        <Stack gap='2' bg='whiteAlpha.800' px='2' py='4' borderRadius={'md'}>
+        <Stack bg='whiteAlpha.800' p='2' borderRadius={'md'}>
           {list.map((row) => (
             <Flex
               key={row.grade}
               flexDirection={{ base: 'column', md: 'row' }}
               borderRadius={'md'}
               bg={`grades.${row.grade.charAt(0)}`}
-              w={{ base: '100%' }}
-              sx={{
-                boxShadow: 'inset 0px 0px 20px 3px rgb(255 255 255 / 25%)',
-              }}
+              shadow='inner'
             >
               <Stack
                 spacing={1}
                 color='white'
                 flexShrink={0}
                 flexBasis='125px'
-                sx={{ aspectRatio: '1/1' }}
-                p='2'
-                justifyContent='center'
+                p='4'
                 fontFamily={'sans-serif'}
+                textShadow='-1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5)'
               >
                 <Box as={'strong'} fontWeight='bold' fontSize={'3xl'}>
                   {row.grade}
@@ -44,38 +40,31 @@ export default function Price({
               </Stack>
               <Grid
                 flex='1'
-                p={2}
+                p='2'
                 borderRadius={'md'}
                 gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }}
                 gap='2'
                 fontWeight={'bold'}
+                fontSize={'xl'}
               >
-                <Text
-                  fontSize={'xl'}
-                  bg='white'
-                  p='2'
-                  display={'grid'}
-                  placeItems='center'
-                  borderRadius='md'
-                  shadow={'md'}
-                >
+                <Text bg='white' p='2' display={'grid'} placeItems='center' borderRadius='md' shadow={'md'}>
                   {row.description}
                 </Text>
-                <Text
-                  fontSize={'xl'}
-                  bg='white'
-                  p='2'
-                  display={'grid'}
-                  placeItems='center'
-                  borderRadius='md'
-                  shadow={'md'}
-                >
+                <Text bg='white' p='2' display={'grid'} placeItems='center' borderRadius='md' shadow={'md'}>
                   {row.explanation}
                 </Text>
               </Grid>
             </Flex>
           ))}
-          <Box fontStyle={'italic'} fontWeight='bold' fontSize='2xl' bg='white' p='4' borderRadius='md' shadow='lg'>
+          <Box
+            fontStyle={'italic'}
+            fontWeight='bold'
+            fontSize='2xl'
+            bg='white'
+            p='4'
+            borderRadius='md'
+            shadow='outline'
+          >
             {disclaimer}
             <ArrowForwardIcon mx='2' />
             <Link href='mailto:admin@fingerate.world' color={'blue'}>

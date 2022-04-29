@@ -37,10 +37,15 @@ export default function Hero({ text: { content }, news }) {
             spacing={{ base: 2, md: 4 }}
             flex={{ base: 0, md: 0.5 }}
           >
-            <Heading as='h1' color='text.second' fontSize={{ base: '3xl', lg: '5xl' }} whiteSpace={{ md: 'pre-wrap' }}>
+            <Heading
+              as='h1'
+              color='text.second'
+              fontSize={{ base: '3xl', lg: '5xl' }}
+              whiteSpace={{ md: 'pre-wrap' }}
+              textShadow='-1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5)'
+            >
               {content.h2}
             </Heading>
-
             <Swiper
               modules={[Autoplay, Pagination]}
               direction={'vertical'}
@@ -93,15 +98,15 @@ export default function Hero({ text: { content }, news }) {
             <Box
               title='SoT device'
               as='iframe'
-              src='https://my.spline.design/sotdevicecopy-e1d4a0f1fcf8d3f04e831dc52abcdc42/'
+              // src='https://my.spline.design/sotdevicecopy-e1d4a0f1fcf8d3f04e831dc52abcdc42/'
+              loading='lazy'
               frameBorder='0'
-              loading='eager'
               w='full'
               flex='1'
               backgroundImage={!loaded && `url('./about/sot_device.png')`}
               backgroundPosition='center'
               backgroundRepeat='no-repeat'
-              backgroundSize='50%'
+              backgroundSize='auto 90%'
               onLoad={() => setLoaded(true)}
             />
             <Feed feed={content.feed} />
