@@ -27,7 +27,7 @@ export default function Hero({ text: { content }, news }) {
         zIndex: '1',
       }}
     >
-      <Container maxW='container.xl' flex='1' position='relative' zIndex='2' pt='65px' pb={{ base: 2, md: 4 }}>
+      <Container maxW='container.xl' flex='1' position='relative' zIndex='2' pt='65px' pb={{ base: 2, md: 4 }} px='2'>
         <Flex flexDirection={{ base: 'column-reverse', md: 'row' }} h='full' sx={{ gap: 2 }}>
           <Stack
             alignSelf='center'
