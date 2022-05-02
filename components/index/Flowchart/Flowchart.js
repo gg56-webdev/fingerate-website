@@ -33,7 +33,7 @@ export default function Flowchart({
           color='common.main'
         >
           <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' gridArea='img1'>
-            <Box bgColor={'common.second'} p='2' borderRadius='md'>
+            <Box bgColor={'common.second'} shadow='inner' p='2' borderRadius='md'>
               {slides[0].title}
             </Box>
             <Image alt='Avatar with SoT device' src={img1} placeholder='blur' />
@@ -43,10 +43,10 @@ export default function Flowchart({
           </GridItem>
           <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' gridArea='img2'>
             <Grid gridTemplateColumns={'1fr 1fr'} gap={2}>
-              <Box bgColor={'common.second'} p='2' borderRadius='md'>
+              <Box bgColor={'common.second'} shadow='inner' p='2' borderRadius='md'>
                 {slides[1].title}
               </Box>
-              <Box bgColor={'common.second'} p='2' borderRadius='md'>
+              <Box bgColor={'common.second'} shadow='inner' p='2' borderRadius='md'>
                 {slides[2].title}
               </Box>
               <GridItem colSpan={2}>
@@ -58,7 +58,7 @@ export default function Flowchart({
             <ArrowForwardIcon transform={{ base: 'rotate(90deg)', md: 'none' }} boxSize='8' />
           </GridItem>
           <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' gridArea='img3'>
-            <Box bgColor={'common.second'} p='2' borderRadius='md'>
+            <Box bgColor={'common.second'} shadow='inner' p='2' borderRadius='md'>
               {slides[3].title}
             </Box>
             <Image alt='Avatar interacting with SoT App and recieving SoM' src={img3} placeholder='blur' />
@@ -74,7 +74,7 @@ export default function Flowchart({
             />
           </GridItem>
           <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' gridArea='img4'>
-            <Box bgColor={'common.second'} p='2' borderRadius='md'>
+            <Box bgColor={'common.second'} shadow='inner' p='2' borderRadius='md'>
               {slides[4].title}
             </Box>
             <Image alt='GG56 Avatar collects and analyzes data' src={img4} placeholder='blur' />
@@ -84,10 +84,10 @@ export default function Flowchart({
           </GridItem>
           <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' gridArea='img5'>
             <Grid gridTemplateColumns={'1fr 1fr'} gap={2}>
-              <Box bgColor={'common.second'} p={2} borderRadius='md'>
+              <Box bgColor={'common.second'} shadow='inner' p={2} borderRadius='md'>
                 {slides[5].title}
               </Box>
-              <Box bgColor={'common.second'} p={2} borderRadius='md'>
+              <Box bgColor={'common.second'} shadow='inner' p={2} borderRadius='md'>
                 {slides[6].title}
               </Box>
               <GridItem textAlign={'center'} colSpan={2}>
@@ -106,7 +106,7 @@ export default function Flowchart({
             />
           </GridItem>
           <GridItem bg={'white'} shadow='md' borderRadius='md' p='2' gridArea='img6'>
-            <Box bgColor={'common.second'} p={2} borderRadius='md'>
+            <Box bgColor={'common.second'} shadow='inner' p={2} borderRadius='md'>
               {slides[7].title}
             </Box>
             <Box as='figure' position={'relative'}>

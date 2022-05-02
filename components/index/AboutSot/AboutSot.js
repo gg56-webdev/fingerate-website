@@ -5,7 +5,7 @@ import handWithPhone from '../../../public/about/fr-hand.png';
 export default function AboutSot({ text: { content } }) {
   return (
     <Box bg='purple.100' id='about-sot'>
-      <Container maxW={'container.lg'} py='8'>
+      <Container maxW={'container.lg'} py='8' px='2'>
         <Heading as='h2' textAlign={'center'} mb='10'>
           {content.h2}
         </Heading>
@@ -24,7 +24,7 @@ export default function AboutSot({ text: { content } }) {
             </Heading>
             <UnorderedList>
               {content.list1.listItems.map((item) => (
-                <ListItem listStylePos={'inside'} key={item}>
+                <ListItem listStylePos={'inside'} key={item} sx={{ '&::marker': { color: 'common.main' } }}>
                   {item}
                 </ListItem>
               ))}
@@ -44,7 +44,7 @@ export default function AboutSot({ text: { content } }) {
             </Heading>
             <UnorderedList display={'flex'} flexWrap='wrap'>
               {content.list2.listItems.map((item) => (
-                <ListItem listStylePos={'inside'} key={item} mr='4'>
+                <ListItem listStylePos={'inside'} key={item} mr='4' sx={{ '&::marker': { color: 'common.main' } }}>
                   {item}
                 </ListItem>
               ))}

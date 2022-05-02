@@ -8,18 +8,25 @@ export default function LearnMore({ text: { content } }) {
   const { locations } = content.box2;
   return (
     <Box bg='gray.200'>
-      <Container maxW={'container.lg'} py='8'>
+      <Container maxW={'container.lg'} py='8' px='2'>
         <Heading as={'h2'} mb='10' textAlign={'center'}>
           {content.h2}
         </Heading>
         <Grid gap='2' gridTemplateColumns={{ base: '1fr', md: '1fr .75fr' }}>
           <Stack bg={'white'} shadow='md' borderRadius='md' p={2} flexDir='column' h={'fit-content'}>
-            <Heading as={'h3'} fontSize='2xl' fontFamily={'Gowun Dodum'} fontWeight='bold' textAlign={'center'}>
+            <Box as={'h3'} fontSize='2xl' fontWeight='bold' textAlign={'center'}>
               {content.box1.title}
-            </Heading>
+            </Box>
             <Stack sx={{ '& img': { borderRadius: 'md' } }}>
               <Image alt='Signis gathering in the FingeRate Metaverse' src={signisImg} placeholder='blur' />
-              <Stack p={2} borderRadius='md' whiteSpace='pre-line' shadow='outline' spacing='1'>
+              <Stack
+                p={2}
+                borderRadius='md'
+                whiteSpace='pre-line'
+                border={'2px solid'}
+                borderColor='purple.200'
+                spacing='1'
+              >
                 <Text>{content.box1.p}</Text>
                 <Flex color='blue' sx={{ gap: 4 }}>
                   <Link href='http://swc2022.cafe24.com/contents.php?mcd=192' isExternal>
@@ -33,9 +40,9 @@ export default function LearnMore({ text: { content } }) {
             </Stack>
           </Stack>
           <Stack bg={'white'} shadow='md' borderRadius='md' p={2}>
-            <Heading as={'h3'} fontSize='2xl' textAlign={'center'} fontFamily={'Gowun Dodum'} fontWeight='bold'>
+            <Box as={'h3'} fontSize='2xl' textAlign={'center'} fontWeight='bold'>
               {content.box2.title}
-            </Heading>
+            </Box>
             <Grid
               gridTemplateColumns={{ base: '1fr 1fr' }}
               gap='2'
@@ -52,7 +59,7 @@ export default function LearnMore({ text: { content } }) {
                   pos: 'absolute',
                   left: 0,
                   bottom: 0,
-                  m: 2,
+                  m: 1,
                   fontSize: 'initial',
                   bg: 'blackAlpha.700',
                   p: 1,
@@ -69,7 +76,7 @@ export default function LearnMore({ text: { content } }) {
                   pos: 'absolute',
                   left: 0,
                   bottom: 0,
-                  m: 2,
+                  m: 1,
                   fontSize: 'initial',
                   bg: 'blackAlpha.700',
                   p: 1,
@@ -86,7 +93,7 @@ export default function LearnMore({ text: { content } }) {
                   pos: 'absolute',
                   left: 0,
                   bottom: 0,
-                  m: 2,
+                  m: 1,
                   fontSize: 'initial',
                   bg: 'blackAlpha.700',
                   p: 1,

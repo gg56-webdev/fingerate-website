@@ -9,7 +9,7 @@ export default function Price({
 }) {
   return (
     <Box bgImage={'/price/metaverse3.webp'} bgSize='cover'>
-      <Container maxW={'container.lg'} textAlign='center' py={8}>
+      <Container maxW={'container.lg'} textAlign='center' py={8} px='2'>
         <Heading as={'h2'} mb='10' color={'common.second'} p='2' bg={'common.main'} borderRadius='md' shadow='md'>
           {h2}
         </Heading>
