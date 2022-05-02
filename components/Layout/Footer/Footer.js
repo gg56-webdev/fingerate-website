@@ -77,7 +77,7 @@ export default function Footer() {
         </Flex>
         <Divider mt='1' />
         <Box as={'small'} display='block' fontSize='xs' color='common.main' textAlign={'center'} mt='1'>
-          @ {new Date().getFullYear()} GG56 Ltd. ALL RIGHTS RESERVED.
+          @{new Date().getFullYear()} GG56 Ltd. ALL RIGHTS RESERVED.
         </Box>
       </Container>
     </Box>

@@ -49,7 +49,7 @@ export default function Header() {
         boxShadow='lg'
         p='1'
         border='1px solid'
-        borderColor='gray.300'
+        borderColor='purple.100'
       >
         <Flex as='nav' align='center' justify='space-between' wrap='wrap'>
           <Flex align='center' sx={{ gap: '0.25rem' }}>
