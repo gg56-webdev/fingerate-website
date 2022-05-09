@@ -35,7 +35,8 @@
     "supercluster": "^7.1.4",
     "swiper": "^7.0.8",
     "swr": "^1.1.2",
-    "use-supercluster": "^0.4.0"
+    "use-supercluster": "^0.4.0",
+    "web3": "^1.7.3"
   },
   "devDependencies": {
     "eslint": "7.32.0",
