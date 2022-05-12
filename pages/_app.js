@@ -16,21 +16,23 @@ import '@fontsource/do-hyeon';
 import '@fontsource/gowun-dodum';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { MetaMaskProvider } from 'metamask-react';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const { locale } = router;
   const currentTheme = locale === 'ko' ? koreanTheme : theme;
-
-  const { user, loading, error, logout } = useUserData();
+  const userData = useUserData();
 
   return (
     <ChakraProvider theme={currentTheme}>
-      <UserContext.Provider value={{ user, loading, error, logout }}>
-        <NextNProgress height={5} color='#710193' />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+      <UserContext.Provider value={userData}>
+        <MetaMaskProvider>
+          <NextNProgress height={5} color='#710193' />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MetaMaskProvider>
       </UserContext.Provider>
     </ChakraProvider>
   );

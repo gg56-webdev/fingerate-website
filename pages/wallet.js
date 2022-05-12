@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState, useContext, useRef } from 'react';
 import { UserContext } from '../context/user';
-import { MetaMaskProvider, useMetaMask } from 'metamask-react';
+import { useMetaMask } from 'metamask-react';
 import { db } from '../lib/firebase';
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import Web3 from 'web3';
@@ -28,11 +28,7 @@ import contractABI from '../abi.json';
 export default function Wallet() {
   const { user, loading } = useContext(UserContext);
 
-  return (
-    <MetaMaskProvider>
-      <Grid pt='80px'>{loading ? <Spinner /> : user ? <MetaMask user={user} /> : <Button>Login</Button>}</Grid>
-    </MetaMaskProvider>
-  );
+  return <Grid pt='80px'>{loading ? <Spinner /> : user ? <MetaMask user={user} /> : <Button>Login</Button>}</Grid>;
 }
 
 const convertToHex = (num) => `0x${Number(num).toString(16)}`;
