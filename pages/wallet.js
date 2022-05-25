@@ -68,7 +68,7 @@ export default function NFT() {
     if (status === 'connected' && chainId === POLYGON.chainId && user && !walletAddress) {
       getAddress();
     }
-  }, [user, status, chainId, walletAddress]);
+  }, [user, status, chainId, walletAddress, getAddress]);
 
   return (
     <Container maxW='container.xl' pt='80px'>
@@ -348,7 +348,7 @@ function Sots({ ethereum, account }) {
     return () => {
       unsub();
     };
-  }, []);
+  }, [account]);
 
   return (
     <Box bg='white' p='2' shadow='md' borderRadius='md'>
