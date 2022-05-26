@@ -28,7 +28,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState, useContext, useRef, Fragment } from 'react';
 import { UserContext } from '../context/user';
-import { db } from '../lib/firebase';
+import { auth, db } from '../lib/firebase';
 import { doc, updateDoc, getDoc, onSnapshot, collection, query, where, setDoc } from 'firebase/firestore';
 
 import useMetaMaskCustom from '../hooks/useMetaMaskCustom';
@@ -54,21 +54,21 @@ export default function NFT() {
     }
   };
 
-  const getAddress = async () => {
-    try {
-      const docSnap = await getDoc(doc(db, 'users', user.uid));
-      const { wallet_address } = docSnap.data();
-      setWalletAddress(wallet_address);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
+    const getAddress = async () => {
+      try {
+        await auth.currentUser.getIdToken(true);
+        const docSnap = await getDoc(doc(db, 'users', user.uid));
+        const { wallet_address } = docSnap.data();
+        setWalletAddress(wallet_address);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     if (status === 'connected' && chainId === POLYGON.chainId && user && !walletAddress) {
       getAddress();
     }
-  }, [user, status, chainId, walletAddress, getAddress]);
+  }, [user, status, chainId, walletAddress]);
 
   return (
     <Container maxW='container.xl' pt='80px'>
@@ -79,7 +79,6 @@ export default function NFT() {
       ) : user ? (
         <Stack>
           <Flex flexDir='row' sx={{ gap: 2 }} justify='center' flexWrap='wrap' fontSize={{ base: 'sm', sm: 'md' }}>
-            <Button onClick={getAddress}>Get address</Button>
             <MetaMask metaMaskData={metaMaskData} />
             {status === 'connected' && chainId === POLYGON.chainId ? (
               <LinkAddress walletAddress={walletAddress} addWalletAddress={addWalletAddress} account={account} />
