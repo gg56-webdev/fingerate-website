@@ -25,8 +25,9 @@ import {
   UnorderedList,
   Select,
   useToast,
+  Divider,
 } from '@chakra-ui/react';
-import { useEffect, useState, useContext, useRef, Fragment } from 'react';
+import { useEffect, useState, useContext, useRef, Fragment, useMemo } from 'react';
 import { UserContext } from '../context/user';
 import { auth, db } from '../lib/firebase';
 import { doc, updateDoc, getDoc, onSnapshot, collection, query, where, setDoc } from 'firebase/firestore';
@@ -244,9 +245,52 @@ function LinkAddress({ walletAddress, addWalletAddress, account }) {
 }
 
 function Sots({ ethereum, account }) {
+  const [nfts, setNfts] = useState();
+  useEffect(() => {
+    const getNFTs = async () => {
+      const { result } = await import('../utils/SOT/nfts.json');
+      setNfts(result);
+    };
+
+    if (!nfts) {
+      getNFTs();
+    }
+  }, [nfts]);
+  return (
+    <Stack bg='white' p='2' shadow='md' borderRadius='md'>
+      {nfts ? (
+        <>
+          <AddSot nfts={nfts} account={account} ethereum={ethereum} />
+          <SotList nfts={nfts} account={account} />
+        </>
+      ) : (
+        <Spinner />
+      )}
+    </Stack>
+  );
+}
+
+function AddSot({ nfts, account, ethereum }) {
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [availableSots, setAvailableSots] = useState([]);
+  const [selectedSot, setSelectedSot] = useState('');
+  const [disabled, setDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const toast = useToast();
 
-  const addSot = async () => {
+  const handleCountrySelect = ({ target: { value } }) => {
+    setSelectedSot();
+    setSelectedCountry(value);
+    setAvailableSots(nftsByCountry[value]);
+  };
+
+  const handleSotSelect = ({ target: { value } }) => {
+    setSelectedSot(value);
+    setDisabled(false);
+  };
+
+  const handleSotAdd = async () => {
     setLoading(true);
     try {
       const [
@@ -258,22 +302,22 @@ function Sots({ ethereum, account }) {
       ] = await Promise.all([import('web3'), import('../utils/SOT/abi.json'), import('../utils/SOT/SOT')]);
       const web3 = new Web3(ethereum);
       const tokenInst = new web3.eth.Contract(contractABI, address);
-      const ownerAddress = await tokenInst.methods.ownerOf(sot).call();
+      const ownerAddress = await tokenInst.methods.ownerOf(selectedSot).call();
 
       if (ownerAddress.toLowerCase() !== account.toLowerCase()) {
         toast({
           title: 'SoT not added',
-          description: `You don't own this token (id: ${sot})`,
+          description: `You don't own this token (token_id: ${selectedSot})`,
           status: 'error',
           isClosable: true,
           position: 'top',
           duration: 4000,
         });
       } else {
-        await setDoc(doc(db, 'nfts', sot), { owner: account.toLowerCase() });
+        await setDoc(doc(db, 'nfts', selectedSot), { owner: account.toLowerCase() });
         toast({
           title: 'Success',
-          description: `Added token (id: ${sot})`,
+          description: `Added token (token_id: ${selectedSot})`,
           status: 'success',
           isClosable: true,
           position: 'top',
@@ -288,108 +332,92 @@ function Sots({ ethereum, account }) {
     }
   };
 
-  const selectCountry = (e) => {
-    setSot();
-    setCountry(e.target.value);
-    setSots(nfts[e.target.value]);
-  };
-
-  const selecSot = (e) => {
-    setSot(e.target.value);
-    setDisabled(false);
-  };
-
-  const [nfts, setNfts] = useState([]);
-  const [country, setCountry] = useState('');
-  const [sots, setSots] = useState([]);
-  const [sot, setSot] = useState();
-  const [disabled, setDisabled] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [fbNfts, setFbNfts] = useState([]);
-
-  useEffect(() => {
-    const getNfts = async () => {
-      try {
-        const { result } = await import('../nfts.json');
-        const arr = result.map(({ metadata, token_id }) => ({ ...JSON.parse(metadata), token_id }));
-
-        const groupedByCountry = arr.reduce((acc, cur) => {
+  const nftsByCountry = useMemo(
+    () =>
+      nfts
+        .map(({ metadata, token_id }) => ({ ...JSON.parse(metadata), token_id }))
+        .reduce((acc, cur) => {
           const { value: country } = cur.attributes[0];
           acc[country] = [...(acc[country] || []), cur];
           return acc;
-        }, {});
+        }, {}),
+    [nfts]
+  );
 
-        setNfts(groupedByCountry);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    if (nfts.length === 0) {
-      getNfts();
-    }
-  }, [nfts]);
+  return (
+    <Box as='fieldset' border='1px solid' borderColor='purple.200' borderRadius='md' p='2'>
+      <Box as='legend' px='2' fontWeight='bold' textAlign={{ base: 'center', sm: 'left' }}>
+        Add your SoT NFTs to FingeRate:
+      </Box>
+      <Flex sx={{ gap: 1 }} flexWrap='wrap' fontFamily='sans-serif' flexDir={{ base: 'column', sm: 'row' }}>
+        <Select minW='fit-content' flex={{ base: 1, sm: 0 }} onChange={handleCountrySelect} disabled={loading}>
+          <option value=''>-- Select Country --</option>
+          {Object.keys(nftsByCountry).map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </Select>
 
+        {selectedCountry && (
+          <Select flex='2' minW='fit-content' onChange={handleSotSelect} disabled={loading}>
+            <option value=''>-- Select SoT --</option>
+            {availableSots.map(({ name, token_id }) => {
+              const [fullId, location] = name.split(' - ');
+              const id = fullId.slice(4);
+              return (
+                <option key={token_id} value={token_id}>
+                  {id} - {location}
+                </option>
+              );
+            })}
+          </Select>
+        )}
+
+        {selectedSot && (
+          <Button isDisabled={disabled} isLoading={loading} onClick={handleSotAdd} colorScheme='purple'>
+            Add SoT
+          </Button>
+        )}
+      </Flex>
+    </Box>
+  );
+}
+
+function SotList({ nfts, account }) {
+  const [sots, setSots] = useState([]);
   useEffect(() => {
+    const parsedNfts = nfts.map(({ token_id, metadata }) => ({ ...JSON.parse(metadata), token_id }));
+
     const listenToNftCollection = () => {
       const q = query(collection(db, 'nfts'), where('owner', '==', account.toLowerCase()));
       return onSnapshot(q, (docs) => {
-        const nfts = [];
-        docs.forEach((doc) => {
-          const { owner } = doc.data();
-          nfts.push({ id: doc.id, owner });
-        });
-        setFbNfts(nfts);
+        const ownedNfts = [];
+        docs.forEach(({ id }) => ownedNfts.push(id));
+        setSots(parsedNfts.filter(({ token_id }) => ownedNfts.includes(token_id)));
       });
     };
-
     let unsub = listenToNftCollection();
-
     return () => {
       unsub();
     };
-  }, [account]);
+  }, [account, nfts]);
 
   return (
-    <Box bg='white' p='2' shadow='md' borderRadius='md'>
-      <Stack>
-        <Box as='strong'>Add SoT from your wallet to FingeRate App:</Box>
-        <Flex sx={{ gap: 1 }} flexWrap='wrap' fontFamily='sans-serif' flexDir={{ base: 'column', sm: 'row' }}>
-          <Select minW='fit-content' flex={{ base: 1, sm: 0 }} onChange={selectCountry}>
-            <option value=''>-- Select Country --</option>
-            {Object.keys(nfts).map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </Select>
-          {country && (
-            <Select flex='2' minW='fit-content' onChange={selecSot}>
-              <option value=''>-- Select SoT --</option>
-              {sots.map(({ name, token_id }) => {
-                const [fullId, location] = name.split(' - ');
-                const id = fullId.slice(4);
-                return (
-                  <option key={token_id} value={token_id}>
-                    {id} - {location}
-                  </option>
-                );
-              })}
-            </Select>
-          )}
-          {country && sots && sot && (
-            <Button isDisabled={disabled} onClick={addSot} isLoading={loading} colorScheme='purple'>
-              Add SoT
-            </Button>
-          )}
-        </Flex>
-        <UnorderedList>
-          {fbNfts.map(({ id, owner }) => (
-            <ListItem key={id}>
-              {id} {owner}
-            </ListItem>
-          ))}
-        </UnorderedList>
-      </Stack>
-    </Box>
+    <UnorderedList>
+      {sots.map(({ token_id, name, attributes }) => {
+        const [{ value: country }, { value: city }, { value: grade }] = attributes;
+        const [sotFullId, location] = name.split(' - ');
+        return (
+          <ListItem key={token_id}>
+            {grade} {location}
+          </ListItem>
+        );
+      })}
+    </UnorderedList>
   );
+}
+
+function SotCard({ sot }) {
+  return <Stack></Stack>;
 }
