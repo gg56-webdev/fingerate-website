@@ -8,6 +8,7 @@ import {
   Grid,
   List,
   ListItem,
+  Icon,
   Spinner,
   useDisclosure,
   AlertDialog,
@@ -19,6 +20,7 @@ import {
   Heading,
   Container,
   AlertDescription,
+  Text,
   Skeleton,
   Stack,
   Center,
@@ -26,8 +28,11 @@ import {
   Select,
   useToast,
   Divider,
+  Tag,
+  Link,
 } from '@chakra-ui/react';
 import { useEffect, useState, useContext, useRef, Fragment, useMemo } from 'react';
+import Image from 'next/image';
 import { UserContext } from '../context/user';
 import { auth, db } from '../lib/firebase';
 import { doc, updateDoc, getDoc, onSnapshot, collection, query, where, setDoc } from 'firebase/firestore';
@@ -35,6 +40,7 @@ import { doc, updateDoc, getDoc, onSnapshot, collection, query, where, setDoc } 
 import useMetaMaskCustom from '../hooks/useMetaMaskCustom';
 
 import POLYGON from '../utils/POLYGON';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 export default function NFT() {
   const { user, loading } = useContext(UserContext);
@@ -72,7 +78,7 @@ export default function NFT() {
   }, [user, status, chainId, walletAddress]);
 
   return (
-    <Container maxW='container.xl' pt='80px'>
+    <Container maxW='container.xl' pt='80px' pb='8'>
       {loading ? (
         <Grid placeItems='center'>
           <Spinner color='purple' />
@@ -391,10 +397,19 @@ function SotList({ nfts, account }) {
 
     const listenToNftCollection = () => {
       const q = query(collection(db, 'nfts'), where('owner', '==', account.toLowerCase()));
-      return onSnapshot(q, (docs) => {
-        const ownedNfts = [];
-        docs.forEach(({ id }) => ownedNfts.push(id));
-        setSots(parsedNfts.filter(({ token_id }) => ownedNfts.includes(token_id)));
+      return onSnapshot(q, ({ docs }) => {
+        const ownedNfts = docs.map(({ id }) => id);
+        setSots(
+          parsedNfts
+            .filter(({ token_id }) => ownedNfts.includes(token_id))
+            .sort((a, b) => {
+              const [, , { value: grade1 }] = a.attributes;
+              const [, , { value: grade2 }] = b.attributes;
+              if (grade1 === 'S') return -1;
+              if (grade2 === 'S') return 1;
+              return grade1.charCodeAt(0) - grade2.charCodeAt(0);
+            })
+        );
       });
     };
     let unsub = listenToNftCollection();
@@ -404,20 +419,104 @@ function SotList({ nfts, account }) {
   }, [account, nfts]);
 
   return (
-    <UnorderedList>
-      {sots.map(({ token_id, name, attributes }) => {
-        const [{ value: country }, { value: city }, { value: grade }] = attributes;
-        const [sotFullId, location] = name.split(' - ');
-        return (
-          <ListItem key={token_id}>
-            {grade} {location}
-          </ListItem>
-        );
-      })}
+    <UnorderedList
+      listStyleType='none'
+      display='grid'
+      gridTemplateColumns='repeat(auto-fill, minmax(min(200px, 100%), 1fr))'
+      gap='2'
+    >
+      {sots.map((sot) => (
+        <SotCard key={sot.token_id} sot={sot} />
+      ))}
     </UnorderedList>
   );
 }
 
-function SotCard({ sot }) {
-  return <Stack></Stack>;
-}
+const OPENSEA_URL = 'https://opensea.io/assets/matic/0x778e62aa005f566e2379fd2cc431b23b4fec2ef5/';
+
+const SotCard = ({ sot, t }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  const [{ value: country }, { value: city }, { value: grade }] = sot.attributes;
+  const [sotFullId, location] = sot.name.split(' - ');
+  const sotId = sotFullId.slice(4);
+  return (
+    <Stack
+      as='li'
+      borderRadius='md'
+      borderWidth='2px'
+      shadow='base'
+      bg='cyan.50'
+      p='1'
+      sx={{ '& img': { borderRadius: 'md' } }}
+    >
+      <Box pos={'relative'}>
+        <Image
+          src={sot.image}
+          alt={`Thumbnail of SoT${sot.token_id}`}
+          width='400'
+          height='400'
+          layout='responsive'
+          onLoad={() => setLoaded(true)}
+        />
+        {!loaded && <Skeleton pos='absolute' inset='0' />}
+      </Box>
+
+      <Flex flexDir='column' flex='1' sx={{ gap: 2 }}>
+        <Box
+          as='strong'
+          display='block'
+          color='common.main'
+          fontFamily='sans-serif'
+          fontWeight='bold'
+          fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
+        >
+          {location}
+        </Box>
+
+        <Box mt='auto' display={{ base: 'none', sm: 'grid' }} sx={{ gap: 1 }}>
+          <Box color='blue.400' display='flex' fontFamily='mono' sx={{ gap: 1 }} flexWrap='wrap'>
+            <Tag colorScheme='purple' size='sm'>
+              {sotId}
+            </Tag>
+            <Tag colorScheme='blue' size='sm'>
+              token_id: {sot.token_id}
+            </Tag>
+          </Box>
+
+          <Box as='small' color='blue'>
+            <Icon>
+              <path
+                fill='currentColor'
+                fillRule='evenodd'
+                d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z'
+                clipRule='evenodd'
+              />
+            </Icon>
+            {country}, {city}
+          </Box>
+        </Box>
+      </Flex>
+      <Flex sx={{ gap: 2 }} alignItems='center'>
+        <Grid
+          fontFamily={'sans-serif'}
+          fontWeight={'bold'}
+          textAlign='center'
+          placeItems='center'
+          borderRadius='md'
+          h='8'
+          w='8'
+          bg={`grades.${grade}`}
+          color='white'
+          shadow='inner'
+          textShadow='-1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5)'
+        >
+          {grade}
+        </Grid>
+        <Link isExternal href={OPENSEA_URL + sot.token_id} color='blue'>
+          View on OpenSea {<ExternalLinkIcon />}
+        </Link>
+      </Flex>
+    </Stack>
+  );
+};
