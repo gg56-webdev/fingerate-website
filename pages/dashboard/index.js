@@ -8,7 +8,7 @@ export default function Dashboard() {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <Box h='1200px'>user main</Box>
+      <Box>user main</Box>
     </>
   );
 }
