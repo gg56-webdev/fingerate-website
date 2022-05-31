@@ -24,14 +24,14 @@ function MyApp({ Component, pageProps }) {
   const currentTheme = locale === 'ko' ? koreanTheme : theme;
   const userData = useUserData();
 
+  const getLayout = Component.getLayout || ((page) => page);
+
   return (
     <ChakraProvider theme={currentTheme}>
       <UserContext.Provider value={userData}>
         <MetaMaskProvider>
           <NextNProgress height={5} color='#710193' />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
         </MetaMaskProvider>
       </UserContext.Provider>
     </ChakraProvider>

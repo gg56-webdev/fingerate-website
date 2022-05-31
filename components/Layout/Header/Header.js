@@ -39,7 +39,8 @@ export default function Header() {
         boxShadow={'lg'}
         p={1}
         border={'1px solid'}
-        borderColor={'gray.300'}>
+        borderColor={'gray.300'}
+      >
         <Flex as='nav' align='center' justify='space-between' wrap='wrap'>
           <Flex as='a' href='/' align='center' sx={{ gap: '0.25rem' }}>
             <Box fontSize={0} borderRadius='md' overflow={'hidden'}>
@@ -93,7 +94,8 @@ export default function Header() {
                           color: 'common.main',
                           boxShadow: 'md',
                         }}
-                        isExternal={item.external}>
+                        isExternal={item.external}
+                      >
                         {item.n}
                         {item.external && <ExternalLinkIcon mx='2px' />}
                       </Link>
@@ -108,7 +110,7 @@ export default function Header() {
                   <Spinner />
                 ) : user ? (
                   <Stack direction={'row'} alignItems='center' spacing={'1'}>
-                    <NLink href={'/user'}>{user.email.split('@')[0]}</NLink>
+                    <NLink href={'/dashboard'}>{user.email.split('@')[0]}</NLink>
                     {user.emailVerified && <CheckCircleIcon />}
                   </Stack>
                 ) : (

@@ -33,13 +33,13 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState, useContext, useRef, Fragment, useMemo } from 'react';
 import Image from 'next/image';
-import { UserContext } from '../context/user';
-import { auth, db } from '../lib/firebase';
+import { UserContext } from '../../context/user';
+import { auth, db } from '../../lib/firebase';
 import { doc, updateDoc, getDoc, onSnapshot, collection, query, where, setDoc } from 'firebase/firestore';
 
-import useMetaMaskCustom from '../hooks/useMetaMaskCustom';
+import useMetaMaskCustom from '../../hooks/useMetaMaskCustom';
 
-import POLYGON from '../utils/POLYGON';
+import POLYGON from '../../utils/POLYGON';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 export default function NFT() {
@@ -254,7 +254,7 @@ function Sots({ ethereum, account }) {
   const [nfts, setNfts] = useState();
   useEffect(() => {
     const getNFTs = async () => {
-      const { result } = await import('../utils/SOT/nfts.json');
+      const { result } = await import('../../utils/SOT/nfts.json');
       setNfts(result);
     };
 
@@ -305,7 +305,7 @@ function AddSot({ nfts, account, ethereum }) {
         {
           default: { address },
         },
-      ] = await Promise.all([import('web3'), import('../utils/SOT/abi.json'), import('../utils/SOT/SOT')]);
+      ] = await Promise.all([import('web3'), import('../../utils/SOT/abi.json'), import('../../utils/SOT/SOT')]);
       const web3 = new Web3(ethereum);
       const tokenInst = new web3.eth.Contract(contractABI, address);
       const ownerAddress = await tokenInst.methods.ownerOf(selectedSot).call();

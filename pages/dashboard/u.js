@@ -1,15 +1,15 @@
-import { UserContext } from '../context/user';
+import { UserContext } from '../../context/user';
 import { useContext, useState, useEffect } from 'react';
 import { Box, Button, Container, Heading, Grid, Stack, Text, Spinner, Icon, Link } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { sendEmailVerification } from 'firebase/auth';
-import { db } from '../lib/firebase';
+import { db } from '../../lib/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import Head from 'next/head';
 import { default as NLink } from 'next/link';
 
-import ko from '../locales/ko/user.json';
+import ko from '../../locales/ko/user.json';
 
 export default function User() {
   const { user, loading, error, logout } = useContext(UserContext);
