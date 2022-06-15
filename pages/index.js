@@ -30,18 +30,12 @@ export default function Home({ news }) {
 }
 
 export async function getStaticProps() {
-  let news = [];
-  const newsSnap = await db.collection('news').get();
-  newsSnap.forEach((doc) => {
+  const { docs } = await db.collection('news').get();
+  const news = docs.map((doc) => {
     const { title, time, link } = doc.data();
-    news.push({
-      title,
-      time: time.toDate().toLocaleDateString('ko-KR', { dateStyle: 'short' }),
-      link,
-    });
+    return { title, time: time.toDate().toLocaleDateString('ko-KR', { dateStyle: 'short' }), link };
   });
   return {
     props: { news },
-    revalidate: 60 * 60 * 24 * 7,
   };
 }
