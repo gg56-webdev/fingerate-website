@@ -5,6 +5,7 @@ import Layout from '../components/Layout/Layout';
 import { UserContext } from '../context/user';
 import { useUserData } from '../hooks/useUserData';
 import NextNProgress from 'nextjs-progressbar';
+import { MetaMaskProvider } from 'metamask-react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -17,15 +18,16 @@ import '@fontsource/gowun-dodum';
 
 function MyApp({ Component, pageProps }) {
   const { locale } = useRouter();
-  const { user, loading, error, logout } = useUserData();
+  const userData = useUserData();
+  const getLayout = Component.getLayout || ((page) => page);
 
   return (
     <ChakraProvider theme={locale === 'ko' ? koreanTheme : theme}>
-      <UserContext.Provider value={{ user, loading, error, logout }}>
-        <NextNProgress height={5} color='#710193' />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+      <UserContext.Provider value={userData}>
+        <MetaMaskProvider>
+          <NextNProgress height={5} color='#710193' />
+          <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+        </MetaMaskProvider>
       </UserContext.Provider>
     </ChakraProvider>
   );
