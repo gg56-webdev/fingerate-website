@@ -1,152 +1,182 @@
+import { useContext, useReducer } from 'react';
 import {
-  Button,
-  Grid,
-  Heading,
   Box,
+  Heading,
   Stack,
+  Grid,
   Text,
   FormControl,
   FormLabel,
   Input,
-  Link,
-  FormHelperText,
+  Button,
   Alert,
   AlertIcon,
   AlertTitle,
 } from '@chakra-ui/react';
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
-import { auth, db } from '../lib/firebase';
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-} from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import { UserContext } from '../context/user';
 
-import { useContext } from 'react';
+import ko from '../locales/ko/enter.json';
+import en from '../locales/en/enter.json';
 
 export default function Enter() {
-  const [screen, setScreen] = useState('로그인');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [alert, setAlert] = useState('');
-  const [isValid, setIsValid] = useState(false);
+  const { locale, back } = useRouter();
+  const t = locale === 'ko' ? ko : en;
 
-  const { user } = useContext(UserContext);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { screen, email, password, error, alert, loading, disabled } = state;
 
-  const changeScreen = (s) => {
-    setScreen(s);
-    setError('');
-  };
+  const { auth } = useContext(UserContext);
 
-  const router = useRouter();
-  const { locale } = router;
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch({ type: FORM_ACTIONS.INPUT, payload: ['error', ''] });
     try {
-      if (screen === '로그인') {
-        await signInWithEmailAndPassword(auth, email, password);
-        router.back();
-      } else if (screen === '가입하기') {
-        const { user } = await createUserWithEmailAndPassword(auth, email, password);
-        await sendEmailVerification(user);
-        setAlert(`계정인증을 위해서 이메일을 확인해주세요`);
-        await setDoc(doc(db, 'users', user.uid), {
-          email: user.email,
-        });
-      } else {
-        await sendPasswordResetEmail(auth, email);
-        setScreen('로그인');
+      dispatch({ type: FORM_ACTIONS.TOGGLE_LOADING });
+      switch (screen) {
+        case 'login':
+          const { signInWithEmailAndPassword } = await import('firebase/auth');
+          await signInWithEmailAndPassword(auth, email, password);
+          back();
+          break;
+        case 'signup':
+          const [{ createUserWithEmailAndPassword, sendEmailVerification }, { setDoc, doc }, { db }] =
+            await Promise.all([import('firebase/auth'), import('firebase/firestore'), import('../lib/firebase')]);
+          const { user } = await createUserWithEmailAndPassword(auth, email, password);
+          await Promise.all([sendEmailVerification(user), setDoc(doc(db, 'users', user.uid), { email: user.email })]);
+          dispatch({ type: FORM_ACTIONS.INPUT, payload: ['alert', t.checkEmail] });
+          dispatch({ type: FORM_ACTIONS.INPUT, payload: ['disabled', true] });
+          break;
+        case 'forgot':
+          const { sendPasswordResetEmail } = await import('firebase/auth');
+          await sendPasswordResetEmail(auth, email);
+          dispatch({ type: FORM_ACTIONS.INPUT, payload: ['alert', t.checkReset] });
+          dispatch({ type: FORM_ACTIONS.SWITCH_SCREEN, payload: 'login' });
+          break;
       }
     } catch (err) {
       console.error(err);
-      setError(err.code.split('/')[1].split('-').join(' '));
+      const errMsg = err?.code.split('/')[1].split('-').join(' ');
+      dispatch({ type: FORM_ACTIONS.INPUT, payload: ['error', errMsg || 'Error'] });
+    } finally {
+      dispatch({ type: FORM_ACTIONS.TOGGLE_LOADING });
     }
   };
-
-  useEffect(() => {
-    user && setScreen('가입하기');
-  }, [user]);
-
   return (
     <>
       <Head>
-        <title>로그인/가입하기</title>
+        <title>{t.title}</title>
       </Head>
-      <Box display='grid' h='full' placeItems='center' pt='80px' px='2' pb='4'>
-        <Stack
-          bg={'white'}
-          p='2'
-          pt='4'
-          borderRadius={'md'}
-          maxW='350px'
-          w='full'
-          textAlign={'center'}
-          alignItems='center'
-          spacing={5}
-          boxShadow='md'
-        >
-          <Stack>
-            <Heading>{screen}</Heading>
-
-            <Text fontSize={'md'}>
-              {screen === '로그인' ? '' : screen === '가입하기' ? '' : '비밀번호를 재설정하세요'}
-            </Text>
-          </Stack>
-
-          <Stack as={'form'} onSubmit={(e) => handleSubmit(e)} spacing='4'>
-            <FormControl>
-              <FormLabel htmlFor='email'>이메일 주소</FormLabel>
-              <Input id='email' type='email' onChange={(e) => setEmail(e.target.value)} required />
-            </FormControl>
-            {(screen === '로그인' || screen === '가입하기') && (
-              <FormControl>
-                <FormLabel htmlFor='password'>비밀번호</FormLabel>
-                <Input id='password' type='password' onChange={(e) => setPassword(e.target.value)} required />
-                {/* {!screen && (
-                <FormHelperText>Please choose a secure password</FormHelperText>
-              )} */}
+      <Box mt='80px' bg='white' borderRadius='md' shadow='md' p='2' maxW='400px' mx='auto' textAlign='center'>
+        <Heading>{t[screen]}</Heading>
+        {screen === 'forgot' && <Text mt='2'>{t.reset}</Text>}
+        <Grid as='form' onSubmit={handleSubmit} mt='4' gap='4' px='8' pb='4'>
+          <FormControl isRequired>
+            <FormLabel htmlFor='email'>{t.email}</FormLabel>
+            <Input
+              id='email'
+              type='email'
+              onChange={(e) => dispatch({ type: FORM_ACTIONS.INPUT, payload: ['email', e.target.value] })}
+            />
+          </FormControl>
+          {screen !== 'forgot' && (
+            <Grid gap='1'>
+              <FormControl isRequired>
+                <FormLabel htmlFor='password'>{t.password}</FormLabel>
+                <Input
+                  id='password'
+                  type='password'
+                  minLength={6}
+                  onChange={(e) => dispatch({ type: FORM_ACTIONS.INPUT, payload: ['password', e.target.value] })}
+                />
               </FormControl>
-            )}
-            <Button type='submit' colorScheme={'purple'}>
-              {screen === '로그인' ? '로그인' : screen === '가입하기' ? '가입하기' : 'Send'}
+              {screen === 'login' && (
+                <Button
+                  size='sm'
+                  variant='link'
+                  justifySelf='center'
+                  w='fit-content'
+                  colorScheme='blue'
+                  onClick={() => dispatch({ type: FORM_ACTIONS.SWITCH_SCREEN, payload: 'forgot' })}
+                >
+                  {t.forgot}
+                </Button>
+              )}
+            </Grid>
+          )}
+          <Grid gap='3'>
+            <Button type='submit' colorScheme='purple' isLoading={loading} isDisabled={disabled}>
+              {t.action[screen]}
             </Button>
             {error && (
-              <Alert status='error'>
+              <Alert borderRadius='md' status='error'>
                 <AlertIcon />
                 <AlertTitle>{error}</AlertTitle>
               </Alert>
             )}
             {alert && (
-              <Alert status='info'>
+              <Alert borderRadius='md' status='info'>
                 <AlertIcon />
                 <AlertTitle>{alert}</AlertTitle>
               </Alert>
             )}
-          </Stack>
-          {screen === '로그인' && <Link onClick={() => changeScreen('비밀번호 찾기')}>비밀번호 찾기</Link>}
-
-          {screen === '로그인' ? (
-            <Link fontSize={'sm'} onClick={() => changeScreen('가입하기')} color='blue'>
-              가입하기
-            </Link>
-          ) : (
-            <Text fontSize={'sm'}>
-              이미 회원이신가요?{' '}
-              <Link onClick={() => changeScreen('로그인')} color='blue'>
-                로그인하기
-              </Link>
-            </Text>
-          )}
-        </Stack>
+            {screen === 'signup' ? (
+              <Text>
+                {t.alreadyHave}{' '}
+                <Button
+                  variant='link'
+                  colorScheme='blue'
+                  onClick={() => dispatch({ type: FORM_ACTIONS.SWITCH_SCREEN, payload: 'login' })}
+                >
+                  {t.login}
+                </Button>
+              </Text>
+            ) : (
+              <Button
+                variant='link'
+                colorScheme='blue'
+                onClick={() => dispatch({ type: FORM_ACTIONS.SWITCH_SCREEN, payload: 'signup' })}
+              >
+                {t.signup}
+              </Button>
+            )}
+          </Grid>
+        </Grid>
       </Box>
     </>
   );
 }
+
+const initialState = {
+  screen: 'login',
+  email: '',
+  password: '',
+  error: '',
+  alert: '',
+  loading: false,
+  disabled: false,
+};
+
+const FORM_ACTIONS = Object.freeze({
+  INPUT: 'input',
+  SWITCH_SCREEN: 'switchScreen',
+  TOGGLE_LOADING: 'toggleLoading',
+  TOGGLE_DISABLED: 'toggleDisabled',
+});
+
+const reducer = (state, { type, payload }) => {
+  switch (type) {
+    case FORM_ACTIONS.INPUT:
+      const [key, val] = payload;
+      return { ...state, [key]: val };
+    case FORM_ACTIONS.SWITCH_SCREEN:
+      return { ...state, screen: payload, error: '', disabled: false };
+    case FORM_ACTIONS.TOGGLE_LOADING:
+      return { ...state, loading: !state.loading };
+    case FORM_ACTIONS.TOGGLE_DISABLED:
+      return { ...state, disabled: !state.disabled };
+    default:
+      return state;
+  }
+};

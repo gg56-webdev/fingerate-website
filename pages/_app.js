@@ -22,11 +22,11 @@ function MyApp({ Component, pageProps }) {
   const { locale } = router;
   const currentTheme = locale === 'ko' ? koreanTheme : theme;
 
-  const { user, loading, error, logout } = useUserData();
+  const userData = useUserData();
 
   return (
     <ChakraProvider theme={currentTheme}>
-      <UserContext.Provider value={{ user, loading, error, logout }}>
+      <UserContext.Provider value={userData}>
         <NextNProgress height={5} color='#710193' />
         <Layout>
           <Component {...pageProps} />

@@ -1,3 +1,8 @@
 {
-  "currency": "$"
+  "filters": {
+    "country": "Country",
+    "grade": "Grade",
+    "price": "Price",
+    "ownership": "Buy Now"
+  }
 }

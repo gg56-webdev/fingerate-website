@@ -3,6 +3,7 @@ import useMapFilter from '../hooks/useMapFilter';
 import useSupercluster from 'use-supercluster';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { default as NLink } from 'next/link';
 import {
   Box,
@@ -33,6 +34,7 @@ import { getDocs, collection, where, query } from 'firebase/firestore';
 import getSoTData from '../utils/getSoTData';
 
 import ko from '../locales/ko/map.json';
+import en from '../locales/en/map.json';
 import axios from 'axios';
 
 export async function getStaticProps() {
@@ -91,7 +93,8 @@ export async function getStaticProps() {
 }
 
 export default function Map({ sotsData, availableCountries }) {
-  const t = ko;
+  const { locale } = useRouter();
+  const t = locale === 'ko' ? ko : en;
 
   const [viewport, setViewport] = useState({
     width: '100%',

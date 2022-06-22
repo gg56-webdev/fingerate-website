@@ -16,8 +16,10 @@ import {
 import { useEffect, useState } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { default as NLink } from 'next/link';
+import { useRouter } from 'next/router';
 
 import ko from '../locales/ko/howto.json';
+import en from '../locales/en/howto.json';
 
 import Image from 'next/image';
 import { card1, card2, card3, card4 } from '../public/howToBuy/card/imgs';
@@ -25,7 +27,8 @@ import { card1, card2, card3, card4 } from '../public/howToBuy/card/imgs';
 const cardImgs = [card1, card2, card3, card4];
 
 export default function Howto() {
-  const t = ko;
+  const { locale } = useRouter();
+  const t = locale === 'ko' ? ko : en;
   return (
     <>
       <Head>
@@ -43,7 +46,8 @@ export default function Howto() {
           bg='white'
           variant='solid-rounded'
           onChange={() => window.scrollTo(0, 0)}
-          borderRadius={'md'}>
+          borderRadius={'md'}
+        >
           <TabList
             border={'1px solid'}
             borderColor='blue.100'
@@ -55,7 +59,8 @@ export default function Howto() {
             borderRadius={'full'}
             mx={'2'}
             gap='2'
-            zIndex={2}>
+            zIndex={2}
+          >
             <Tab>{t.card.with}</Tab>
             <Tab>{t.crypto.with}</Tab>
           </TabList>
@@ -83,18 +88,20 @@ function Card({ text }) {
           flexDir={{ base: 'column', md: id % 2 === 0 ? 'row-reverse' : 'row' }}
           p='4'
           bg={id % 2 !== 0 && 'blue.50'}
-          alignItems='center'>
+          alignItems='center'
+        >
           <Box width={'100%'}>
             <Image src={cardImgs[id]} alt={step} placeholder='blur' />
           </Box>
           <Text
             width={'100%'}
             p='2'
-            fontSize={'3xl'}
+            fontSize='2xl'
             borderRadius='md'
             shadow={'md'}
             bg={id % 2 === 0 ? 'blue.50' : 'white'}
-            textAlign={'center'}>
+            textAlign={'center'}
+          >
             {step}
           </Text>
         </Flex>
@@ -111,7 +118,8 @@ function Card({ text }) {
             bg='common.mainLight'
             color='white'
             fontSize='2xl'
-            fontWeight={'bold'}>
+            fontWeight={'bold'}
+          >
             {text.sotsLink}
           </Link>
         </NLink>

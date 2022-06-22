@@ -1,0 +1,13 @@
+{
+  "title": "Login / Sign up",
+  "checkEmail": "Please check your email to verify your account",
+  "checkReset": "Check your email for password reset link",
+  "login": "Login",
+  "signup": "Sign up",
+  "forgot": "Forgot password",
+  "reset": "Reset your password",
+  "email": "Email",
+  "password": "Password",
+  "action": { "login": "Login", "signup": "Sign up", "forgot": "Send" },
+  "alreadyHave": "Alredy have account?"
+}

@@ -1,11 +1,14 @@
 import { Container, Heading, Box, FormControl, Input, Textarea, Button, Link, Stack } from '@chakra-ui/react';
 import { default as NLink } from 'next/link';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useForm, ValidationError } from '@formspree/react';
 import ko from '../../locales/ko/help/email-us.json';
+import en from '../../locales/en/help/email-us.json';
 
 export default function Email() {
-  const t = ko;
+  const { locale } = useRouter();
+  const t = locale === 'ko' ? ko : en;
   const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORM);
 
   if (state.succeeded) {

@@ -7,5 +7,5 @@ export function useUserData() {
 
   const logout = () => signOut(auth);
 
-  return { user, loading, error, logout };
+  return { user, loading, error, logout, auth };
 }

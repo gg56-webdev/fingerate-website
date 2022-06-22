@@ -10,18 +10,17 @@ import Head from 'next/head';
 import { default as NLink } from 'next/link';
 
 import ko from '../locales/ko/user.json';
+import en from '../locales/en/user.json';
 
 export default function User() {
   const { user, loading, error, logout } = useContext(UserContext);
   const [sots, setSots] = useState([]);
   const [noSots, setNoSots] = useState(false);
-  const router = useRouter();
-  const { locale } = router;
-
-  const t = ko;
+  const { locale, push } = useRouter();
+  const t = locale === 'ko' ? ko : en;
   useEffect(() => {
     if ((!loading && !user) || error) {
-      router.push('/enter', '/enter', { locale });
+      push('/enter', '/enter', { locale });
     }
     if (!loading && user) {
       (async () => {
@@ -45,7 +44,7 @@ export default function User() {
         }
       })();
     }
-  }, [user, error, loading, locale, router]);
+  }, [user, error, loading, locale, push]);
 
   return (
     <Box minH={'100%'}>
@@ -117,7 +116,7 @@ export default function User() {
                   border='1px solid'
                   borderColor={'blue.100'}
                   onClick={() =>
-                    router.push(`/sots/${sot.id}`, `/sots/${sot.id}`, {
+                    push(`/sots/${sot.id}`, `/sots/${sot.id}`, {
                       locale,
                     })
                   }

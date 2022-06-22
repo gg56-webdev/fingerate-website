@@ -1,0 +1,23 @@
+{
+  "title": "How to Buy SoT ",
+  "card": {
+    "with": "Buy with credit card",
+    "steps": [
+      "Choose the SoT you want from the Collection.",
+      "Use the filters to find the perfect SoT for you",
+      "Click on buy SoT and complete the payment with your credit card easily.",
+      "Congratulations! You are now an SoT owner"
+    ],
+    "sotsLink": "Go to the SoT collection"
+  },
+  "crypto": {
+    "with": "Buy with Crypto",
+    "steps": [
+      "Make sure to add Polygon network to your Metamask wallet",
+      "Buy Matic from an exchange or swap from a DEFI protocol",
+      "Swap your Matic to DAI or ETH on polygon chain",
+      "Make sure your Wallet is connected to the Polygon Mainnet and Purchase your SoT!"
+    ],
+    "sotsLink": "Go to the SoT NFT collection"
+  }
+}

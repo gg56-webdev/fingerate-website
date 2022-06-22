@@ -1,4 +1,13 @@
 {
-  "title": "FingeRate Metaverse",
-  "checkEmail": "계정인증을 위해서 이메일을 확인해주세요"
+  "title": "로그인/가입하기",
+  "checkEmail": "계정인증을 위해서 이메일을 확인해주세요",
+  "checkReset": "Check your email for password reset link",
+  "login": "로그인",
+  "signup": "가입하기",
+  "forgot": "비밀번호 찾기",
+  "reset": "비밀번호를 재설정하세요",
+  "email": "이메일 주소",
+  "password": "비밀번호",
+  "action": { "login": "로그인", "signup": "가입하기", "forgot": "보내기" },
+  "alreadyHave": "이미 회원이신가요?"
 }

@@ -1,0 +1,9 @@
+{
+  "sendEmail": "Send Email Verification",
+  "notVerified": "Not Verified",
+  "logout": "Log Out",
+  "reload": "Please refresh this page after confirming your Email",
+  "noSots": "You don't own any SoTs yet!",
+  "visitMarket": "Click here to go to the SoT marketplace",
+  "sotsMarket": "Buy SoT"
+}

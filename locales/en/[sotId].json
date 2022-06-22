@@ -1,21 +1,40 @@
 {
+  "currency": "$",
+  "stats": {
+    "country": "Country",
+    "city": "City",
+    "grade": "Grade",
+    "price": "Price",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "location": "Location",
+    "owner": "Owner",
+    "noOwner": "No Owner"
+  },
   "btn": {
-    "loginToBuy": "SOT 구매를 위해 로그인 해주세요",
-    "verifyToBuy": "SOT 구매를 위해 이메일을 확인해주세요",
-    "buy": "SOT 구매"
+    "loginToBuy": "Please log in to buy SoT",
+    "verifyToBuy": "You have to verify your Email first to buy SoT",
+    "buy": "Buy SoT"
   },
   "description": {
-    "para1": "지금 바로 나만의 SoT를 구매해야 하는 이유!",
+    "nftNotice": "Attention! Do you want to prove and showcase your SoT ownership outside our website as well? FingeRate will help you to turn your SoT into an NFT so that you don't have to go through that hassle. Apply for SoT NFT service with an additional cost of 10,000 won (or USD 10) and show off your SoT to the world!",
+    "contactUs": "Contact us for more details",
+    "more": "See more SoT details",
+    "para1": "This  is why you should be an SoT owner right now!",
     "grades": {
-      "S": "S급의 SoT는 가장 많은 사람들이 설문조사에 참여하는 전세계 1% 밖에 없는 희귀한 SoT입니다."
+      "S": "Grade S -  The rarest SoTs at the Top 1% in the world, where surveys are participated by the most number of people",
+      "A": "Grade A - SoTs installed in a public square, station, airport, or city with a population of 1 million+, including major landmarks around the world",
+      "B": "Grade B - SoTs installed in a lively metropolis with an average population of 500,000+ ",
+      "C": "Grade C - SoTs installed in beautiful and sophisticated cities with an average population of 100,000+",
+      "D": "Grade D - SoTs with collectible value, such as places with special meanings or places with your own memories"
     },
-    "para2": "SoT를 구매하시면,",
+    "para2": "Benefits of owning an SoT:",
     "paraList": [
-      "나의 SoT에서 진행되는 모든 조사 의뢰비의 50%",
-      "나의 SoT에서 진행되는 조사에 참여한 유저들에게 지급되는 보상비의 50%",
-      "나의 SoT에서 생성된 모든 데이터 판매 수익의 50%가 “수익”으로 얻을 수 있게 됩니다"
+      "50% of the SoT survey request renting fee of the surveys conducted in your SoT(s)",
+      "50% of the reward processing fee of the surveys conducted in your SoT(s)",
+      "50% of the revenue generated all data sales by your SoT(s)"
     ],
-    "para3": "게다가 나의 SoT를 더 높은 가격에 다른 유저에게 판매하게 된다면\n그 시세차익까지 챙기게 되는 똑똑한 자산이죠!",
-    "disclaimer": "SoT 10개 이상 단체 주문시 스페셜 할인 제공!! 자세한 문의"
+    "para3": "In addition, you can resell your SoT to other users at a higher price if you wish to. It's not just a device in the metaverse, but a smart digital asset!",
+    "disclaimer": "Special discount for bundle orders of 10 or more SoTs! Contact us for more details."
   }
 }

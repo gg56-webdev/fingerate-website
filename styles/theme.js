@@ -7,7 +7,6 @@ export const theme = extendTheme({
       body: {
         bg: '#f4f5f7',
         color: '#09244d',
-        fontSize: '18px',
       },
     },
   },
@@ -36,6 +35,11 @@ export const theme = extendTheme({
 
 export const koreanTheme = extendTheme(
   {
+    styles: {
+      global: {
+        body: { fontSize: '18px' },
+      },
+    },
     fonts: {
       heading: 'Do Hyeon',
       body: 'Gowun Dodum',

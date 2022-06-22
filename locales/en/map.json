@@ -1,0 +1,16 @@
+{
+  "general": {
+    "buy": "Buy SoT",
+    "buyPolygon": "Buy SoT",
+    "view": "View Details",
+    "sold": "Sold Out"
+  },
+  "filters": {
+    "country": "Country",
+    "grade": "Grade",
+    "ownership": "Buy Now",
+    "source": "Payment Options",
+    "buyWithCard": "Buy with Card",
+    "buyWithCrypto": "Buy with Crypto"
+  }
+}
