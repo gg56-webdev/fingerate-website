@@ -388,7 +388,7 @@ function SotList({ sots }) {
         </Box>
         <Text>
           {ko.visitMarket}{' '}
-          <NLink href='/sots'>
+          <NLink href='/sots' passHref>
             <Link fontWeight='bold' color='rebeccapurple'>
               {ko.sotsMarket}
             </Link>
@@ -397,7 +397,7 @@ function SotList({ sots }) {
         </Text>
         <Text>
           Go to{' '}
-          <Link href='https://opensea.io/collection/fingeratesot' color='blue' fontWeight='bold'>
+          <Link isExternal href='https://opensea.io/collection/fingeratesot' color='blue' fontWeight='bold'>
             OpenSea <ExternalLinkIcon verticalAlign='-1px' />
           </Link>
           , acquire SoT and add it to FingeRate App by linking your crypto wallet address.

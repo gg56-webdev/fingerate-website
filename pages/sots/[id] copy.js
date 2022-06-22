@@ -36,6 +36,26 @@ import { useRouter } from 'next/router';
 import en from '../../locales/en/[sotId].json';
 import ko from '../../locales/ko/[sotId].json';
 
+export async function getStaticPaths() {
+  const { docs } = await getDocs(collection(db, 'sots'));
+  const paths = docs.map(({ id }) => ({ params: { id } }));
+  return {
+    paths,
+    fallback: 'blocking',
+  };
+}
+
+export async function getStaticProps({ params: { id } }) {
+  const docSnap = await getDoc(doc(db, 'sots', id));
+  if (!docSnap.exists()) return { notFound: true };
+
+  const { location, ...data } = docSnap.data();
+  const sot = { id, ...data, ...location };
+  return {
+    props: { sot },
+  };
+}
+
 export default function Sot({ sot }) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
@@ -45,8 +65,7 @@ export default function Sot({ sot }) {
   const [KRWrate, setKRWrate] = useState('');
   const [isMobile, setIsMobile] = useState(false);
 
-  const router = useRouter();
-  const { locale } = router;
+  const { locale } = useRouter();
   const t = locale === 'en' ? en : ko;
 
   const handleSubmit = async () => {
@@ -111,7 +130,7 @@ export default function Sot({ sot }) {
   return (
     <>
       <Head>
-        <title>{`SoT ${sot.id} - ${sot.name}`}</title>
+        <title>{`${sot.id} - ${sot.name}`}</title>
       </Head>
       <Box pb='2'>
         <Container maxW={'container.lg'} pt={'80px'}>
@@ -138,7 +157,7 @@ export default function Sot({ sot }) {
                   {`SoT ${sot.id}`}
                 </Box>
               </Stack>
-              <Text>{`${sot.grade}급 SoT, 100m²의 HideOut이 포함 위도 = ${sot.lat}, 경도 = ${sot.long}`}</Text>
+              <Text>{`${sot.grade}급 SoT, 100m²의 HideOut이 포함 위도 = ${sot._lat}, 경도 = ${sot._long}`}</Text>
               <Flex sx={{ gap: '0.5rem' }} flexWrap='wrap'>
                 <Box flex={'1'} borderRadius={'md'} bg='purple.50' p='2' gap='1' textAlign={'center'}>
                   <Text as={'small'} fontSize='lg' textTransform='uppercase' color={'common.main'}>
@@ -328,37 +347,4 @@ export default function Sot({ sot }) {
       </Box>
     </>
   );
-}
-
-export async function getStaticPaths() {
-  const colRef = collection(db, 'sots');
-  const snap = await getDocs(colRef);
-
-  const paths = snap.docs.map((doc) => {
-    const sotId = doc.id;
-    return { params: { sotId } };
-  });
-
-  return {
-    paths,
-    fallback: 'blocking',
-  };
-}
-
-export async function getStaticProps({ params: { sotId } }) {
-  const docRef = doc(db, 'sots', sotId);
-  const [snap] = await Promise.all([getDoc(docRef)]);
-
-  if (!snap.exists()) return { notFound: true };
-
-  const {
-    location: { _lat: lat, _long: long },
-    ...data
-  } = snap.data();
-
-  const sot = { id: snap.id, lat, long, ...data };
-  return {
-    props: { sot },
-    revalidate: 60 * 30,
-  };
 }

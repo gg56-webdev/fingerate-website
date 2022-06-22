@@ -1,4 +1,5 @@
 import { db, auth, rtd } from '../../lib/firebaseAdmin';
+import { ServerValue } from 'firebase-admin/database';
 import rateLimit from '../../utils/rate-limit';
 
 const limiter = rateLimit({
@@ -82,7 +83,7 @@ export default async function handler(req, res) {
           SoTID: sotId,
           Paid: 'No',
           Price: (docSnap.get('price') * XR.get('rates.KRW.value')).toFixed(0),
-          CreatedAt: new Date().getTime(),
+          CreatedAt: ServerValue.TIMESTAMP,
           CombinedID: userId + sotId,
         },
         (_err) => {
@@ -110,7 +111,6 @@ export default async function handler(req, res) {
             body: 'There is no user record corresponding to the provided identifier',
           },
         });
-        break;
 
       default:
         break;

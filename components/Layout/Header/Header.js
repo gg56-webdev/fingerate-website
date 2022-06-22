@@ -147,10 +147,10 @@ function Auth({ onClick, t }) {
   if (loading) return <Spinner color='common.mainLight' />;
   if (user !== null)
     return (
-      <NLink href='/user' passHref>
+      <NLink href='/dashboard' passHref>
         <Link color='common.mainLight' onClick={onClick}>
           {user.email.split('@')[0]}
-          {user.emailVerified && <CheckCircleIcon ml='1' />}
+          {user.emailVerified && <CheckCircleIcon ml='1' verticalAlign='-1px' />}
         </Link>
       </NLink>
     );

@@ -19,9 +19,9 @@
         },
         {
           "n": "SoT NFT 마켓프레이스",
-          "l": "/marketplace",
+          "l": "https://opensea.io/collection/fingeratesot",
           "important": false,
-          "external": false
+          "external": true
         },
         {
           "n": "구매 방법",
