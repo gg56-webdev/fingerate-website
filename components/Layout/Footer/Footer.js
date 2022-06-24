@@ -41,9 +41,14 @@ export default function Footer() {
               </Flex>
             </Stack>
           </Stack>
-          <Box color={'blue'}>
-            <NLink href={'/terms'}>서비스 이용약관</NLink>
-          </Box>
+          <Flex flexDir={{ base: 'row', md: 'column' }} color={'blue'} gap='2'>
+            <NLink href={'/terms'} passHref>
+              <Link>서비스 이용약관</Link>
+            </NLink>
+            <NLink href={'/privacy'} passHref>
+              <Link>개인정보처리방침</Link>
+            </NLink>
+          </Flex>
           {/* <Contact /> */}
         </Box>
         <Text fontSize='smaller' textAlign={'center'} mt='2'>
