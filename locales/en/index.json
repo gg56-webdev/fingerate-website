@@ -1,47 +1,52 @@
 {
   "title": "FingeRate Metaverse",
+  "description": "FingeRate is the very first metaverse platform with actual utility in the real world. It offers revolutionary research & survey experiences with so much fun and plentiful rewards!",
+  "keywords": "metaverse, app, nft, blockchain, sot, survey, vr ,ar",
   "sections": {
     "hero": {
       "id": "hero",
       "content": {
-        "h2": "세계 최초\n메타버스로 만나는\n설문조사 플랫폼",
+        "h2": "World's First Metaverse Survey Platform",
         "features": [
-          "실제 세상을 그대로 옮겨 놓은\n메타버스 세상!",
-          "전세계 유명 랜드마크에 위치한\nSoT NFT 리서치 부동산!",
-          "SoT NFT로 다양한 리서치와 설문조사를\n더욱 재미있고 즐겁고 간편하게!",
-          "SoT로 리서치 데이터 확보부터\n데이터 판매까지 수익도 팡팡!"
+          "The real world mapped on metaverse!",
+          "SoT NFT Research Asset located in famous landmarks around the world!",
+          "Enjoy more fun & convenient research and surveys through SoT NFT!",
+          "From research data collection to data sales, SoT will ee booming your profits!"
         ],
 
-        "btn1": "SoT 구매",
-        "btn2": "회원가입",
-        "milestones": ["프리세일:", "Total Supply:", "현제 분양 가능 수량:"],
-        "latestNews": "news"
+        "btn1": "Buy SoT",
+        "btn2": "Sign Up",
+        "latestNews": "News",
+        "feed": [
+          { "item": "Pre-sale", "number": "1000+" },
+          { "item": "Total number of SoTs", "number": "1.2 mil." },
+          { "item": "SoTs available for sale", "number": "10K" }
+        ]
       }
     },
     "aboutSot": {
       "id": "sot",
       "content": {
-        "h2": "SoT (Satisfaction of Things)를 만나볼까요",
+        "h2": "Let's get to know about SoT (Satisfaction of Things)",
         "list1": {
-          "h3": "나만의 디지털 자산",
+          "h3": "My own digital assets",
           "listItems": [
-            "실제 세계를 그대로 매핑한 “FingeRate 메타버스”에서 만나는 리서치 & 설문조사 NFT 자산",
-            "SoT 1대 구매 시 1km²의 대지도 함께 제공",
-            "조사 의뢰를 통해 다양한 리서치&설문조사 진행",
-            "SoT 소유주가 직접 조사해서 원하는 데이터 확보부터 판매까지!"
+            "Research & survey NFT assets in the “FingeRate metaverse” that maps the real world as it is",
+            "In case of purchasing an SoT, the surrounding land of 1 km² is also yours",
+            "Conducting various research & surveys through request basis",
+            "SoT owners can also do surveys, and collect & sell datasets!"
           ]
         },
         "list2": {
-          "h3": "수익 생성",
+          "h3": "Profit Generation",
           "listItems": [
-            "조사의뢰비의 50%",
-            "데이터 판매의 50%",
-            "조사 의뢰 보상비의 50%",
-            "재판매 시 시세 차이",
-            "SoT 1대만 소유해도",
-            "이 모든 수익이 팡팡!"
+            "50% of survey request fee",
+            "50% of data sales",
+            "50% of reward processing fee",
+            "profit at resale"
           ]
-        }
+        },
+        "imgCaption": "All of these profits come with one SoT!"
       }
     },
     "flow": {
@@ -49,17 +54,17 @@
       "content": {
         "h2": "SoT Flow",
         "slides": [
-          { "title": "누구나 쉽고 간편하게 원하는 SoT 구매하기", "info": "" },
-          { "title": "개인 또는 기업/기관 등 제3자의 조사 의뢰", "info": "" },
-          { "title": "GG56 또는 SoT 소유주가 직접 조사 진행", "info": "" },
-          { "title": "다양한 설문조사/리서치 참여 후 보상 받기", "info": "" },
-          { "title": "조사 종료 후  통계데이터 생성", "info": "" },
-          { "title": "의뢰한 조사의 통계데이터 확보 및 활용", "info": "" },
-          { "title": "자체 조사로 수집/가공한 데이터 판매하기 ", "info": "" },
+          { "title": "Anyone can purchase their desired SoT easily and conveniently", "info": "" },
+          { "title": "Survey request from a third party, such as an individual or company/institution", "info": "" },
+          { "title": "Conduct survey by GG56 or SoT owner her/himself", "info": "" },
+          { "title": "Earn rewards for participating in various surveys/researches", "info": "" },
+          { "title": "Statistical data available after completion of survey", "info": "" },
+          { "title": "Securing and utilizing statistical data from surveys on SoT", "info": "" },
+          { "title": "Selling data collected/processed from surveys on SoT", "info": "" },
           {
-            "title": "모두가 윈윈하는 Satisfaction of Things!",
+            "title": "Satisfaction of Things, a win-win for everyone!",
             "info": "",
-            "avatars": ["GG56", "SoT 소유주", "일반 사용자", "조사 의뢰자"]
+            "avatars": ["GG56", "SoT Owner", "FingeRate User", "Survey Requester"]
           }
         ]
       }
@@ -67,69 +72,68 @@
     "price": {
       "id": "price",
       "content": {
-        "h2": "SoT 가격 차트 (사전 판매)",
+        "h2": "SoT Price List! (Pre-Sale)",
+        "currency": "$",
         "list": [
-          [
-            [
-              "S급: $1,000",
-              "6개월마다 산정된 조사참여 상위 1% SoT에게만 주어지는 최상위 타이틀"
-            ],
-            "전세계 1% 밖에 없는 희귀한 SoT",
-            "S"
-          ],
-          [
-            [
-              "A급: $750",
-              "유동인구가 많은 랜드마크, 주요 공항/역, 광장 또는 인구 100만 이상 도시에 설치된 SoT"
-            ],
-            "전세계 20%으로 배치된 SoT",
-            "A"
-          ],
-          [
-            ["B급: $500", "평균 인구 50만 이상 도시에 설치된 SoT"],
-            "전세계 40%으로 배치된 SoT",
-            "B"
-          ],
-          [
-            ["C급: $300", "평균 인구 10만 이상 도시에 설치된 SoT"],
-            "전세계 30%으로 배치된 SoT",
-            "C"
-          ],
-          [
-            [
-              "D급: $150",
-              "수익창출보다는 나만의 의미 있는 장소, 특별한 장소에 설치된 소장가치가 있는 SoT"
-            ],
-            "전세계 9%으로 배치된 컬렉션 만들어서 재판매하기 좋은 SoT",
-            "D"
-          ]
-        ]
+          {
+            "grade": "S",
+            "price": 2000,
+            "description": "The rarest SoTs at the Top 1% in the world, where surveys are participated by the most number of people",
+            "explanation": "Rarest 1% of the total SoTs installed around the world"
+          },
+          {
+            "grade": "A",
+            "price": 1000,
+            "description": "SoTs installed in a public square, station, airport, or city with a population of 1 million+, including major landmarks around the world",
+            "explanation": "20% of the total SoTs installed around the world"
+          },
+          {
+            "grade": "B",
+            "price": 750,
+            "description": "SoTs installed in a lively metropolis with an average population of 500,000+",
+            "explanation": "40% of the total SoTs installed around the world"
+          },
+          {
+            "grade": "C",
+            "price": 500,
+            "description": "SoTs installed in beautiful and sophisticated cities with an average population of 100,000+",
+            "explanation": "30% of the total SoTs installed around the world"
+          },
+          {
+            "grade": "D",
+            "price": 300,
+            "description": "SoTs with collectible value, such as places with special meanings or places with your own memories",
+            "explanation": "9% of the total SoTs installed around the world"
+          }
+        ],
+        "disclaimer": "Special discount for bundle orders of 10 or more SoT!! Contact us for more details"
       }
     },
     "learnMore": {
       "id": "more",
       "content": {
-        "h2": "더 알고 싶나요?",
+        "h2": "Interested to know more?",
         "box1": {
-          "title": "FingeRate에서 만나는 전세계 가톨릭인들의 축제! 시그니스 총회",
-          "p": "관련 내용"
+          "title": "SIGNIS World Congress - A festival of the Catholics from all over the world at FingeRate!",
+          "p": "Through this MOU, GG56 Korea will provide technical support for the construction of a metaverse platform for the 2022 Seoul SIGNIS World Congress, which will be held from August 16 to 22 under the theme of “Peace in the Digital World.”"
         },
         "box2": {
-          "title": "실제 세계에서 작동하고 있는 SoT"
+          "title": "SoTs operating in the real world",
+          "locations": ["Chuncheon Gugok Falls", "Chuncheon Skywalk", "YBM Language School Jongno Head Office"]
         }
       }
     },
     "history": {
       "id": "history",
       "content": {
-        "h2": "FingeRate의 진화는 계속된다 (특허 History)",
+        "h2": "The evolution of FingeRate continues (Patent History)",
         "events": [
-          "가상화폐 기반 오프라인 마일리지 결제 시스템",
-          "위치 기반 메타버스 설문조사 시스템",
-          "현장에서 동작 인식을 통한 만족도 조사 시스템",
-          "아바타 토큰화를 이용한 메타버스 시스템",
-          "전자지갑 기반 아바타의 이력 관리를 위한 메타버스 시스템",
-          "심층분석을 위한 설문조사 시스템"
+          "Virtual currency-based offline mileage payment system",
+          "location-based metaverse survey system",
+          "Satisfaction survey system through motion recognition in the field",
+          "Metaverse system using avatar tokenization",
+          "Metaverse system for managing the history of e-wallet-based avatars",
+          "Survey system for in-depth analysis"
         ]
       }
     },
@@ -142,23 +146,108 @@
     "roadmap": {
       "id": "roadmap",
       "content": {
-        "h2": "Roadmap",
+        "h2": "Technological Roadmap",
         "steps": [
           {
-            "title": "title1",
-            "p": "text with explanation fdfsdfd fdsdfdf sdfsd fdfdfdfd"
+            "title": "SoT Digital Asset Sale",
+            "year": 2021,
+            "sections": [
+              {
+                "title": "FingeRate 2.0 Platform Development",
+                "points": ["Web platform development and Launch", "10,000 SoT ", "Model house configuration"]
+              },
+              {
+                "title": "OpenSea Integration",
+                "points": [
+                  "SoT Smart Contract Development",
+                  "Creating FingeRate SoT Collection",
+                  "Minting 100 SOTs and uploading to OpenSea"
+                ]
+              }
+            ]
           },
           {
-            "title": "title2",
-            "p": "text with explanation fdsjlkfjoidsj jfiosdj iofsjdjfiosdj fiosjdoi joi joisdjf o"
+            "title": "Start of SoT Service",
+            "year": 2022,
+
+            "sections": [
+              {
+                "title": "Start of SoT Survey & Satisfaction Service",
+                "points": [
+                  "Public poll system development",
+                  "Satisfaction survey AR system development and testing",
+                  "FingeRate2.0 app development"
+                ]
+              },
+              {
+                "title": "SoT Meeting Room",
+                "points": ["Meeting Room Configuration", "Meeting Room Development", "Service Testing"]
+              },
+              {
+                "title": "SoT Marketplace",
+                "points": [
+                  "FingeRate2.0 App Marketplace Planning and Development",
+                  "Interworking with Marketplace Item NFT"
+                ]
+              }
+            ]
           },
           {
-            "title": "title3",
-            "p": "text with explanation pfjsdipjfiosdjiofjsdiofj j soidjfiosdj ijsdi jisdj fisjdoi fjso"
+            "title": "Blockchain Advancement",
+            "year": 2023,
+
+            "sections": [
+              {
+                "title": "Smart Contract",
+                "points": ["Survey Exchange System", "Real-time Revenue Settlement", "SOT Valuation System"]
+              },
+              {
+                "title": "Native Mainnet Development",
+                "points": ["Mainnet Development", "DeFi Service", "Building Own Blockchain Ecosystem"]
+              }
+            ]
           },
           {
-            "title": "title4",
-            "p": "text with explanation fijiodsjfiosdjf jfiodsjfiosdj jfoio jdiofj oisd"
+            "title": "Introduction of Deep research & AI",
+            "year": 2024,
+
+            "sections": [
+              {
+                "title": "Introduction of Deep Research",
+                "points": [
+                  "Survey deep research implementation",
+                  "deep research-based survey service launch",
+                  "deep research API implementation"
+                ]
+              },
+              {
+                "title": "Introduction of AI Survey",
+                "points": ["Automating Survey", "Adopting Qualitative AI", "Generating Draft Analytical Reports"]
+              }
+            ]
+          },
+          {
+            "title": "Deep Research & AI Enhancement",
+            "year": 2025,
+
+            "sections": [
+              {
+                "title": "Enhancing Deep Reaserch",
+                "points": [
+                  "Survey Deep Research Enhancement",
+                  "Initiation of AI Survey Based on Deep Research",
+                  "Deep Research API Sales"
+                ]
+              },
+              {
+                "title": "Enhancing AI Survey",
+                "points": [
+                  "Automating Survey",
+                  "Enhancing Qualitative AI",
+                  "Fully Automatic Generation of Analytical Reports"
+                ]
+              }
+            ]
           }
         ]
       }

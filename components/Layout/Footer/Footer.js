@@ -17,7 +17,7 @@ import gg56logo from '../../../public/footer/gg56.svg';
 
 export default function Footer() {
   return (
-    <Box as={'footer'} bg='white' marginBlockStart='auto' shadow='inner'>
+    <Box as={'footer'} bg='white' mt='auto' shadow='inner'>
       <Container maxW='container.xl' p='2'>
         <Flex
           justifyContent={{ base: 'space-between' }}

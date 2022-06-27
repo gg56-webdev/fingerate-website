@@ -1,31 +1,37 @@
 {
   "nav": [
     {
-      "n": "SoT란?",
-      "l": "/",
+      "n": "What is SoT?",
+      "l": "/#about-sot",
       "important": true,
       "external": false
     },
     {
-      "n": "SoT구매",
+      "n": "Buy SoT",
       "important": true,
       "external": false,
       "dropdown": [
         {
-          "n": "맵에서구매",
+          "n": "Buy SoT on Map",
           "l": "/map",
           "important": false,
           "external": false
         },
         {
-          "n": "SoT NFT 마켓프레이스",
-          "l": "https://opensea.io/collection/fingeratesot",
+          "n": "SoT Marketplace (Credit card)",
+          "l": "/sots",
           "important": false,
-          "external": true
+          "external": false
         },
         {
-          "n": "구매 방법",
-          "l": "/",
+          "n": "SoT NFT Marketplace",
+          "l": "/marketplace",
+          "important": false,
+          "external": false
+        },
+        {
+          "n": "How to Buy SoT",
+          "l": "/howto",
           "important": false,
           "external": false
         }
@@ -33,40 +39,23 @@
     },
     {
       "n": "FingeRate 2.0",
-      "l": "/",
+      "l": "/fr2",
       "important": true,
       "external": false
     },
     {
-      "n": "지원",
+      "n": "Support",
       "important": true,
       "external": false,
       "dropdown": [
         {
-          "n": "공지 사항",
-          "l": "/",
-          "important": false,
-          "external": false
-        },
-        {
-          "n": "이용자 가이드",
-          "l": "/",
-          "important": false,
-          "external": false
-        },
-        {
-          "n": "FAQ",
-          "l": "/",
-          "important": false,
-          "external": false
-        },
-        {
-          "n": "문의하기",
-          "l": "/",
+          "n": "Contact Us",
+          "l": "/help/email-us",
           "important": false,
           "external": false
         }
       ]
     }
-  ]
+  ],
+  "auth": { "login": "Login", "signup": "Sign up" }
 }

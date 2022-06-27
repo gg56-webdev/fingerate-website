@@ -29,8 +29,8 @@ import { ArrowForwardIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import Head from 'next/head';
 import { default as NLink } from 'next/link';
-import { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../../context/user';
+import { useState, useEffect } from 'react';
+import { useUserContext } from '../../context/User';
 
 import en from '../../locales/en/[sotId].json';
 import ko from '../../locales/ko/[sotId].json';
@@ -160,7 +160,7 @@ const redirect = (url) => window.location.assign(url);
 
 function BuyBtn({ sot }) {
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user } = useUserContext();
   const [error, setError] = useState();
 
   const handleBuy = async () => {

@@ -1,47 +1,26 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Stack,
-  useDisclosure,
-  Link,
-  Select,
-  Spinner,
-  Spacer,
-  Button,
-  IconButton,
-} from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, ExternalLinkIcon, CheckCircleIcon, WarningIcon } from '@chakra-ui/icons';
+import { Box, Container, Flex, useDisclosure, Link, Select, Spinner, Button, IconButton } from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon, CheckCircleIcon, WarningIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
 
 import frLogo from '../../../public/background/fr2.svg';
 
-// import nav from './nav.json';
 import en from '../../../locales/en/header.json';
 import ko from '../../../locales/ko/header.json';
 
 import { useRouter } from 'next/router';
 import Dropdown from './Dropdown';
 
-import { useContext } from 'react';
-import { UserContext } from '../../../context/user';
+import { useUserContext } from '../../../context/User';
 
 export default function Header() {
   const router = useRouter();
-  const { locale, pathname, asPath, query } = router;
-  const t = locale === 'en' ? en : ko;
+  const t = router.locale === 'ko' ? ko : en;
 
   const { isOpen, onToggle, onClose } = useDisclosure();
 
-  const changeLang = (e) => {
-    const locale = e.target.value;
-    router.push({ pathname, query }, asPath, { locale });
-    onToggle();
-  };
-
   return (
-    <Box as='header' pos='fixed' w='full' color='white' zIndex='sticky' padding='2'>
+    <Box as='header' pos='fixed' w='full' zIndex='sticky' p='2'>
       <Container
         maxW='container.xl'
         backgroundColor='white'
@@ -52,12 +31,12 @@ export default function Header() {
         borderColor='purple.100'
       >
         <Flex as='nav' align='center' justify='space-between' wrap='wrap'>
-          <Flex align='center' sx={{ gap: '0.25rem' }}>
-            <Box fontSize={0} borderRadius='md' overflow={'hidden'}>
+          <Flex align='center' gap='1'>
+            <Box fontSize={0} sx={{ '& img': { borderRadius: 'md' } }}>
               <Image src={frLogo} alt='FingeRate logo' width='40' height='40' />
             </Box>
             <NLink href='/' passHref>
-              <Link color='common.main' fontSize='2xl' fontWeight='bold' fontFamily={'sans-serif'} onClick={onClose}>
+              <Link color='common.main' fontSize='2xl' fontWeight='bold' fontFamily='sans-serif' onClick={onClose}>
                 FingeRate
               </Link>
             </NLink>
@@ -86,7 +65,8 @@ export default function Header() {
               direction={{ base: 'column', lg: 'row' }}
               pt={{ base: 4, lg: 0 }}
               pb={{ base: 2, lg: 0 }}
-              sx={{ gap: 2 }}
+              gap='2'
+              px='2'
               fontSize='md'
               fontWeight='bold'
             >
@@ -110,23 +90,8 @@ export default function Header() {
                   </NLink>
                 );
               })}
-              <Spacer />
-              <Auth onClick={onClose} t={t} />
-              <Spacer />
-              {/* <Select
-                w={'fit-content'}
-                size='sm'
-                variant='outline'
-                color='common.main'
-                bgColor='white'
-                onChange={changeLang}
-                defaultValue={locale}
-                border='1px solid'
-                borderColor='common.main'
-              >
-                <option value='en'>English</option>
-                <option value='ko'>한국어</option>
-              </Select> */}
+              <ChangeLang router={router} onClose={onClose} />
+              <Auth onClose={onClose} t={t.auth} />
             </Flex>
           </Box>
         </Flex>
@@ -135,8 +100,39 @@ export default function Header() {
   );
 }
 
-function Auth({ onClick, t }) {
-  const { user, loading, error } = useContext(UserContext);
+const LOCALES = Object.freeze({
+  ko: '한국어',
+  en: 'English',
+});
+
+function ChangeLang({ router, onClose }) {
+  const { pathname, query, asPath, locales, locale, push } = router;
+  const changeLang = (e) => {
+    const locale = e.target.value;
+    push({ pathname, query }, asPath, { locale });
+    onClose();
+  };
+  return (
+    <Select
+      w='auto'
+      size='sm'
+      borderRadius='md'
+      color='common.main'
+      defaultValue={locale}
+      onChange={changeLang}
+      mr={{ md: '2' }}
+    >
+      {locales.map((l) => (
+        <option key={l} value={l}>
+          {LOCALES[l] || l}
+        </option>
+      ))}
+    </Select>
+  );
+}
+
+function Auth({ onClose, t }) {
+  const { user, loading, error } = useUserContext();
   if (error)
     return (
       <Flex align='center' p='1' color='red'>
@@ -148,7 +144,7 @@ function Auth({ onClick, t }) {
   if (user !== null)
     return (
       <NLink href='/dashboard' passHref>
-        <Link color='common.mainLight' onClick={onClick}>
+        <Link color='common.mainLight' onClick={onClose}>
           {user.email.split('@')[0]}
           {user.emailVerified && <CheckCircleIcon ml='1' verticalAlign='-1px' />}
         </Link>
@@ -156,7 +152,7 @@ function Auth({ onClick, t }) {
     );
   return (
     <NLink href='/enter' passHref>
-      <Link color='common.mainLight' onClick={onClick}>{`${t.login}/${t.signup}`}</Link>
+      <Link color='common.mainLight' onClick={onClose}>{`${t.login} / ${t.signup}`}</Link>
     </NLink>
   );
 }

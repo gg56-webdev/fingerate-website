@@ -1,11 +1,15 @@
 import Head from 'next/head';
 import { Hero, AboutSot, Flowchart, Price, LearnMore, History, Roadmap } from '../components';
-import { db } from '../lib/firebaseAdmin';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 import ko from '../locales/ko/index.json';
+import en from '../locales/en/index.json';
 
-export default function Home({ news }) {
-  const t = ko;
+export default function Home({ news, locale }) {
+  const t = locale === 'ko' ? ko : en;
 
   return (
     <>
@@ -30,6 +34,7 @@ export default function Home({ news }) {
 }
 
 export async function getStaticProps() {
+  const { db } = await import('../lib/firebaseAdmin');
   const { docs } = await db.collection('news').get();
   const news = docs.map((doc) => {
     const { title, time, link } = doc.data();

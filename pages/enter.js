@@ -25,9 +25,7 @@ import {
 } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { UserContext } from '../context/user';
-
-import { useContext } from 'react';
+import { useUserContext } from '../context/User';
 
 export default function Enter() {
   const [screen, setScreen] = useState('로그인');
@@ -37,7 +35,7 @@ export default function Enter() {
   const [alert, setAlert] = useState('');
   const [isValid, setIsValid] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { user } = useUserContext;
 
   const changeScreen = (s) => {
     setScreen(s);

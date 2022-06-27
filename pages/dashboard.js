@@ -1,12 +1,11 @@
 import Head from 'next/head';
-import { useContext, useEffect, useState, useRef, createContext, useMemo, useReducer } from 'react';
+import { useEffect, useState, useRef, createContext, useContext, useMemo, useReducer } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
-import { UserContext } from '../context/user';
+import { useUserContext } from '../context/User';
 import { auth, db } from '../lib/firebase';
 import { doc, updateDoc, getDoc, onSnapshot, collection, query, where, setDoc, getDocs } from 'firebase/firestore';
-
 import useMetaMaskCustom from '../hooks/useMetaMaskCustom';
 import POLYGON from '../utils/POLYGON';
 import { CheckIcon, QuestionIcon, WarningIcon, ExternalLinkIcon, AddIcon } from '@chakra-ui/icons';
@@ -15,13 +14,11 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   Select,
   Link,
   Skeleton,
-  UnorderedList,
   Container,
   Stack,
   Spinner,
@@ -29,16 +26,11 @@ import {
   Button,
   Grid,
   Box,
-  Alert,
-  AlertIcon,
-  AlertDescription,
-  AlertTitle,
   Text,
   Icon,
   Tooltip,
   useToast,
   useDisclosure,
-  Center,
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
@@ -56,11 +48,8 @@ import {
   Tag,
   TagLabel,
   TagRightIcon,
-  TagLeftIcon,
-  Heading,
   Divider,
 } from '@chakra-ui/react';
-
 import ko from '../locales/ko/user.json';
 
 const WalletContext = createContext();
@@ -78,7 +67,7 @@ export async function getStaticProps() {
 }
 
 export default function Dashboard({ nfts }) {
-  const { user, loading, error } = useContext(UserContext);
+  const { user, loading, error } = useUserContext();
   const { locale, push } = useRouter();
   const { status, chainId } = useMetaMaskCustom();
 
@@ -131,7 +120,7 @@ export default function Dashboard({ nfts }) {
 }
 
 function UserSection() {
-  const { user } = useContext(UserContext);
+  const { user } = useUserContext();
 
   return (
     <Flex justify='center' sx={{ gap: 2 }} fontFamily='sans-serif' flexWrap='wrap'>
@@ -152,7 +141,7 @@ function UserSection() {
 }
 
 function User() {
-  const { user, logout, sendEmail } = useContext(UserContext);
+  const { user, logout, sendEmail } = useUserContext();
   const toast = useToast();
   return (
     <Flex bg='white' borderRadius='md' p='4' shadow='md' textAlign='center' alignItems='center' sx={{ gap: 4 }}>
@@ -186,7 +175,7 @@ function User() {
 const isSameWalletAddress = (a1, a2) => (a1 && a2 ? a1?.toLowerCase() === a2?.toLowerCase() : false);
 
 function Wallet() {
-  const { user } = useContext(UserContext);
+  const { user } = useUserContext();
 
   const { status, account, startOnboarding, switchToPolygon, connectAndSwitch, chainId } = useMetaMaskCustom();
   const { walletAddress, setWalletAddress, loaded } = useContext(WalletContext);
@@ -326,7 +315,7 @@ function Sots({ nfts }) {
   const [cardSots, setCardSots] = useState([]);
   const [nftSots, setNftSots] = useState([]);
   const { walletAddress } = useContext(WalletContext);
-  const { user } = useContext(UserContext);
+  const { user } = useUserContext();
   const { chainId, account } = useMetaMaskCustom();
   const [loaded, setLoaded] = useState(false);
 
