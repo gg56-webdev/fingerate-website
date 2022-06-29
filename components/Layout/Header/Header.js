@@ -22,7 +22,7 @@ import ko from '../../../locales/ko/header.json';
 import { useRouter } from 'next/router';
 import Dropdown from './Dropdown';
 
-import { useUserContext } from '../../../context/User';
+import { useUserContext } from '../../../context/user';
 import { useRef } from 'react';
 
 export default function Header() {
@@ -133,9 +133,9 @@ function ChangeLang({ router, onClose }) {
       size='sm'
       borderRadius='md'
       color='common.main'
-      defaultValue={locale}
       onChange={changeLang}
       mr={{ md: '2' }}
+      value={locale}
     >
       {locales.map((l) => (
         <option key={l} value={l}>
@@ -150,20 +150,22 @@ function Auth({ onClose, t }) {
   const { user, loading, error } = useUserContext();
   if (error)
     return (
-      <Flex align='center' p='1' color='red'>
+      <Flex align='center' p='1' color='red' gap='1'>
         Auth error
-        <WarningIcon ml='1' />
+        <WarningIcon />
       </Flex>
     );
   if (loading) return <Spinner color='common.mainLight' />;
   if (user !== null)
     return (
-      <NLink href='/dashboard' passHref>
-        <Link color='common.mainLight' onClick={onClose}>
-          {user.email.split('@')[0]}
-          {user.emailVerified && <CheckCircleIcon ml='1' verticalAlign='-1px' />}
-        </Link>
-      </NLink>
+      <Flex color='common.mainLight' align='center' maxW='15ch' gap='1'>
+        <NLink href='/dashboard' passHref>
+          <Link onClick={onClose} isTruncated>
+            {user.email.split('@')[0]}
+          </Link>
+        </NLink>
+        {user.emailVerified && <CheckCircleIcon />}
+      </Flex>
     );
   return (
     <NLink href='/enter' passHref>

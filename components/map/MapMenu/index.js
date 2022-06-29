@@ -27,6 +27,7 @@ export default function MapMenu({ filteredSots, t, ...rest }) {
       transform={isOpen ? 'translate(0%, 0%)' : 'translate(-100%,0%)'}
     >
       <IconButton
+        shadow={isOpen ? 'none' : 'md'}
         aria-label='toggle list map menu'
         onClick={onToggle}
         pos='absolute'

@@ -4,5 +4,6 @@
     "grade": "Grade",
     "price": "Price",
     "ownership": "Buy Now"
-  }
+  },
+  "hasOwner": "Sold out"
 }

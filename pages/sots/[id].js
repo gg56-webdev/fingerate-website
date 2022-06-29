@@ -30,10 +30,10 @@ import Image from 'next/image';
 import Head from 'next/head';
 import { default as NLink } from 'next/link';
 import { useState, useEffect } from 'react';
-import { useUserContext } from '../../context/User';
+import { useUserContext } from '../../context/user';
 
-import en from '../../locales/en/[sotId].json';
-import ko from '../../locales/ko/[sotId].json';
+import ko from '../../locales/ko/[id].json';
+import en from '../../locales/en/[id].json';
 
 export async function getStaticPaths() {
   const { docs } = await getDocs(collection(db, 'sots'));
@@ -55,7 +55,8 @@ export async function getStaticProps({ params: { id } }) {
   };
 }
 
-export default function Sot({ sot }) {
+export default function Sot({ sot, locale }) {
+  const t = locale === 'ko' ? ko : en;
   const [krwPrice, setKrwPrice] = useState();
 
   useEffect(() => {
@@ -102,9 +103,9 @@ export default function Sot({ sot }) {
               <Text>{`${sot.grade}급 SoT, 100m²의 HideOut이 포함 위도 = ${sot._lat}, 경도 = ${sot._long}`}</Text>
               <Grid gridTemplateColumns='repeat(3,1fr)' gap='2' mt='auto'>
                 {[
-                  [sot.grade, ko.stats.grade],
-                  [sot.country, ko.stats.country],
-                  [sot.city, ko.stats.city],
+                  [sot.grade, t.stats.grade],
+                  [sot.country, t.stats.country],
+                  [sot.city, t.stats.city],
                 ].map(([stat, text]) => (
                   <Box key={text} p='2' bg='purple.50' borderRadius='md' shadow='inner' textAlign='center'>
                     <Box fontSize='sm'>{text}</Box>
@@ -115,7 +116,7 @@ export default function Sot({ sot }) {
                 ))}
               </Grid>
               <Stack p='2' borderRadius='md' bg='white' border='2px solid' borderColor='purple' shadow='sm'>
-                <Box fontSize='sm'>{ko.stats.price}</Box>
+                <Box fontSize='sm'>{t.stats.price}</Box>
                 <Flex gap='2' fontWeight='bold'>
                   <Tag colorScheme='purple' variant='solid' size='lg' fontWeight='bold'>
                     $ {sot.price.toLocaleString()}
@@ -127,11 +128,11 @@ export default function Sot({ sot }) {
                   )}
                 </Flex>
               </Stack>
-              <BuyBtn sot={sot} />
+              <BuyBtn sot={sot} t={t} />
             </Flex>
           </Grid>
           <Divider />
-          <Description sot={sot} />
+          <Description sot={sot} t={t} />
         </Stack>
       </Container>
     </>
@@ -158,7 +159,7 @@ const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigat
 
 const redirect = (url) => window.location.assign(url);
 
-function BuyBtn({ sot }) {
+function BuyBtn({ sot, t }) {
   const [loading, setLoading] = useState(false);
   const { user } = useUserContext();
   const [error, setError] = useState();
@@ -193,7 +194,7 @@ function BuyBtn({ sot }) {
     return (
       <NLink href='/enter' passHref>
         <Button as='a' size='lg'>
-          {ko.btn.loginToBuy}
+          {t.btn.loginToBuy}
         </Button>
       </NLink>
     );
@@ -201,7 +202,7 @@ function BuyBtn({ sot }) {
     return (
       <NLink href='/dashboard' passHref>
         <Button as='a' size='lg'>
-          {ko.btn.verifyToBuy}
+          {t.btn.verifyToBuy}
         </Button>
       </NLink>
     );
@@ -215,12 +216,12 @@ function BuyBtn({ sot }) {
     );
   return (
     <Button colorScheme='purple' size='lg' isLoading={loading} bg='common.mainLight' onClick={handleBuy}>
-      {ko.btn.buy}
+      {t.btn.buy}
     </Button>
   );
 }
 
-function Description({ sot }) {
+function Description({ sot, t }) {
   return (
     <Stack spacing='4'>
       <Text
@@ -232,23 +233,23 @@ function Description({ sot }) {
         color='purple.900'
         fontWeight='bold'
       >
-        {ko.description.nftNotice}
+        {t.description.nftNotice}
         <br />
-        {ko.description.contactUs} <ArrowForwardIcon verticalAlign='-3px' />{' '}
+        {t.description.contactUs} <ArrowForwardIcon verticalAlign='-3px' />{' '}
         <Link href='mailto:admin@fingerate.world' color='blue'>
           admin@fingerate.world
         </Link>
       </Text>
       <Box px='2'>
-        <Text>{ko.description.para1}</Text>
-        <Text>{ko.description.grades[sot.grade]}</Text>
-        <Text>{ko.description.para2}</Text>
+        <Text>{t.description.para1}</Text>
+        <Text>{t.description.grades[sot.grade]}</Text>
+        <Text>{t.description.para2}</Text>
         <UnorderedList sx={{ '& li::marker': { color: 'common.main' } }}>
-          {ko.description.paraList.map((i) => (
+          {t.description.paraList.map((i) => (
             <ListItem key={i}>{i}</ListItem>
           ))}
         </UnorderedList>
-        <Text>{ko.description.para3}</Text>
+        <Text>{t.description.para3}</Text>
       </Box>
       <Grid
         gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }}
@@ -261,10 +262,10 @@ function Description({ sot }) {
         <Table size='sm'>
           <Tbody>
             {[
-              [ko.stats.country, sot.country],
-              [ko.stats.city, sot.city],
-              [ko.stats.latitude, sot._lat],
-              [ko.stats.longitude, sot._long],
+              [t.stats.country, sot.country],
+              [t.stats.city, sot.city],
+              [t.stats.latitude, sot._lat],
+              [t.stats.longitude, sot._long],
             ].map(([key, val]) => (
               <Tr key={key}>
                 <Td bg='purple.50' fontWeight='bold' w='28' textAlign='center' color='purple.900'>
@@ -278,10 +279,10 @@ function Description({ sot }) {
         <Table size='sm'>
           <Tbody>
             {[
-              [ko.stats.location, sot.name],
-              [ko.stats.grade, sot.grade],
-              [ko.stats.price, `$ ${sot.price}`],
-              [ko.stats.owner, sot.owner ? ko.stats.hasOwner : ko.stats.noOwner],
+              [t.stats.location, sot.name],
+              [t.stats.grade, sot.grade],
+              [t.stats.price, `$ ${sot.price}`],
+              [t.stats.owner, sot.owner ? t.stats.hasOwner : t.stats.noOwner],
             ].map(([key, val]) => (
               <Tr key={key}>
                 <Td bg='purple.50' fontWeight='bold' w='28' textAlign='center' color='purple.900'>
@@ -294,7 +295,7 @@ function Description({ sot }) {
         </Table>
       </Grid>
       <Text p='2' borderRadius='md' shadow='outline' fontWeight='bold' _before={{ content: `'*'`, mr: 1 }}>
-        {ko.description.disclaimer} <ArrowForwardIcon verticalAlign='-3px' />{' '}
+        {t.description.disclaimer} <ArrowForwardIcon verticalAlign='-3px' />{' '}
         <Link href='mailto:admin@fingerate.world' color={'blue'}>
           admin@fingerate.world
         </Link>

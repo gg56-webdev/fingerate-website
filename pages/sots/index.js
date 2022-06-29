@@ -27,6 +27,7 @@ import useFilter, { FILTER_ACTIONS } from '../../hooks/useFilter';
 import { db } from '../../lib/firebase';
 
 import ko from '../../locales/ko/sots.json';
+import en from '../../locales/en/sots.json';
 
 const LIMIT = 6 * 5;
 const q = query(collection(db, 'sots'), orderBy(documentId()), limit(LIMIT));
@@ -43,9 +44,9 @@ export async function getStaticProps() {
   return { props: { sots, availableCountries } };
 }
 
-export default function Sots({ sots, availableCountries }) {
+export default function Sots({ sots, availableCountries, locale }) {
   const { filteredSots, dispatch } = useFilter(sots);
-
+  const t = locale === 'ko' ? ko : en;
   return (
     <>
       <Head>
@@ -56,15 +57,15 @@ export default function Sots({ sots, availableCountries }) {
           SoTs
         </Heading>
         <Stack p='2' bg='white' borderRadius='md' shadow='md'>
-          <Filters dispatch={dispatch} availableCountries={availableCountries} />
-          <SotsList sots={filteredSots} />
+          <Filters t={t} dispatch={dispatch} availableCountries={availableCountries} />
+          <SotsList t={t} sots={filteredSots} />
         </Stack>
       </Container>
     </>
   );
 }
 
-function Filters({ dispatch, availableCountries }) {
+function Filters({ dispatch, availableCountries, t }) {
   return (
     <Flex sx={{ gap: 1 }} bg='purple.50' borderRadius='md' shadow='inner' p='1'>
       <Select
@@ -72,7 +73,7 @@ function Filters({ dispatch, availableCountries }) {
         w='auto'
         onChange={(e) => dispatch({ type: FILTER_ACTIONS.SET, payload: ['countryFilter', e.target.value] })}
       >
-        <option value=''>- {ko.filters.country} -</option>
+        <option value=''>- {t.filters.country} -</option>
         {availableCountries.map((c) => (
           <option key={c} value={c}>
             {c}
@@ -84,7 +85,7 @@ function Filters({ dispatch, availableCountries }) {
         w='auto'
         onChange={(e) => dispatch({ type: FILTER_ACTIONS.SET, payload: ['gradeFilter', e.target.value] })}
       >
-        <option value=''>- {ko.filters.grade} -</option>
+        <option value=''>- {t.filters.grade} -</option>
         {['S', 'A', 'B', 'C', 'D'].map((g) => (
           <option value={g} key={g}>
             {g}
@@ -104,7 +105,7 @@ function Filters({ dispatch, availableCountries }) {
         flexShrink='0'
       >
         <FormLabel htmlFor='owner-toogle' m='0' mr='2'>
-          {ko.filters.ownership}
+          {t.filters.ownership}
         </FormLabel>
         <Switch
           id='owner-toogle'
@@ -116,7 +117,7 @@ function Filters({ dispatch, availableCountries }) {
   );
 }
 
-function SotsList({ sots }) {
+function SotsList({ sots, t }) {
   if (sots.length === 0)
     return (
       <Box bg='pink.50' textAlign='center' color='pink.900' py='8' borderRadius='md'>
@@ -131,13 +132,13 @@ function SotsList({ sots }) {
       gap='2'
     >
       {sots.map((sot) => (
-        <SotCard key={sot.id} sot={sot} />
+        <SotCard key={sot.id} sot={sot} t={t} />
       ))}
     </Grid>
   );
 }
 
-function SotCard({ sot }) {
+function SotCard({ sot, t }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -216,7 +217,7 @@ function SotCard({ sot }) {
           </Box>
           {sot.owner && (
             <Box as='ins' ml='1' fontSize='xs' textDecor='none'>
-              {ko.hasOwner}
+              {t.hasOwner}
             </Box>
           )}
         </Box>

@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { UserContext } from '../context/user';
+import { auth } from '../lib/firebase';
 
 import ko from '../locales/ko/enter.json';
 import en from '../locales/en/enter.json';
@@ -26,8 +26,6 @@ export default function Enter() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const { screen, email, password, error, alert, loading, disabled } = state;
-
-  const { auth } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -121,7 +119,7 @@ export default function Enter() {
                 <AlertTitle>{alert}</AlertTitle>
               </Alert>
             )}
-            {screen === 'signup' ? (
+            {screen !== 'login' ? (
               <Text>
                 {t.alreadyHave}{' '}
                 <Button

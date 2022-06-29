@@ -4,6 +4,7 @@ import useFilter from '../hooks/useFilter';
 import { Mapbox, MapMenu } from '../components/map';
 
 import ko from '../locales/ko/map.json';
+import en from '../locales/en/map.json';
 
 export async function getStaticProps() {
   const [{ default: getFirebaseSots }, { default: getPolygonSots }, { default: getCountryCoords }] = await Promise.all([

@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, createContext, useContext, useMemo, useRed
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
-import { useUserContext } from '../context/User';
+import { useUserContext } from '../context/user';
 import { auth, db } from '../lib/firebase';
 import { doc, updateDoc, getDoc, onSnapshot, collection, query, where, setDoc, getDocs } from 'firebase/firestore';
 import useMetaMaskCustom from '../hooks/useMetaMaskCustom';
@@ -50,7 +50,8 @@ import {
   TagRightIcon,
   Divider,
 } from '@chakra-ui/react';
-import ko from '../locales/ko/user.json';
+import ko from '../locales/ko/dashboard.json';
+import en from '../locales/en/dashboard.json';
 
 const WalletContext = createContext();
 
@@ -74,6 +75,7 @@ export default function Dashboard({ nfts }) {
   const [walletAddress, setWalletAddress] = useState();
   const [loaded, setLoaded] = useState();
 
+  const t = locale === 'ko' ? ko : en;
   useEffect(() => {
     if ((!loading && !user) || error) {
       push('/enter', '/enter', { locale });
@@ -109,8 +111,8 @@ export default function Dashboard({ nfts }) {
             <Spinner size='lg' color='purple' alignSelf='center' />
           ) : (
             <WalletContext.Provider value={{ walletAddress, setWalletAddress, loaded }}>
-              <UserSection />
-              <Sots nfts={nfts} />
+              <UserSection t={t} />
+              <Sots nfts={nfts} t={t} />
             </WalletContext.Provider>
           )}
         </Stack>
@@ -119,12 +121,12 @@ export default function Dashboard({ nfts }) {
   );
 }
 
-function UserSection() {
+function UserSection({ t }) {
   const { user } = useUserContext();
 
   return (
     <Flex justify='center' sx={{ gap: 2 }} fontFamily='sans-serif' flexWrap='wrap'>
-      <User />
+      <User t={t} />
       {user?.emailVerified ? (
         <Wallet />
       ) : (
@@ -140,7 +142,7 @@ function UserSection() {
   );
 }
 
-function User() {
+function User({ t }) {
   const { user, logout, sendEmail } = useUserContext();
   const toast = useToast();
   return (
@@ -152,7 +154,7 @@ function User() {
         <Box as='strong' color='common.main'>
           {user?.email}
           {!user?.emailVerified && (
-            <Tooltip label={ko.notVerified}>
+            <Tooltip label={t.notVerified}>
               <WarningIcon ml='1' color='pink.600' verticalAlign='-2px' />
             </Tooltip>
           )}
@@ -160,11 +162,11 @@ function User() {
         <Flex justify='center' sx={{ gap: 2 }}>
           {!user?.emailVerified && (
             <Button colorScheme='pink' size='sm' onClick={() => sendEmail(toast)}>
-              {ko.sendEmail}
+              {t.sendEmail}
             </Button>
           )}
           <Button onClick={logout} variant='ghost' colorScheme='purple' size='sm'>
-            {ko.logout}
+            {t.logout}
           </Button>
         </Flex>
       </Stack>
@@ -311,7 +313,7 @@ function Wallet() {
   );
 }
 
-function Sots({ nfts }) {
+function Sots({ nfts, t }) {
   const [cardSots, setCardSots] = useState([]);
   const [nftSots, setNftSots] = useState([]);
   const { walletAddress } = useContext(WalletContext);
@@ -363,23 +365,23 @@ function Sots({ nfts }) {
     <Stack bg='white' borderRadius='md' shadow='md' p='2'>
       {isSameWalletAddress(account, walletAddress) && chainId === POLYGON.chainId && <AddSot nfts={nfts} />}
       <Divider />
-      {loaded ? <SotList sots={[...cardSots, ...nftSots]} /> : <Spinner size='xl' />}
+      {loaded ? <SotList sots={[...cardSots, ...nftSots]} t={t} /> : <Spinner size='xl' />}
     </Stack>
   );
 }
 
-function SotList({ sots }) {
+function SotList({ sots, t }) {
   if (sots.length === 0) {
     return (
       <Box textAlign='center'>
         <Box fontWeight='bold' fontSize='2xl' mb='2' color='pink.800'>
-          {ko.noSots} 😢
+          {t.noSots} 😢
         </Box>
         <Text>
-          {ko.visitMarket}{' '}
+          {t.visitMarket}{' '}
           <NLink href='/sots' passHref>
             <Link fontWeight='bold' color='rebeccapurple'>
-              {ko.sotsMarket}
+              {t.sotsMarket}
             </Link>
           </NLink>
           .

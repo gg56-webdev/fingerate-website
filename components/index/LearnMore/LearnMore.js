@@ -29,7 +29,7 @@ export default function LearnMore({ text: { content } }) {
               >
                 <Text>{content.box1.p}</Text>
                 <Flex color='blue' sx={{ gap: 4 }}>
-                  <Link href='http://swc2022.cafe24.com/contents.php?mcd=192' isExternal>
+                  <Link href='http://swc2022.cafe24.com/' isExternal>
                     SIGNIS 배경 및 목적 <ExternalLinkIcon />
                   </Link>
                   <Link href='https://news.yahoo.com/news/2022-seoul-signis-world-congress-212300440.html' isExternal>
@@ -60,7 +60,7 @@ export default function LearnMore({ text: { content } }) {
                   left: 0,
                   bottom: 0,
                   m: 1,
-                  fontSize: 'initial',
+                  fontSize: 'sm',
                   bg: 'blackAlpha.700',
                   p: 1,
                   borderRadius: 'md',
@@ -77,7 +77,7 @@ export default function LearnMore({ text: { content } }) {
                   left: 0,
                   bottom: 0,
                   m: 1,
-                  fontSize: 'initial',
+                  fontSize: 'sm',
                   bg: 'blackAlpha.700',
                   p: 1,
                   borderRadius: 'md',
@@ -94,7 +94,7 @@ export default function LearnMore({ text: { content } }) {
                   left: 0,
                   bottom: 0,
                   m: 1,
-                  fontSize: 'initial',
+                  fontSize: 'sm',
                   bg: 'blackAlpha.700',
                   p: 1,
                   borderRadius: 'md',

@@ -14,27 +14,24 @@
         ],
         "benefit": "Benefits",
         "table": [
-          [
-            "SoT Owner",
-            "Generating revenue from the SoT devices",
-            "Resellable at a higher price",
-            "linear(to-l, blue.200, cyan.600)",
-            "blue.400"
-          ],
-          [
-            "Survey Participants",
-            "Earning SoM as rewards for survey participation",
-            "More fun and engaging survey experience",
-            "linear(to-br, teal.300, yellow.400)",
-            "orange.500"
-          ],
-          [
-            "Survey Requester",
-            "Possible to retrieve survey data disaggregated into target, region, etc.",
-            "Secure survey system based on smart contract",
-            "linear(to-tr, #9A22F5, #F4A261)",
-            "green.500"
-          ]
+          {
+            "user": "SoT Owner",
+            "points": ["Generating revenue from the SoT devices", "Resellable at a higher price"],
+            "color": "blue.300"
+          },
+          {
+            "user": "Survey Participants",
+            "points": ["Earning SoM as rewards for survey participation", "More fun and engaging survey experience"],
+            "color": "pink.400"
+          },
+          {
+            "user": "Survey Requester",
+            "points": [
+              "Possible to retrieve survey data disaggregated into target, region, etc.",
+              "Secure survey system based on smart contract"
+            ],
+            "color": "green.400"
+          }
         ]
       }
     },
@@ -98,11 +95,7 @@
                 "Location-based service technology, satisfaction analysis technology",
                 "Android version in service"
               ],
-              "list2": [
-                "FingeRate 2.0(App / Web)",
-                "Android, Apple, Web Browser",
-                "NFT (ERC-721 Token)"
-              ]
+              "list2": ["FingeRate 2.0(App / Web)", "Android, Apple, Web Browser", "NFT (ERC-721 Token)"]
             }
           ]
         }

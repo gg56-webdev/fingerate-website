@@ -2,7 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { theme, koreanTheme } from '../styles/theme';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout/Layout';
-import UserContextProvider from '../context/User';
+import UserContextProvider from '../context/user';
 import NextNProgress from 'nextjs-progressbar';
 import { MetaMaskProvider } from 'metamask-react';
 

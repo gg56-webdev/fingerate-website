@@ -30,6 +30,7 @@ export default function Price({
                 p='4'
                 fontFamily={'sans-serif'}
                 textShadow='-1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5)'
+                alignSelf='center'
               >
                 <Box as={'strong'} fontWeight='bold' fontSize={'3xl'}>
                   {row.grade}

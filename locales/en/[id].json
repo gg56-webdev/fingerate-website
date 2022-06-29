@@ -9,7 +9,8 @@
     "longitude": "Longitude",
     "location": "Location",
     "owner": "Owner",
-    "noOwner": "No Owner"
+    "noOwner": "No Owner",
+    "hasOwner": "Has Owner"
   },
   "btn": {
     "loginToBuy": "Please log in to buy SoT",

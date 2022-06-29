@@ -23,6 +23,7 @@ export default function Social() {
       shadow={isOpen ? 'md' : 'none'}
     >
       <IconButton
+        shadow={isOpen ? 'none' : 'md'}
         aria-label='toggle list map menu'
         onClick={onToggle}
         pos='absolute'

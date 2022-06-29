@@ -73,7 +73,7 @@ function Card({ text }) {
             alignItems='center'
             textAlign='center'
           >
-            <Box flex='1' filter='hue-rotate(163deg)'>
+            <Box flex='1' filter='hue-rotate(116deg)'>
               <Image src={cardImgs[id]} alt={step} placeholder='blur' />
             </Box>
             <Text

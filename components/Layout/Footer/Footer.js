@@ -87,17 +87,17 @@ export default function Footer() {
               </AccordionItem>
             </Accordion>
           </Stack>
-          <Flex flexDir={{ base: 'row', md: 'column' }} color={'blue'} gap='2'>
-            <NLink href={'/terms'} passHref>
+          <Flex color='blue' gap='6' justify='center'>
+            <NLink href='/terms' passHref>
               <Link>서비스 이용약관</Link>
             </NLink>
-            <NLink href={'/privacy'} passHref>
+            <NLink href='/privacy' passHref>
               <Link>개인정보처리방침</Link>
             </NLink>
           </Flex>
         </Flex>
         <Divider mt='1' />
-        <Box as={'small'} display='block' fontSize='xs' color='common.main' textAlign={'center'} mt='1'>
+        <Box as='small' display='block' fontSize='xs' color='common.main' textAlign='center' mt='1'>
           @{new Date().getFullYear()} GG56 Ltd. ALL RIGHTS RESERVED.
         </Box>
       </Container>

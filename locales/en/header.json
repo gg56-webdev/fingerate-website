@@ -27,7 +27,7 @@
           "n": "SoT NFT Marketplace",
           "l": "/marketplace",
           "important": false,
-          "external": false
+          "external": true
         },
         {
           "n": "How to Buy SoT",

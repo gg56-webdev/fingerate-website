@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 import { useUserData } from '../hooks/useUserData';
 
-export const UserContext = createContext();
+const UserContext = createContext();
 
 export const useUserContext = () => useContext(UserContext);
 

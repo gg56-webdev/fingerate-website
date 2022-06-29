@@ -98,7 +98,11 @@ export default function Hero({ text: { content }, news }) {
             <Box
               title='SoT device'
               as='iframe'
-              // src='https://my.spline.design/sotdevicecopy-e1d4a0f1fcf8d3f04e831dc52abcdc42/'
+              src={
+                process.env.NODE_ENV === 'development'
+                  ? ''
+                  : 'https://my.spline.design/sotdevicecopy-e1d4a0f1fcf8d3f04e831dc52abcdc42/'
+              }
               loading='lazy'
               frameBorder='0'
               w='full'
