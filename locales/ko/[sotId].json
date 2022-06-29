@@ -9,7 +9,8 @@
     "longitude": "경도",
     "location": "위치",
     "owner": "소유자",
-    "noOwner": "소유자 없음"
+    "noOwner": "소유자 없음",
+    "hasOwner": "소유자 있음"
   },
   "btn": {
     "loginToBuy": "SoT 구매를 위해 로그인 해주세요",

@@ -1,6 +1,6 @@
 {
   "sendEmail": "Send Email Verification",
-  "notVerified": "Not Verified",
+  "notVerified": "Email is not verified",
   "logout": "로그아웃",
   "reload": "이메일을 확인한 뒤에 페이지를 새로 고침하세요",
   "noSots": "아직 소유한 SoT가 없습니다",

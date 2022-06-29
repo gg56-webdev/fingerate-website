@@ -31,9 +31,9 @@
         "list1": {
           "h3": "My own digital assets",
           "listItems": [
-            "Research & survey NFT assets in the “FingeRate metaverse” that maps the real world as it is,",
-            "In case of purchasing an SoT, the surrounding land of 1 km² is also yours,",
-            "Conducting various research & surveys through request basis,",
+            "Research & survey NFT assets in the “FingeRate metaverse” that maps the real world as it is",
+            "In case of purchasing an SoT, the surrounding land of 1 km² is also yours",
+            "Conducting various research & surveys through request basis",
             "SoT owners can also do surveys, and collect & sell datasets!"
           ]
         },
@@ -78,7 +78,7 @@
           {
             "grade": "S",
             "price": 2000,
-            "description": "The rarest SoTs at the Top 1% in the world, where surveys are participated by the most number of people,",
+            "description": "The rarest SoTs at the Top 1% in the world, where surveys are participated by the most number of people",
             "explanation": "Rarest 1% of the total SoTs installed around the world"
           },
           {
@@ -94,7 +94,7 @@
             "explanation": "40% of the total SoTs installed around the world"
           },
           {
-            "grade": "C ",
+            "grade": "C",
             "price": 500,
             "description": "SoTs installed in beautiful and sophisticated cities with an average population of 100,000+",
             "explanation": "30% of the total SoTs installed around the world"
@@ -118,7 +118,7 @@
           "p": "Through this MOU, GG56 Korea will provide technical support for the construction of a metaverse platform for the 2022 Seoul SIGNIS World Congress, which will be held from August 16 to 22 under the theme of “Peace in the Digital World.”"
         },
         "box2": {
-          "title": "SoTs operating in the real world,",
+          "title": "SoTs operating in the real world",
           "locations": ["Chuncheon Gugok Falls", "Chuncheon Skywalk", "YBM Language School Jongno Head Office"]
         }
       }
@@ -128,11 +128,11 @@
       "content": {
         "h2": "The evolution of FingeRate continues (Patent History)",
         "events": [
-          "Virtual currency-based offline mileage payment system,",
-          "location-based metaverse survey system,",
-          "Satisfaction survey system through motion recognition in the field,",
-          "Metaverse system using avatar tokenization,",
-          "Metaverse system for managing the history of e-wallet-based avatars,",
+          "Virtual currency-based offline mileage payment system",
+          "location-based metaverse survey system",
+          "Satisfaction survey system through motion recognition in the field",
+          "Metaverse system using avatar tokenization",
+          "Metaverse system for managing the history of e-wallet-based avatars",
           "Survey system for in-depth analysis"
         ]
       }
@@ -208,7 +208,7 @@
             ]
           },
           {
-            "title": "Introduction of Deep research & AI,",
+            "title": "Introduction of Deep research & AI",
             "year": 2024,
 
             "sections": [

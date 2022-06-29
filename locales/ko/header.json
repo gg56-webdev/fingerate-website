@@ -25,9 +25,9 @@
         },
         {
           "n": "SoT NFT 마켓플레이스",
-          "l": "/marketplace",
+          "l": "https://opensea.io/collection/fingeratesot",
           "important": false,
-          "external": false
+          "external": true
         },
         {
           "n": "구매 방법",
@@ -57,7 +57,5 @@
       ]
     }
   ],
-  "auth": {
-    "loginSignup": "로그인/가입하기"
-  }
+  "auth": { "login": "로그인", "signup": "가입하기" }
 }

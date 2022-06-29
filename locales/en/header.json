@@ -2,7 +2,7 @@
   "nav": [
     {
       "n": "What is SoT?",
-      "l": "/",
+      "l": "/#about-sot",
       "important": true,
       "external": false
     },
@@ -12,14 +12,14 @@
       "external": false,
       "dropdown": [
         {
-          "n": "SoT Marketplace (Pay with credit cards)",
-          "l": "/sots",
+          "n": "Buy SoT on Map",
+          "l": "/map",
           "important": false,
           "external": false
         },
         {
-          "n": "Buy SoT on Map",
-          "l": "/map",
+          "n": "SoT Marketplace (Credit card)",
+          "l": "/sots",
           "important": false,
           "external": false
         },
@@ -57,7 +57,5 @@
       ]
     }
   ],
-  "auth": {
-    "loginSignup": "Login/Sign up"
-  }
+  "auth": { "login": "Login", "signup": "Sign up" }
 }

@@ -1,45 +1,91 @@
-import { Container, Box, Text, Stack, Link, Divider, Flex } from '@chakra-ui/react';
+import {
+  Container,
+  Box,
+  Stack,
+  Link,
+  Divider,
+  Flex,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react';
 import { default as NLink } from 'next/link';
 import Image from 'next/image';
 import gg56logo from '../../../public/footer/gg56.svg';
 
 export default function Footer() {
   return (
-    <Box as={'footer'} bg='white' marginBlockStart='auto'>
-      <Container maxW='container.lg' p='2'>
-        <Box
-          display={'flex'}
-          justifyContent={{ base: 'center', sm: 'space-between' }}
+    <Box as={'footer'} bg='white' mt='auto' shadow='inner'>
+      <Container maxW='container.xl' p='2'>
+        <Flex
+          justifyContent={{ base: 'space-between' }}
           alignItems={'center'}
           sx={{ gap: '0.5rem' }}
           flexWrap={'wrap-reverse'}
         >
-          <Stack direction={'row'} alignItems='center'>
-            <Box display={{ base: 'none', sm: 'block' }}>
-              <Image src={gg56logo} alt='GG56 Logo' width={60} height={60} />
+          <Stack as='address' direction={'row'} alignItems='center'>
+            <Box display={{ base: 'none', sm: 'block' }} lineHeight='0'>
+              <Image src={gg56logo} alt='GG56 Logo' width={35} height={35} />
             </Box>
-            <Stack spacing={'0'}>
-              <Box as={'strong'} color='common.main'>
-                GG56 LIMITED
-              </Box>
-              <Flex as='address' flexDirection='row' sx={{ gap: '0.5rem' }}>
-                <Stack spacing={'0'}>
-                  <Box as='small'>
-                    Contact: <Link href='mailto:admin@fingerate.world'>admin@fingerate.world</Link>
+            <Accordion allowToggle>
+              <AccordionItem border='none' id='0' fontStyle='initial'>
+                <AccordionButton p='0' color='common.main' fontFamily='sans-serif' fontWeight='bold'>
+                  GG56 LIMITED
+                  <AccordionIcon />
+                </AccordionButton>
+                <AccordionPanel
+                  fontSize='sm'
+                  display='grid'
+                  p='0'
+                  as='dl'
+                  gridTemplateColumns='auto auto'
+                  columnGap='2'
+                  rowGap={{ base: 2, md: 0 }}
+                  alignItems='start'
+                  sx={{
+                    '& dt': { color: 'gray.400', mr: 1 },
+                    '& dt::after': { content: `':'` },
+                  }}
+                >
+                  <Box display='inline-flex' flexWrap={{ base: 'wrap', md: 'nowrap' }}>
+                    <dt>상호명</dt>
+                    <dd>주식회사 지지56코리아</dd>
                   </Box>
-                  <Box as='small'>사업자등록번호 : 351-86-01750</Box>
-                  <Box as='small'>상호명:주식회사 지지56코리아</Box>
-                </Stack>
+                  <Box display='inline-flex' flexWrap={{ base: 'wrap', md: 'nowrap' }}>
+                    <dt>연락처</dt>
+                    <dd>
+                      <Link color='blue' href='tel:025566780'>
+                        02-556-6780
+                      </Link>
+                    </dd>
+                  </Box>
+                  <Box display='inline-flex' flexWrap={{ base: 'wrap', md: 'nowrap' }}>
+                    <dt>사업자등록번호</dt>
+                    <dd>351-86-01750</dd>
+                  </Box>
+                  <Box display='inline-flex' flexWrap={{ base: 'wrap', md: 'nowrap' }}>
+                    <dt>Contact</dt>
+                    <dd>
+                      <Link color='blue' href='mailto:admin@fingerate.world'>
+                        admin@fingerate.world
+                      </Link>
+                    </dd>
+                  </Box>
 
-                <Stack spacing='0'>
-                  <Box as='small'>대표자:김영군</Box>
-                  <Box as='small'>사업자주소:서울특별시 강남구 테헤란로 437</Box>
-                  <Box as='small'>
-                    연락처: <Link href='tel:025566780'>02-556-6780</Link>
+                  <Box display='inline-flex' flexWrap={{ base: 'wrap', md: 'nowrap' }}>
+                    <dt>대표자</dt>
+                    <dd>김영군</dd>
                   </Box>
-                </Stack>
-              </Flex>
-            </Stack>
+
+                  <Box display='inline-flex' flexWrap={{ base: 'wrap', md: 'nowrap' }}>
+                    <dt>사업자주소</dt>
+                    <dd>서울특별시 강남구 테헤란로 437</dd>
+                  </Box>
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
           </Stack>
           <Flex flexDir={{ base: 'row', md: 'column' }} color={'blue'} gap='2'>
             <NLink href={'/terms'} passHref>
@@ -49,11 +95,11 @@ export default function Footer() {
               <Link>개인정보처리방침</Link>
             </NLink>
           </Flex>
-          {/* <Contact /> */}
+        </Flex>
+        <Divider mt='1' />
+        <Box as={'small'} display='block' fontSize='xs' color='common.main' textAlign={'center'} mt='1'>
+          @{new Date().getFullYear()} GG56 Ltd. ALL RIGHTS RESERVED.
         </Box>
-        <Text fontSize='smaller' textAlign={'center'} mt='2'>
-          @ {new Date().getFullYear()} GG56 Ltd. ALL RIGHTS RESERVED.
-        </Text>
       </Container>
     </Box>
   );

@@ -1,57 +1,54 @@
-import { Menu, MenuButton, MenuList, MenuItem, useDisclosure, Link } from '@chakra-ui/react';
-import { ChevronDownIcon, ChevronUpIcon, ExternalLinkIcon } from '@chakra-ui/icons';
+import { Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
+import { ChevronDownIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import { default as NLink } from 'next/link';
 
-export default function Dropdown({ item, onToggle }) {
-  const { isOpen, onOpen, onClose, onToggle: onToggleDrop } = useDisclosure();
+export default function Dropdown({ item, onClose }) {
   return (
-    <Menu isOpen={isOpen}>
-      <MenuButton
-        disabled={item?.disabled}
-        border={item.important && '1px solid'}
-        borderColor={item.important && 'common.main'}
-        fontWeight={item.important && 'bold'}
-        bg={item.important && 'common.main'}
-        color={item.important ? 'white' : 'common.main'}
-        px='2'
-        borderRadius='md'
-        _hover={{
-          bg: 'common.second',
-          color: 'common.main',
-          boxShadow: 'md',
-        }}
-        onMouseEnter={onOpen}
-        onClick={onToggleDrop}
-        onMouseLeave={onClose}
-      >
-        {item.n}
-        {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-      </MenuButton>
-      <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
-        {item.dropdown.map((item) => (
-          <MenuItem
-            p='0'
-            key={item.n}
-            onClick={onToggle}
-            border={item.important && '1px solid'}
-            borderColor={item.important && 'common.main'}
-            fontWeight={item.important && 'bold'}
-            bg={item.important && 'common.main'}
-            color={item.important ? 'white' : 'common.main'}
-            _hover={{
-              bg: 'common.second',
-              color: 'common.main',
-              boxShadow: 'md',
-            }}
-          >
-            <NLink href={item.l} passHref>
-              <Link w={'100%'} isExternal={item.external} _hover={{ textDecoration: 'none' }} p='2'>
+    <Menu autoSelect={false}>
+      {item?.important && (
+        <MenuButton
+          as={Button}
+          size='sm'
+          rightIcon={<ChevronDownIcon boxSize={6} />}
+          colorScheme='purple'
+          bg='common.main'
+          fontSize='inherit'
+          fontWeight='inherit'
+          sx={{
+            '&[data-active] svg': { transform: 'rotateZ(180deg)' },
+            '& svg': { transition: 'transform 0.2s' },
+            '&:is(:hover, :active, [data-active])': { bg: 'common.second', color: 'common.main', shadow: 'md' },
+          }}
+        >
+          {item.n}
+        </MenuButton>
+      )}
+      <MenuList color='common.main'>
+        {item.dropdown.map((item) => {
+          if (item.external) {
+            return (
+              <MenuItem
+                key={item.n}
+                as='a'
+                href={item.l}
+                _hover={{ bg: 'common.second' }}
+                onClick={onClose}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 {item.n}
-                {item.external && <ExternalLinkIcon mx='2px' />}
-              </Link>
+                <ExternalLinkIcon ml='1' />
+              </MenuItem>
+            );
+          }
+          return (
+            <NLink key={item.n} href={item.l} passHref>
+              <MenuItem as='a' _hover={{ bg: 'common.second' }} onClick={onClose}>
+                {item.n}
+              </MenuItem>
             </NLink>
-          </MenuItem>
-        ))}
+          );
+        })}
       </MenuList>
     </Menu>
   );
