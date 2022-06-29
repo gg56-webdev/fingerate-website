@@ -78,7 +78,7 @@ export default function Dashboard({ nfts }) {
     if ((!loading && !user) || error) {
       push('/enter', '/enter', { locale });
     }
-  }, [user, loading, error]);
+  }, [user, loading, error, push, locale]);
 
   useEffect(() => {
     const getAddress = async () => {
@@ -335,7 +335,7 @@ function Sots({ nfts }) {
     return () => {
       unsub();
     };
-  }, [walletAddress]);
+  }, [walletAddress, nfts]);
 
   useEffect(() => {
     if (cardSots.length === 0) {
@@ -357,7 +357,7 @@ function Sots({ nfts }) {
         }
       })();
     }
-  }, [user]);
+  }, [user, cardSots.length]);
 
   return (
     <Stack bg='white' borderRadius='md' shadow='md' p='2'>

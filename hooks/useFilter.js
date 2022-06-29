@@ -1,6 +1,6 @@
 import { useState, useReducer, useEffect } from 'react';
 
-const filterInitalState = {
+const filterInitialState = {
   gradeFilter: '',
   countryFilter: '',
   forSaleFilter: false,
@@ -26,16 +26,16 @@ const reducer = (state, { type, payload }) => {
 
 export default function useFilter(sots) {
   const [filteredSots, setFilteredSots] = useState([]);
-  const [state, dispatch] = useReducer(reducer, { ...filterInitalState });
+  const [state, dispatch] = useReducer(reducer, { ...filterInitialState });
   const { gradeFilter, countryFilter, forSaleFilter, sourceFilter } = state;
 
-  const filterByCountry = (arr) => arr.filter(({ country }) => country === countryFilter);
-  const filterByGrade = (arr) => arr.filter(({ grade }) => grade === gradeFilter);
-  const filterBySource = (arr) =>
-    arr.filter(({ source }) => (sourceFilter === 'crypto' ? source !== 'Firebase' : source === 'Firebase'));
-  const filterByForSale = (arr) => arr.filter(({ owner }) => !owner);
-
   useEffect(() => {
+    const filterByCountry = (arr) => arr.filter(({ country }) => country === countryFilter);
+    const filterByGrade = (arr) => arr.filter(({ grade }) => grade === gradeFilter);
+    const filterBySource = (arr) =>
+      arr.filter(({ source }) => (sourceFilter === 'crypto' ? source !== 'Firebase' : source === 'Firebase'));
+    const filterByForSale = (arr) => arr.filter(({ owner }) => !owner);
+
     let res = sots;
     if (countryFilter) res = filterByCountry(res);
     if (gradeFilter) res = filterByGrade(res);

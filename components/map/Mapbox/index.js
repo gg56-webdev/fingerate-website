@@ -3,7 +3,6 @@ import { useState, useMemo } from 'react';
 import useSupercluster from 'use-supercluster';
 import ClusterMarker from './ClusterMarker';
 import SotMarker from './SotMarker';
-
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const MAPBOX_CONFIG = Object.freeze({

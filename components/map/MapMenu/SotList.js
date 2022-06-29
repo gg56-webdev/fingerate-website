@@ -3,13 +3,14 @@ import { useMap } from 'react-map-gl';
 import SotCard from './SotCard';
 
 export default function SotList({ filteredSots, ...rest }) {
+  const { map } = useMap();
+
   if (!filteredSots.length)
     return (
       <Grid borderRadius='md' bg='pink.50' h='full' textAlign='center' color='pink.900' placeItems='center'>
         No SoTs to show, try to change filters...
       </Grid>
     );
-  const { map } = useMap();
   return (
     <Grid
       borderRadius='md'

@@ -1,4 +1,6 @@
-import { Flex, Box, Tag, Button, Icon, TagLabel, Grid } from '@chakra-ui/react';
+import { Flex, Box, Tag, Button, Icon, TagLabel, Grid, IconButton } from '@chakra-ui/react';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { default as NLink } from 'next/link';
 
 export default function SotCard({ sot, map, onClose, t }) {
   const isNft = sot.source !== 'Firebase';
@@ -13,7 +15,6 @@ export default function SotCard({ sot, map, onClose, t }) {
 
   return (
     <Flex
-      onClick={flyToCoords}
       flexDir='column'
       fontFamily='sans-serif'
       as='li'
@@ -24,6 +25,8 @@ export default function SotCard({ sot, map, onClose, t }) {
       borderColor={hasOwner ? 'gray.200' : `${color}.200`}
       gap='1.5'
       shadow='xs'
+      pos='relative'
+      sx={{ '&:hover .card-overlay': { opacity: 1 }, gap: 1 }}
     >
       <Box as='strong' color={color} fontSize='sm' lineHeight='1.25'>
         {sot.name}
@@ -74,6 +77,57 @@ export default function SotCard({ sot, map, onClose, t }) {
             </Box>
           )}
         </Box>
+      </Flex>
+      <Flex
+        className='card-overlay'
+        opacity='0'
+        transition='0.2s'
+        pos='absolute'
+        inset='1'
+        p='1'
+        bg='whiteAlpha.700'
+        align='center'
+        justify='center'
+        gap='1'
+        borderRadius='md'
+      >
+        <IconButton
+          size='sm'
+          icon={
+            <Icon boxSize={4}>
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'>
+                <path
+                  fillRule='evenodd'
+                  d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z'
+                  clipRule='evenodd'
+                />
+              </svg>
+            </Icon>
+          }
+          colorScheme={color}
+          variant='outline'
+          bg='white'
+          onClick={flyToCoords}
+        />
+        {isNft ? (
+          <Button
+            as='a'
+            size='sm'
+            colorScheme={color}
+            href={sot.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            cursor='pointer'
+          >
+            {t.general.buyPolygon} <ExternalLinkIcon ml='2' />
+          </Button>
+        ) : (
+          <NLink passHref href={sot.url}>
+            <Button as='a' colorScheme={hasOwner ? 'gray' : color} cursor='pointer' size='sm'>
+              {hasOwner ? t.general.view : t.general.buy}
+            </Button>
+          </NLink>
+        )}
       </Flex>
     </Flex>
   );

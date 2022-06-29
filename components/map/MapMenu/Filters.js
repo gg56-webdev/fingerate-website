@@ -1,15 +1,19 @@
 import { Flex, Select, FormControl, FormLabel, Switch } from '@chakra-ui/react';
+import { useMap } from 'react-map-gl';
 import { FILTER_ACTIONS } from '../../../hooks/useFilter';
 
 export default function Filters({ availableCountries, dispatch, t }) {
+  const { map } = useMap();
+  const changeCountry = (e) => {
+    dispatch({ type: FILTER_ACTIONS.SET, payload: ['countryFilter', e.target.value] });
+    if (e.target.value) {
+      const { _lat, _long } = availableCountries.find(({ country }) => country === e.target.value);
+      map.flyTo({ center: [_long, _lat], zoom: 4, essential: true });
+    }
+  };
   return (
     <Flex gap='1' p='1' bg='purple.50' shadow='inner' borderRadius='md' flexWrap='wrap'>
-      <Select
-        flex='1 1 auto'
-        bg='white'
-        w='auto'
-        onChange={(e) => dispatch({ type: FILTER_ACTIONS.SET, payload: ['countryFilter', e.target.value] })}
-      >
+      <Select flex='1 1 auto' bg='white' w='auto' onChange={changeCountry}>
         <option value=''>- {t.filters.country} -</option>
         {availableCountries.map(({ country }) => (
           <option key={country} value={country}>

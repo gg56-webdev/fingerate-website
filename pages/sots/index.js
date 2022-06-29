@@ -22,33 +22,30 @@ import { collection, getDocs, limit, query, orderBy, documentId } from 'firebase
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
+import useFilter, { FILTER_ACTIONS } from '../../hooks/useFilter';
 import { db } from '../../lib/firebase';
 
 import ko from '../../locales/ko/sots.json';
 
 const LIMIT = 6 * 5;
+const q = query(collection(db, 'sots'), orderBy(documentId()), limit(LIMIT));
 
-export default function Sots() {
-  const filter = useFilter();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    (async () => {
-      try {
-        const q = query(collection(db, 'sots'), orderBy(documentId()), limit(LIMIT));
-        const { docs } = await getDocs(q);
-        const sots = docs.map((doc) => {
-          const { name, country, city, grade, image, price, owner } = doc.data();
-          return { name, country, city, grade, image, price, id: doc.id, owner };
-        });
-        filter.setArrToFilter(sots);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+export async function getStaticProps() {
+  const { docs } = await getDocs(q);
+  const sots = docs.map((doc) => {
+    const { location, ...data } = doc.data();
+    return { id: doc.id, ...data };
+  });
+
+  const availableCountries = [...new Set(sots.map(({ country }) => country))];
+
+  return { props: { sots, availableCountries } };
+}
+
+export default function Sots({ sots, availableCountries }) {
+  const { filteredSots, dispatch } = useFilter(sots);
+
   return (
     <>
       <Head>
@@ -59,31 +56,35 @@ export default function Sots() {
           SoTs
         </Heading>
         <Stack p='2' bg='white' borderRadius='md' shadow='md'>
-          <Filters {...filter} />
-          {loading ? (
-            <Spinner alignSelf='center' size='lg' color='common.main' />
-          ) : (
-            <SotsList sots={filter.filteredSots} />
-          )}
+          <Filters dispatch={dispatch} availableCountries={availableCountries} />
+          <SotsList sots={filteredSots} />
         </Stack>
       </Container>
     </>
   );
 }
 
-function Filters({ setGradeFilter, availableCountries, setOwnerFilter, setCountryFilter }) {
+function Filters({ dispatch, availableCountries }) {
   return (
     <Flex sx={{ gap: 1 }} bg='purple.50' borderRadius='md' shadow='inner' p='1'>
-      <Select bg='white' w='auto' onChange={(e) => setCountryFilter(e.target.value)}>
-        <option value=''>{ko.filters.country}</option>
+      <Select
+        bg='white'
+        w='auto'
+        onChange={(e) => dispatch({ type: FILTER_ACTIONS.SET, payload: ['countryFilter', e.target.value] })}
+      >
+        <option value=''>- {ko.filters.country} -</option>
         {availableCountries.map((c) => (
           <option key={c} value={c}>
             {c}
           </option>
         ))}
       </Select>
-      <Select bg='white' w='auto' onChange={(e) => setGradeFilter(e.target.value)}>
-        <option value=''>{ko.filters.grade}</option>
+      <Select
+        bg='white'
+        w='auto'
+        onChange={(e) => dispatch({ type: FILTER_ACTIONS.SET, payload: ['gradeFilter', e.target.value] })}
+      >
+        <option value=''>- {ko.filters.grade} -</option>
         {['S', 'A', 'B', 'C', 'D'].map((g) => (
           <option value={g} key={g}>
             {g}
@@ -105,7 +106,11 @@ function Filters({ setGradeFilter, availableCountries, setOwnerFilter, setCountr
         <FormLabel htmlFor='owner-toogle' m='0' mr='2'>
           {ko.filters.ownership}
         </FormLabel>
-        <Switch id='owner-toogle' colorScheme='purple' onChange={(e) => setOwnerFilter(e.target.checked)} />
+        <Switch
+          id='owner-toogle'
+          colorScheme='purple'
+          onChange={(e) => dispatch({ type: FILTER_ACTIONS.SET, payload: ['forSaleFilter', e.target.checked] })}
+        />
       </FormControl>
     </Flex>
   );
@@ -114,7 +119,7 @@ function Filters({ setGradeFilter, availableCountries, setOwnerFilter, setCountr
 function SotsList({ sots }) {
   if (sots.length === 0)
     return (
-      <Box bg='pink.50' textAlign='center' color='pink.900' py='8'>
+      <Box bg='pink.50' textAlign='center' color='pink.900' py='8' borderRadius='md'>
         No SoTs to show, try to change filters...
       </Box>
     );
@@ -218,36 +223,4 @@ function SotCard({ sot }) {
       </Flex>
     </LinkBox>
   );
-}
-
-function useFilter() {
-  const [arrToFilter, setArrToFilter] = useState([]);
-  const [filteredSots, setFilteredSots] = useState([]);
-  const [countryFilter, setCountryFilter] = useState('');
-  const [gradeFilter, setGradeFilter] = useState('');
-  const [ownerFilter, setOwnerFilter] = useState(false);
-
-  const availableCountries = useMemo(() => [...new Set(arrToFilter.map(({ country }) => country))], [arrToFilter]);
-
-  const filterByCountry = (arr) => arr.filter(({ country }) => (countryFilter ? country === countryFilter : true));
-  const filterByGrade = (arr) => arr.filter(({ grade }) => (gradeFilter ? grade === gradeFilter : true));
-  const filterByOwner = (arr) => arr.filter(({ owner }) => (ownerFilter ? !owner : true));
-
-  useEffect(() => {
-    let result = arrToFilter;
-    result = filterByCountry(result);
-    result = filterByGrade(result);
-    result = filterByOwner(result);
-
-    setFilteredSots(result);
-  }, [arrToFilter, countryFilter, gradeFilter, ownerFilter]);
-
-  return {
-    filteredSots,
-    availableCountries,
-    setArrToFilter,
-    setCountryFilter,
-    setGradeFilter,
-    setOwnerFilter,
-  };
 }

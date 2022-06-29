@@ -1,4 +1,15 @@
-import { Box, Container, Flex, useDisclosure, Link, Select, Spinner, Button, IconButton } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Flex,
+  useDisclosure,
+  Link,
+  Select,
+  Spinner,
+  Button,
+  IconButton,
+  useOutsideClick,
+} from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, CheckCircleIcon, WarningIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
@@ -12,8 +23,11 @@ import { useRouter } from 'next/router';
 import Dropdown from './Dropdown';
 
 import { useUserContext } from '../../../context/User';
+import { useRef } from 'react';
 
 export default function Header() {
+  const ref = useRef();
+  useOutsideClick({ ref, handler: () => onClose() });
   const router = useRouter();
   const t = router.locale === 'ko' ? ko : en;
 
@@ -54,6 +68,7 @@ export default function Header() {
           />
 
           <Box
+            ref={ref}
             display={{
               base: isOpen ? 'block' : 'none',
               lg: 'block',

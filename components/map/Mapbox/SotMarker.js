@@ -51,7 +51,7 @@ export default function SotMarker({ coordinates, map, t, ...sot }) {
             cursor='pointer'
             boxSize='14'
             color={color}
-            opacity={hasOwner ? 0.6 : 1}
+            opacity={hasOwner ? 0.5 : 1}
             onClick={() => {
               setIsClicked(!isClicked);
               if (isMobile) flyToCoords();

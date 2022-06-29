@@ -5,59 +5,43 @@ import {
   Heading,
   Tabs,
   TabList,
-  Link,
   TabPanels,
   Tab,
   TabPanel,
   Text,
   Flex,
   Grid,
+  Button,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import detectEthereumProvider from '@metamask/detect-provider';
 import { default as NLink } from 'next/link';
 
 import ko from '../locales/ko/howto.json';
+import en from '../locales/en/howto.json';
 
 import Image from 'next/image';
 import { card1, card2, card3, card4 } from '../public/howToBuy/card/imgs';
 
 const cardImgs = [card1, card2, card3, card4];
 
-export default function Howto() {
-  const t = ko;
+export default function Howto({ locale }) {
+  const t = locale === 'ko' ? ko : en;
   return (
     <>
       <Head>
         <title>{t.title}</title>
       </Head>
-      <Container maxW={'container.lg'} pt='70px' pb='4'>
-        <Heading as='h1' textAlign={'center'}>
+      <Container maxW='container.lg' pt='80px' px='2' pb='8'>
+        <Heading as='h1' textAlign='center'>
           {t.title}
         </Heading>
-        <Tabs
-          pt='2'
-          shadow={'sm'}
-          isFitted
-          colorScheme={'purple'}
-          bg='white'
-          variant='solid-rounded'
-          onChange={() => window.scrollTo(0, 0)}
-          borderRadius={'md'}>
-          <TabList
-            border={'1px solid'}
-            borderColor='blue.100'
-            position={'sticky'}
-            top='80px'
-            p={'2'}
-            bg='white'
-            shadow={'md'}
-            borderRadius={'full'}
-            mx={'2'}
-            gap='2'
-            zIndex={2}>
-            <Tab>{t.card.with}</Tab>
-            <Tab>{t.crypto.with}</Tab>
+        <Tabs isFitted pt='2' shadow='md' colorScheme='purple' bg='white' variant='solid-rounded' borderRadius='md'>
+          <TabList p='2' bg='purple.50' shadow='inner' borderRadius='full' mx='2' gap='2'>
+            <Tab bg='white' shadow='sm'>
+              {t.card.with}
+            </Tab>
+            <Tab bg='white' shadow='sm'>
+              {t.crypto.with}
+            </Tab>
           </TabList>
 
           <TabPanels>
@@ -76,65 +60,45 @@ export default function Howto() {
 
 function Card({ text }) {
   return (
-    <Flex flexDirection={'column'}>
-      {text.steps.map((step, id) => (
-        <Flex
-          key={step}
-          flexDir={{ base: 'column', md: id % 2 === 0 ? 'row-reverse' : 'row' }}
-          p='4'
-          bg={id % 2 !== 0 && 'blue.50'}
-          alignItems='center'>
-          <Box width={'100%'}>
-            <Image src={cardImgs[id]} alt={step} placeholder='blur' />
-          </Box>
-          <Text
-            width={'100%'}
-            p='2'
-            fontSize={'3xl'}
-            borderRadius='md'
-            shadow={'md'}
-            bg={id % 2 === 0 ? 'blue.50' : 'white'}
-            textAlign={'center'}>
-            {step}
-          </Text>
-        </Flex>
-      ))}
-      <Grid placeItems='center' p='4'>
-        <NLink href={'/sots'} passHref>
-          <Link
-            _hover={{ textDecor: 'none', bg: 'purple.700' }}
-            _focus={{ textDecor: 'none', bg: 'purple.700' }}
-            py='2'
-            px='4'
-            borderRadius={'md'}
-            colorScheme='purple'
-            bg='common.mainLight'
-            color='white'
-            fontSize='2xl'
-            fontWeight={'bold'}>
-            {text.sotsLink}
-          </Link>
-        </NLink>
-      </Grid>
-    </Flex>
+    <Grid gap='2' py='2'>
+      {text.steps.map((step, id) => {
+        const isOdd = id % 2 !== 0;
+        return (
+          <Flex
+            key={step}
+            flexDir={{ base: 'column', md: isOdd ? 'row' : 'row-reverse' }}
+            p='4'
+            bg={isOdd && 'purple.50'}
+            alignItems='center'
+            textAlign='center'
+          >
+            <Box flex='1' filter='hue-rotate(163deg)'>
+              <Image src={cardImgs[id]} alt={step} placeholder='blur' />
+            </Box>
+            <Text
+              flex='1'
+              p='2'
+              fontSize='2xl'
+              borderRadius='md'
+              shadow='inner'
+              color='purple.900'
+              bg={isOdd ? 'white' : 'purple.50'}
+            >
+              {step}
+            </Text>
+          </Flex>
+        );
+      })}
+      <NLink href='/sots' passHref>
+        <Button as='a' colorScheme='purple' size='lg' w='fit-content' justifySelf='center'>
+          {text.sotsLink}
+        </Button>
+      </NLink>
+    </Grid>
   );
 }
 
 function Crypto() {
-  const [ethProvider, setEthProvider] = useState(null);
-
-  const getProvider = async () => {
-    const provider = await detectEthereumProvider({ silent: true });
-    if (provider) {
-      setEthProvider(true);
-    } else {
-      setEthProvider(false);
-    }
-  };
-
-  useEffect(() => {
-    getProvider();
-  }, []);
   return (
     <Text textAlign={'center'} p='4'>
       Coming soon
