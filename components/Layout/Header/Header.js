@@ -3,6 +3,8 @@ import {
   Container,
   Flex,
   useDisclosure,
+  LinkOverlay,
+  LinkBox,
   Link,
   Select,
   Spinner,
@@ -44,17 +46,23 @@ export default function Header() {
         border='1px solid'
         borderColor='purple.100'
       >
-        <Flex as='nav' align='center' justify='space-between' wrap='wrap'>
-          <Flex align='center' gap='1'>
+        <Flex ref={ref} as='nav' align='center' justify='space-between' wrap='wrap'>
+          <LinkBox display='flex' alignItems='center' gap='1'>
             <Box fontSize={0} sx={{ '& img': { borderRadius: 'md' } }}>
               <Image src={frLogo} alt='FingeRate logo' width='40' height='40' />
             </Box>
             <NLink href='/' passHref>
-              <Link color='common.main' fontSize='2xl' fontWeight='bold' fontFamily='sans-serif' onClick={onClose}>
+              <LinkOverlay
+                color='common.main'
+                fontSize='2xl'
+                fontWeight='bold'
+                fontFamily='sans-serif'
+                onClick={onClose}
+              >
                 FingeRate
-              </Link>
+              </LinkOverlay>
             </NLink>
-          </Flex>
+          </LinkBox>
 
           <IconButton
             aria-label={`${isOpen ? 'close' : 'open'} navbar`}
@@ -68,7 +76,6 @@ export default function Header() {
           />
 
           <Box
-            ref={ref}
             display={{
               base: isOpen ? 'block' : 'none',
               lg: 'block',

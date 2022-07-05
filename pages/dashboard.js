@@ -121,17 +121,29 @@ export default function Dashboard({ nfts }) {
   );
 }
 
+const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+
 function UserSection({ t }) {
   const { user } = useUserContext();
 
   return (
     <Flex justify='center' sx={{ gap: 2 }} fontFamily='sans-serif' flexWrap='wrap'>
       <User t={t} />
-      {user?.emailVerified ? (
-        <Wallet />
+      {!isMobile() ? (
+        user?.emailVerified ? (
+          <Wallet />
+        ) : (
+          <Flex bg='white' borderRadius='md' p='4' shadow='md' textAlign='center' alignItems='center' sx={{ gap: 4 }}>
+            <Tooltip label='Verify Email to Connect Wallet!'>
+              <Icon viewBox='0 0 48 48' boxSize='10' fill='gray'>
+                <path d='M32.6 27.2Q33.85 27.2 34.825 26.225Q35.8 25.25 35.8 23.95Q35.8 22.7 34.825 21.75Q33.85 20.8 32.6 20.8Q31.35 20.8 30.375 21.75Q29.4 22.7 29.4 23.95Q29.4 25.25 30.375 26.225Q31.35 27.2 32.6 27.2ZM9 36.35Q9 36.35 9 37.675Q9 39 9 39Q9 39 9 39Q9 39 9 39V9Q9 9 9 9Q9 9 9 9Q9 9 9 10.35Q9 11.7 9 11.7Q9 11.7 9 13.6Q9 15.5 9 18.35V29.7Q9 32.55 9 34.45Q9 36.35 9 36.35ZM9 42Q7.85 42 6.925 41.1Q6 40.2 6 39V9Q6 7.85 6.925 6.925Q7.85 6 9 6H39Q40.2 6 41.1 6.925Q42 7.85 42 9V15.7H39V9Q39 9 39 9Q39 9 39 9H9Q9 9 9 9Q9 9 9 9V39Q9 39 9 39Q9 39 9 39H39Q39 39 39 39Q39 39 39 39V32.35H42V39Q42 40.2 41.1 41.1Q40.2 42 39 42ZM26.9 33.35Q25.2 33.35 24.2 32.35Q23.2 31.35 23.2 29.7V18.35Q23.2 16.65 24.2 15.675Q25.2 14.7 26.9 14.7H40.4Q42.1 14.7 43.1 15.675Q44.1 16.65 44.1 18.35V29.7Q44.1 31.35 43.1 32.35Q42.1 33.35 40.4 33.35ZM41.1 30.35Q41.1 30.35 41.1 30.35Q41.1 30.35 41.1 30.35V17.7Q41.1 17.7 41.1 17.7Q41.1 17.7 41.1 17.7H26.2Q26.2 17.7 26.2 17.7Q26.2 17.7 26.2 17.7V30.35Q26.2 30.35 26.2 30.35Q26.2 30.35 26.2 30.35Z' />
+              </Icon>
+            </Tooltip>
+          </Flex>
+        )
       ) : (
         <Flex bg='white' borderRadius='md' p='4' shadow='md' textAlign='center' alignItems='center' sx={{ gap: 4 }}>
-          <Tooltip label='Verify Email to Connect Wallet!'>
+          <Tooltip label='Use Desktop version to use crypto wallet extension'>
             <Icon viewBox='0 0 48 48' boxSize='10' fill='gray'>
               <path d='M32.6 27.2Q33.85 27.2 34.825 26.225Q35.8 25.25 35.8 23.95Q35.8 22.7 34.825 21.75Q33.85 20.8 32.6 20.8Q31.35 20.8 30.375 21.75Q29.4 22.7 29.4 23.95Q29.4 25.25 30.375 26.225Q31.35 27.2 32.6 27.2ZM9 36.35Q9 36.35 9 37.675Q9 39 9 39Q9 39 9 39Q9 39 9 39V9Q9 9 9 9Q9 9 9 9Q9 9 9 10.35Q9 11.7 9 11.7Q9 11.7 9 13.6Q9 15.5 9 18.35V29.7Q9 32.55 9 34.45Q9 36.35 9 36.35ZM9 42Q7.85 42 6.925 41.1Q6 40.2 6 39V9Q6 7.85 6.925 6.925Q7.85 6 9 6H39Q40.2 6 41.1 6.925Q42 7.85 42 9V15.7H39V9Q39 9 39 9Q39 9 39 9H9Q9 9 9 9Q9 9 9 9V39Q9 39 9 39Q9 39 9 39H39Q39 39 39 39Q39 39 39 39V32.35H42V39Q42 40.2 41.1 41.1Q40.2 42 39 42ZM26.9 33.35Q25.2 33.35 24.2 32.35Q23.2 31.35 23.2 29.7V18.35Q23.2 16.65 24.2 15.675Q25.2 14.7 26.9 14.7H40.4Q42.1 14.7 43.1 15.675Q44.1 16.65 44.1 18.35V29.7Q44.1 31.35 43.1 32.35Q42.1 33.35 40.4 33.35ZM41.1 30.35Q41.1 30.35 41.1 30.35Q41.1 30.35 41.1 30.35V17.7Q41.1 17.7 41.1 17.7Q41.1 17.7 41.1 17.7H26.2Q26.2 17.7 26.2 17.7Q26.2 17.7 26.2 17.7V30.35Q26.2 30.35 26.2 30.35Q26.2 30.35 26.2 30.35Z' />
             </Icon>
@@ -363,9 +375,14 @@ function Sots({ nfts, t }) {
 
   return (
     <Stack bg='white' borderRadius='md' shadow='md' p='2'>
-      {isSameWalletAddress(account, walletAddress) && chainId === POLYGON.chainId && <AddSot nfts={nfts} />}
-      <Divider />
-      {loaded ? <SotList sots={[...cardSots, ...nftSots]} t={t} /> : <Spinner size='xl' />}
+      {isSameWalletAddress(account, walletAddress) && chainId === POLYGON.chainId && (
+        <>
+          <AddSot nfts={nfts} />
+          <Divider />
+        </>
+      )}
+
+      {loaded ? <SotList sots={[...cardSots, ...nftSots]} t={t} /> : <Spinner size='xl' alignSelf='center' />}
     </Stack>
   );
 }
