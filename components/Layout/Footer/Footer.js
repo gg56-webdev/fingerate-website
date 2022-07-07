@@ -31,7 +31,7 @@ export default function Footer() {
             </Box>
             <Accordion allowToggle>
               <AccordionItem border='none' id='0' fontStyle='initial'>
-                <AccordionButton p='0' color='common.main' fontFamily='sans-serif' fontWeight='bold'>
+                <AccordionButton p='0' fontFamily='sans-serif' fontWeight='bold'>
                   GG56 LIMITED
                   <AccordionIcon />
                 </AccordionButton>
