@@ -18,17 +18,17 @@ export default function terms({ text }) {
       mt='80px'
     >
       <Head>
-        <title>서비스 이용약관</title>
+        <title>SIGNIS FR이용약관</title>
       </Head>
       <Heading as='h1' textAlign='center' fontSize='4xl'>
-        서비스 이용약관
+        SIGNIS FR이용약관
       </Heading>
       <ReactMarkdown className='markdown'>{text}</ReactMarkdown>
     </Container>
   );
 }
 export async function getStaticProps() {
-  const text = fs.readFileSync(path.join('docs', 'terms.md'), 'utf-8');
+  const text = fs.readFileSync(path.join('docs', '08-02-2022', '이용약관.md'), 'utf-8');
 
   return { props: { text } };
 }
