@@ -52,7 +52,7 @@
     "flow": {
       "id": "flow",
       "content": {
-        "h2": "SoT Flow",
+        "h2": "FingeRate Flow",
         "slides": [
           { "title": "Anyone can purchase their desired SoT easily and conveniently", "info": "" },
           { "title": "Survey request from a third party, such as an individual or company/institution", "info": "" },
