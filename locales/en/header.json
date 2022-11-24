@@ -25,7 +25,7 @@
         },
         {
           "n": "SoT NFT Marketplace",
-          "l": "/marketplace",
+          "l": "https://opensea.io/collection/fingeratesot",
           "important": false,
           "external": true
         },
@@ -57,5 +57,8 @@
       ]
     }
   ],
-  "auth": { "login": "Login", "signup": "Sign up" }
+  "auth": {
+    "login": "Login",
+    "signup": "Sign up"
+  }
 }
