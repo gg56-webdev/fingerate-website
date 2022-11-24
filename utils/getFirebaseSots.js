@@ -8,7 +8,14 @@ export default async function getFirebaseSots() {
     const { docs } = await getDocs(collection(db, 'sots'));
     return docs.map((doc) => {
       const { location, image, owner, ...data } = doc.data();
-      return { ...location, ...data, id: doc.id, source: 'Firebase', url: SOT_URL_PATH + doc.id, owner: !!owner };
+      return {
+        ...location,
+        ...data,
+        id: `FB-${doc.id}`,
+        source: 'Firebase',
+        url: SOT_URL_PATH + doc.id,
+        owner: !!owner,
+      };
     });
   } catch (err) {
     console.error(err);
