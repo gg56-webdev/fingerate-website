@@ -1,16 +1,13 @@
 import axios from 'axios';
 
-const MORALIS_API_ENDPOINT =
-  'https://deep-index.moralis.io/api/v2/nft/0x778E62AA005F566E2379FD2cC431B23B4Fec2ef5?chain=polygon&format=decimal';
+const MORALIS_API_ENDPOINT = 'https://deep-index.moralis.io/api/v2/nft/';
+const CONTRACT_ADDRESS = '0x778E62AA005F566E2379FD2cC431B23B4Fec2ef5';
 
 export default async function getPolygonSots() {
   let sots = [];
   try {
-    const {
-      data: { result },
-    } = await axios.get(MORALIS_API_ENDPOINT, { headers: { 'X-API-key': process.env.MORALIS_API_KEY } });
-
-    for (const t of result) {
+    await getDataFromMoralis();
+    for (const t of results) {
       if (!t.metadata) {
         const { data } = await axios.get(t.token_uri);
         sots.push(parsePolygonMetadata(data, t.token_id));
@@ -19,11 +16,26 @@ export default async function getPolygonSots() {
         sots.push(parsePolygonMetadata(data, t.token_id));
       }
     }
+    return sots;
   } catch (err) {
-    console.error(err);
+    console.log(err);
   }
-  return sots;
 }
+
+const results = [];
+
+const getDataFromMoralis = async (nextPage) => {
+  const {
+    data: { result, cursor },
+  } = await axios.request({
+    baseURL: MORALIS_API_ENDPOINT,
+    url: CONTRACT_ADDRESS,
+    params: { chain: 'polygon', format: 'decimal', cursor: nextPage },
+    headers: { 'X-API-key': process.env.MORALIS_API_KEY },
+  });
+  results.push(...result);
+  if (cursor) await getDataFromMoralis(cursor);
+};
 
 const OPENSEA_COLLECTION_URL = 'https://opensea.io/assets/matic/0x778e62aa005f566e2379fd2cc431b23b4fec2ef5/';
 const PRICE_LIST = Object.freeze({
