@@ -34,7 +34,10 @@ const getDataFromMoralis = async (nextPage) => {
     headers: { 'X-API-key': process.env.MORALIS_API_KEY },
   });
   results.push(...result);
-  if (cursor) await getDataFromMoralis(cursor);
+  if (cursor) {
+    await new Promise((r) => setTimeout(r, 2000));
+    await getDataFromMoralis(cursor);
+  }
 };
 
 const OPENSEA_COLLECTION_URL = 'https://opensea.io/assets/matic/0x778e62aa005f566e2379fd2cc431b23b4fec2ef5/';
