@@ -44,7 +44,7 @@ export default function Mapbox({ filteredSots, t }) {
     points,
     bounds,
     zoom: viewState.zoom,
-    options: { radius: 65, maxZoom: 12 },
+    options: { radius: 100 },
   });
   return (
     <Map {...MAPBOX_CONFIG} {...viewState} onMove={({ viewState }) => setViewState(viewState)}>
