@@ -81,7 +81,7 @@ export default function Footer() {
 
                   <Box display='inline-flex' flexWrap={{ base: 'wrap', md: 'nowrap' }}>
                     <dt>사업자주소</dt>
-                    <dd>서울특별시 강남구 테헤란로 437</dd>
+                    <dd>서울 강남구 강남대로 408 4층</dd>
                   </Box>
                 </AccordionPanel>
               </AccordionItem>
