@@ -1,0 +1,35 @@
+{
+  "companyInfo": {
+    "company": {
+      "term": "Company",
+      "description": "GG56 KOREA"
+    },
+    "businessNumber": {
+      "term": "Business Reg. No."
+    },
+    "ceo": {
+      "term": "CEO",
+      "description": "Kim Young-kun"
+    },
+    "address": {
+      "term": "Company Address",
+      "description": "4th floor, 408 Gangnam daero, Seoul, Republic of Korea"
+    },
+    "contact": {
+      "term": "Contact"
+    },
+    "email": {
+      "term": "Email"
+    }
+  },
+  "links": {
+    "terms": {
+      "name": "Terms & Conditions",
+      "link": "/docs/terms-eng.pdf"
+    },
+    "privacy": {
+      "name": "Privacy Policy",
+      "link": "/docs/privacy-eng.pdf"
+    }
+  }
+}
