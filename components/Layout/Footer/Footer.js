@@ -88,12 +88,8 @@ export default function Footer() {
             </Accordion>
           </Stack>
           <Flex color='blue' gap='6' justify='center'>
-            <NLink href='/terms' passHref>
-              <Link>서비스 이용약관</Link>
-            </NLink>
-            <NLink href='/privacy' passHref>
-              <Link>개인정보처리방침</Link>
-            </NLink>
+            <Link href='/docs/terms-kor.pdf'>서비스 이용약관</Link>
+            <Link href='/docs/privacy-kor.pdf'>개인정보처리방침</Link>
           </Flex>
         </Flex>
         <Divider mt='1' />
