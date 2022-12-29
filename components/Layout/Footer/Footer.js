@@ -10,6 +10,8 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  UnorderedList,
+  ListItem,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import gg56logo from '../../../public/footer/gg56.svg';
@@ -94,10 +96,24 @@ export default function Footer() {
               </AccordionItem>
             </Accordion>
           </Stack>
-          <Flex color='blue' gap='6' justify='center'>
-            <Link href={t.links.terms.link}>{t.links.terms.name}</Link>
-            <Link href={t.links.privacy.link}>{t.links.privacy.name}</Link>
-          </Flex>
+          <UnorderedList
+            display='flex'
+            color='blue'
+            justify='center'
+            fontSize={{ base: 'xs', md: 'sm' }}
+            textAlign='center'
+            alignItems='center'
+            listStyleType='none'
+            gap={{ base: 2, md: 6 }}
+          >
+            {Object.entries(t.links).map(([, { name, link }]) => (
+              <ListItem key={name}>
+                <Link href={link} isExternal>
+                  {name}
+                </Link>
+              </ListItem>
+            ))}
+          </UnorderedList>
         </Flex>
         <Divider mt='1' />
         <Box as='small' display='block' fontSize='xs' color='common.main' textAlign='center' mt='1'>

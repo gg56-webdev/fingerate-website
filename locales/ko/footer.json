@@ -25,11 +25,19 @@
   "links": {
     "terms": {
       "name": "서비스 이용약관",
-      "link": "/docs/terms-kor.pdf"
+      "link": "https://fingerate.gitbook.io/terms-kor/"
     },
     "privacy": {
       "name": "개인정보처리방침",
-      "link": "/docs/privacy-kor.pdf"
+      "link": "https://fingerate.gitbook.io/privacy-kor/"
+    },
+    "payment": {
+      "name": "유료서비스 이용약관",
+      "link": "https://fingerate.gitbook.io/payment-kor/"
+    },
+    "location": {
+      "name": "위치정보 이용약관",
+      "link": "https://fingerate.gitbook.io/location-kor/"
     }
   }
 }
