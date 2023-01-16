@@ -7,25 +7,30 @@ import ko from '../locales/ko/map.json';
 import en from '../locales/en/map.json';
 
 export async function getStaticProps() {
-  const [{ default: getFirebaseSots }, { default: getPolygonSots }, { default: getCountryCoords }] = await Promise.all([
-    import('../utils/getFirebaseSots'),
+  const [
+    { default: getPolygonSots },
+    // { default: getCountryCoords }
+  ] = await Promise.all([
     import('../utils/getPolygonSots'),
-    import('../utils/getCountryCoords'),
+    // import('../utils/getCountryCoords'),
   ]);
-  const [firebaseSots, polygonSots] = await Promise.all([getFirebaseSots(), getPolygonSots()]);
-  const allSots = [...firebaseSots, ...polygonSots];
+  const [polygonSots] = await Promise.all([getPolygonSots()]);
+  const allSots = [...polygonSots];
 
-  let availableCountries = [...new Set(allSots.map(({ country }) => country))];
+  // let availableCountries = [...new Set(allSots.map(({ country }) => country))];
 
-  availableCountries = await Promise.all(
-    availableCountries.map(async (country) => {
-      const [_lat, _long] = await getCountryCoords(country);
-      return { country, _lat, _long };
-    })
-  );
+  // availableCountries = await Promise.all(
+  //   availableCountries.map(async (country) => {
+  //     const [_lat, _long] = await getCountryCoords(country);
+  //     return { country, _lat, _long };
+  //   })
+  // );
 
   return {
-    props: { allSots, availableCountries },
+    props: {
+      allSots,
+      // availableCountries
+    },
   };
 }
 
@@ -39,7 +44,7 @@ export default function MapOfSots({ allSots, availableCountries, locale }) {
         <meta name='description' content='Map of all SoTs currently deployed around the world' />
       </Head>
       <Mapbox filteredSots={filter.filteredSots} t={t} />
-      <MapMenu {...filter} availableCountries={availableCountries} t={t} />
+      {/* <MapMenu {...filter} availableCountries={availableCountries} t={t} /> */}
     </MapProvider>
   );
 }
