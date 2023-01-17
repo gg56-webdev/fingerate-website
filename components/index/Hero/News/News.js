@@ -5,7 +5,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 export default function News({ news, title }) {
   return (
-    <Box zIndex='2' bg='cyan.100' borderTop={'1px solid'} borderBottom={'1px solid'} borderColor='common.mainLight'>
+    <Box bg='cyan.100' borderTop={'1px solid'} borderBottom={'1px solid'} borderColor='common.mainLight'>
       <Container maxW='container.lg' p='1'>
         <Grid gridTemplateColumns={'auto 1fr'} gap={{ md: 4 }}>
           <Box
