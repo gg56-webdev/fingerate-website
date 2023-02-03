@@ -1,6 +1,6 @@
 import { Box, Container, Grid, GridItem, Heading, UnorderedList, ListItem, Text, Stack } from '@chakra-ui/react';
 import Image from 'next/image';
-import handWithPhone from '../../../public/about/fr-hand.png';
+import img from '../../../public/about/msot.png';
 
 export default function AboutSot({ text: { content } }) {
   return (
@@ -18,7 +18,7 @@ export default function AboutSot({ text: { content } }) {
           alignItems='center'
           shadow='md'
         >
-          <GridItem order={{ base: 2, md: 'initial' }}>
+          <GridItem order={{ base: 2 }} colSpan='2'>
             <Heading textAlign={{ base: 'center', md: 'left' }} mb='2' fontSize={'xl'} as={'h3'}>
               {content.list1.h3}
             </Heading>
@@ -30,25 +30,8 @@ export default function AboutSot({ text: { content } }) {
               ))}
             </UnorderedList>
           </GridItem>
-          <GridItem order={{ base: 1, md: 'initial' }} justifySelf='center'>
-            <Stack textAlign={'center'}>
-              <Image alt='Avatar holding phone with SoT App' src={handWithPhone} placeholder='blur' />
-              <Text fontSize={'xl'} whiteSpace='pre-wrap' fontWeight={'bold'} color='common.main'>
-                {content.imgCaption}
-              </Text>
-            </Stack>
-          </GridItem>
-          <GridItem order='3'>
-            <Heading textAlign={{ base: 'center', md: 'left' }} mb='2' fontSize={'xl'} as={'h3'}>
-              {content.list2.h3}
-            </Heading>
-            <UnorderedList display={'flex'} flexWrap='wrap'>
-              {content.list2.listItems.map((item) => (
-                <ListItem listStylePos={'inside'} key={item} mr='4' sx={{ '&::marker': { color: 'common.main' } }}>
-                  {item}
-                </ListItem>
-              ))}
-            </UnorderedList>
+          <GridItem order={{ base: 1 }} h='300' pos='relative'>
+            <Image alt='Metaverse SoT Device' src={img} layout='fill' objectFit='contain' />
           </GridItem>
         </Grid>
       </Container>

@@ -7,37 +7,6 @@
       "external": false
     },
     {
-      "n": "SoT구매",
-      "important": true,
-      "external": false,
-      "dropdown": [
-        {
-          "n": "맵에서구매",
-          "l": "/map",
-          "important": false,
-          "external": false
-        },
-        {
-          "n": "카드 결제 구매",
-          "l": "/sots",
-          "important": false,
-          "external": false
-        },
-        {
-          "n": "SoT NFT 마켓플레이스",
-          "l": "https://opensea.io/collection/fingeratesot",
-          "important": false,
-          "external": true
-        },
-        {
-          "n": "구매 방법",
-          "l": "/howto",
-          "important": false,
-          "external": false
-        }
-      ]
-    },
-    {
       "n": "FingeRate 2.0",
       "l": "/fr2",
       "important": true,
@@ -57,5 +26,8 @@
       ]
     }
   ],
-  "auth": { "login": "로그인", "signup": "가입하기" }
+  "auth": {
+    "login": "로그인",
+    "signup": "가입하기"
+  }
 }

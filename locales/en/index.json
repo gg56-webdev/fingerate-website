@@ -9,18 +9,26 @@
         "h2": "World's First Metaverse Survey Platform",
         "features": [
           "The real world mapped on metaverse!",
-          "SoT NFT Research Asset located in famous landmarks around the world!",
-          "Enjoy more fun & convenient research and surveys through SoT NFT!",
-          "From research data collection to data sales, SoT will ee booming your profits!"
+          "SoT Research Asset located in famous landmarks around the world!",
+          "Enjoy more fun & convenient research and surveys through SoT!",
+          "From research data collection to data sales, SoT will be booming your profits!"
         ],
-
         "btn1": "Buy SoT",
         "btn2": "Sign Up",
         "latestNews": "News",
         "feed": [
-          { "item": "Pre-sale", "number": "1000+" },
-          { "item": "Total number of SoTs", "number": "1.2 mil." },
-          { "item": "SoTs available for sale", "number": "10K" }
+          {
+            "item": "Pre-sale",
+            "number": "1000+"
+          },
+          {
+            "item": "Total number of SoTs",
+            "number": "1.2 mil."
+          },
+          {
+            "item": "SoTs available for sale",
+            "number": "10K"
+          }
         ]
       }
     },
@@ -29,24 +37,13 @@
       "content": {
         "h2": "Let's get to know about SoT (Satisfaction of Things)",
         "list1": {
-          "h3": "My own digital assets",
+          "h3": "My own research device",
           "listItems": [
-            "Research & survey NFT assets in the “FingeRate metaverse” that maps the real world as it is",
-            "In case of purchasing an SoT, the surrounding land of 1 km² is also yours",
-            "Conducting various research & surveys through request basis",
-            "SoT owners can also do surveys, and collect & sell datasets!"
+            "World's first blockchain-based metaverse survey system",
+            "FingeRate 2.0 sets on the metaverse mapped from the real-world using GPS",
+            "Various profit models such as survey fee, data sale, and reward distribution fee"
           ]
-        },
-        "list2": {
-          "h3": "Profit Generation",
-          "listItems": [
-            "50% of survey request fee",
-            "50% of data sales",
-            "50% of reward processing fee",
-            "profit at resale"
-          ]
-        },
-        "imgCaption": "All of these profits come with one SoT!"
+        }
       }
     },
     "flow": {
@@ -54,17 +51,43 @@
       "content": {
         "h2": "FingeRate Flow",
         "slides": [
-          { "title": "Anyone can purchase their desired SoT easily and conveniently", "info": "" },
-          { "title": "Survey request from a third party, such as an individual or company/institution", "info": "" },
-          { "title": "Conduct survey by GG56 or SoT owner her/himself", "info": "" },
-          { "title": "Earn rewards for participating in various surveys/researches", "info": "" },
-          { "title": "Statistical data available after completion of survey", "info": "" },
-          { "title": "Securing and utilizing statistical data from surveys on SoT", "info": "" },
-          { "title": "Selling data collected/processed from surveys on SoT", "info": "" },
+          {
+            "title": "Anyone can purchase their desired SoT easily and conveniently",
+            "info": ""
+          },
+          {
+            "title": "Survey request from a third party, such as an individual or company/institution",
+            "info": ""
+          },
+          {
+            "title": "Conduct survey by GG56 or SoT owner her/himself",
+            "info": ""
+          },
+          {
+            "title": "Earn rewards for participating in various surveys/researches",
+            "info": ""
+          },
+          {
+            "title": "Statistical data available after completion of survey",
+            "info": ""
+          },
+          {
+            "title": "Securing and utilizing statistical data from surveys on SoT",
+            "info": ""
+          },
+          {
+            "title": "Selling data collected/processed from surveys on SoT",
+            "info": ""
+          },
           {
             "title": "Satisfaction of Things, a win-win for everyone!",
             "info": "",
-            "avatars": ["GG56", "SoT Owner", "FingeRate User", "Survey Requester"]
+            "avatars": [
+              "GG56",
+              "SoT Owner",
+              "FingeRate User",
+              "Survey Requester"
+            ]
           }
         ]
       }
@@ -119,7 +142,11 @@
         },
         "box2": {
           "title": "SoTs operating in the real world",
-          "locations": ["Chuncheon Gugok Falls", "Chuncheon Skywalk", "YBM Language School Jongno Head Office"]
+          "locations": [
+            "Chuncheon Gugok Falls",
+            "Chuncheon Skywalk",
+            "YBM Language School Jongno Head Office"
+          ]
         }
       }
     },
@@ -154,7 +181,11 @@
             "sections": [
               {
                 "title": "FingeRate 2.0 Platform Development",
-                "points": ["Web platform development and Launch", "10,000 SoT ", "Model house configuration"]
+                "points": [
+                  "Web platform development and Launch",
+                  "10,000 SoT ",
+                  "Model house configuration"
+                ]
               },
               {
                 "title": "OpenSea Integration",
@@ -169,7 +200,6 @@
           {
             "title": "Start of SoT Service",
             "year": 2022,
-
             "sections": [
               {
                 "title": "Start of SoT Survey & Satisfaction Service",
@@ -181,7 +211,11 @@
               },
               {
                 "title": "SoT Meeting Room",
-                "points": ["Meeting Room Configuration", "Meeting Room Development", "Service Testing"]
+                "points": [
+                  "Meeting Room Configuration",
+                  "Meeting Room Development",
+                  "Service Testing"
+                ]
               },
               {
                 "title": "SoT Marketplace",
@@ -195,22 +229,28 @@
           {
             "title": "Blockchain Advancement",
             "year": 2023,
-
             "sections": [
               {
                 "title": "Smart Contract",
-                "points": ["Survey Exchange System", "Real-time Revenue Settlement", "SOT Valuation System"]
+                "points": [
+                  "Survey Exchange System",
+                  "Real-time Revenue Settlement",
+                  "SOT Valuation System"
+                ]
               },
               {
                 "title": "Native Mainnet Development",
-                "points": ["Mainnet Development", "DeFi Service", "Building Own Blockchain Ecosystem"]
+                "points": [
+                  "Mainnet Development",
+                  "DeFi Service",
+                  "Building Own Blockchain Ecosystem"
+                ]
               }
             ]
           },
           {
             "title": "Introduction of Deep research & AI",
             "year": 2024,
-
             "sections": [
               {
                 "title": "Introduction of Deep Research",
@@ -222,14 +262,17 @@
               },
               {
                 "title": "Introduction of AI Survey",
-                "points": ["Automating Survey", "Adopting Qualitative AI", "Generating Draft Analytical Reports"]
+                "points": [
+                  "Automating Survey",
+                  "Adopting Qualitative AI",
+                  "Generating Draft Analytical Reports"
+                ]
               }
             ]
           },
           {
             "title": "Deep Research & AI Enhancement",
             "year": 2025,
-
             "sections": [
               {
                 "title": "Enhancing Deep Reaserch",

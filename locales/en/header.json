@@ -7,37 +7,6 @@
       "external": false
     },
     {
-      "n": "Buy SoT",
-      "important": true,
-      "external": false,
-      "dropdown": [
-        {
-          "n": "Buy SoT on Map",
-          "l": "/map",
-          "important": false,
-          "external": false
-        },
-        {
-          "n": "SoT Marketplace (Credit card)",
-          "l": "/sots",
-          "important": false,
-          "external": false
-        },
-        {
-          "n": "SoT NFT Marketplace",
-          "l": "https://opensea.io/collection/fingeratesot",
-          "important": false,
-          "external": true
-        },
-        {
-          "n": "How to Buy SoT",
-          "l": "/howto",
-          "important": false,
-          "external": false
-        }
-      ]
-    },
-    {
       "n": "FingeRate 2.0",
       "l": "/fr2",
       "important": true,

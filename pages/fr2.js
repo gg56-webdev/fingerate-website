@@ -15,7 +15,7 @@ export default function Fr2() {
         <title>FingeRate 2.0</title>
       </Head>
       <Sot text={t.sections.sot} />
-      <Background text={t.sections.background} />
+      {/* <Background text={t.sections.background} /> */}
     </>
   );
 }

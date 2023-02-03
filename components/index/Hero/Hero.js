@@ -110,7 +110,7 @@ function Info({ content }) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Grid gap={{ base: 2, md: 4 }} gridAutoFlow='column'>
+      {/* <Grid gap={{ base: 2, md: 4 }} gridAutoFlow='column'>
         <NLink href={'/map'} passHref>
           <Button
             as='a'
@@ -139,7 +139,7 @@ function Info({ content }) {
             </Button>
           </NLink>
         )}
-      </Grid>
+      </Grid> */}
     </Stack>
   );
 }

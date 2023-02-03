@@ -12,7 +12,7 @@ import {
   IconButton,
   useOutsideClick,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, CheckCircleIcon, WarningIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import { default as NLink } from 'next/link';
 
@@ -24,7 +24,6 @@ import ko from '../../../locales/ko/header.json';
 import { useRouter } from 'next/router';
 import Dropdown from './Dropdown';
 
-import { useUserContext } from '../../../context/user';
 import { useRef } from 'react';
 
 export default function Header() {
@@ -113,7 +112,6 @@ export default function Header() {
                 );
               })}
               <ChangeLang router={router} onClose={onClose} />
-              <Auth onClose={onClose} t={t.auth} />
             </Flex>
           </Box>
         </Flex>
@@ -150,33 +148,5 @@ function ChangeLang({ router, onClose }) {
         </option>
       ))}
     </Select>
-  );
-}
-
-function Auth({ onClose, t }) {
-  const { user, loading, error } = useUserContext();
-  if (error)
-    return (
-      <Flex align='center' p='1' color='red' gap='1'>
-        Auth error
-        <WarningIcon />
-      </Flex>
-    );
-  if (loading) return <Spinner color='common.mainLight' />;
-  if (user !== null)
-    return (
-      <Flex color='common.mainLight' align='center' maxW='15ch' gap='1'>
-        <NLink href='/dashboard' passHref>
-          <Link onClick={onClose} isTruncated>
-            {user.email.split('@')[0]}
-          </Link>
-        </NLink>
-        {user.emailVerified && <CheckCircleIcon />}
-      </Flex>
-    );
-  return (
-    <NLink href='/enter' passHref>
-      <Link color='common.mainLight' onClick={onClose}>{`${t.login} / ${t.signup}`}</Link>
-    </NLink>
   );
 }

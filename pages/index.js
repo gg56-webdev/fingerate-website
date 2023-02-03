@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Hero, AboutSot, Flowchart, Price, LearnMore, History, Roadmap } from '../components';
+import { Hero, AboutSot, Flowchart, LearnMore, History, Roadmap } from '../components';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -24,11 +24,10 @@ export default function Home({ news, locale }) {
 
       <Hero text={t.sections.hero} news={news} />
       <AboutSot text={t.sections.aboutSot} />
-      <Flowchart text={t.sections.flow} />
-      <Price text={t.sections.price} />
+      {/* <Flowchart text={t.sections.flow} /> */}
       <LearnMore text={t.sections.learnMore} />
-      <History text={t.sections.history} />
-      <Roadmap text={t.sections.roadmap} />
+      {/* <History text={t.sections.history} /> */}
+      {/* <Roadmap text={t.sections.roadmap} /> */}
     </>
   );
 }
