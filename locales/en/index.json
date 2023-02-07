@@ -36,14 +36,14 @@
       "id": "sot",
       "content": {
         "h2": "Let's get to know about SoT (Satisfaction of Things)",
-        "list1": {
-          "h3": "My own research device",
-          "listItems": [
-            "World's first blockchain-based metaverse survey system",
-            "FingeRate 2.0 sets on the metaverse mapped from the real-world using GPS",
-            "Various profit models such as survey fee, data sale, and reward distribution fee"
-          ]
-        }
+        "h3": "My own research device",
+        "p": "SoT (Satisfaction of Things) is a research & survey device in FingeRate metaverse that maps the real world. Each SoT is installed at intervals of 300m~500m.",
+        "listHeading": "How the system works",
+        "ol": [
+          "Survey requesters can run a survey on any SoT device they want, and the survey participants will be rewarded for participating in the survey.",
+          "Users can participate in surveys through SoTs available at their current location",
+          "Survey participants will be rewarded with SoM (SoT mileage) after completing the survey. SoM can be used to upgrade your avatar or purchase various items & services from the Marketplace."
+        ]
       }
     },
     "flow": {

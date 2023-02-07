@@ -1,38 +1,57 @@
-import { Box, Container, Grid, GridItem, Heading, UnorderedList, ListItem, Text, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Grid,
+  GridItem,
+  Heading,
+  UnorderedList,
+  ListItem,
+  Text,
+  Stack,
+  OrderedList,
+} from '@chakra-ui/react';
 import Image from 'next/image';
-import img from '../../../public/about/msot.png';
+import sotImg from '../../../public/about/msot.png';
 
 export default function AboutSot({ text: { content } }) {
   return (
-    <Box bg='purple.100' id='about-sot'>
-      <Container maxW={'container.lg'} py='8' px='2'>
+    <Box as='section' bg='purple.100' id='about-sot'>
+      <Container maxW='container.xl' py='8' px='2'>
         <Heading as='h2' textAlign={'center'} mb='10'>
           {content.h2}
         </Heading>
         <Grid
-          gridTemplateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
-          gap='4'
-          bg={'white'}
-          p='6'
-          borderRadius={'md'}
+          gridTemplateAreas={{
+            base: `'img' 'info' 'list'`,
+            md: `'img info' 'list list'`,
+            lg: `'img list' 'info list' `,
+          }}
+          gridTemplateColumns={{ base: '1fr', md: '1fr .75fr', lg: '.6fr 1fr' }}
+          rowGap={{ base: 4, lg: 0 }}
+          columnGap={{ base: 0, lg: 10 }}
           alignItems='center'
-          shadow='md'
         >
-          <GridItem order={{ base: 2 }} colSpan='2'>
-            <Heading textAlign={{ base: 'center', md: 'left' }} mb='2' fontSize={'xl'} as={'h3'}>
-              {content.list1.h3}
+          <Box gridArea='info' p='4' borderRadius='md' bg='white' textAlign='center' shadow='outline'>
+            <Heading as='h3' mb='4'>
+              {content.h3}
             </Heading>
-            <UnorderedList>
-              {content.list1.listItems.map((item) => (
-                <ListItem listStylePos={'inside'} key={item} sx={{ '&::marker': { color: 'common.main' } }}>
-                  {item}
+            <Text>{content.p}</Text>
+          </Box>
+          <Box gridArea='img' pos='relative' h='300'>
+            <Image src={sotImg} alt='Metaverse SoT Device' layout='fill' objectFit='contain' />
+          </Box>
+          <Box gridArea='list' bg='white' borderRadius='md' shadow='md' p='4'>
+            <Heading as='h3' textAlign='center' mb='4'>
+              {content.listHeading}
+            </Heading>
+            <OrderedList>
+              {content.ol.map((li, i) => (
+                <ListItem key={i} sx={{ '&::marker': { color: 'common.main', fontWeight: 'bold' } }}>
+                  {li}
                 </ListItem>
               ))}
-            </UnorderedList>
-          </GridItem>
-          <GridItem order={{ base: 1 }} h='300' pos='relative'>
-            <Image alt='Metaverse SoT Device' src={img} layout='fill' objectFit='contain' />
-          </GridItem>
+            </OrderedList>
+          </Box>
         </Grid>
       </Container>
     </Box>
