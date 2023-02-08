@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 
 import ko from '../locales/ko/index.json';
 import en from '../locales/en/index.json';
-import { Box, Container, Flex, Heading } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 export default function Home({ news, locale }) {
@@ -51,51 +51,85 @@ export async function getStaticProps() {
 const partners = {
   kim: {
     img: partnerImgs.kim,
-    country: 'Korea',
+    name: 'Kim & Chang Law Firm (Korea)',
   },
   iff: {
     img: partnerImgs.iff,
-    country: 'China',
+    name: 'International Finance Forum (China)',
   },
   uppsala: {
     img: partnerImgs.uppsala,
-    country: 'Singapore',
+    name: 'Uppsala Security (Singapore)',
   },
   efkba: {
     img: partnerImgs.efkba,
-    country: 'Spain',
+    name: 'European Federation of Korean Business Association (Spain)',
   },
   gl: {
     img: partnerImgs.gl,
-    country: 'Singapore, Pakistan',
+    name: 'Genesis Lab (Singapore, Pakistan)',
   },
   imecc: {
     img: partnerImgs.imecc,
-    country: 'China',
+    name: 'Int’l Medical Exchange & Cooperation Committee (China)',
   },
   ybm: {
     img: partnerImgs.ybm,
-    country: 'Korea',
+    name: 'YBM (Korea)',
   },
 };
 
 function Partners() {
   return (
-    <Box as='section' id='partners' bg='white' py='16' px='2'>
+    <Box as='section' id='partners' py='16' px='2'>
       <Container maxW='container.lg'>
         <Heading textAlign='center' mb='8'>
           Partners
         </Heading>
-        <Flex as='ul' flexWrap='wrap' listStyleType='none' justify='center' align='center' gap='4'>
-          {Object.entries(partners).map(([key, { img, country }], i) => (
-            <Box as='li' pos='relative' key={i} flexBasis='200px' flexShrink='0' h={key === 'imecc' ? 150 : 125}>
-              <Image
-                src={img}
-                alt=''
-                layout='fill'
-                objectFit='contain'
-                style={{ mixBlendMode: key === 'gl' ? 'difference' : '' }}
-              />
+        <Flex as='ul' flexWrap='wrap' listStyleType='none' justify='center' gap='4'>
+          {Object.entries(partners).map(([key, { img, name }], i) => (
+            <Box
+              as='li'
+              key={i}
+              flexBasis={{ base: '150px', md: '220px' }}
+              minH={{ base: '150px', md: '220px' }}
+              bg='white'
+              borderRadius='md'
+              shadow='md'
+              display='grid'
+              placeItems='center'
+            >
+              <Box
+                as='figure'
+                display='grid'
+                gridTemplate={`'stack'`}
+                sx={{ '& > *': { gridArea: 'stack' }, '&:hover figcaption': { opacity: 1 } }}
+                placeItems='center'
+                h='full'
+              >
+                <Box p={{ base: 1, md: 4 }}>
+                  <Image src={img} alt='' style={{ mixBlendMode: key === 'gl' ? 'difference' : '' }} />
+                </Box>
+                <Box
+                  as='figcaption'
+                  opacity='0'
+                  bg='common.second'
+                  transition='all 0.2s'
+                  textAlign='center'
+                  fontSize={{ base: 'md', md: 'xl' }}
+                  lineHeight={{ md: '1.2' }}
+                  fontWeight='bold'
+                  pos='relative'
+                  p='1'
+                  h='full'
+                  w='full'
+                  display='grid'
+                  placeItems='center'
+                  color='common.main'
+                >
+                  {name}
+                </Box>
+              </Box>
             </Box>
           ))}
         </Flex>
