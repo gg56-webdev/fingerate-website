@@ -189,7 +189,7 @@ function QrPopover() {
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverBody display='grid' placeItems='center'>
-          <Image src={qr} />
+          <Image src={qr} alt='QR code icon' />
         </PopoverBody>
       </PopoverContent>
     </Popover>
@@ -200,7 +200,7 @@ function AppDownload() {
   return (
     <Flex flexDir='column' flex='1' gap='4' my={{ base: 0, md: 10 }} maxH='580px'>
       <Box w='full' flex='1' pos='relative'>
-        <Image src={phone} objectFit='contain' layout='fill' />
+        <Image src={phone} alt='Phone with FingeRate app' objectFit='contain' layout='fill' />
       </Box>
       <Box alignSelf='center'>
         <Download />
