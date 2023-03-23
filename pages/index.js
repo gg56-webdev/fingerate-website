@@ -108,7 +108,11 @@ function Partners() {
                 h='full'
               >
                 <Box p={{ base: 1, md: 4 }}>
-                  <Image src={img} alt='' style={{ mixBlendMode: key === 'gl' ? 'difference' : '' }} />
+                  <Image
+                    src={img}
+                    alt={`${name.split('(')[0]}logo`}
+                    style={{ mixBlendMode: key === 'gl' ? 'difference' : '' }}
+                  />
                 </Box>
                 <Box
                   as='figcaption'
