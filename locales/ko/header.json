@@ -7,6 +7,12 @@
       "external": false
     },
     {
+      "n": "Team",
+      "l": "/team",
+      "important": false,
+      "external": false
+    },
+    {
       "n": "지원",
       "important": true,
       "external": false,
