@@ -1,16 +1,21 @@
-import { Container, Flex, Heading, Stack, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 
 import ko from '../locales/ko/team.json';
 import en from '../locales/en/team.json';
+import Head from 'next/head';
 
 const Team = ({ locale }) => {
   const t = locale === 'ko' ? ko : en;
   return (
-    <Container textAlign='center' pt='65px'>
-      <Heading as='h1'>{t.h1}</Heading>
-      <Text>{t.subtitle}</Text>
-      <Grid></Grid>
-    </Container>
+    <>
+      <Head>
+        <title>Team</title>
+      </Head>
+      <Container textAlign='center' pt='65px'>
+        <Heading as='h1'>{t.h1}</Heading>
+        <Text>{t.subtitle}</Text>
+      </Container>
+    </>
   );
 };
 
@@ -20,7 +25,7 @@ const Profile = ({ person }) => {
   const { name, subtitles, socialLinks } = person;
   return (
     <Stack>
-      <Image />
+      {/* <Image /> */}
       <Box as='strong'>{name}</Box>
       {subtitles.length > 0 &&
         subtitles.map((s, i) => (
