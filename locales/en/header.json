@@ -6,12 +6,7 @@
       "important": true,
       "external": false
     },
-    {
-      "n": "Team",
-      "l": "/team",
-      "important": false,
-      "external": false
-    },
+
     {
       "n": "Support",
       "important": true,
